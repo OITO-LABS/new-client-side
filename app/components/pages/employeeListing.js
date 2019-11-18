@@ -1,5 +1,5 @@
 import React from 'react';
-import { FLIP_LOADER, GOTO_URL, EMPLOYEE_LISTING,SHOW_ALERT,SHOW_ALERT_MSG,ALERT_TYPE } from 'utils/constants';
+import { FLIP_LOADER, GOTO_URL,SHOW_ALERT,SHOW_ALERT_MSG,ALERT_TYPE ,EMPLOYEE_REG} from 'utils/constants';
 import SearchAndButtonBar from "../searchAndButtonBar";
 import ListTable from "../listTable";
 import { confirm } from 'utils/common';
@@ -20,6 +20,8 @@ class EmployeeListing extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
+
   }
 
   componentDidMount() {
@@ -67,7 +69,7 @@ class EmployeeListing extends React.Component {
     console.log(data);
   }
   async handleDelete(data) {
-      alert(data);
+      // alert(data);
       console.log(data);
     let isConfirmed = false;
     isConfirmed = await confirm({
@@ -82,6 +84,10 @@ class EmployeeListing extends React.Component {
       });
 
     }
+  }
+
+  handleRegister(){
+    app.events.trigger(GOTO_URL,{ routerKey: EMPLOYEE_REG});
   }
 
   render() {

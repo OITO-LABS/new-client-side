@@ -12,7 +12,6 @@ class HomePage extends React.Component {
     this.appInfo = this.appInfo.bind(this);
     this.upperClick = this.upperClick.bind(this);
     this.empList = this.empList.bind(this);
-    this.handleRegister = this.handleRegister.bind(this);
   }
   appInfo() {
     app.events.trigger(GOTO_URL, { routerKey: APP_INFO });
@@ -29,9 +28,7 @@ class HomePage extends React.Component {
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
   }
-  handleRegister(){
-    app.events.trigger(GOTO_URL,{ routerKey: EMPLOYEE_REG});
-  }
+ 
 
 
   render() {
@@ -46,13 +43,13 @@ class HomePage extends React.Component {
           upper bar
         </a>
         
-        <SearchAndButtonBar
+        {/* <SearchAndButtonBar
           button1name="Register a employee"
           button2name="export"
           handleRegister={this.handleRegister}
-        />
+        /> */}
         {/* <div className="col-12"> */}
-          <ListTable />
+          {/* <ListTable /> */}
         {/* </div> */}
         {/* <AlertModal/> */}
       </div>

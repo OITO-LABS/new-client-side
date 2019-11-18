@@ -12,12 +12,7 @@ class SearchAndButtonBar extends Component {
             employeeSearchValue: ""
         }
         this.employeeSearchHandler = this.employeeSearchHandler.bind(this);
-        this.addHandler = this.addHandler.bind(this);
         this.exportHandler = this.exportHandler.bind(this);
-    }
-
-    addHandler() {
-        this.props.handleRegister();
     }
 
     exportHandler() {
@@ -39,7 +34,7 @@ class SearchAndButtonBar extends Component {
         return (
             <React.Fragment>
                 <div className="row header-bar">
-                    <button type="button" onClick={this.addHandler} className="btn btn-primary button">{this.props.button1name}</button>
+                    <button type="button" onClick={this.props.handleRegister} className="btn btn-primary button">{this.props.button1name}</button>
                     <button type="button" onClick={this.exportHandler} className="btn btn-success button">{this.props.button2name}</button>
                     <div className="form-group has-search ml-auto">
                         <span className="fa fa-search form-control-feedback"></span>
