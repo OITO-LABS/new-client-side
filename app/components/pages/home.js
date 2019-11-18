@@ -11,7 +11,7 @@ class HomePage extends React.Component {
     super(props);
     this.appInfo = this.appInfo.bind(this);
     this.upperClick = this.upperClick.bind(this);
-    this.empList = this.empList.bind(this);
+    // this.empList = this.empList.bind(this);
   }
   appInfo() {
     app.events.trigger(GOTO_URL, { routerKey: APP_INFO });
@@ -22,9 +22,9 @@ class HomePage extends React.Component {
   upperClick() {
     app.events.trigger(GOTO_URL, { routerKey: UPPER_BAR });
   }
-  empList() {
-    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });
-  }
+  // empList() {
+  //   app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });
+  // }
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
   }

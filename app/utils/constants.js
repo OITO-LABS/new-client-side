@@ -41,6 +41,8 @@ export const PATH_CHANGED = 'path:changed';
 //routes
 export const LANDING = 'landing';
 export const APP_INFO = 'app-info';
+// *********DASHBOARD*********
+export const DASHBOARD = 'dashboard';
 // *********EMPLOYEE_REG*********
 export const EMPLOYEE_REG = 'employee-reg'
 // ******upperbar*********
