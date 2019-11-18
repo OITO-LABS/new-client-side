@@ -41,8 +41,12 @@ export const PATH_CHANGED = 'path:changed';
 //routes
 export const LANDING = 'landing';
 export const APP_INFO = 'app-info';
+// *********DASHBOARD*********
+export const DASHBOARD = 'dashboard';
 // *********EMPLOYEE_REG*********
 export const EMPLOYEE_REG = 'employee-reg'
+// *********EMPLOYEE_UPDATE*********
+export const EMPLOYEE_UPDATE = 'employee-update'
 // ******upperbar*********
 export const UPPER_BAR ="upper-bar";
 export const EMPLOYEE_LISTING = "employee-listing";

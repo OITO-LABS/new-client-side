@@ -1,12 +1,43 @@
 import React from "react";
+import {DASHBOARD,EMPLOYEE_REG,EMPLOYEE_LISTING,GOTO_URL} from "utils/constants";
 import 'assets/css/_sidebar.css';
+
 class Sidebar extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.dashboard = this.dashboard.bind(this);
+    this.empReg = this.empReg.bind(this);
+    this.empList = this.empList.bind(this);
+    this.addAssets = this.addAssets.bind(this);
+    this.viewAssets = this.viewAssets.bind(this);
+  }
+  
+  dashboard() {
+    app.events.trigger(GOTO_URL, { routerKey: DASHBOARD });
+  }
+
+  empReg() {
+    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG });
+  }
+
+  empList() {
+    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });
+  }
+
+  addAssets() {
+    app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS });
+  }
+
+  viewAssets() {
+    app.events.trigger(GOTO_URL, { routerKey: VIEW_ASSETS });
+  }
+
   render() {
     return (
       <React.Fragment>
         <sidebar>
-        
-          {/* <div className="wrapper"> */}
             {/* Sidebar   */}
             <nav id="sidebar" className="sidebar-navwrapper">
               <div className="sidebar-header">
@@ -17,57 +48,37 @@ class Sidebar extends React.Component {
               <ul className="list-unstyled components">
                 {/* Dashboard  */}
                 <li className="active">
-                  <a
-                    href="#homeSubmenu"
-                    // data-toggle="collapse"
-                    // aria-expanded="false"
-                  >
+                  <a href="#" onClick={this.dashboard}>
                     <i className="fas fa-home"></i>
                     Dashboard
                   </a>
                 </li>
-                {/* Asset List  */}
+                {/* Register Employee  */}
                 <li>
-                  <a
-                    href="#pageSubmenu"
-                    // data-toggle="collapse"
-                    // aria-expanded="false"
-                    className="dropdown-toggle"
-                  >
+                  <a href="#" onClick={this.empReg}  className="dropdown-toggle">
                     <i className="fas fa-cog"></i>
-                    Asset List
+                    Register Employee
                   </a>
-                  {/* <ul className="collapse list-unstyled" id="pageSubmenu">
-                    <li>
-                      <a href="#">List</a>
-                    </li>
-                    <li>
-                      <a href="#">Add</a>
-                    </li>
-                    <li>
-                      <a href="#">Assigned Assets</a>
-                    </li>
-                  </ul> */}
+                </li>
+                {/* View Employee */}
+                <li>
+                  <a href="#" onClick={this.empList}>
+                    <i className="fas fa-user-cog"></i>
+                    View Employee 
+                  </a>
                 </li>
                 {/* Add Assets  */}
                 <li>
-                  <a href="#">
-                    <i className="fas fa-user-cog"></i>
-                    Add Assets 
+                  <a href="#" onClick={this.addAssets}>
+                    <i className="fas fa-users"></i>
+                    Add Assets
                   </a>
                 </li>
-                {/* Employee  */}
-                {/* <li>
-                  <a href="#">
-                    <i className="fas fa-users"></i>
-                    Employee
-                  </a>
-                </li> */}
-                {/* Reimbursement  */}
+                {/* View Assets  */}
                 <li>
-                  <a href="#">
+                  <a href="#" onClick={this.viewAssets}>
                     <i className="fas fa-wallet"></i>
-                    Reimbursement
+                    View Assets
                   </a>
                 </li>
               </ul>

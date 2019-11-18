@@ -59,8 +59,7 @@ export class registerEmployee extends Component {
     });
   }
 
- cancel() {
-    // console.log(data);
+  cancel(){
     app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });
   }
 
@@ -196,7 +195,7 @@ export class registerEmployee extends Component {
             type="button"
             className="btn submit-btn"
             onClick={this.submit}>
-            Submit
+            Update
           </button>
           <button 
             type="button" 
