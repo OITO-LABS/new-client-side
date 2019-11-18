@@ -1,0 +1,36 @@
+.reat-dropdown{
+    .custom-select {
+        width: 100%;
+        margin-left:-.8rem;
+        min-width: 15rem;
+        height: 2.6rem;
+        @include breakpoint-down(xs){
+            min-width: auto;
+        }
+        cursor: pointer;
+        .dropdown-menu{
+            left:-.7rem !important;
+            top:.25rem!important;
+            li{
+                display: block;
+                padding: .3rem .7em;
+                font-size: 1.2rem;
+                &:hover{
+                    cursor: pointer;
+                    background:darken($offwhite, 5%) ;
+                }
+                label{
+                    display: block;
+                    background: transparent !important;
+                    &:hover{
+                        cursor: pointer;
+                        background: $offwhite;
+                    }
+                }
+            }
+        }
+    }
+    .custom-control-label{
+        min-width: fit-content;
+    }
+}

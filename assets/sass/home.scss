@@ -1,0 +1,21 @@
+@import "animate/animate.scss";
+@import "abstracts/variables";
+
+@import "themes/default";
+
+@import "base/base";
+@import "components/pagination";
+
+@import "layout/footer";
+
+@import "layout/header";
+@import "components/modal";
+
+@import "pages/home";
+
+
+@import "layout/right-panel";
+@import "components/preloader";
+
+
+// @import "components/searchAndButtonBar";

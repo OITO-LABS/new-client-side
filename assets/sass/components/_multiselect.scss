@@ -1,0 +1,65 @@
+.multi-select{
+    .dropdown-menu{
+        min-width: 50rem;
+        .dropdown-item{
+            line-height: 2rem;
+            font-size: 1.3em;
+            &:hover,&.active{
+                cursor: pointer;
+                background:$theme-primary;
+                border-radius:.3rem;
+                color: $white;
+            }
+        }
+        .tab-pane{
+            max-height: 30rem;
+            min-height: 30rem;
+            overflow-y: auto;
+        }
+        .nav-item{
+            a{
+                cursor: pointer;
+                font-size: 1.3em;
+            }
+            .nav-link{
+                font-weight: 550;
+                padding: .4em 1.5rem;
+                font-size: 1.4rem;
+                &.active{
+                   border-color:  $theme-primary $theme-primary $white;
+                }
+            }
+        }
+        .tab-content{
+            .form-control{
+                border-right: 0px;
+                border-left: 0px;
+                border-top:0px;
+                &:focus{
+                    border-bottom: 1px solid  lighten($theme-secondary,25%);
+                    &::-webkit-input-placeholder {
+                        color:transparent;
+                    }
+                    &::-moz-placeholder {
+                        color:transparent;
+                    }
+
+                }
+                &:-moz-placeholder  {
+                    color:transparent;
+                }
+            }
+        }
+    }
+    .nav-tabs{
+        border-bottom: 1px solid $theme-primary;
+    }
+}
+
+@media (max-width: 576px) {
+  .multi-select{
+    .dropdown-menu{
+      min-width: 100%;
+    }
+  }
+}

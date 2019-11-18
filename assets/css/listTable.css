@@ -1,0 +1,10 @@
+.list th {
+    background: #1C2A48;
+    color: #fff;
+}
+.list .action {
+    margin-right:10px;
+}
+table.list{
+    border: 1px solid #dee2e6;
+}

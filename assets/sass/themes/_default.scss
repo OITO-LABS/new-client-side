@@ -1,0 +1,83 @@
+//$theme-primary: #227fe6;
+//$theme-secondary: #fcf302;
+
+//$theme-primary: #e14f50;
+//$theme-secondary: #e14f50;
+
+$theme-primary: #3639b4;
+/*Lign Shade*/
+$theme-primary-light: #4d51bd;
+$theme-primary-soft: #ebebf7;
+
+$theme-secondary: #f02748;
+/*Lign Shade*/
+$theme-secondary-light: #f0465c;
+
+$theme-tertiary: #f8531e;
+/*Lign Shade*/
+$theme-tertiary-light:#feede8;
+
+$theme-quaternary: #100e37;
+
+$base-color: #555;
+$base-color-dark: #212529;
+$corosel-blue:#ebebf7;
+$litegrey-color:#666666;
+$verfiygreen:#0fc608;
+$head-corosel:#100e37;
+
+@mixin rotate($degrees) {
+    -webkit-transform: rotate($degrees);
+    -moz-transform: rotate($degrees);
+    -ms-transform: rotate($degrees);
+    -o-transform: rotate($degrees);
+    transform: rotate($degrees);
+}
+
+/*color*/
+$purple: #4f3fb3;
+$purple-light: #4d51bd;
+$purple-new: #535edb;
+
+$white: rgba(255,255,255,1);
+$black: #000000;
+$offwhite: #f6f6f6;
+$offwhite-new: #f3f3f3;
+
+$grey: #303030;
+$light-gray: #999;
+$soft-gray: #cccccc;
+$light-grey2: #f3f1f4;
+$light-grey3: #ececec;
+$btn-grey: #e8e6ed;
+$grey-new: #535252;
+$soft-grey-new: #f7f7f7;
+$btn-grey-color: #f5f5f5;
+
+// $border: #ebebeb;
+$border: #e0dee1;
+$border-new: #e4e4e4;
+$light-red: #fdf5e8;
+
+$success: #28a745;
+$danger:#dc3545;
+
+$header-color:#0d014d;
+$light-border:#9a9a9c;
+$grey-border:#939393;
+$coruselcolor:#c6c6c8;
+
+$coruselarrowcolor:#555556;
+$coruselimgbg-color:#f7f7f9;
+
+$corusel-spotlitecolor1:#e0a638;
+$corusel-spotlitecolor1-txt:#262f2d;
+$corusel-spotlitecolor2:#3739b4;
+$corusel-spotlitecolor3:#ffdb01;
+$corusel-spotlitecolor3-txt:#0c232a;
+$corusel-spotlitecolor6:rgba(245,60,22,0.7);
+
+$offprice-color:#fcf9e3;
+$orange-color: #f87620;
+$bg-light-red: #f7efef;
+$soft-grey-new: #f7f7f7;

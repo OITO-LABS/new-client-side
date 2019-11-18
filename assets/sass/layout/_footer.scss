@@ -1,0 +1,44 @@
+.footer{
+    background-color: #1C2A48;
+    margin-top: 0rem;
+}
+
+// .footer-logo {
+//     width: 8%;
+//     padding: 0.25rem 0rem;
+// }
+
+.footer-txt { 
+    display: flex;
+    justify-content: space-around;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Roboto", sans-serif;
+    color: #fff;
+}
+
+.footer-txt :hover {
+    color: rgb(194, 51, 51) !important;     
+}
+
+.footer-txtpara { 
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Roboto", sans-serif;
+    color: rgb(212, 209, 209);
+}
+
+
+.footer-txt a {
+    color: #fff;
+}
+
+.footer-txt p a {
+    text-decoration: none;
+}
+
+.heading-txt {
+    color: rgb(194, 51, 51) !important;
+}

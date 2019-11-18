@@ -1,0 +1,24 @@
+.header {
+  background-color: #e5e7e9;
+  height: 5%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-logo {
+  width: 7%;
+  margin-left: 4%;
+  padding: 0.25rem 0rem;
+}
+
+.header-txt {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+  color: #000;
+}
+
+.header-txt:hover {
+  color: rgb(8, 22, 66);
+  text-decoration: none;
+}

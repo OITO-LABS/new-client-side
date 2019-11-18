@@ -1,0 +1,10 @@
+.heading-row{
+    background: #0a0aa0;
+    color: white;
+    justify-content: center;
+    height: 40px;
+    align-items: center;
+}
+.heading-row h4{
+    font-size: 25px;
+}

@@ -1,0 +1,19 @@
+{
+    "env":"dev",
+    "apis":
+    {
+	    "baseurl":"http://localhost:3000/data",
+	    "portalSettings": "/portal-settings.json",
+	    "portalNavMenus":"/navmenus.json",
+	    "products":"/products.json",
+	    "filters":"/filters.json",
+	    "productDetails":"/productDetails.json",
+	    "productBasicDetails":"/product-basic-details.json",
+	    "autoSuggestions": "/autoSuggestions.json",
+	    "categoryDetails":"/categoryDetails.json",
+	    "params": {
+			"commonparams": "commonparams"
+	    }
+    }
+    
+}

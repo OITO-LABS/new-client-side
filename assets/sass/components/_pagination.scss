@@ -1,0 +1,102 @@
+.bxpagn{
+    .pagination{
+        margin: 0 1.4rem;
+        border-top: .1rem solid $border;
+        padding: 1.4rem 0;
+        border-radius: 0;
+        @include breakpoint-down(md){
+            margin-left: 0rem;
+        }
+        .page-item{
+            margin: 0rem .4rem;
+          
+            &.active{
+                .page-link{
+                    color: $white;
+                    background-color: $theme-primary;
+                }
+            }
+            &.disabled {
+                opacity: .5;
+            }
+        }
+        .page-link{
+            border: 0;
+            color:$litegrey-color;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 0;
+            padding: .5rem 1rem;
+            width: 3.2rem;
+            height: 3.2rem;
+            border: 1px solid $soft-gray;
+            border-radius: .4rem;
+            line-height: 2rem;
+            text-align: center;
+        }
+    }
+    &.mini-pagination{
+        .pagination{
+            border-top: none;
+            padding:0;
+        }
+    }
+    @include breakpoint-down(xs){
+        margin-bottom: 15px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .bxpagn{
+        .pagination{
+            .page-link{
+                padding: .2rem .5rem;
+                font-size: 1.2rem;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 320px) {
+  .bxpagn {
+    margin: 0 auto;
+    .pagination {
+      .page-item {
+          margin: 0rem .1rem !important;
+      }
+    }
+  }
+}
+/* right side top pagination*/
+
+.pagn-top{
+    .justify-content-center{
+        justify-content: flex-end !important;
+        border: none !important;   
+        padding:0rem; 
+        @include breakpoint-down(xs){
+            justify-content: center !important;
+        }
+        .page-item{
+            text-transform: capitalize !important;
+            border:none;
+            a{
+                font-size:1.3rem;
+                text-transform: capitalize !important;
+                padding:.8rem .8rem .6rem!important;
+                text-align: center;
+                line-height: 1.3rem;               
+               
+              }
+            &.active .page-link {
+                color: $white;
+                background-color: $theme-primary;
+              
+            }
+            &.disabled{
+                opacity: .5;
+            }
+           
+        }   
+    }
+}

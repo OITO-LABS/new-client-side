@@ -1,0 +1,11 @@
+{
+  "env": "production",
+  "apis": {
+      "baseurl": "/",
+      "portalSettings": "/data/portal-settings.json",
+      "customerServiceSignup":"/auth/signup/customer-service",
+      "params": {
+        "commonparams": "commonparams"
+      }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "defaultLocale": "en",
+  "currency": "‎฿",
+  "phoneCountryCodes": [
+    "+91"
+  ],
+  "translations": {
+    "app.footer.goto_top": "Go to top",
+    "app.loading": "Loading...",
+    "app.lbl.warning": "Warning!",
+    "app.lbl.ok": "Ok",
+    "app.error": "Error!",
+    "app.button.cancel": "Cancel",
+    "app.button.calculate": "Calculate",
+    "app.button.submit": "Submit",
+    "app.welcome": "Welcome",
+    "app.success":"Success"
+  }
+}

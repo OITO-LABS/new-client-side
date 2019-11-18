@@ -1,0 +1,93 @@
+$theme-primary-gray: #555;
+$theme-secondary-gray: #777;
+$lightgrey:#818181;
+$btn-grey: #e8e6ed;
+@mixin rotate($degrees) {
+  -webkit-transform: rotate($degrees);
+  -moz-transform: rotate($degrees);
+  -ms-transform: rotate($degrees);
+  -o-transform: rotate($degrees);
+  transform: rotate($degrees);
+}
+@mixin skewY($degrees) {
+  -webkit-transform: skewY($degrees);
+  -moz-transform: skewY($degrees);
+  -ms-transform: skewY($degrees);
+  -o-transform: skewY($degrees);
+  transform: skewY($degrees);
+}
+@mixin horizontal-gradient($from, $to, $stop: 100%) {
+  /* fallback/image non-cover color */
+  background-color: $from;
+  /* Firefox 3.6+ */
+  background-image: -moz-linear-gradient(left, $from 0%, $to $stop);
+  /* Safari 4+, Chrome 1+ */
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, $from), color-stop($stop, $to));
+  /* Safari 5.1+, Chrome 10+ */
+  background-image: -webkit-linear-gradient(left, $from 0%, $to $stop);
+  /* Opera 11.10+ */
+  background-image: -o-linear-gradient(left, $from 0%, $to $stop);
+  /* IE10+ */
+  background: -ms-linear-gradient(left, $from 0%, $to $stop);
+  /* Standard */
+  background: linear-gradient(to right, $from 0%, $to $stop);
+  /* IE6-9 */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$from', endColorstr='$to',GradientType=1 );
+}
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+  -webkit-box-shadow:inset $left $top $blur $color;
+  -moz-box-shadow:inset $left $top $blur $color;
+  box-shadow:inset $left $top $blur $color;
+  } @else {
+  -webkit-box-shadow: $left $top $blur $color;
+  -moz-box-shadow: $left $top $blur $color;
+  box-shadow: $left $top $blur $color;
+  }
+  }
+
+  //media queries
+@mixin breakpoint-down($breakpoint) {
+  @if $breakpoint == xs {
+       @media (max-width:575.98px) { @content };
+  }
+  @if $breakpoint == sm {
+       @media (max-width:767.98px) { @content };
+  }
+  @if $breakpoint == md {
+       @media (max-width: 991.98px) { @content };
+  }
+  @if $breakpoint == lg {
+    @media (max-width: 1199.98px) { @content };
+  }
+  @if $breakpoint == xl {
+    @media (max-width: 1365px) { @content };
+  }
+}
+@mixin border-radius($radius) {
+	border-radius: $radius;
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+}
+
+$dark-grey:#333333;
+$green:#35900e;
+$green-new:#3ad516;
+$checkboxbrder:#aca9a9;
+$filterlist:#535353;
+$filtercross:#d1cbcb;
+$creamwhite:#f5f5f5;
+$green-border:#ccc3c3;
+$simple-border:#dedede;
+$mobile-bg:#f8f4f4;
+$grey-border:#939393;
+
+$tipslink:#0e1dcb;
+
+$drop-dwn-border:#e2e2e2;
+
+$icon-color:#535252;
+
+
+$brder-color3:#e4e4e4;
+$calculatorbtnbg:#ebebf7; 
