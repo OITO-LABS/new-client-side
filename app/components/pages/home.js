@@ -2,6 +2,7 @@ import React from "react";
 import {FLIP_LOADER,GOTO_URL,APP_INFO,UPPER_BAR,EMPLOYEE_LISTING,EMPLOYEE_REG} from "utils/constants";
 import SearchAndButtonBar from "components/searchAndButtonBar";
 import ListTable from "components/listTable";
+import DetailsTable from "../detailsTable"
 
 // import AlertModal from "../common/alertmodal";
 
@@ -52,6 +53,7 @@ class HomePage extends React.Component {
           {/* <ListTable /> */}
         {/* </div> */}
         {/* <AlertModal/> */}
+        <DetailsTable/>
       </div>
     );
   }

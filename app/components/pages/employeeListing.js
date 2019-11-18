@@ -1,11 +1,13 @@
 import React from 'react';
 import { FLIP_LOADER, GOTO_URL,SHOW_ALERT,SHOW_ALERT_MSG,ALERT_TYPE ,EMPLOYEE_REG} from 'utils/constants';
 import SearchAndButtonBar from "../searchAndButtonBar";
+import FormMsg from 'components/common/formmessage';
 import ListTable from "../listTable";
 import { confirm } from 'utils/common';
 import { fileURLToPath } from 'url';
-// import { FLIP_LOADER,ALERT_TYPE,SHOW_ALERT_MSG,SHOW_ALERT } from 'utils/constants';
+import dataService from 'utils/dataservice'; 
 
+// import { FLIP_LOADER,ALERT_TYPE,SHOW_ALERT_MSG,SHOW_ALERT } from 'utils/constants';
 
 class EmployeeListing extends React.Component {
   constructor(props) {
@@ -13,7 +15,8 @@ class EmployeeListing extends React.Component {
 
     this.state = {
       activePage: 1,
-      searchValue: ""
+      searchValue: "",
+      recordsPerPage:10
     }
     this.gettingData = this.gettingData.bind(this);
     this.handlePage = this.handlePage.bind(this);
@@ -32,23 +35,33 @@ class EmployeeListing extends React.Component {
 
 
   gettingData() {
-    const data = { activePage: this.state.activePage, searchValue: this.state.searchValue }
-    fetch('http://localhost:4000', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    })
-      .then(response => response.json())
-      .then((jsonData) => {
-        // jsonData is parsed json object received from url
-        console.log(jsonData)
-        this.setState({
-          totalRecords: jsonData.totalrecords,
-          datas: jsonData.datas
-        })
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+    const data = { page: this.state.activePage-1, searchkey: this.state.searchValue ,limit:this.state.recordsPerPage}
+    dataService.postRequest("employee-listing",{data})
+    .then(res=>{console.log(res);
+      }).catch(res=>{    
+    });
+   
+   
+   
+   
+    // fetch('http://localhost:4000', {
+    //   method: 'POST',
+    //   body: JSON.stringify(data),
+    // })
+    //   .then(response => response.json())
+    //   .then((jsonData) => {
+    //     // jsonData is parsed json object received from url
+    //     console.log(jsonData)
+    //     this.setState({
+    //       totalRecords: jsonData.totalrecords,
+    //       datas: jsonData.datas
+    //     })
+    //   })
+    //   .catch((error) => {
+    //     console.error(error)
+    //   })
+
+    
   }
 
 
@@ -73,14 +86,14 @@ class EmployeeListing extends React.Component {
       console.log(data);
     let isConfirmed = false;
     isConfirmed = await confirm({
-      msg: 'Are you sure you want to delete this from emplist'
+      msg: 'Do you sure you want to delete this from emplist',
     });
     if (isConfirmed) {
       // alert("successfully deleted");
       app.events.trigger(SHOW_ALERT_MSG, {
         visible: true,
         type: ALERT_TYPE.SUCESS,
-        msg: 'some message'
+        msg: `${data.firstName} deleted`
       });
 
     }
@@ -94,7 +107,7 @@ class EmployeeListing extends React.Component {
     return (
       <div>
         <SearchAndButtonBar
-          button1name="Register a employee"
+          button1name="Register employee"
           button2name="export"
           handleRegister={this.handleRegister}
           searchHandler={this.handleSearch}

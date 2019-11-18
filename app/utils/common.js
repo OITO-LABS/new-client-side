@@ -3,7 +3,7 @@ import Loadable from 'react-loadable';
 import queryString from './querystring';//import {setToCache,getFromCache,removeFromCache} from 'utils/querystring';
 import {setCookie, getCookie} from 'utils/cookie';
 import validator from 'validator';
-import {SHOW_ALERT,COOKIE_ID} from 'utils/constants';
+import {SHOW_ALERT,COOKIE_ID,ALERT_TYPE} from 'utils/constants';
 
 const dynaParamSep = ':';
 const mobWidth = 767;

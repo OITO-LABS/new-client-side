@@ -2,7 +2,7 @@ import React from 'react';
 import Pagination from 'components/common/pagination';
 import FormField from 'components/common/formfield';
 import FormMsg from 'components/common/formmessage';
-import { FLIP_LOADER,ALERT_TYPE,SHOW_ALERT_MSG,SHOW_ALERT } from 'utils/constants';
+import { FLIP_LOADER,ALERT_TYPE,SHOW_ALERT_MSG,SHOW_ALERT, } from 'utils/constants';
 
 class HomePage extends React.Component {
 
