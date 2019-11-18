@@ -1,4 +1,4 @@
-import {PATH_PREFIX,LANDING,DASHBOARD,APP_INFO,UPPER_BAR,EMPLOYEE_REG,EMPLOYEE_LISTING} from 'utils/constants';
+import {PATH_PREFIX,LANDING,DASHBOARD,APP_INFO,UPPER_BAR,EMPLOYEE_REG,EMPLOYEE_UPDATE,EMPLOYEE_LISTING} from 'utils/constants';
 const routes = [
     {
         name:LANDING,
@@ -38,6 +38,16 @@ const routes = [
         componentId:'pages/registerEmployee',
         title:'register employee',
         className:'register-employee-page',
+        exact:true,
+        nowrap:false
+    },
+    {
+        name:EMPLOYEE_UPDATE,
+        path:PATH_PREFIX+EMPLOYEE_UPDATE,
+        samplePath:PATH_PREFIX+EMPLOYEE_UPDATE,
+        componentId:'pages/updateEmployee',
+        title:'update employee',
+        className:'update-employee-page',
         exact:true,
         nowrap:false
     },

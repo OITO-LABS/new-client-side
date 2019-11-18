@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FLIP_LOADER } from "utils/constants";
+import { GOTO_URL,FLIP_LOADER,EMPLOYEE_LISTING } from "utils/constants";
 import FormField from "../common/formfield";
 import dataService from 'utils/dataservice'; 
 export class registerEmployee extends Component {
@@ -59,8 +59,9 @@ export class registerEmployee extends Component {
     });
   }
 
-  cancel(){
-    this.props.cancel();
+ cancel() {
+    // console.log(data);
+    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });
   }
 
   render() {
