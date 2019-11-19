@@ -97,6 +97,7 @@ export function initApp(){
     routes.forEach(function(route){
         app.pageUris[route.path] = route.name;
         app.routesMap[route.name] = route;
+        // app.pageInfo[route.query,route.params] = route;
     });
     
     app.events = Object.create(eventSubPub);

@@ -33,24 +33,24 @@ const routes = [
     },
     {
         name:EMPLOYEE_REG,
-        path:PATH_PREFIX+EMPLOYEE_REG,
-        samplePath:PATH_PREFIX+EMPLOYEE_REG,
+        path:PATH_PREFIX+':empId/'+EMPLOYEE_REG,
+        samplePath:PATH_PREFIX+'123/'+EMPLOYEE_REG,
         componentId:'pages/registerEmployee',
         title:'register employee',
         className:'register-employee-page',
         exact:true,
         nowrap:false
     },
-    {
-        name:EMPLOYEE_UPDATE,
-        path:PATH_PREFIX+EMPLOYEE_UPDATE,
-        samplePath:PATH_PREFIX+EMPLOYEE_UPDATE,
-        componentId:'pages/updateEmployee',
-        title:'update employee',
-        className:'update-employee-page',
-        exact:true,
-        nowrap:false
-    },
+    // {
+    //     name:EMPLOYEE_UPDATE,
+    //     path:PATH_PREFIX+EMPLOYEE_UPDATE,
+    //     samplePath:PATH_PREFIX+EMPLOYEE_UPDATE,
+    //     componentId:'pages/updateEmployee',
+    //     title:'update employee',
+    //     className:'update-employee-page',
+    //     exact:true,
+    //     nowrap:false
+    // },
     {
         name:UPPER_BAR,
         path:PATH_PREFIX+UPPER_BAR,
@@ -70,6 +70,7 @@ const routes = [
         className:'employee-listing-page',
         exact:true,
         nowrap:false
+        // params:'',
     }
 ];
 

@@ -37,7 +37,7 @@ class ListTable extends Component {
                "healthCardNo":"OITO101INT001",
                "bloodGroup":"A-",
                "status":"Y",
-               "empNo":"INT001"
+               "empNo":"INT002"
             },
             {
                "firstName": "arun",
@@ -51,7 +51,7 @@ class ListTable extends Component {
                "healthCardNo":"OITO101INT001",
                "bloodGroup":"A-",
                "status":"Y",
-               "empNo":"INT001"
+               "empNo":"INT003"
             },
             {
                "firstName": "gayatri",
@@ -65,7 +65,7 @@ class ListTable extends Component {
                "healthCardNo":"OITO101INT001",
                "bloodGroup":"A-",
                "status":"Y",
-               "empNo":"INT001"
+               "empNo":"INT003"
             }
          ],
          fields: [

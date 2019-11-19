@@ -1,5 +1,5 @@
 import React from 'react';
-import { FLIP_LOADER, GOTO_URL,SHOW_ALERT,SHOW_ALERT_MSG,ALERT_TYPE ,EMPLOYEE_REG,EMPLOYEE_UPDATE} from 'utils/constants';
+import { FLIP_LOADER, GOTO_URL,SHOW_ALERT,SHOW_ALERT_MSG,ALERT_TYPE ,EMPLOYEE_REG} from 'utils/constants';
 import SearchAndButtonBar from "../searchAndButtonBar";
 import FormMsg from 'components/common/formmessage';
 import ListTable from "../listTable";
@@ -60,10 +60,7 @@ class EmployeeListing extends React.Component {
     //   .catch((error) => {
     //     console.error(error)
     //   })
-
-    
   }
-
 
   handlePage(pagenum) {
     this.setState({
@@ -78,9 +75,9 @@ class EmployeeListing extends React.Component {
     }, () => { this.gettingData() })
   }
 
-  handleEdit() {
+  handleEdit(data) {
     // console.log(data);
-    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_UPDATE });
+    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG,params:{empId:data.empNo} });
   }
 
   async handleDelete(data) {
@@ -102,7 +99,7 @@ class EmployeeListing extends React.Component {
   }
 
   handleRegister(){
-    app.events.trigger(GOTO_URL,{ routerKey: EMPLOYEE_REG});
+    app.events.trigger(GOTO_URL,{ routerKey: EMPLOYEE_REG,params:{empId:-1}});
   }
 
   render() {

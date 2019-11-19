@@ -4,6 +4,9 @@
       "baseurl": "/",
       "portalSettings": "/data/portal-settings.json",
       "customerServiceSignup":"/auth/signup/customer-service",
+      "getEmpDetails":"api/employee/:empId",    
+      "updateEmployee":"api/employee/:empId",
+      "registered":"api/employee",
       "params": {
         "commonparams": "commonparams"
       }
