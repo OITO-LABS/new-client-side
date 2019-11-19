@@ -2,8 +2,10 @@
   "env": "production",
   "apis": {
       "baseurl": "/",
-      "portalSettings": "/data/portal-settings.json",
-      "customerServiceSignup":"/auth/signup/customer-service",
+      "portalSettings": "http://localhost:8080/data/portal-settings.json",
+      "employeeList":"/api/employee/list",
+      "employeeSearch":"/api/employee/search",
+      "employeeDelete":"/api/employee/delete/:empNo",
       "params": {
         "commonparams": "commonparams"
       }

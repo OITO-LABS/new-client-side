@@ -3,6 +3,7 @@ import {FLIP_LOADER,GOTO_URL,APP_INFO,UPPER_BAR,EMPLOYEE_LISTING,EMPLOYEE_REG} f
 import SearchAndButtonBar from "components/searchAndButtonBar";
 import ListTable from "components/listTable";
 import DetailsTable from "../detailsTable"
+import Heading from "../heading"
 
 // import AlertModal from "../common/alertmodal";
 
@@ -53,6 +54,7 @@ class HomePage extends React.Component {
           {/* <ListTable /> */}
         {/* </div> */}
         {/* <AlertModal/> */}
+        <Heading heading="employee-details"/>
         <DetailsTable/>
       </div>
     );

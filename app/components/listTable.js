@@ -10,99 +10,17 @@ class ListTable extends Component {
       super(props)
 
       this.state = {
-         datas: [
-            {
-               "firstName": "abhishek",
-               "lastName":"Murali", 
-               "email": "abhishek@gmail.com",
-               "designation": "intern",
-               "dob":"1974-04-18",
-               "contactNo":97412983352, 
-               "emergencyContactName":"Muralimohan",
-               "emergencyContact":9384326738,
-               "healthCardNo":"OITO101INT001",
-               "bloodGroup":"A-",
-               "status":"Y",
-               "empNo":"INT001"
-            },
-            {
-               "firstName": "preeti",
-               "lastName":"Murali", 
-               "email": "preeti@gmail.com",
-               "designation": "intern",
-               "dob":"1974-04-18",
-               "contactNo":97412983352, 
-               "emergencyContactName":"Muralimohan",
-               "emergencyContact":9384326738,
-               "healthCardNo":"OITO101INT001",
-               "bloodGroup":"A-",
-               "status":"Y",
-               "empNo":"INT001"
-            },
-            {
-               "firstName": "arun",
-               "lastName":"Murali", 
-               "email": "arun2@gmail.com",
-               "designation": "intern",
-               "dob":"1974-04-18",
-               "contactNo":97412983352, 
-               "emergencyContactName":"Muralimohan",
-               "emergencyContact":9384326738,
-               "healthCardNo":"OITO101INT001",
-               "bloodGroup":"A-",
-               "status":"Y",
-               "empNo":"INT001"
-            },
-            {
-               "firstName": "gayatri",
-               "lastName":"Murali", 
-               "email": "gayatri@gmail.com",
-               "designation": "intern",
-               "dob":"1974-04-18",
-               "contactNo":97412983352, 
-               "emergencyContactName":"Muralimohan",
-               "emergencyContact":9384326738,
-               "healthCardNo":"OITO101INT001",
-               "bloodGroup":"A-",
-               "status":"Y",
-               "empNo":"INT001"
-            }
-         ],
-         fields: [
-            { label: "si no", key: "index" },
-            { label: "employee id", key: "empNo" },
-            { label: "NAME", key: "firstName" },
-            { label: "email", key: "email" },
-            { label: "contact no", key: "contactNo" },
-            { label: "action", key: "editDelete" }
-         ]
+         
       }
       this.renderTableHeader = this.renderTableHeader.bind(this);
       this.renderTableData = this.renderTableData.bind(this);
       this.handleDetails = this.handleDetails.bind(this);
-      // this.readData = this.readData.bind(this);
       this.onPageChange = this.onPageChange.bind(this);
-
-
    }
 
-
-   // componentDidMount() {
-   //    this.readData();
-   // }
-
-   // readData(){
-   //    this.setState({
-   //       datas:this.props.datas,
-   //       fields:this.props.fields,
-   //       activePage: this.props.activePage,
-   //       totalRecords: this.props.totalRecords,
-   //       recordsPerPage: this.props.recordsPerPage
-   //    })
-   // }
-
    renderTableHeader() {
-      return this.state.fields.map((item, index) => {
+
+      return this.props.fields.map((item, index) => {
          return <th key={index}>{item.label.toUpperCase()}</th>
       })
    }
@@ -113,10 +31,13 @@ class ListTable extends Component {
    }
 
    renderTableData() {
-      return this.state.datas.map((student, index) => {
+      const data = this.props.datas || [];
+      const fields = this.props.fields || [];
+      return data.map((data, index) => {
          return (
             <tr key={index}>
-               {this.state.fields.map((item, i) => {
+               
+               {fields.map((item, i) => {
                   if (item.key == "index") {
                      return (
                         <td key={i}>{index + 1}</td>
@@ -125,23 +46,23 @@ class ListTable extends Component {
                   else if (item.key !== "editDelete") {
                      if (i == 1) {
                         return (
-                           <td key={i} onClick={this.handleDetails}><a href="#">{student[item.key]}</a></td>
+                           <td key={i} onClick={this.handleDetails}><a href="#">{data[item.key]}</a></td>
                         )
                      }
                      return (
-                        <td key={i}>{student[item.key]}</td>
+                        <td key={i}>{data[item.key]}</td>
                      )
                   }
                   else if (item.key == "editDelete") {
                      return (
                         <td key={i}>
-                           <button onClick={()=>{this.props.editHandler(student)}} className="btn btn-primary action"><i className="fas fa-edit"></i></button>
-                           <button onClick={()=>{this.props.deleteHandler(student)}} className="btn btn-danger action"><i className="fas fa-trash"></i></button>
+                           <button onClick={()=>{this.props.editHandler(data)}} className="btn btn-primary action"><i className="fas fa-edit"></i></button>
+                           <button onClick={()=>{this.props.deleteHandler(data)}} className="btn btn-danger action"><i className="fas fa-trash"></i></button>
                         </td>
                      )
                   }
                   // return(
-                  // item.key == 'index' ?<td key={i}>{index+1}</td> :<td key={i}>{student[item.key]}</td>
+                  // item.key == 'index' ?<td key={i}>{index+1}</td> :<td key={i}>{data[item.key]}</td>
                   // )
                })}
             </tr>
@@ -171,7 +92,7 @@ class ListTable extends Component {
                   {this.renderTableData()}
                </tbody>
             </table>
-            <Pagination totalItems={300} onPageChange={this.onPageChange}/>
+            <Pagination totalItems={this.props.totalRecords} onPageChange={this.onPageChange}/>
          </div>
       );
    }

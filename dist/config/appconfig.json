@@ -3,7 +3,8 @@
   "apis": {
       "baseurl": "/",
       "portalSettings": "/data/portal-settings.json",
-      "customerServiceSignup":"/auth/signup/customer-service",
+      "employeeReg":"/api/employee",
+      "employeeUpdate":"/api/employee/:empNo",
       "params": {
         "commonparams": "commonparams"
       }

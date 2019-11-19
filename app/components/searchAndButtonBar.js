@@ -11,7 +11,7 @@ class SearchAndButtonBar extends Component {
         this.state = {
             employeeSearchValue: ""
         }
-        this.employeeSearchHandler = this.employeeSearchHandler.bind(this);
+        this.searchHandler = this.searchHandler.bind(this);
         this.exportHandler = this.exportHandler.bind(this);
     }
 
@@ -19,7 +19,7 @@ class SearchAndButtonBar extends Component {
         alert("second button clicked");
     }
     
-    employeeSearchHandler(e) {
+    searchHandler(e) {
         let searchValue = e.target.value;
         this.setState({
             employeeSearchValue: searchValue
@@ -38,7 +38,7 @@ class SearchAndButtonBar extends Component {
                     <button type="button" onClick={this.exportHandler} className="btn btn-success button">{this.props.button2name}</button>
                     <div className="form-group has-search ml-auto">
                         <span className="fa fa-search form-control-feedback"></span>
-                        <input type="text" onChange={this.employeeSearchHandler} className="form-control search-box" placeholder="Search..." value={this.state.employeeSearchValue} />
+                        <input type="text" onChange={this.searchHandler} className="form-control search-box" placeholder="Search..." value={this.state.employeeSearchValue} />
                     </div>
                 </div>
             </React.Fragment>
