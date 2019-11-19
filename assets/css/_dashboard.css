@@ -23,16 +23,16 @@
 }
 
 .txt-input {
-  border: 1px solid #616263;
+  /* border: 1px solid #616263; */
   padding: 0.25rem 1rem;
   width: 100%;
   outline: none !important;
   display: flex;
 }
 
-.txt-input:hover {
+/* .txt-input:hover {
   border-color: rgb(226, 224, 224);
-}
+} */
 
 .image-wrapper {
   display: flex;

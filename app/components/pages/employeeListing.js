@@ -70,9 +70,9 @@ class EmployeeListing extends React.Component {
     }, () => { this.gettingData() })
   }
 
-  handleEdit() {
+  handleEdit(data) {
     // console.log(data);
-    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_UPDATE });
+    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG,params:{empId:data.empNo} });
   }
 
   async handleDelete(data) {
@@ -98,8 +98,8 @@ class EmployeeListing extends React.Component {
     }
   }
 
-  handleRegister() {
-    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG });
+  handleRegister(){
+    app.events.trigger(GOTO_URL,{ routerKey: EMPLOYEE_REG,params:{empId:-1}});
   }
 
   render() {

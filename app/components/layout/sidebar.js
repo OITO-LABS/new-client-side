@@ -19,7 +19,7 @@ class Sidebar extends React.Component {
   }
 
   empReg() {
-    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG });
+    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG,params:{empId:-1}});
   }
 
   empList() {

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { GOTO_URL,FLIP_LOADER,EMPLOYEE_LISTING } from "utils/constants";
+import { GOTO_URL, FLIP_LOADER, EMPLOYEE_LISTING,SHOW_ALERT_MSG,ALERT_TYPE } from "utils/constants";
 import FormField from "../common/formfield";
-import dataService from 'utils/dataservice'; 
+import dataService from "utils/dataservice";
+
 export class registerEmployee extends Component {
   constructor(props) {
     super(props);
@@ -9,62 +10,84 @@ export class registerEmployee extends Component {
     this.state = {
       ...this.getStateData(this.props)
     };
-     this.handleInputChange = this.handleInputChange.bind(this);
-     this.submit = this.submit.bind(this);
-     this.persistInCache = this.props.persistInCache;  
-     this.userId = app.userId ? app.userId : -1;
-     this.cancel = this.cancel.bind(this);
-     this.fieldData = {};
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.submit = this.submit.bind(this);
+    this.update = this.update.bind(this);
+    this.cancel = this.cancel.bind(this);
+    this.fieldData = {};
   }
 
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
-    this.persistInCache = this.props.persistInCache;
-    if((app.userId && this.userId!=app.userId)){
-        this.userId = app.userId || -1;
-        this.setState({...this.getStateData(this.props)});
-    }
+    dataService.getRequest("getEmpDetails", { empNo: this.props.match.params.empId })
+      // .then(res => res.json())
+      .then(result => {
+        this.setState({
+          ...this.getStateData(result)
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
-  getStateData(empdata){
+  getStateData(empdata) {
     return {
-      firstName:empdata.firstName || '',
-      lastName:empdata.lastName || '',
-      email:empdata.email || '',
-      designation:empdata.designation || '',
-      dob:empdata.dob || '',
-      contactNo:empdata.contactNo || '',
-      emergencyContactName:empdata.emergencyContactName || '',
-      emergencyContact:empdata.emergencyContact || '',
-      healthCardNo:empdata.healthCardNo || '',
-      empNo:empdata.empNo || '',
-      bloodGroup:empdata.bloodGroup || '',
+      firstName: empdata.firstName || "",
+      lastName: empdata.lastName || "",
+      email: empdata.email || "",
+      designation: empdata.designation || "",
+      dob: empdata.dob || "",
+      contactNo: empdata.contactNo || "",
+      emergencyContactName: empdata.emergencyContactName || "",
+      emergencyContact: empdata.emergencyContact || "",
+      healthCardNo: empdata.healthCardNo || "",
+      empNo: empdata.empNo || "",
+      bloodGroup: empdata.bloodGroup || ""
     };
   }
 
-  handleInputChange(event,fieldData={}){
-    //event.preventDefault();
+  handleInputChange(event, fieldData = {}) {
     let field = fieldData.field || event.target.name;
-    let value = fieldData.value || event.target.value || '';
+    let value = fieldData.value || event.target.value || "";
     this.fieldData[field] = fieldData;
-    event && this.setState({
-      [field]: (event.target.type=='checkbox'?event.target.checked:value),
-    });
+    event &&
+      this.setState({
+        [field]: event.target.type == "checkbox" ? event.target.checked : value
+      });
   }
 
   submit() {
-    dataService.postRequest("registered",{...this.getStateData(this.state)})
-    .then(res=>{console.log(res);
-      }).catch(res=>{    
-    });
+    dataService.postRequest("registered", { ...this.getStateData(this.state) })
+      .then(res => {
+        app.events.trigger(SHOW_ALERT_MSG, {
+          visible: true,
+          type: ALERT_TYPE.SUCESS,
+          msg: res
+        });
+      })
+      .catch(err => {console.log(err)});
   }
 
- cancel() {
+  update() {
+    dataService.putRequest("updateEmployee", { empNo: this.props.match.params.empId } ,{ ...this.getStateData(this.state) } )
+    .then(res => {
+      app.events.trigger(SHOW_ALERT_MSG, {
+        visible: true,
+        type: ALERT_TYPE.SUCESS,
+        msg: res
+      });
+    })
+    .catch(err => {console.log(err)});
+  }
+
+  cancel() {
     // console.log(data);
     app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });
   }
 
   render() {
+    var empNo = this.props.match.params.empId;
     return (
       <div className="form-wrapper">
         <div className="d-flex justify-content-sm-around">
@@ -72,136 +95,145 @@ export class registerEmployee extends Component {
           <div className="p-2 w-25 mt-5">
             <FormField
               label="First Name"
-              labelClassName='txt-label'
-              fieldClassName='txt-input'
+              labelClassName="txt-label"
+              fieldClassName="txt-input"
               mandatory
               name="firstName"
               onChange={this.handleInputChange}
               value={this.state.firstName}
               placeholder="First Name"
             />
-            <FormField 
-              label="Last Name" 
-              labelClassName='txt-label'
-              fieldClassName='txt-input'
-              mandatory  
+            <FormField
+              label="Last Name"
+              labelClassName="txt-label"
+              fieldClassName="txt-input"
+              mandatory
               onChange={this.handleInputChange}
-              name="lastName" 
-              value={this.state.lastName} 
+              name="lastName"
+              value={this.state.lastName}
               placeholder="Last Name"
             />
-            <FormField 
-              label="Email" 
-              labelClassName='txt-label'
-              fieldClassName='txt-input'
+            <FormField
+              label="Email"
+              labelClassName="txt-label"
+              fieldClassName="txt-input"
               mandatory
-              onChange={this.handleInputChange} 
-              name="email" 
+              onChange={this.handleInputChange}
+              name="email"
               value={this.state.email}
               placeholder="Email"
             />
-            <FormField 
-              label="Designation" 
-              labelClassName='txt-label'
-              fieldClassName='txt-input'
+            <FormField
+              label="Designation"
+              labelClassName="txt-label"
+              fieldClassName="txt-input"
               mandatory
               onChange={this.handleInputChange}
-              name="designation" 
+              name="designation"
               value={this.state.designation}
-              placeholder="Designation" 
+              placeholder="Designation"
             />
             <FormField
-              label="DOB" 
-              labelClassName='txt-label'
-              fieldClassName='txt-input'
-              mandatory 
-              onChange={this.handleInputChange} 
-              name="dob" 
+              label="DOB"
+              labelClassName="txt-label"
+              fieldClassName="txt-input"
+              mandatory
+              onChange={this.handleInputChange}
+              name="dob"
               type="date"
               value={this.state.dob}
               placeholder="DOB"
-            /> 
+            />
           </div>
 
           {/* Input details second block  */}
           <div className="p-2 w-25 mt-5">
-            <FormField 
-              label="Contact Number" 
-              labelClassName='txt-label'
-              fieldClassName='txt-input'
+            <FormField
+              label="Contact Number"
+              labelClassName="txt-label"
+              fieldClassName="txt-input"
               mandatory
-              onChange={this.handleInputChange} 
-              name="contactNo" 
+              onChange={this.handleInputChange}
+              name="contactNo"
               value={this.state.contactNo}
-              placeholder="Contact Number" 
+              placeholder="Contact Number"
             />
-            <FormField 
-              label="Emergency Contact Name" 
-              labelClassName='txt-label'
-              fieldClassName='txt-input'
+            <FormField
+              label="Emergency Contact Name"
+              labelClassName="txt-label"
+              fieldClassName="txt-input"
               mandatory
-              onChange={this.handleInputChange} 
-              name="emergencyContactName" 
+              onChange={this.handleInputChange}
+              name="emergencyContactName"
               value={this.state.emergencyContactName}
-              placeholder="Emergency Contact Name"  
+              placeholder="Emergency Contact Name"
             />
-            <FormField 
-              label="Emergency Contact Number" 
-              labelClassName='txt-label'
-              fieldClassName='txt-input'
+            <FormField
+              label="Emergency Contact Number"
+              labelClassName="txt-label"
+              fieldClassName="txt-input"
               mandatory
-              onChange={this.handleInputChange} 
-              name="emergencyContact" 
+              onChange={this.handleInputChange}
+              name="emergencyContact"
               value={this.state.emergencyContact}
               placeholder="Emergency Contact Number"
             />
-            <FormField 
+            <FormField
               label="Healthcard Number"
-              labelClassName='txt-label'
-              fieldClassName='txt-input' 
+              labelClassName="txt-label"
+              fieldClassName="txt-input"
               mandatory
-              onChange={this.handleInputChange} 
-              name="healthCardNo" 
+              onChange={this.handleInputChange}
+              name="healthCardNo"
               value={this.state.healthCardNo}
               placeholder="Healthcard Number"
             />
-            <FormField 
-              label="Employee Number" 
-              labelClassName='txt-label'
-              fieldClassName='txt-input'
+            <FormField
+              label="Employee Number"
+              labelClassName="txt-label"
+              fieldClassName="txt-input"
               mandatory
-              onChange={this.handleInputChange} 
-              name="empNo" 
+              disabled = {empNo !='-1'}
+              onChange={this.handleInputChange}
+              name="empNo"
               value={this.state.empNo}
-              placeholder="Employee Number"  
-            />    
-            <FormField   
+              placeholder="Employee Number"
+            />
+            <FormField
               type="select"
-              label='Blood Group'
-              labelClassName='txt-label'
+              label="Blood Group"
+              labelClassName="txt-label"
               fieldClassName="select-input"
               mandatory
-              name="bloodGroup" 
-              nameAlias = {"abc_fullName"}
-              onChange={this.handleInputChange} 
-              options={[{value:'A+ve',label:'A+ve'},{value:'B+ve',label:'B+ve'},{value:'B-ve',label:'B-ve'},{value:'AB+ve',label:'AB+ve'},{value:'AB-ve',label:'AB-ve'},{value:'O+ve',label:'O+ve'},{value:'O-ve',label:'O-ve'}]}
-              value={this.state.bloodGroup} 
-              placeholder='Blood Group'
+              name="bloodGroup"
+              nameAlias={"abc_fullName"}
+              onChange={this.handleInputChange}
+              options={[
+                { value: "A+ve", label: "A+ve" },
+                { value: "B+ve", label: "B+ve" },
+                { value: "B-ve", label: "B-ve" },
+                { value: "AB+ve", label: "AB+ve" },
+                { value: "AB-ve", label: "AB-ve" },
+                { value: "O+ve", label: "O+ve" },
+                { value: "O-ve", label: "O-ve" }
+              ]}
+              value={this.state.bloodGroup}
+              placeholder="Blood Group"
             />
           </div>
         </div>
 
         <div className="btn-wrapper">
+        {empNo == "-1" ? 
+          <button type="button" className="btn submit-btn" onClick={this.submit}>Submit</button>: 
+          <button type="button" className="btn submit-btn" onClick={this.update}>Update</button>
+        }
+
           <button
             type="button"
-            className="btn submit-btn"
-            onClick={this.submit}>
-            Submit
-          </button>
-          <button 
-            type="button" 
-            className="btn cancel-btn" 
-            onClick={this.cancel}>
+            className="btn cancel-btn"
+            onClick={this.cancel}
+          >
             Cancel
           </button>
         </div>

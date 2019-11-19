@@ -10,7 +10,7 @@
 	    "productDetails":"/productDetails.json",
 	    "productBasicDetails":"/product-basic-details.json",
 	    "autoSuggestions": "/autoSuggestions.json",
-	    "categoryDetails":"/categoryDetails.json",
+		"categoryDetails":"/categoryDetails.json",
 	    "params": {
 			"commonparams": "commonparams"
 	    }
