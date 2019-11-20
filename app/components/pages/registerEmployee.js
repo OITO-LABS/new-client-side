@@ -124,7 +124,9 @@ export class registerEmployee extends Component {
 
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
-    dataService.getRequest("getEmpDetails", { empNo: this.props.match.params.empId })
+    {this.props.match.params.empId == -1 ?
+     '': 
+     dataService.getRequest("getEmpDetails", { empNo: this.props.match.params.empId })
       // .then(res => res.json())
       .then(result => {
         this.setState({
@@ -134,6 +136,7 @@ export class registerEmployee extends Component {
       .catch(error => {
         console.error(error);
       });
+    }
   }
 
   getStateData(empdata) {
@@ -164,10 +167,9 @@ export class registerEmployee extends Component {
     let field = fieldData.field || event.target.name;
     let value = fieldData.value || event.target.value || "";
     this.fieldData[field] = fieldData;
-    event &&
-      this.setState({
+    event && this.setState({
         [field]: event.target.type == "checkbox" ? event.target.checked : value
-      });
+    });
   }
 
   submit() {

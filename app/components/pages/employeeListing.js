@@ -43,7 +43,7 @@ class EmployeeListing extends React.Component {
   gettingData() {
     const data = { page: this.state.activePage - 1, searchkey: this.state.searchValue, limit: this.state.recordsPerPage }
     // dataService.getRequest("employeeUpdate", { empNo:'123',empId:123 })
-    dataService.getRequest("employeeList", data)
+    dataService.postRequest("employeeList", data)
       .then((jsonData) => {
         // jsonData is parsed json object received from url
         console.log(jsonData)
