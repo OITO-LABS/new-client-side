@@ -1,0 +1,74 @@
+.form-wrapper {
+  border: 1px solid #ede4e4;
+  background-color: #fff;
+}
+
+.txt-label {
+  font-size: 16px !important;
+} 
+
+.token {
+  color: red;
+}
+
+.txt-input {
+  border-radius: 0.5rem;
+  border-style: groove;
+  border: 1px solid #b6c5d1 !important;
+  padding: 0.25rem 1rem;
+  width: 100%;
+  outline: none !important;
+  display: flex;
+}
+
+.txt-input:hover {
+  border-color: rgb(226, 224, 224);
+} 
+
+.select-input {
+  outline: none !important;
+  display: flex;
+  width: 30% !important;
+  border-radius: 0.5rem;
+  border-style: groove;
+  border: 1px solid #b6c5d1 !important;
+  background-color: #fff !important;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+  border-top: 0;
+  margin: 1%;
+}
+
+.submit-btn {
+  background-color: #b4323e;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0.5rem 2.5rem;
+}
+
+.cancel-btn {
+  background-color: #28a745;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0.5rem 2.5rem;
+  margin-left: 5%;
+}
+
+.cancel-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  background-color: #6acc7f;
+  color: #000;
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  background-color: #c73e3e;
+  color: #000;
+}
