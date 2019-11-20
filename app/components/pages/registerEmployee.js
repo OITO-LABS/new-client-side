@@ -10,6 +10,7 @@ export class registerEmployee extends Component {
     this.state = {
       ...this.getStateData(this.props)
     };
+    
     this.handleInputChange = this.handleInputChange.bind(this);
     this.submit = this.submit.bind(this);
     this.update = this.update.bind(this);
@@ -82,7 +83,6 @@ export class registerEmployee extends Component {
   }
 
   cancel() {
-    // console.log(data);
     app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });
   }
 
@@ -222,20 +222,14 @@ export class registerEmployee extends Component {
             />
           </div>
         </div>
-
+        
+        {/* Button wrapper for Submit, Update and Cancel*/}
         <div className="btn-wrapper">
         {empNo == "-1" ? 
           <button type="button" className="btn submit-btn" onClick={this.submit}>Submit</button>: 
           <button type="button" className="btn submit-btn" onClick={this.update}>Update</button>
         }
-
-          <button
-            type="button"
-            className="btn cancel-btn"
-            onClick={this.cancel}
-          >
-            Cancel
-          </button>
+          <button type="button" className="btn cancel-btn" onClick={this.cancel}>Cancel</button>
         </div>
       </div>
     );

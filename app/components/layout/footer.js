@@ -1,20 +1,6 @@
 import React from "react";
-import {
-  GOTO_URL,
-  SCROLL_TO_TOP,
-  WIN_SCROLL,
-  SHOW_ALERT_MSG,
-  ALERT_TYPE,
-  LANDING,
-  PATH_CHANGED
-} from "utils/constants";
-import {
-  gotoUrl,
-  moveToTop,
-  resolveRouterPath,
-  translate,
-  getRouterUrl
-} from "utils/common";
+import {GOTO_URL,SCROLL_TO_TOP,WIN_SCROLL,SHOW_ALERT_MSG,ALERT_TYPE,LANDING,PATH_CHANGED} from "utils/constants";
+import {gotoUrl,moveToTop,resolveRouterPath,translate,getRouterUrl} from "utils/common";
 import { setCookie, getCookie } from "utils/cookie";
 import dataService from "utils/dataservice";
 import AlertMessage from "components/common/alertmessage";

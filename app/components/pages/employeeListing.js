@@ -1,5 +1,5 @@
 import React from 'react';
-import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, EMPLOYEE_REG, EMPLOYEE_UPDATE } from 'utils/constants';
+import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, EMPLOYEE_REG } from 'utils/constants';
 import SearchAndButtonBar from "../searchAndButtonBar";
 import FormMsg from 'components/common/formmessage';
 import ListTable from "../listTable";
