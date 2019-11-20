@@ -2,7 +2,6 @@ import React from 'react';
 import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, EMPLOYEE_REG, EMPLOYEE_UPDATE,EMPLOYEE_DETAILS } from 'utils/constants';
 import SearchAndButtonBar from "../searchAndButtonBar";
 import FormMsg from 'components/common/formmessage';
-import SearchAndButtonBar from "../searchAndButtonBar";
 import ListTable from "../listTable";
 import { confirm } from 'utils/common';
 import { fileURLToPath } from 'url';
@@ -81,11 +80,7 @@ class EmployeeListing extends React.Component {
 
   handleEdit(data) {
     // console.log(data);
-<<<<<<< HEAD
-    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG, params: { empId: data.empNo } });
-=======
     app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG,params:{empId:data.empId} });
->>>>>>> 7ea5279e6929eaa8c5d843c76590c20568162953
   }
 
   async handleDelete(data) {
