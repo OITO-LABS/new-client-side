@@ -1,6 +1,6 @@
 import React from "react";
-import {DASHBOARD,EMPLOYEE_REG,EMPLOYEE_LISTING,GOTO_URL} from "utils/constants";
-import 'assets/css/_sidebar.css';
+import {DASHBOARD,EMPLOYEE_REG,EMPLOYEE_LISTING,GOTO_URL,ADD_ASSETS,ASSET_LISTING} from "utils/constants";
+import "assets/sass/pages/_employeeListing.scss";
 
 class Sidebar extends React.Component {
 
@@ -19,7 +19,7 @@ class Sidebar extends React.Component {
   }
 
   empReg() {
-    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG,params:{empId:-1}});
+    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG,params:{empId:-1} });
   }
 
   empList() {
@@ -27,11 +27,11 @@ class Sidebar extends React.Component {
   }
 
   addAssets() {
-    app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS });
+    app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS,params:{empId:-1} });
   }
 
   viewAssets() {
-    app.events.trigger(GOTO_URL, { routerKey: VIEW_ASSETS });
+    app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
   }
 
   render() {

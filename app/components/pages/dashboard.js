@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FLIP_LOADER } from "utils/constants";
-import "assets/css/_dashboard.css";
 import Admin_Logo from 'assets/images/Admin.png';
+import "assets/sass/pages/_employeeListing.scss";
 
 class dashboard extends Component {
   componentDidMount() {

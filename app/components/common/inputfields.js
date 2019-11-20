@@ -3,7 +3,8 @@ import {translate,isValidRange,round,withDecimal} from 'utils/common';
 import FormMsg from './formmessage';
 import Validator from 'validator';
 import { Dropdown, DropdownToggle, DropdownMenu } from 'reactstrap';
-import "assets/css/_empReg.css";
+import "assets/sass/pages/_employeeListing.scss"
+
 
 function getField(props,validator)
 {

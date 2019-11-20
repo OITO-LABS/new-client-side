@@ -126,7 +126,7 @@ export class registerEmployee extends Component {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
     {this.props.match.params.empId == -1 ?
      '': 
-     dataService.getRequest("getEmpDetails", { empNo: this.props.match.params.empId })
+     dataService.getRequest("getEmpDetails", { empId: this.props.match.params.empId })
       // .then(res => res.json())
       .then(result => {
         this.setState({
@@ -198,7 +198,7 @@ export class registerEmployee extends Component {
     this.submitted = true;
 
     if (validation.isValid) {
-      dataService.putRequest("updateEmployee", { empNo: this.props.match.params.empId } ,{ ...this.getStateData(this.state) } )
+      dataService.putRequest("updateEmployee", { empId: this.props.match.params.empId } ,{ ...this.getStateData(this.state) } )
       .then(res => {
         app.events.trigger(SHOW_ALERT_MSG, {
         visible: true,

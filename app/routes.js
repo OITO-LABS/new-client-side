@@ -1,4 +1,4 @@
-import {PATH_PREFIX,LANDING,DASHBOARD,APP_INFO,UPPER_BAR,EMPLOYEE_REG,EMPLOYEE_UPDATE,EMPLOYEE_LISTING,EMPLOYEE_DETAILS,ASSET_LISTING,ASSET_DETAILS} from 'utils/constants';
+import {PATH_PREFIX,LANDING,DASHBOARD,APP_INFO,UPPER_BAR,EMPLOYEE_REG,EMPLOYEE_UPDATE,EMPLOYEE_LISTING,EMPLOYEE_DETAILS,ASSET_LISTING,ASSET_DETAILS,ADD_ASSETS} from 'utils/constants';
 const routes = [
     {
         name:LANDING,
@@ -99,6 +99,16 @@ const routes = [
         componentId:'pages/assetListing',
         title:'asset listing',
         className:'asset-listing-page',
+        exact:true,
+        nowrap:false
+    },
+    {
+        name:ADD_ASSETS,
+        path:PATH_PREFIX+':empId/'+ADD_ASSETS,
+        samplePath:PATH_PREFIX+ADD_ASSETS,
+        componentId:'pages/assetRegistration',
+        title:'asset registration',
+        className:'asset-registration-page',
         exact:true,
         nowrap:false
     },
