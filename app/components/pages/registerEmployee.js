@@ -8,7 +8,7 @@ export class registerEmployee extends Component {
   constructor(props) {
     super(props);
     this.validateFieldData = this.validateFieldData.bind(this);
-    // this.validEmailData = this.validEmailData.bind(this);
+    this.validEmailData = this.validEmailData.bind(this);
     this.validator = new FormValidator([
       {
         field: 'firstName', 
@@ -38,13 +38,13 @@ export class registerEmployee extends Component {
         validWhen: false, 
         message: 'Email is empty'
       },
-      // {
-      //   field: 'email', 
-      //   method: this.validEmailData, 
-      //   args:[{ignore_whitespace:true}],
-      //   validWhen: false, 
-      //   message: 'Invalid format'
-      // },
+      {
+        field: 'email', 
+        method: this.validEmailData, 
+        args:[{ignore_whitespace:true}],
+        validWhen: true, 
+        message: 'Invalid format'
+      },
       {
         field: 'dob', 
         method: 'isEmpty', 
@@ -155,11 +155,12 @@ export class registerEmployee extends Component {
     };
   }
 
-  // validEmailData(args,field) {
+  validEmailData(value,args, state, validation,field) {
+    const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+    return(validEmailRegex.test(value));
+  }
 
-  // }
-
-  validateFieldData(args,field){
+  validateFieldData(value,args, state, validation,field){
     return this.fieldData[field] && !!this.fieldData[field][args.propName];
   }
 
