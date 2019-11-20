@@ -1,14 +1,118 @@
 import React, { Component } from "react";
 import { GOTO_URL, FLIP_LOADER, EMPLOYEE_LISTING,SHOW_ALERT_MSG,ALERT_TYPE } from "utils/constants";
 import FormField from "../common/formfield";
+import FormValidator from '../common/formvalidator';
 import dataService from "utils/dataservice";
 
 export class registerEmployee extends Component {
   constructor(props) {
     super(props);
+    this.validateFieldData = this.validateFieldData.bind(this);
+    // this.validEmailData = this.validEmailData.bind(this);
+    this.validator = new FormValidator([
+      {
+        field: 'firstName', 
+        method: 'isEmpty', 
+        args:[{ignore_whitespace:true}],
+        validWhen: false, 
+        message: 'First name is empty'
+      },
+      {
+        field: 'lastName', 
+        method: 'isEmpty', 
+        args:[{ignore_whitespace:true}],
+        validWhen: false, 
+        message: 'Last name is empty'
+      },
+      {
+        field: 'designation', 
+        method: 'isEmpty', 
+        args:[{ignore_whitespace:true}],
+        validWhen: false, 
+        message: 'Designation is empty'
+      },
+      {
+        field: 'email', 
+        method: 'isEmpty', 
+        args:[{ignore_whitespace:true}],
+        validWhen: false, 
+        message: 'Email is empty'
+      },
+      // {
+      //   field: 'email', 
+      //   method: this.validEmailData, 
+      //   args:[{ignore_whitespace:true}],
+      //   validWhen: false, 
+      //   message: 'Invalid format'
+      // },
+      {
+        field: 'dob', 
+        method: 'isEmpty', 
+        args:[{ignore_whitespace:true}],
+        validWhen: false, 
+        message: 'Date of birth is empty'
+      },
+      { 
+        field: 'contactNo', 
+        method: this.validateFieldData, 
+        args:[{propName:'phone'}],
+        validWhen: true, 
+        message: 'Contact number is empty'
+      },
+      { 
+        field: 'contactNo', 
+        method: this.validateFieldData, 
+        args:[{propName:'valid'}],
+        validWhen: true, 
+        message: 'Invalid contact number'
+      },
+      {
+        field: 'emergencyContactName', 
+        method: 'isEmpty', 
+        args:[{ignore_whitespace:true}],
+        validWhen: false, 
+        message: 'Emergency contact name is empty'
+      },
+      { 
+        field: 'emergencyContact', 
+        method: this.validateFieldData, 
+        args:[{propName:'phone'}],
+        validWhen: true, 
+        message: 'Emergency contact number is empty'
+      },
+      { 
+        field: 'emergencyContact', 
+        method: this.validateFieldData, 
+        args:[{propName:'valid'}],
+        validWhen: true, 
+        message: 'Invalid emergency contact number'
+      },
+      {
+        field: 'healthCardNo', 
+        method: 'isEmpty', 
+        args:[{ignore_whitespace:true}],
+        validWhen: false, 
+        message: 'Health card number is empty'
+      },
+      {
+        field: 'empNo', 
+        method: 'isEmpty', 
+        args:[{ignore_whitespace:true}],
+        validWhen: false, 
+        message: 'Employee number is empty'
+      },
+      {
+        field: 'bloodGroup', 
+        method: 'isEmpty', 
+        args:[{ignore_whitespace:true}],
+        validWhen: false, 
+        message: 'Select blood group'
+      },
+    ]);
 
     this.state = {
-      ...this.getStateData(this.props)
+      ...this.getStateData(this.props),
+      validation: this.validator.valid()
     };
     
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -48,6 +152,14 @@ export class registerEmployee extends Component {
     };
   }
 
+  // validEmailData(args,field) {
+
+  // }
+
+  validateFieldData(args,field){
+    return this.fieldData[field] && !!this.fieldData[field][args.propName];
+  }
+
   handleInputChange(event, fieldData = {}) {
     let field = fieldData.field || event.target.name;
     let value = fieldData.value || event.target.value || "";
@@ -59,27 +171,39 @@ export class registerEmployee extends Component {
   }
 
   submit() {
-    dataService.postRequest("registered", { ...this.getStateData(this.state) })
+    const validation = this.validator.validate(this.state);
+    this.setState({ validation });
+    this.submitted = true;
+
+    if (validation.isValid) {
+      dataService.postRequest("registered", { ...this.getStateData(this.state) })
       .then(res => {
         app.events.trigger(SHOW_ALERT_MSG, {
-          visible: true,
-          type: ALERT_TYPE.SUCESS,
-          msg: res
-        });
-      })
-      .catch(err => {console.log(err)});
-  }
-
-  update() {
-    dataService.putRequest("updateEmployee", { empNo: this.props.match.params.empId } ,{ ...this.getStateData(this.state) } )
-    .then(res => {
-      app.events.trigger(SHOW_ALERT_MSG, {
         visible: true,
         type: ALERT_TYPE.SUCESS,
         msg: res
-      });
-    })
-    .catch(err => {console.log(err)});
+        });
+      })
+      .catch(err => {console.log(err)});
+      } 
+    }
+
+  update() {
+    const validation = this.validator.validate(this.state);
+    this.setState({ validation });
+    this.submitted = true;
+
+    if (validation.isValid) {
+      dataService.putRequest("updateEmployee", { empNo: this.props.match.params.empId } ,{ ...this.getStateData(this.state) } )
+      .then(res => {
+        app.events.trigger(SHOW_ALERT_MSG, {
+        visible: true,
+        type: ALERT_TYPE.SUCESS,
+        msg: res
+        });
+      })
+      .catch(err => {console.log(err)});
+    }
   }
 
   cancel() {
@@ -87,7 +211,8 @@ export class registerEmployee extends Component {
   }
 
   render() {
-    var empNo = this.props.match.params.empId;
+    let validation = this.submitted ?this.validator.validate(this.state) : this.state.validation;
+    var empId = this.props.match.params.empId;
     return (
       <div className="form-wrapper">
         <div className="d-flex justify-content-sm-around">
@@ -102,6 +227,7 @@ export class registerEmployee extends Component {
               onChange={this.handleInputChange}
               value={this.state.firstName}
               placeholder="First Name"
+              validator={validation} 
             />
             <FormField
               label="Last Name"
@@ -112,6 +238,7 @@ export class registerEmployee extends Component {
               name="lastName"
               value={this.state.lastName}
               placeholder="Last Name"
+              validator={validation} 
             />
             <FormField
               label="Email"
@@ -122,6 +249,7 @@ export class registerEmployee extends Component {
               name="email"
               value={this.state.email}
               placeholder="Email"
+              validator={validation} 
             />
             <FormField
               label="Designation"
@@ -132,6 +260,7 @@ export class registerEmployee extends Component {
               name="designation"
               value={this.state.designation}
               placeholder="Designation"
+              validator={validation} 
             />
             <FormField
               label="DOB"
@@ -143,6 +272,7 @@ export class registerEmployee extends Component {
               type="date"
               value={this.state.dob}
               placeholder="DOB"
+              validator={validation} 
             />
           </div>
 
@@ -157,6 +287,10 @@ export class registerEmployee extends Component {
               name="contactNo"
               value={this.state.contactNo}
               placeholder="Contact Number"
+              type="phone"
+              minLength="8"
+              maxLength="10"
+              validator={validation}
             />
             <FormField
               label="Emergency Contact Name"
@@ -167,6 +301,7 @@ export class registerEmployee extends Component {
               name="emergencyContactName"
               value={this.state.emergencyContactName}
               placeholder="Emergency Contact Name"
+              validator={validation}
             />
             <FormField
               label="Emergency Contact Number"
@@ -177,6 +312,10 @@ export class registerEmployee extends Component {
               name="emergencyContact"
               value={this.state.emergencyContact}
               placeholder="Emergency Contact Number"
+              type="phone"
+              minLength="8"
+              maxLength="10"
+              validator={validation}
             />
             <FormField
               label="Healthcard Number"
@@ -187,17 +326,19 @@ export class registerEmployee extends Component {
               name="healthCardNo"
               value={this.state.healthCardNo}
               placeholder="Healthcard Number"
+              validator={validation}
             />
             <FormField
               label="Employee Number"
               labelClassName="txt-label"
               fieldClassName="txt-input"
               mandatory
-              disabled = {empNo !='-1'}
+              disabled = {empId !='-1'}
               onChange={this.handleInputChange}
               name="empNo"
               value={this.state.empNo}
               placeholder="Employee Number"
+              validator={validation}
             />
             <FormField
               type="select"
@@ -219,13 +360,14 @@ export class registerEmployee extends Component {
               ]}
               value={this.state.bloodGroup}
               placeholder="Blood Group"
+              validator={validation}
             />
           </div>
         </div>
         
         {/* Button wrapper for Submit, Update and Cancel*/}
         <div className="btn-wrapper">
-        {empNo == "-1" ? 
+        {empId == "-1" ? 
           <button type="button" className="btn submit-btn" onClick={this.submit}>Submit</button>: 
           <button type="button" className="btn submit-btn" onClick={this.update}>Update</button>
         }
