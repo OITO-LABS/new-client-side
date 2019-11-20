@@ -1,4 +1,4 @@
-import {PATH_PREFIX,LANDING,DASHBOARD,APP_INFO,UPPER_BAR,EMPLOYEE_REG,EMPLOYEE_UPDATE,EMPLOYEE_LISTING} from 'utils/constants';
+import {PATH_PREFIX,LANDING,DASHBOARD,APP_INFO,UPPER_BAR,EMPLOYEE_REG,EMPLOYEE_UPDATE,EMPLOYEE_LISTING,EMPLOYEE_DETAILS,ASSET_LISTING,ASSET_DETAILS} from 'utils/constants';
 const routes = [
     {
         name:LANDING,
@@ -71,7 +71,37 @@ const routes = [
         exact:true,
         nowrap:false
         // params:'',
-    }
+    },
+    {
+        name:EMPLOYEE_DETAILS,
+        path:PATH_PREFIX+':empId/'+EMPLOYEE_DETAILS,
+        samplePath:PATH_PREFIX+EMPLOYEE_DETAILS,
+        componentId:'pages/employeeDetails',
+        title:'employee details',
+        className:'employee-details-page',
+        exact:true,
+        nowrap:false
+    },
+    {
+        name:ASSET_DETAILS,
+        path:PATH_PREFIX+':empId/'+ASSET_DETAILS,
+        samplePath:PATH_PREFIX+ASSET_DETAILS,
+        componentId:'pages/assetDetails',
+        title:'asset details',
+        className:'asset-details-page',
+        exact:true,
+        nowrap:false
+    },
+    {
+        name:ASSET_LISTING,
+        path:PATH_PREFIX+ASSET_LISTING,
+        samplePath:PATH_PREFIX+ASSET_LISTING,
+        componentId:'pages/assetListing',
+        title:'asset listing',
+        className:'asset-listing-page',
+        exact:true,
+        nowrap:false
+    },
 ];
 
 export default routes;

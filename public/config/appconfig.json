@@ -3,9 +3,13 @@
   "apis": {
       "baseurl": "/",
       "portalSettings": "http://localhost:8080/data/portal-settings.json",
+      "getEmpDetails":"api/employee/:empId",    
+      "updateEmployee":"api/employee/:empId",
+      "registered":"api/employee",
       "employeeList":"/api/employee/list",
       "employeeSearch":"/api/employee/search",
       "employeeDelete":"/api/employee/delete/:empNo",
+      "assetsOfEmployee":"/api/employee/asset/:empId",
       "params": {
         "commonparams": "commonparams"
       }

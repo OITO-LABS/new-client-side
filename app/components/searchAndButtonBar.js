@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FLIP_LOADER } from "utils/constants";
 import PropTypes from 'prop-types';
 // import {SHOW_ALERT} from "../../utils/constants";
-import "assets/css/searchAndButtonBar.css"
+// import "assets/css/searchAndButtonBar.css"
 
 class SearchAndButtonBar extends Component {
     constructor(props) {

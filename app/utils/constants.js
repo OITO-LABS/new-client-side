@@ -49,7 +49,10 @@ export const EMPLOYEE_REG = 'employee-reg'
 export const EMPLOYEE_UPDATE = 'employee-update'
 // ******upperbar*********
 export const UPPER_BAR ="upper-bar";
+export const EMPLOYEE_DETAILS ="employee-details";
 export const EMPLOYEE_LISTING = "employee-listing";
+export const ASSET_DETAILS ="asset-details";
+export const ASSET_LISTING = "asset-listing";
 export const PATH_PREFIX = pageConfig['PATH_PREFIX'];
 export const PUBLIC_PATH = pageConfig['PUBLIC_PATH'];
 

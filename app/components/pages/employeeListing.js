@@ -1,11 +1,12 @@
 import React from 'react';
-import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, EMPLOYEE_REG, EMPLOYEE_UPDATE } from 'utils/constants';
-import SearchAndButtonBar from "../searchAndButtonBar";
+import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, EMPLOYEE_REG, EMPLOYEE_UPDATE,EMPLOYEE_DETAILS } from 'utils/constants';
 import FormMsg from 'components/common/formmessage';
+import SearchAndButtonBar from "../searchAndButtonBar";
 import ListTable from "../listTable";
 import { confirm } from 'utils/common';
 import { fileURLToPath } from 'url';
 import dataService from 'utils/dataservice';
+import "assets/sass/pages/_employeeListing.scss"
 
 // import { FLIP_LOADER,ALERT_TYPE,SHOW_ALERT_MSG,SHOW_ALERT } from 'utils/constants';
 
@@ -24,7 +25,7 @@ class EmployeeListing extends React.Component {
         { label: "email", key: "email" },
         { label: "contact no", key: "contactNo" },
         { label: "action", key: "editDelete" }
-     ]
+      ]
     }
     this.gettingData = this.gettingData.bind(this);
     this.handlePage = this.handlePage.bind(this);
@@ -32,7 +33,7 @@ class EmployeeListing extends React.Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
-
+    this.handleDetails = this.handleDetails.bind(this);
   }
 
   componentDidMount() {
@@ -43,7 +44,14 @@ class EmployeeListing extends React.Component {
   gettingData() {
     const data = { page: this.state.activePage - 1, searchkey: this.state.searchValue, limit: this.state.recordsPerPage }
     // dataService.getRequest("employeeUpdate", { empNo:'123',empId:123 })
-    dataService.postRequest("employeeList", data)
+    let urlKey = "";
+    if (this.state.searchValue === "") {
+      urlKey = "employeeList";
+    }
+    else {
+      urlKey = "employeeSearch";
+    }
+    dataService.getRequest(urlKey, data)
       .then((jsonData) => {
         // jsonData is parsed json object received from url
         console.log(jsonData)
@@ -72,7 +80,7 @@ class EmployeeListing extends React.Component {
 
   handleEdit(data) {
     // console.log(data);
-    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG,params:{empId:data.empNo} });
+    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG, params: { empId: data.empNo } });
   }
 
   async handleDelete(data) {
@@ -90,16 +98,23 @@ class EmployeeListing extends React.Component {
           app.events.trigger(SHOW_ALERT_MSG, {
             visible: true,
             type: ALERT_TYPE.SUCESS,
-            msg: { res }
+            msg: "successfully deleted"
           });
+          this.gettingData();
         }).catch(res => {
           console.log(res);
         });
     }
   }
 
-  handleRegister(){
-    app.events.trigger(GOTO_URL,{ routerKey: EMPLOYEE_REG,params:{empId:-1}});
+  handleDetails(data) {
+    console.log("details");
+    console.log(data.empId);
+    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_DETAILS, params: { empId: data.empId } });
+  }
+
+  handleRegister() {
+    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG, params: { empId: -1 } });
   }
 
   render() {
@@ -109,17 +124,15 @@ class EmployeeListing extends React.Component {
           button1name="Register employee"
           button2name="export"
           handleRegister={this.handleRegister}
-          searchHandler={this.handleSearch}
-        />
-        <ListTable 
-        totalRecords={this.state.totalRecords} 
-        recordsPerPage={this.state.recordsPerPage} 
-        activePage={this.state.activePage} 
-        fields={this.state.fields} 
-         datas={this.state.datas}
-        pageHandler={this.handlePage} 
-        editHandler={this.handleEdit} 
-        deleteHandler={this.handleDelete} />
+          searchHandler={this.handleSearch} />
+        <ListTable
+          totalRecords={this.state.totalRecords}
+          fields={this.state.fields}
+          datas={this.state.datas}
+          pageHandler={this.handlePage}
+          editHandler={this.handleEdit}
+          deleteHandler={this.handleDelete}
+          detailsHandler={this.handleDetails} />
       </div>
     );
   }

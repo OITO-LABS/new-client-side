@@ -13,8 +13,8 @@ export class Heading extends Component {
 
     render() {
         return (
-            <div class="row heading-row">
-                <h4 class="text-uppercase">{this.props.heading}</h4>
+            <div className="row heading-row">
+                <h4 >{this.props.heading}</h4>
             </div>
         );
     }

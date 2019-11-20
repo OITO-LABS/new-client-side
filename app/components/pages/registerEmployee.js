@@ -30,6 +30,7 @@ export class registerEmployee extends Component {
         console.error(error);
       });
   }
+ 
 
   getStateData(empdata) {
     return {

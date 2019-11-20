@@ -13,6 +13,10 @@
 		"categoryDetails":"/categoryDetails.json",
 
 		"employeeList":"/employeeList.json",
+		"employeeSearch":"/employeeSearch.json",
+		"assetsOfEmployee":"/assetsOfEmployee.json",
+		
+		"getEmpDetails":"/getEmpDetails.json",
 		
 	    "params": {
 			"commonparams": "commonparams"

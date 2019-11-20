@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import "assets/css/listTable.css";
 import { SHOW_ALERT,SHOW_ALERT_MSG,ALERT_TYPE } from "utils/constants";
 import PropTypes from 'prop-types';
 import Pagination from './common/pagination';
+// import "assets/css/listTable.css";
 // import {confirm} from 'utils/common';
 
 class ListTable extends Component {
@@ -46,7 +46,7 @@ class ListTable extends Component {
                   else if (item.key !== "editDelete") {
                      if (i == 1) {
                         return (
-                           <td key={i} onClick={this.handleDetails}><a href="#">{data[item.key]}</a></td>
+                           <td key={i} onClick={()=>{this.props.detailsHandler(data)}}><a href="#">{data[item.key]}</a></td>
                         )
                      }
                      return (
@@ -92,7 +92,7 @@ class ListTable extends Component {
                   {this.renderTableData()}
                </tbody>
             </table>
-            <Pagination totalItems={this.props.totalRecords} onPageChange={this.onPageChange}/>
+            <Pagination totalItems={this.props.totalRecords||1} onPageChange={this.onPageChange}/>
          </div>
       );
    }
