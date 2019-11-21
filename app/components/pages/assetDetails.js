@@ -4,6 +4,7 @@ import Heading from "../heading"
 import DetailsTable from "../detailsTable"
 import ListTable from "../listTable"
 import dataService from 'utils/dataservice';
+import "assets/sass/pages/_listing.scss";
 
 
 export class AssetDetails extends Component {
@@ -26,16 +27,16 @@ export class AssetDetails extends Component {
       //     "status": "Y",
       //     "empNo": "INT002"
       // },
-      employeeFields: [
-        { label: "Asset Category", key: "firstName" },
-        { label: "Asset Id", key: "lastName" },
-        { label: "Asset owner", key: "empNo" },
-        { label: "Asset owner Id", key: "designation" },
-        { label: "Model ", key: "email" },
-        { label: "Sim NO ", key: "contactNo" },
-        { label: "Msisdn No ", key: "emergencyContactName" },
-        { label: "Mac Id", key: "emergencyContact" },
-        { label: "Issue date", key: "healthCardNo" },
+      assetFields: [
+        { label: "Asset Category", key: "productCategoryName" },
+        { label: "Asset key", key: "assetKey" },
+        { label: "Asset owner", key: "fname" },
+        { label: "Asset owner Id", key: "empNo" },
+        { label: "Model ", key: "model" },
+        { label: "Sim NO ", key: "simNo" },
+        { label: "Msisdn No ", key: "msisdnNO" },
+        { label: "Mac Id", key: "macId" },
+        { label: "Issue date", key: "issueDate" },
         
       ],
       // assets:[
@@ -64,49 +65,57 @@ export class AssetDetails extends Component {
       //         "id": null
       //     }
       // ],
-      assetFields: [
+      historyFields: [
         { label: "si no", key: "index" },
-        { label: "owner Id", key: "assetKey" },
-        { label: "owner name", key: "productCategory" },
-        { label: "issue date", key: "model" },
-        { label: "return date", key: "model" },
-        { label: "cause", key: "model" },
+        { label: "owner Id", key: "empNo" },
+        { label: "owner name", key: "fname" },
+        { label: "issue date", key: "issueDate" },
+        { label: "return date", key: "returnDate" },
+        { label: "cause", key: "cause" },
       ]
     }
+    this.handlePage=this.handlePage.bind(this);
   }
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
-    dataService.getRequest("getAsset", { empId: this.props.match.params.assetId })
+
+    dataService.getRequest("getAsset", { assetId: this.props.match.params.assetId })
       .then(res => {
+        debugger;
         this.setState({
-          data: res
+          assetData: res[0]
         });
       })
       .catch(error => {
         console.error(error);
       });
 
-    dataService.getRequest("assetsOfEmployee", { assetId: this.props.match.params.assetId })
+    dataService.getRequest("assetHistory", { assetId: this.props.match.params.assetId })
       .then(res => {
         this.setState({
-          assets: res
+          historyDatas: res
         });
       })
       .catch(error => {
         console.error(error);
       });
+  }
+
+  handlePage(data){
+      console.log(data);
   }
 
   render() {
     return (
       <div >
         <Heading heading="Asset-Details" />
-        <DetailsTable data={this.state.data} fields={this.state.employeeFields} />
+        <DetailsTable data={this.state.assetData} fields={this.state.assetFields} />
         <Heading heading="Asset-History " />
         <ListTable
           totalRecords={1}
-          fields={this.state.assetFields}
-          datas={this.state.assets} />
+          fields={this.state.historyFields}
+          pageHandler={this.handlePage}
+          datas={this.state.historyDatas} />
       </div>
     );
   }

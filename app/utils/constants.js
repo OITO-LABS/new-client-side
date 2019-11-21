@@ -55,6 +55,12 @@ export const EMPLOYEE_DETAILS ="employee-details";
 export const EMPLOYEE_LISTING = "employee-listing";
 export const ASSET_DETAILS ="asset-details";
 export const ASSET_LISTING = "asset-listing";
+
+export const REIMBURSEMENT_LISTING ="reimbursement-listing";
+export const REIMBURSEMENT_EMPLOYEE_LISTING = "reimbursement-employee-listing";
+export const REIMBURSEMENT_BILL_LISTING = "reimbursement-bill-listing";
+
+
 export const PATH_PREFIX = pageConfig['PATH_PREFIX'];
 export const PUBLIC_PATH = pageConfig['PUBLIC_PATH'];
 

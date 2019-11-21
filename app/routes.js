@@ -1,4 +1,5 @@
-import {PATH_PREFIX,LANDING,DASHBOARD,APP_INFO,UPPER_BAR,EMPLOYEE_REG,EMPLOYEE_UPDATE,EMPLOYEE_LISTING,EMPLOYEE_DETAILS,ASSET_LISTING,ASSET_DETAILS,ADD_ASSETS,ASSIGN_ASSETS} from 'utils/constants';
+import {PATH_PREFIX,LANDING,DASHBOARD,APP_INFO,UPPER_BAR,EMPLOYEE_REG,EMPLOYEE_UPDATE,EMPLOYEE_LISTING,EMPLOYEE_DETAILS,ASSET_LISTING,ASSET_DETAILS,ADD_ASSETS,ASSIGN_ASSETS,
+    REIMBURSEMENT_LISTING,REIMBURSEMENT_EMPLOYEE_LISTING,REIMBURSEMENT_BILL_LISTING} from 'utils/constants';
 const routes = [
     {
         name:LANDING,
@@ -119,6 +120,36 @@ const routes = [
         componentId:'pages/assetAssignment',
         title:'asset assignment',
         className:'asset-assign-page',
+        exact:true,
+        nowrap:false
+    },
+    {
+        name:REIMBURSEMENT_LISTING,
+        path:PATH_PREFIX+REIMBURSEMENT_LISTING,
+        samplePath:PATH_PREFIX+REIMBURSEMENT_LISTING,
+        componentId:'pages/reimbursementListing',
+        title:'reimbursement listing',
+        className:'reimbursement-listing-page',
+        exact:true,
+        nowrap:false
+    },
+    {
+        name:REIMBURSEMENT_EMPLOYEE_LISTING,
+        path:PATH_PREFIX+REIMBURSEMENT_EMPLOYEE_LISTING,
+        samplePath:PATH_PREFIX+REIMBURSEMENT_EMPLOYEE_LISTING,
+        componentId:'pages/reimbursementEmployeeListing',
+        title:'reimbursement employee listing',
+        className:'reimbursement-employee-listing-page',
+        exact:true,
+        nowrap:false
+    },
+    {
+        name:REIMBURSEMENT_BILL_LISTING,
+        path:PATH_PREFIX+REIMBURSEMENT_BILL_LISTING,
+        samplePath:PATH_PREFIX+REIMBURSEMENT_BILL_LISTING,
+        componentId:'pages/reimbursementBillListing',
+        title:'reimbursement bill listing',
+        className:'reimbursement-bill-listing-page',
         exact:true,
         nowrap:false
     },

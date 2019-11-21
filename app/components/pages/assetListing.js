@@ -4,6 +4,8 @@ import dataService from 'utils/dataservice';
 import SearchAndButtonBar from "../searchAndButtonBar";
 import ListTable from "../listTable";
 import "assets/sass/pages/_listing.scss";
+import { confirm } from 'utils/common';
+
 export class AssetListing extends Component {
   constructor(props) {
     super(props)
@@ -14,47 +16,51 @@ export class AssetListing extends Component {
       recordsPerPage: 10,
       fields: [
         { label: "si no", key: "index" },
-        { label: "asset id", key: "assetKey" },
-        { label: "asset category", key: "firstName" },
+        { label: "asset Key", key: "assetKey" },
+        { label: "asset category", key: "productCategoryName" },
         { label: "model", key: "model" },
         { label: "asset owner", key: "empNo" },
         { label: "action", key: "editDelete" },
-        { label: "assign", key: "status" }
+        { label: "assign/unassign", key: "status" }
       ],
-      datas: [
-        {
-          "assetId": 10,
-          "assetKey": "MDM_001",
-          "status": "0",
-          "model": "D-Link",
-          "empId": 1,
-          "empNo": "INT001"
-        },
-        {
-          "assetId": 9,
-          "assetKey": "ib1901",
-          "status": "1",
-          "model": "iBell",
-          "empId": 1,
-          "empNo": "INT001"
-        },
-        {
-          "assetId": 8,
-          "assetKey": "ADO_D001",
-          "status": "1",
-          "model": "Dell",
-          "empId": 1,
-          "empNo": "INT001"
-        },
-        {
-          "assetId": 7,
-          "assetKey": "JioFi_246468E",
-          "status": "0",
-          "model": "Jio",
-          "empId": 1,
-          "empNo": "INT001"
-        }
-      ]
+      // datas: [
+      //   {
+      //     "assetId": 10,
+      //     "assetKey": "MDM_001",
+      //     "status": "0",
+      //     "model": "D-Link",
+      //     "empId": 1,
+      //     "empNo": "INT001",
+      //     "assetCategoryName":"laptop"
+      //   },
+      //   {
+      //     "assetId": 9,
+      //     "assetKey": "ib1901",
+      //     "status": "1",
+      //     "model": "iBell",
+      //     "empId": 1,
+      //     "empNo": "INT001",
+      //     "assetCategoryName":"mouse"
+      //   },
+      //   {
+      //     "assetId": 8,
+      //     "assetKey": "ADO_D001",
+      //     "status": "1",
+      //     "model": "Dell",
+      //     "empId": 1,
+      //     "empNo": "INT001",
+      //     "assetCategoryName":"jio"
+      //   },
+      //   {
+      //     "assetId": 7,
+      //     "assetKey": "JioFi_246468E",
+      //     "status": "0",
+      //     "model": "Jio",
+      //     "empId": 1,
+      //     "empNo": "INT001",
+      //     "assetCategoryName":"monitor"
+      //   }
+      // ]
     }
     this.gettingData = this.gettingData.bind(this);
     this.handlePage = this.handlePage.bind(this);
@@ -69,7 +75,7 @@ export class AssetListing extends Component {
 
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
-    // this.gettingData();
+    this.gettingData();
   }
 
   gettingData() {
@@ -85,10 +91,10 @@ export class AssetListing extends Component {
     dataService.getRequest(urlKey, data)
       .then((jsonData) => {
         // jsonData is parsed json object received from url
-        console.log(jsonData)
+        console.log(jsonData);
         this.setState({
-          totalRecords: jsonData.totalElements,
-          datas: jsonData.content
+          totalRecords: jsonData.numberOfElements,
+          datas: jsonData.resultSet
         })
       })
       .catch((error) => {
@@ -119,19 +125,21 @@ export class AssetListing extends Component {
     console.log(data);
     let isConfirmed = false;
     isConfirmed = await confirm({
-      msg: 'Do you sure you want to delete this from emplist',
+      msg: 'Do you sure you want to delete this from Assetlist',
     });
     if (isConfirmed) {
       // const deleteData = { empNo: data.empNo }
-      dataService.putRequest("assetDelete", { assetId: data.assetId })
+      dataService.deleteRequest("assetDelete", { assetId: data.assetId })
         .then(res => {
           // console.log(res);
-          app.events.trigger(SHOW_ALERT_MSG, {
-            visible: true,
-            type: ALERT_TYPE.SUCESS,
-            msg: res
-          });
-          this.gettingData();
+          if(res.status=="delete successFul"){
+            app.events.trigger(SHOW_ALERT_MSG, {
+              visible: true,
+              type: ALERT_TYPE.SUCESS,
+              msg: "Successfully Deleted"
+            });
+            this.gettingData();
+          }
         }).catch(res => {
           console.log(res);
         });

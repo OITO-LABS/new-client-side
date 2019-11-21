@@ -1,0 +1,36 @@
+[
+    {
+        "assetId": 1,
+        "assetKey": null,
+        "productCategoryName": null,
+        "status": null,
+        "macId": null,
+        "simNo": null,
+        "msisdnNO": null,
+        "model": null,
+        "empId": null,
+        "empNo": "INT001",
+        "fname": "Sreenu",
+        "lname": "S",
+        "issueDate": "2018-11-12",
+        "returnDate": "2018-11-21",
+        "cause": "i want to get replace"
+    },
+    {
+        "assetId": 1,
+        "assetKey": null,
+        "productCategoryName": null,
+        "status": null,
+        "macId": null,
+        "simNo": null,
+        "msisdnNO": null,
+        "model": null,
+        "empId": null,
+        "empNo": "INT005",
+        "fname": "Alex",
+        "lname": "Mary George",
+        "issueDate": "2018-11-21",
+        "returnDate": null,
+        "cause": null
+    }
+]

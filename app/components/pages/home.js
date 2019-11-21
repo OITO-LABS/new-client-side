@@ -10,6 +10,7 @@ class HomePage extends React.Component {
     this.appInfo = this.appInfo.bind(this);
     this.upperClick = this.upperClick.bind(this);
     // this.empList = this.empList.bind(this);
+    this.handleDate=this.handleDate.bind(this);
   }
   appInfo() {
     app.events.trigger(GOTO_URL, { routerKey: APP_INFO });
@@ -26,7 +27,7 @@ class HomePage extends React.Component {
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
   }
- 
+
 
 
   render() {
@@ -40,8 +41,6 @@ class HomePage extends React.Component {
         <a href="#" onClick={this.upperClick}>
           upper bar
         </a>
-        
-       
         {/* <AlertModal/> */}
       </div>
     );
