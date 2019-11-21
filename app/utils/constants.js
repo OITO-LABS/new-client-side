@@ -47,6 +47,8 @@ export const DASHBOARD = 'dashboard';
 export const EMPLOYEE_REG = 'employee-reg'
 // *********ADD_ASSETS*********
 export const ADD_ASSETS = 'add-assets'
+// ASSIGN_ASSETS
+export const ASSIGN_ASSETS = 'assign-assets'
 // ******upperbar*********
 export const UPPER_BAR ="upper-bar";
 export const EMPLOYEE_DETAILS ="employee-details";

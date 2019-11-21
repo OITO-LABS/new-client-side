@@ -67,11 +67,11 @@ class assetRegistration extends Component {
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
     {
-      this.props.match.params.empId == -1
+      this.props.match.params.assetKey == -1
         ? ""
         : dataService
-            .getRequest("getAssetDetails", {
-              empId: this.props.match.params.empId
+            .getRequest("getAsset", {
+              assetKey: this.props.match.params.assetKey
             })
             // .then(res => res.json())
             .then(result => {
@@ -114,7 +114,7 @@ class assetRegistration extends Component {
     const validation = this.validator.validate(this.state);
     this.setState({ validation });
     this.submitted = true;
-    
+
     // Submit data if validation is successful
     if (validation.isValid) {
       dataService
@@ -141,7 +141,7 @@ class assetRegistration extends Component {
       dataService
         .putRequest(
           "updateAsset",
-          { empId: this.props.match.params.empId },
+          { assetKey: this.props.match.params.assetKey },
           { ...this.getStateData(this.state) }
         )
         .then(res => {
@@ -165,7 +165,7 @@ class assetRegistration extends Component {
     let validation = this.submitted
       ? this.validator.validate(this.state)
       : this.state.validation;
-    var empId = this.props.match.params.empId;
+    var assetKey = this.props.match.params.assetKey;
     return (
       <div className="form-wrapper">
         <div className="d-flex justify-content-sm-around">
@@ -176,6 +176,7 @@ class assetRegistration extends Component {
               labelClassName="txt-label"
               fieldClassName="txt-input"
               mandatory
+              disabled = {assetKey !='-1'}
               name="assetKey"
               onChange={this.handleInputChange}
               value={this.state.assetKey}
@@ -249,7 +250,7 @@ class assetRegistration extends Component {
 
         {/* Button wrapper for Submit, Update and Cancel*/}
         <div className="btn-wrapper">
-          {empId == "-1" ? (
+          {assetKey == "-1" ? (
             <button
               type="button"
               className="btn submit-btn"

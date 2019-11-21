@@ -273,7 +273,7 @@ export class registerEmployee extends Component {
               mandatory
               onChange={this.handleInputChange}
               name="dob"
-              type="date"
+              type= {empId == -1 ?"date" :''}
               value={this.state.dob}
               placeholder="DOB"
               validator={validation} 
@@ -345,7 +345,7 @@ export class registerEmployee extends Component {
               validator={validation}
             />
             <FormField
-              type="select"
+              type={empId == -1 ?"select" :''}
               label="Blood Group"
               labelClassName="txt-label"
               fieldClassName="select-input"
@@ -354,13 +354,13 @@ export class registerEmployee extends Component {
               nameAlias={"abc_fullName"}
               onChange={this.handleInputChange}
               options={[
-                { value: "A+ve", label: "A+ve" },
-                { value: "B+ve", label: "B+ve" },
-                { value: "B-ve", label: "B-ve" },
-                { value: "AB+ve", label: "AB+ve" },
-                { value: "AB-ve", label: "AB-ve" },
-                { value: "O+ve", label: "O+ve" },
-                { value: "O-ve", label: "O-ve" }
+                { value: "A+", label: "A+" },
+                { value: "B", label: "B+" },
+                { value: "B-", label: "B-" },
+                { value: "AB+", label: "AB+" },
+                { value: "AB-", label: "AB-" },
+                { value: "O+", label: "O+" },
+                { value: "O-", label: "O-" }
               ]}
               value={this.state.bloodGroup}
               placeholder="Blood Group"

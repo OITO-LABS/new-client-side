@@ -10,6 +10,9 @@
       "employeeList":"/api/employee/list",
       "employeeSearch":"/api/employee/search",
       "employeeDelete":"/api/employee/delete/:empNo",
+      "assetregistered":"api/asset",
+      "updateAsset":"api/asset/:assetId",
+      "getAsset":"api/details/:assetId",
       "params": {
         "commonparams": "commonparams"
       }

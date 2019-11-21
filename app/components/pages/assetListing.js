@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, ASSET_DETAILS,ADD_ASSETS } from 'utils/constants';
+import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, ASSET_DETAILS,ADD_ASSETS,ASSIGN_ASSETS } from 'utils/constants';
 import dataService from 'utils/dataservice';
 import SearchAndButtonBar from "../searchAndButtonBar";
 import ListTable from "../listTable";
@@ -111,7 +111,7 @@ export class AssetListing extends Component {
 
   handleEdit(data) {
     // console.log(data);
-    app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS,params:{empId:data.empId} });
+    app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS,params:{assetId : data.assetId} });
   }
 
   async handleDelete(data) {
@@ -145,17 +145,19 @@ export class AssetListing extends Component {
   }
 
   handleRegister() {
-    app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS, params: { empId: -1 } });
+    app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS, params: { assetId: -1 } });
   }
 
   handleAssign(data){
     console.log("assign");
     console.log(data);
+    app.events.trigger(GOTO_URL, { routerKey: ASSIGN_ASSETS, params: { assetId: -1 } });
   }
+
   handleUnAssign(data){
     console.log("unAssign");
     console.log(data);
-
+    app.events.trigger(GOTO_URL, { routerKey: ASSIGN_ASSETS, params: { assetId: data.assetId } });
   }
 
   render() {
