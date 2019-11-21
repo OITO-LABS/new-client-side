@@ -5,7 +5,6 @@ import FormValidator from '../common/formvalidator';
 import dataService from "utils/dataservice";
 import Heading from "../heading"
 
-
 export class registerEmployee extends Component {
   constructor(props) {
     super(props);

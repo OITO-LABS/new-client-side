@@ -83,7 +83,7 @@ class assetRegistration extends Component {
             .catch(error => {
               console.error(error);
             });
-    }
+        }
   }
 
   getStateData(assetdata) {
