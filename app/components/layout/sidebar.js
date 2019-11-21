@@ -1,6 +1,6 @@
 import React from "react";
 import {DASHBOARD,EMPLOYEE_REG,EMPLOYEE_LISTING,GOTO_URL,ADD_ASSETS,ASSET_LISTING} from "utils/constants";
-import "assets/sass/pages/_employeeListing.scss";
+import "assets/sass/pages/_employeeRegister.scss"
 
 class Sidebar extends React.Component {
 

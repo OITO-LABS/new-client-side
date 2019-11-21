@@ -2,7 +2,7 @@ import React from 'react';
 import {translate} from 'utils/common';
 import {Input,NumberField,PhoneField,Select} from './inputfields';
 import { Popover, PopoverBody } from 'reactstrap';
-import "assets/sass/pages/_employeeListing.scss"
+import "assets/sass/pages/_employeeRegister.scss"
 
 class InfoIcon extends React.Component {
     constructor(props){
