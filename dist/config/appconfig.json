@@ -1,15 +1,18 @@
 {
   "env": "production",
   "apis": {
-      "baseurl": "/",
+      "baseurl": "http://localhost:8080/",
       "portalSettings": "/data/portal-settings.json",
-      "customerServiceSignup":"/auth/signup/customer-service",
       "getEmpDetails":"api/employee/:empId",    
       "updateEmployee":"api/employee/:empId",
       "registered":"api/employee",
-      "employeeList":"/api/employee/list",
-      "employeeSearch":"/api/employee/search",
-      "employeeDelete":"/api/employee/delete/:empNo",
+      "employeeList":"api/employee/list",
+      "employeeSearch":"api/employee/search",
+      "employeeDelete":"api/employee/delete/:empNo",
+      "assetsOfEmployee":"api/employee/asset/:empId",
+      "assetList":"api/asset/getAll",
+      "assetSearch":"api/asset/assetDetails",
+      "assetDelete":"api/asset/:assetId",
       "params": {
         "commonparams": "commonparams"
       }

@@ -76,7 +76,7 @@ export class AssetDetails extends Component {
   }
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
-    dataService.getRequest("getEmpDetails", { empId: this.props.match.params.assetId })
+    dataService.getRequest("getAsset", { empId: this.props.match.params.assetId })
       .then(res => {
         this.setState({
           data: res
@@ -86,7 +86,7 @@ export class AssetDetails extends Component {
         console.error(error);
       });
 
-    dataService.getRequest("assetsOfEmployee", { empId: this.props.match.params.empId })
+    dataService.getRequest("assetsOfEmployee", { assetId: this.props.match.params.assetId })
       .then(res => {
         this.setState({
           assets: res
