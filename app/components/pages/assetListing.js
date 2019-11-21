@@ -63,6 +63,8 @@ export class AssetListing extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
     this.handleDetails = this.handleDetails.bind(this);
+    this.handleAssign = this.handleAssign.bind(this);
+    this.handleUnAssign = this.handleUnAssign.bind(this);
   }
 
   componentDidMount() {
@@ -146,6 +148,16 @@ export class AssetListing extends Component {
     app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS, params: { empId: -1 } });
   }
 
+  handleAssign(data){
+    console.log("assign");
+    console.log(data);
+  }
+  handleUnAssign(data){
+    console.log("unAssign");
+    console.log(data);
+
+  }
+
   render() {
     return (
       <div>
@@ -161,7 +173,9 @@ export class AssetListing extends Component {
       pageHandler={this.handlePage}
       editHandler={this.handleEdit}
       deleteHandler={this.handleDelete}
-      detailsHandler={this.handleDetails} />
+      detailsHandler={this.handleDetails}
+      assignHandler={this.handleAssign}
+      unAssignHandler={this.handleUnAssign} />
       </div>
     );
   }
