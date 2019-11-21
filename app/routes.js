@@ -84,7 +84,7 @@ const routes = [
     },
     {
         name:ASSET_DETAILS,
-        path:PATH_PREFIX+':empId/'+ASSET_DETAILS,
+        path:PATH_PREFIX+':assetId/'+ASSET_DETAILS,
         samplePath:PATH_PREFIX+ASSET_DETAILS,
         componentId:'pages/assetDetails',
         title:'asset details',

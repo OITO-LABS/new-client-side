@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SHOW_ALERT,SHOW_ALERT_MSG,ALERT_TYPE } from "utils/constants";
+import { SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE } from "utils/constants";
 import PropTypes from 'prop-types';
 import Pagination from './common/pagination';
 // import "assets/css/listTable.css";
@@ -10,7 +10,7 @@ class ListTable extends Component {
       super(props)
 
       this.state = {
-         
+
       }
       this.renderTableHeader = this.renderTableHeader.bind(this);
       this.renderTableData = this.renderTableData.bind(this);
@@ -36,17 +36,17 @@ class ListTable extends Component {
       return data.map((data, index) => {
          return (
             <tr key={index}>
-               
+
                {fields.map((item, i) => {
                   if (item.key == "index") {
                      return (
                         <td key={i}>{index + 1}</td>
                      )
                   }
-                  else if (item.key !== "editDelete") {
+                  else if (item.key !== "editDelete"&& item.key !== "status") {
                      if (i == 1) {
                         return (
-                           <td key={i} onClick={()=>{this.props.detailsHandler(data)}}><a href="#">{data[item.key]}</a></td>
+                           <td key={i} onClick={() => { this.props.detailsHandler(data) }}><a href="#">{data[item.key]}</a></td>
                         )
                      }
                      return (
@@ -56,10 +56,25 @@ class ListTable extends Component {
                   else if (item.key == "editDelete") {
                      return (
                         <td key={i}>
-                           <button onClick={()=>{this.props.editHandler(data)}} className="btn btn-primary action"><i className="fas fa-edit"></i></button>
-                           <button onClick={()=>{this.props.deleteHandler(data)}} className="btn btn-danger action"><i className="fas fa-trash"></i></button>
+                           <button onClick={() => { this.props.editHandler(data) }} className="btn btn-primary action"><i className="fas fa-edit"></i></button>
+                           <button onClick={() => { this.props.deleteHandler(data) }} className="btn btn-danger action"><i className="fas fa-trash"></i></button>
                         </td>
                      )
+                  }
+                  else if (item.key == "status") {
+                     if (data[item.key] == "0") {
+                        return (
+                           <td key={i}>
+                              <button className="btn btn-warning">UnAssign</button>
+                           </td>
+                        )
+                     }else if(data[item.key] == "1"){
+                        return(
+                           <td key={i}>
+                              <button className="btn btn-success">Assign</button>
+                           </td>
+                        ) 
+                     }
                   }
                   // return(
                   // item.key == 'index' ?<td key={i}>{index+1}</td> :<td key={i}>{data[item.key]}</td>
@@ -70,9 +85,9 @@ class ListTable extends Component {
       })
    }
 
-   onPageChange(paginationInfo){
+   onPageChange(paginationInfo) {
       this.setState({
-         activePage:paginationInfo.activePage
+         activePage: paginationInfo.activePage
       })
       this.props.pageHandler(paginationInfo.activePage);
       // alert(paginationInfo.activePage);
@@ -92,7 +107,7 @@ class ListTable extends Component {
                   {this.renderTableData()}
                </tbody>
             </table>
-            <Pagination totalItems={this.props.totalRecords||1} onPageChange={this.onPageChange}/>
+            <Pagination totalItems={this.props.totalRecords || 1} onPageChange={this.onPageChange} />
          </div>
       );
    }
@@ -106,8 +121,8 @@ ListTable.propTypes = {
    datas: PropTypes.array,
    fields: PropTypes.array,
    pageHandler: PropTypes.func.isRequired,
-   editHandler:PropTypes.func,
-   deleteHandler:PropTypes.func
+   editHandler: PropTypes.func,
+   deleteHandler: PropTypes.func
 };
 
 ListTable.defaultProps = {

@@ -1,9 +1,5 @@
 import React from "react";
 import {FLIP_LOADER,GOTO_URL,APP_INFO,UPPER_BAR,EMPLOYEE_LISTING,EMPLOYEE_REG} from "utils/constants";
-import SearchAndButtonBar from "components/searchAndButtonBar";
-import ListTable from "components/listTable";
-import DetailsTable from "../detailsTable"
-import Heading from "../heading"
 
 // import AlertModal from "../common/alertmodal";
 
@@ -45,17 +41,8 @@ class HomePage extends React.Component {
           upper bar
         </a>
         
-        {/* <SearchAndButtonBar
-          button1name="Register a employee"
-          button2name="export"
-          handleRegister={this.handleRegister}
-        /> */}
-        {/* <div className="col-12"> */}
-          {/* <ListTable /> */}
-        {/* </div> */}
+       
         {/* <AlertModal/> */}
-        <Heading heading="employee-details"/>
-        <DetailsTable/>
       </div>
     );
   }
