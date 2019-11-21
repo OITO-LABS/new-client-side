@@ -45,7 +45,8 @@ export const APP_INFO = 'app-info';
 export const DASHBOARD = 'dashboard';
 // *********EMPLOYEE_REG*********
 export const EMPLOYEE_REG = 'employee-reg'
-
+// *********ADD_ASSETS*********
+export const ADD_ASSETS = 'add-assets'
 // ******upperbar*********
 export const UPPER_BAR ="upper-bar";
 export const EMPLOYEE_DETAILS ="employee-details";

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE,ASSET_DETAILS } from 'utils/constants';
+import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, ASSET_DETAILS,ADD_ASSETS } from 'utils/constants';
 import dataService from 'utils/dataservice';
 import SearchAndButtonBar from "../searchAndButtonBar";
 import ListTable from "../listTable";
 import "assets/sass/pages/_employeeListing.scss"
-
 export class AssetListing extends Component {
   constructor(props) {
     super(props)
@@ -22,40 +21,40 @@ export class AssetListing extends Component {
         { label: "action", key: "editDelete" },
         { label: "assign", key: "status" }
       ],
-      datas:[
+      datas: [
         {
-            "assetId": 10,
-            "assetKey": "MDM_001",
-            "status": "0",
-            "model": "D-Link",
-            "empId": 1,
-            "empNo": "INT001"
+          "assetId": 10,
+          "assetKey": "MDM_001",
+          "status": "0",
+          "model": "D-Link",
+          "empId": 1,
+          "empNo": "INT001"
         },
         {
-            "assetId": 9,
-            "assetKey": "ib1901",
-            "status": "1",
-            "model": "iBell",
-            "empId": 1,
-            "empNo": "INT001"
+          "assetId": 9,
+          "assetKey": "ib1901",
+          "status": "1",
+          "model": "iBell",
+          "empId": 1,
+          "empNo": "INT001"
         },
         {
-            "assetId": 8,
-            "assetKey": "ADO_D001",
-            "status": "1",
-            "model": "Dell",
-            "empId": 1,
-            "empNo": "INT001"
+          "assetId": 8,
+          "assetKey": "ADO_D001",
+          "status": "1",
+          "model": "Dell",
+          "empId": 1,
+          "empNo": "INT001"
         },
         {
-            "assetId": 7,
-            "assetKey": "JioFi_246468E",
-            "status": "0",
-            "model": "Jio",
-            "empId": 1,
-            "empNo": "INT001"
+          "assetId": 7,
+          "assetKey": "JioFi_246468E",
+          "status": "0",
+          "model": "Jio",
+          "empId": 1,
+          "empNo": "INT001"
         }
-    ]
+      ]
     }
     this.gettingData = this.gettingData.bind(this);
     this.handlePage = this.handlePage.bind(this);
@@ -144,7 +143,7 @@ export class AssetListing extends Component {
   }
 
   handleRegister() {
-    // app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG, params: { empId: -1 } });
+    app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS, params: { empId: -1 } });
   }
 
   render() {
@@ -155,15 +154,15 @@ export class AssetListing extends Component {
           button2name="export"
           handleRegister={this.handleRegister}
           searchHandler={this.handleSearch} />
-        <ListTable
-          totalRecords={this.state.totalRecords}
-          fields={this.state.fields}
-          datas={this.state.datas}
-          pageHandler={this.handlePage}
-          editHandler={this.handleEdit}
-          deleteHandler={this.handleDelete}
-          detailsHandler={this.handleDetails} />
-      </div>
+    <ListTable
+      totalRecords={this.state.totalRecords}
+      fields={this.state.fields}
+      datas={this.state.datas}
+      pageHandler={this.handlePage}
+      editHandler={this.handleEdit}
+      deleteHandler={this.handleDelete}
+      detailsHandler={this.handleDetails} />
+      </div >
     );
   }
 }
