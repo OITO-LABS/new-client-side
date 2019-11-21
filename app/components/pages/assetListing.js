@@ -3,7 +3,7 @@ import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, ASSET_DE
 import dataService from 'utils/dataservice';
 import SearchAndButtonBar from "../searchAndButtonBar";
 import ListTable from "../listTable";
-import "assets/sass/pages/_employeeListing.scss";
+import "assets/sass/pages/_listing.scss";
 export class AssetListing extends Component {
   constructor(props) {
     super(props)
@@ -77,10 +77,10 @@ export class AssetListing extends Component {
     // dataService.getRequest("employeeUpdate", { empNo:'123',empId:123 })
     let urlKey = "";
     if (this.state.searchValue === "") {
-      urlKey = "employeeList";
+      urlKey = "assetList";
     }
     else {
-      urlKey = "employeeSearch";
+      urlKey = "assetSearch";
     }
     dataService.getRequest(urlKey, data)
       .then((jsonData) => {
@@ -123,13 +123,13 @@ export class AssetListing extends Component {
     });
     if (isConfirmed) {
       // const deleteData = { empNo: data.empNo }
-      dataService.putRequest("employee-listing", { empNo: data.empNo })
+      dataService.putRequest("assetDelete", { assetId: data.assetId })
         .then(res => {
           // console.log(res);
           app.events.trigger(SHOW_ALERT_MSG, {
             visible: true,
             type: ALERT_TYPE.SUCESS,
-            msg: "successfully deleted"
+            msg: res
           });
           this.gettingData();
         }).catch(res => {

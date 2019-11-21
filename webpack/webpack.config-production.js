@@ -12,12 +12,12 @@ const deployPath = '/home/santhosh/scg/workspace/buyer-ui-build/';
 //const prodEnv = new Dotenv({path:'./webpack/prod.env'});
 const fs = require('fs');
 const dotenv = require('dotenv');
-const envFile = './webpack/prod.env';
+const envFile = path.join(process.cwd(), 'webpack/prod.env');
 const prodConfig = dotenv.parse(fs.readFileSync(envFile));
 const resourceFolder = prodConfig['RESOURCE_FOLDER'];
 prodConfig['BUILD_NO'] = Date.now();
 prodConfig['PAGE_CONFIG'] = JSON.stringify(prodConfig);
-//console.log(prodEnv);
+//console.log(prodConfig);
 //const configIndex = process.argv.indexOf('--config-file');
 //const envFile = configIndex>-1?process.argv[configIndex+1]:'prod.env';
 module.exports = {
@@ -63,9 +63,8 @@ module.exports = {
           { loader: 'css-loader',
             options: {
               importLoaders: 1,
-              modules: {
-              	localIdentName: resourceFolder+'/css/[name].css'
-              }
+              minimize: true,
+              localIdentName: resourceFolder+'/css/[name].css'
             } 
           },
           {
@@ -74,10 +73,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-                sassOptions: {
-                indentWidth: 4,
-                includePaths: [path.join(process.cwd(), 'assets/saas')]
-                },
+                includePaths: [path.join(process.cwd(), 'assets/saas')],
                 sourceMap: shouldUseSourceMap
             }
           }
@@ -151,7 +147,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new Dotenv({path:'./webpack/'+envFile}),
+    new Dotenv({path:envFile}),
     new FileManagerPlugin({
 			onStart:[
 				{delete: [path.join(process.cwd(), 'dist/*')]},

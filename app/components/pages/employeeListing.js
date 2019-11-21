@@ -6,7 +6,7 @@ import ListTable from "../listTable";
 import { confirm } from 'utils/common';
 import { fileURLToPath } from 'url';
 import dataService from 'utils/dataservice';
-import "assets/sass/pages/_employeeRegister.scss"
+import "assets/sass/pages/_listing.scss";
 
 // import { FLIP_LOADER,ALERT_TYPE,SHOW_ALERT_MSG,SHOW_ALERT } from 'utils/constants';
 
@@ -51,7 +51,7 @@ class EmployeeListing extends React.Component {
     else {
       urlKey = "employeeSearch";
     }
-    dataService.getRequest(urlKey, data)
+    dataService.postRequest(urlKey, data)
       .then((jsonData) => {
         // jsonData is parsed json object received from url
         console.log(jsonData)
@@ -92,13 +92,13 @@ class EmployeeListing extends React.Component {
     });
     if (isConfirmed) {
       // const deleteData = { empNo: data.empNo }
-      dataService.putRequest("employee-listing", { empNo: data.empNo })
+      dataService.putRequest("employeeDelete", { empNo: data.empNo })
         .then(res => {
           // console.log(res);
           app.events.trigger(SHOW_ALERT_MSG, {
             visible: true,
             type: ALERT_TYPE.SUCESS,
-            msg: "successfully deleted"
+            msg: res
           });
           this.gettingData();
         }).catch(res => {

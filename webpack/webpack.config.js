@@ -60,7 +60,7 @@ module.exports = {
           { loader: 'css-loader',
             options: {
               importLoaders: 1,
-              //minimize: false,
+              minimize: false,
               //localIdentName: 'static/css/[name].css'
             } 
           },
@@ -70,10 +70,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-                sassOptions: {
-		        indentWidth: 4,
-		        includePaths: [path.join(process.cwd(), 'assets/saas')]
-                },
+                includePaths: [path.join(process.cwd(), 'assets/saas')],
                 sourceMap: true
             }
           }
