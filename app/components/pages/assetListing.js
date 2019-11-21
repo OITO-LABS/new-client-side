@@ -150,7 +150,7 @@ export class AssetListing extends Component {
     return (
       <div>
         <SearchAndButtonBar
-          button1name="Register employee"
+          button1name="Add Asset"
           button2name="export"
           handleRegister={this.handleRegister}
           searchHandler={this.handleSearch} />
