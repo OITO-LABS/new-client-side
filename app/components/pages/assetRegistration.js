@@ -121,11 +121,13 @@ class assetRegistration extends Component {
       dataService
         .postRequest("assetregistered", { ...this.getStateData(this.state) })
         .then(res => {
+          if(res.status == "success") {
           app.events.trigger(SHOW_ALERT_MSG, {
             visible: true,
             type: ALERT_TYPE.SUCESS,
             msg: res
           });
+         }
         })
         .catch(err => {
           console.log(err);
@@ -146,11 +148,13 @@ class assetRegistration extends Component {
           { ...this.getStateData(this.state) }
         )
         .then(res => {
+          if(res.status == "success") {
           app.events.trigger(SHOW_ALERT_MSG, {
             visible: true,
             type: ALERT_TYPE.SUCESS,
             msg: res
           });
+         }
         })
         .catch(err => {
           console.log(err);

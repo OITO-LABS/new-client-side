@@ -94,7 +94,6 @@ class EmployeeListing extends React.Component {
       // const deleteData = { empNo: data.empNo }
       dataService.putRequest("employeeDelete", { empNo: data.empNo })
         .then(res => {
-          // console.log(res);
           if(res.status=="success"){
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,

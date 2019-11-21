@@ -11,13 +11,45 @@ import {
 import FormField from "../common/formfield";
 import dataService from "utils/dataservice";
 import Heading from "../heading";
+import FormValidator from '../common/formvalidator';
 
 class assetAssignment extends Component {
   constructor(props) {
     super(props);
-
+    this.validateFieldData = this.validateFieldData.bind(this);
+    this.validator = new FormValidator([
+      {
+        field: 'empNO', 
+        method: 'isEmpty', 
+        args:[{ignore_whitespace:true}],
+        validWhen: false, 
+        message: 'Select employee number'
+      },
+      {
+        field: 'issueDate', 
+        method: 'isEmpty', 
+        args:[{ignore_whitespace:true}],
+        validWhen: false, 
+        message: 'Issue date is empty'
+      },
+      {
+        field: 'returnDate', 
+        method: 'isEmpty', 
+        args:[{ignore_whitespace:true}],
+        validWhen: false, 
+        message: 'Return date is empty'
+      },
+      {
+        field: 'cause', 
+        method: 'isEmpty', 
+        args:[{ignore_whitespace:true}],
+        validWhen: false, 
+        message: 'Cause is empty'
+      }
+    ])
     this.state = {
-      ...this.getStateData(this.props)
+      ...this.getStateData(this.props),
+      validation: this.validator.valid()
       //   empnoArray,
       //   results
     };
@@ -59,15 +91,26 @@ class assetAssignment extends Component {
     };
   }
 
+  validateFieldData(value,args, state, validation,field){
+    return this.fieldData[field] && !!this.fieldData[field][args.propName];
+  }
+
   assign() {
+    const validation = this.validator.validate(this.state);
+    this.setState({ validation });
+    this.submitted = true;
+
+    if (validation.isValid) {
     dataService
       .postRequest("assetassignment", { ...this.getStateData(this.state),updatedId:1 })
       .then(res => {
+        if(res.status == "success") {
         app.events.trigger(SHOW_ALERT_MSG, {
           visible: true,
           type: ALERT_TYPE.SUCESS,
-          msg: res
+          msg: "Successfully Assigned"
         });
+        }
       })
       .catch(err => {
         app.events.trigger(SHOW_ALERT_MSG, {
@@ -76,17 +119,25 @@ class assetAssignment extends Component {
           msg: err
         });
       });
+    }
   }
 
   unassign() {
+    const validation = this.validator.validate(this.state);
+    this.setState({ validation });
+    this.submitted = true;
+
+    if (validation.isValid) {
     dataService
       .putRequest("assetassignment", { ...this.getStateData(this.state),updatedId:1 })
       .then(res => {
+        if(res.status == "success") {
         app.events.trigger(SHOW_ALERT_MSG, {
           visible: true,
           type: ALERT_TYPE.SUCESS,
-          msg: res
+          msg: "Unassigned Assets"
         });
+      }
       })
       .catch(err => {
         app.events.trigger(SHOW_ALERT_MSG, {
@@ -95,6 +146,7 @@ class assetAssignment extends Component {
           msg: err
         });
       });
+    }
   }
 
   cancel() {
@@ -112,6 +164,7 @@ class assetAssignment extends Component {
   }
 
   render() {
+    let validation = this.submitted ?this.validator.validate(this.state) : this.state.validation;
     var assetId = this.props.match.params.assetId;
     return (
       <React.Fragment>
@@ -137,7 +190,7 @@ class assetAssignment extends Component {
                   //   options={[{ value: this.state.empnoArray.empNo, label: this.state.empnoArray.fname}]}
                   value={this.state.empNo}
                   placeholder="Employee Number"
-                  //   validator={validation}
+                  validator={validation}
                 />
                 <FormField
                   label="Issue Date"
@@ -149,7 +202,7 @@ class assetAssignment extends Component {
                   type="date"
                   value={this.state.issueDate}
                   placeholder="Issue Date"
-                  //   validator={validation}
+                  validator={validation}
                 />
               </div>
             </div>
@@ -167,9 +220,10 @@ class assetAssignment extends Component {
                   type="date"
                   value={this.state.returnDate}
                   placeholder="Return Date"
-                  //   validator={validation}
+                  validator={validation}
                 />
                 <FormField
+                  type="textarea"
                   label="Cause"
                   labelClassName="txt-label"
                   fieldClassName="txt-input"
@@ -178,7 +232,7 @@ class assetAssignment extends Component {
                   onChange={this.handleInputChange}
                   value={this.state.cause}
                   placeholder="Cause"
-                  // validator={validation}
+                  validator={validation}
                 />
               </div>
             </div>
