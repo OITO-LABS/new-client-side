@@ -10,7 +10,6 @@ class HomePage extends React.Component {
     this.appInfo = this.appInfo.bind(this);
     this.upperClick = this.upperClick.bind(this);
     // this.empList = this.empList.bind(this);
-    this.handleDate=this.handleDate.bind(this);
   }
   appInfo() {
     app.events.trigger(GOTO_URL, { routerKey: APP_INFO });
