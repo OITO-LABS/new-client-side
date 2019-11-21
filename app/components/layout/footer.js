@@ -51,12 +51,12 @@ class Footer extends React.Component {
       <React.Fragment>
         <footer className="footer">
           <div className="">
-            <div className="footer-txt">
+            {/* <div className="footer-txt">
               <p><a  className="heading-txt" href="#">About Us</a></p>
               <p><a href="#">Our Company</a></p>
               <p><a href="#">Our Services</a></p>
               <p><a href="#">Our Team</a></p>
-            </div>
+            </div> */}
             <div className="footer-txtpara">
               <p>Office OitoLabs Technologies Pvt. Ltd 3rd Floor,   Amstor Annex Building Technopark,   Trivandrum
                  Kerala, India- 695 581 Phone- +914712700648</p>

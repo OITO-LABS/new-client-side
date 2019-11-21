@@ -1,4 +1,4 @@
-import {PATH_PREFIX,LANDING,DASHBOARD,APP_INFO,UPPER_BAR,EMPLOYEE_REG,EMPLOYEE_UPDATE,EMPLOYEE_LISTING,EMPLOYEE_DETAILS,ASSET_LISTING,ASSET_DETAILS,ADD_ASSETS,ASSIGN_ASSETS} from 'utils/constants';
+import {PATH_PREFIX,LANDING,DASHBOARD,APP_INFO,UPPER_BAR,EMPLOYEE_REG,EMPLOYEE_UPDATE,EMPLOYEE_LISTING,EMPLOYEE_DETAILS,ASSET_LISTING,ASSET_DETAILS,ADD_ASSETS,ASSIGN_ASSETS,APPLY_REIMBURSEMENT} from 'utils/constants';
 const routes = [
     {
         name:LANDING,
@@ -119,6 +119,16 @@ const routes = [
         componentId:'pages/assetAssignment',
         title:'asset assignment',
         className:'asset-assign-page',
+        exact:true,
+        nowrap:false
+    },
+    {
+        name:APPLY_REIMBURSEMENT,
+        path:PATH_PREFIX+APPLY_REIMBURSEMENT,
+        samplePath:PATH_PREFIX+APPLY_REIMBURSEMENT,
+        componentId:'pages/applyreimbursement',
+        title:'apply reimbursement',
+        className:'apply-reimbursement-page',
         exact:true,
         nowrap:false
     },

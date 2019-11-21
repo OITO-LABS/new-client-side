@@ -1,5 +1,5 @@
 import React from "react";
-import {DASHBOARD,EMPLOYEE_REG,EMPLOYEE_LISTING,GOTO_URL,ADD_ASSETS,ASSET_LISTING} from "utils/constants";
+import {DASHBOARD,EMPLOYEE_REG,EMPLOYEE_LISTING,GOTO_URL,ADD_ASSETS,ASSET_LISTING,APPLY_REIMBURSEMENT} from "utils/constants";
 import "assets/sass/pages/_employeeRegister.scss"
 
 class Sidebar extends React.Component {
@@ -12,6 +12,8 @@ class Sidebar extends React.Component {
     this.empList = this.empList.bind(this);
     this.addAssets = this.addAssets.bind(this);
     this.viewAssets = this.viewAssets.bind(this);
+    this.applyReimbursement = this.applyReimbursement.bind(this);
+    // this.viewReimbursements = this.viewReimbursements.bind(this);
   }
   
   dashboard() {
@@ -33,6 +35,14 @@ class Sidebar extends React.Component {
   viewAssets() {
     app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
   }
+
+  applyReimbursement() {
+    app.events.trigger(GOTO_URL, { routerKey: APPLY_REIMBURSEMENT });
+  }
+
+  // viewReimbursements() {
+  //   app.events.trigger(GOTO_URL, { routerKey:  });
+  // }
 
   render() {
     return (
@@ -79,6 +89,20 @@ class Sidebar extends React.Component {
                   <a href="#" onClick={this.viewAssets}>
                     <i className="fas fa-wallet"></i>
                     Assets 
+                  </a>
+                </li>
+                 {/* Apply Reimbursement */}
+                 <li>
+                  <a href="#" onClick={this.applyReimbursement}>
+                    <i className="fas fa-wallet"></i>
+                    Apply Reimbursement 
+                  </a>
+                </li>
+                {/* Reimbursement */}
+                <li>
+                  <a href="#" onClick={this.viewReimbursements}>
+                    <i className="fas fa-wallet"></i>
+                    Reimbursements
                   </a>
                 </li>
               </ul>
