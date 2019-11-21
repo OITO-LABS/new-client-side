@@ -7,7 +7,7 @@
       "updateEmployee":"api/employee/:empId",
       "registered":"api/employee",
       "assetregistered":"api/asset",
-      "updateAsset":"api/asset/:assetId",
+      "updateAsset":"api/assetAssign/:assetId",
       "getAsset":"api/details/:assetId",
       "employeeList":"api/employee/list",
       "employeeSearch":"api/employee/search",

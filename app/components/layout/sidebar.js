@@ -27,7 +27,7 @@ class Sidebar extends React.Component {
   }
 
   addAssets() {
-    app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS,params:{empId:-1} });
+    app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS,params:{assetId:-1} });
   }
 
   viewAssets() {
@@ -57,14 +57,14 @@ class Sidebar extends React.Component {
                 <li>
                   <a href="#" onClick={this.empReg}  className="dropdown-toggle">
                     <i className="fas fa-cog"></i>
-                    Register Employee
+                    Register
                   </a>
                 </li>
                 {/* View Employee */}
                 <li>
                   <a href="#" onClick={this.empList}>
                     <i className="fas fa-user-cog"></i>
-                    View Employee 
+                    Employees
                   </a>
                 </li>
                 {/* Add Assets  */}
@@ -78,7 +78,7 @@ class Sidebar extends React.Component {
                 <li>
                   <a href="#" onClick={this.viewAssets}>
                     <i className="fas fa-wallet"></i>
-                    View Assets
+                    Assets 
                   </a>
                 </li>
               </ul>

@@ -3,6 +3,8 @@ import { GOTO_URL, FLIP_LOADER, EMPLOYEE_LISTING,SHOW_ALERT_MSG,ALERT_TYPE } fro
 import FormField from "../common/formfield";
 import FormValidator from '../common/formvalidator';
 import dataService from "utils/dataservice";
+import Heading from "../heading"
+
 
 export class registerEmployee extends Component {
   constructor(props) {
@@ -188,7 +190,12 @@ export class registerEmployee extends Component {
         msg: res
         });
       })
-      .catch(err => {console.log(err)});
+      .catch(err => {app.events.trigger(SHOW_ALERT_MSG, {
+        visible: true,
+        type: ALERT_TYPE.DANGER,
+        msg: err
+        });
+      });
       } 
     }
 
@@ -198,7 +205,7 @@ export class registerEmployee extends Component {
     this.submitted = true;
 
     if (validation.isValid) {
-      dataService.putRequest("updateEmployee", { empId: this.props.match.params.empId } ,{ ...this.getStateData(this.state) } )
+      dataService.putRequest("updateEmployee", { empId: this.props.match.params.empId , ...this.getStateData(this.state) } )
       .then(res => {
         app.events.trigger(SHOW_ALERT_MSG, {
         visible: true,
@@ -206,7 +213,12 @@ export class registerEmployee extends Component {
         msg: res
         });
       })
-      .catch(err => {console.log(err)});
+      .catch(err => {app.events.trigger(SHOW_ALERT_MSG, {
+        visible: true,
+        type: ALERT_TYPE.DANGER,
+        msg: err
+        });
+      });
     }
   }
 
@@ -219,6 +231,7 @@ export class registerEmployee extends Component {
     var empId = this.props.match.params.empId;
     return (
       <div className="form-wrapper">
+        {empId == -1 ? <Heading heading="REGISTER EMPLOYEE" />: <Heading heading="UPDATE EMPLOYEE" />}
         <div className="d-flex justify-content-sm-around">
           {/* Input details first block  */}
           <div className="p-2 w-25 mt-5">

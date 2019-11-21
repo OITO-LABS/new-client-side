@@ -3,6 +3,7 @@ import {FLIP_LOADER,GOTO_URL,SHOW_ALERT,SHOW_ALERT_MSG,ALERT_TYPE,ASSET_LISTING}
 import FormField from "../common/formfield";
 import dataService from "utils/dataservice";
 import FormValidator from '../common/formvalidator';
+import Heading from "../heading";
 
 class assetRegistration extends Component {
   constructor(props) {
@@ -67,11 +68,11 @@ class assetRegistration extends Component {
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
     {
-      this.props.match.params.assetKey == -1
+      this.props.match.params.assetId == -1
         ? ""
         : dataService
             .getRequest("getAsset", {
-              assetKey: this.props.match.params.assetKey
+              assetId: this.props.match.params.assetId
             })
             // .then(res => res.json())
             .then(result => {
@@ -141,7 +142,7 @@ class assetRegistration extends Component {
       dataService
         .putRequest(
           "updateAsset",
-          { assetKey: this.props.match.params.assetKey },
+          { assetId: this.props.match.params.assetId },
           { ...this.getStateData(this.state) }
         )
         .then(res => {
@@ -165,9 +166,10 @@ class assetRegistration extends Component {
     let validation = this.submitted
       ? this.validator.validate(this.state)
       : this.state.validation;
-    var assetKey = this.props.match.params.assetKey;
+    var assetId = this.props.match.params.assetId;
     return (
       <div className="form-wrapper">
+      {assetId == -1 ? <Heading heading="REGISTER ASSET" />: <Heading heading="UPDATE ASSET" />}
         <div className="d-flex justify-content-sm-around">
           {/* Input details first block  */}
           <div className="p-2 w-25 mt-5">
@@ -176,7 +178,7 @@ class assetRegistration extends Component {
               labelClassName="txt-label"
               fieldClassName="txt-input"
               mandatory
-              disabled = {assetKey !='-1'}
+              disabled = {assetId !='-1'}
               name="assetKey"
               onChange={this.handleInputChange}
               value={this.state.assetKey}
@@ -225,7 +227,7 @@ class assetRegistration extends Component {
               validator={validation}
             />
             <FormField
-              type="select"
+              type={assetId == -1? "select": ""}
               label="Product Category"
               labelClassName="txt-label"
               fieldClassName="select-input"
@@ -250,7 +252,7 @@ class assetRegistration extends Component {
 
         {/* Button wrapper for Submit, Update and Cancel*/}
         <div className="btn-wrapper">
-          {assetKey == "-1" ? (
+          {assetId == "-1" ? (
             <button
               type="button"
               className="btn submit-btn"
