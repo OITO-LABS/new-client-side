@@ -6,7 +6,7 @@ import ListTable from "../listTable";
 import { confirm } from 'utils/common';
 import { fileURLToPath } from 'url';
 import dataService from 'utils/dataservice';
-import "assets/sass/pages/_employeeListing.scss"
+import "assets/sass/pages/_employeeRegister.scss"
 
 // import { FLIP_LOADER,ALERT_TYPE,SHOW_ALERT_MSG,SHOW_ALERT } from 'utils/constants';
 

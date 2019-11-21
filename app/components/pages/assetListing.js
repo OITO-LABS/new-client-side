@@ -3,7 +3,7 @@ import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, ASSET_DE
 import dataService from 'utils/dataservice';
 import SearchAndButtonBar from "../searchAndButtonBar";
 import ListTable from "../listTable";
-import "assets/sass/pages/_employeeListing.scss"
+import "assets/sass/pages/_employeeListing.scss";
 export class AssetListing extends Component {
   constructor(props) {
     super(props)
@@ -108,8 +108,8 @@ export class AssetListing extends Component {
   }
 
   handleEdit(data) {
-    console.log(data);
-    // app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG,params:{empId:data.empId} });
+    // console.log(data);
+    app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS,params:{empId:data.empId} });
   }
 
   async handleDelete(data) {
@@ -162,7 +162,7 @@ export class AssetListing extends Component {
       editHandler={this.handleEdit}
       deleteHandler={this.handleDelete}
       detailsHandler={this.handleDetails} />
-      </div >
+      </div>
     );
   }
 }
