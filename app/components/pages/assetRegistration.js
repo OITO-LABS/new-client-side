@@ -114,7 +114,8 @@ class assetRegistration extends Component {
     const validation = this.validator.validate(this.state);
     this.setState({ validation });
     this.submitted = true;
-
+    
+    // Submit data if validation is successful
     if (validation.isValid) {
       dataService
         .postRequest("assetregistered", { ...this.getStateData(this.state) })
