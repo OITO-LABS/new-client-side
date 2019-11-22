@@ -158,7 +158,7 @@ const routes = [
         name: APPLY_REIMBURSEMENT,
         path: PATH_PREFIX + APPLY_REIMBURSEMENT,
         samplePath: PATH_PREFIX + APPLY_REIMBURSEMENT,
-        componentId: 'pages/applyreimbursement',
+        componentId: 'pages/reimbursementApply',
         title: 'apply reimbursement',
         className: 'apply-reimbursement-page',
         exact: true,

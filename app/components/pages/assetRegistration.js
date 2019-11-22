@@ -25,27 +25,6 @@ class assetRegistration extends Component {
         message: 'Model is empty'
       },
       {
-        field: 'macId', 
-        method: 'isEmpty', 
-        args:[{ignore_whitespace:true}],
-        validWhen: false, 
-        message: 'MAC Id is empty'
-      },
-      {
-        field: 'simNo', 
-        method: 'isEmpty', 
-        args:[{ignore_whitespace:true}],
-        validWhen: false, 
-        message: 'SIM Number is empty'
-      },
-      {
-        field: 'msisdnNo', 
-        method: 'isEmpty', 
-        args:[{ignore_whitespace:true}],
-        validWhen: false, 
-        message: 'MSISDN Number is empty'
-      },
-      {
         field: 'productCategory', 
         method: 'isEmpty', 
         args:[{ignore_whitespace:true}],
@@ -83,7 +62,7 @@ class assetRegistration extends Component {
             .catch(error => {
               console.error(error);
             });
-    }
+        }
   }
 
   getStateData(assetdata) {
@@ -121,11 +100,13 @@ class assetRegistration extends Component {
       dataService
         .postRequest("assetregistered", { ...this.getStateData(this.state) })
         .then(res => {
+          if(res.status == "success") {
           app.events.trigger(SHOW_ALERT_MSG, {
             visible: true,
             type: ALERT_TYPE.SUCESS,
             msg: res
           });
+         }
         })
         .catch(err => {
           console.log(err);
@@ -146,11 +127,13 @@ class assetRegistration extends Component {
           { ...this.getStateData(this.state) }
         )
         .then(res => {
+          if(res.status == "success") {
           app.events.trigger(SHOW_ALERT_MSG, {
             visible: true,
             type: ALERT_TYPE.SUCESS,
             msg: res
           });
+         }
         })
         .catch(err => {
           console.log(err);
@@ -204,7 +187,6 @@ class assetRegistration extends Component {
               name="macId"
               value={this.state.macId}
               placeholder="MAC Id"
-              validator={validation}
             />
             <FormField
               label="Sim Number"
@@ -214,7 +196,6 @@ class assetRegistration extends Component {
               name="simNo"
               value={this.state.simNo}
               placeholder="Sim Number"
-              validator={validation}
             />
             <FormField
               label="MSISDN Number"
@@ -224,7 +205,6 @@ class assetRegistration extends Component {
               name="msisdnNo"
               value={this.state.msisdnNo}
               placeholder="MSISDN Number"
-              validator={validation}
             />
             <FormField
               type={assetId == -1? "select": ""}

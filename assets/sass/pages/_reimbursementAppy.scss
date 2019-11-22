@@ -1,0 +1,43 @@
+.txt-label {
+  font-size: 16px;
+}
+
+.txt-input {
+  /* border: 1px solid #616263; */
+  padding: 0.25rem 1rem;
+  width: 100%;
+  outline: none !important;
+  display: flex;
+}
+
+.personal-assets .asset-list {
+  padding: 0px 0px;
+}
+
+.asset-list ul li:hover {
+  background: #b4323e;
+  color: #fff;
+}
+
+.personal-assets .asset {
+  /* padding: 30px 40px; */
+  padding: 0px;
+}
+
+thead {
+  color: #fff;
+  background: #b4323e;
+}
+
+.single-asset.table thead tr td {
+  border: 1px solid #000;
+}
+
+.row-input {
+  border: 0;
+}
+
+.input-style td {
+  border-top: none !important;
+  padding: 0.5rem !important;
+}

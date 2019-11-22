@@ -5,7 +5,6 @@ import FormValidator from '../common/formvalidator';
 import dataService from "utils/dataservice";
 import Heading from "../heading"
 
-
 export class registerEmployee extends Component {
   constructor(props) {
     super(props);
@@ -184,11 +183,13 @@ export class registerEmployee extends Component {
     if (validation.isValid) {
       dataService.postRequest("registered", { ...this.getStateData(this.state) })
       .then(res => {
+        if(res.status == "success") {
         app.events.trigger(SHOW_ALERT_MSG, {
         visible: true,
         type: ALERT_TYPE.SUCESS,
-        msg: res
+        msg: "Successfully Submmited"
         });
+       }
       })
       .catch(err => {app.events.trigger(SHOW_ALERT_MSG, {
         visible: true,
@@ -207,11 +208,13 @@ export class registerEmployee extends Component {
     if (validation.isValid) {
       dataService.putRequest("updateEmployee", { empId: this.props.match.params.empId , ...this.getStateData(this.state) } )
       .then(res => {
+        if(res.status == "success") {
         app.events.trigger(SHOW_ALERT_MSG, {
         visible: true,
         type: ALERT_TYPE.SUCESS,
-        msg: res
+        msg: "Successfully updated"
         });
+       }
       })
       .catch(err => {app.events.trigger(SHOW_ALERT_MSG, {
         visible: true,
