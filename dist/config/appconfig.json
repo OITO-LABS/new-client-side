@@ -6,7 +6,7 @@
       "getEmpDetails":"api/employee/:empId",    
       "updateEmployee":"api/employee/:empId",
       "getAsset":"api/asset/details/:assetId",
-      "updategetAsset":"api/asset/getforupdate/:assetId",
+      "updategetAsset":"api/asset/getforupdate/details/:assetId",
       "updateAsset":"api/asset/:assetId",
       "registered":"api/employee",
       "assetregistered":"api/asset",
