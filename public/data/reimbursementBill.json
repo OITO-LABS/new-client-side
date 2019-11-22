@@ -1,0 +1,21 @@
+{
+    "billDetails": [
+        {
+            "billDate": "2019-11-13",
+            "reimbursementDescription": "Travel Expense",
+            "categoryName": "Travel",
+            "billNo": 14555,
+            "cost": 10000
+        },
+        {
+            "billDate": "2019-11-14",
+            "reimbursementDescription": "Food Expense",
+            "categoryName": "Food",
+            "billNo": 30644,
+            "cost": 5000
+        }
+    ],
+    "empName": "Shahana Shalikh",
+    "empNo": "EMP002",
+    "empDesignation": "intern"
+}

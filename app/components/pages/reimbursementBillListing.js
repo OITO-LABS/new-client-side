@@ -16,22 +16,22 @@ export class ReimbursementBillListing extends Component {
         { label: "category name", key: "categoryName" },
         { label: "cost", key: "cost" },
       ],
-      // datas: [
-      //   {
-      //     "billDate": "2019-11-11T18:30:00.000+0000",
-      //     "reimbursementDescription": "Travel Expense",
-      //     "categoryName": "Travel",
-      //     "billNo": 14351,
-      //     "cost": 16000
-      //   },
-      //   {
-      //     "billDate": "2019-11-12T18:30:00.000+0000",
-      //     "reimbursementDescription": "Food Expense",
-      //     "categoryName": "Food",
-      //     "billNo": 3042253,
-      //     "cost": 2000
-      //   }
-      // ]
+      datas: [
+        // {
+        //   "billDate": "2019-11-11T18:30:00.000+0000",
+        //   "reimbursementDescription": "Travel Expense",
+        //   "categoryName": "Travel",
+        //   "billNo": 14351,
+        //   "cost": 16000
+        // },
+        // {
+        //   "billDate": "2019-11-12T18:30:00.000+0000",
+        //   "reimbursementDescription": "Food Expense",
+        //   "categoryName": "Food",
+        //   "billNo": 3042253,
+        //   "cost": 2000
+        // }
+      ]
     }
     this.pageHandler = this.pageHandler.bind(this);
     this.totalCost = this.totalCost.bind(this);
@@ -53,23 +53,28 @@ export class ReimbursementBillListing extends Component {
       .then(res => {
         this.setState({
           datas: res.billDetails,
-          empName:res.empName,
-          empNo:res.empNo,
-          empDesignation:res.empDesignation
+          empName: res.empName,
+          empNo: res.empNo,
+          empDesignation: res.empDesignation
         });
       })
       .catch(error => {
         console.log(error);
       });
+
+      // this.totalCost();
+
   }
 
   totalCost() {
     let totalCost = 0;
     this.state.datas.map((data) => {
-      totalCost = totalCost + data.cost;
+    
+        totalCost = totalCost + data.cost;
+      
     })
     this.setState({
-      totalCost: totalCost
+      totalCost:totalCost
     })
   }
 
@@ -87,7 +92,7 @@ export class ReimbursementBillListing extends Component {
             <table className="table ">
               <tbody>
                 <td>Total Cost</td>
-                <td className="num">1200</td>
+                <td className="num">{this.state.totalCost}</td>
               </tbody>
             </table>
           </div>

@@ -21,6 +21,8 @@
 		"getAsset":"/getAsset.json",
 		"assetHistory":"/assetHistory.json",
 		"assetList":"/assetList.json",
+
+		"reimbursementBill":"/reimbursementBill.json",
 		
 	    "params": {
 			"commonparams": "commonparams"

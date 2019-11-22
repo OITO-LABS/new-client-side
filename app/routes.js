@@ -1,5 +1,5 @@
 import {
-    PATH_PREFIX, LANDING, DASHBOARD, APP_INFO, UPPER_BAR, EMPLOYEE_REG, EMPLOYEE_UPDATE, EMPLOYEE_LISTING, EMPLOYEE_DETAILS, ASSET_LISTING, ASSET_DETAILS, ADD_ASSETS, ASSIGN_ASSETS,
+    PATH_PREFIX, LANDING, DASHBOARD, APP_INFO, EMPLOYEE_REG, EMPLOYEE_UPDATE, EMPLOYEE_LISTING, EMPLOYEE_DETAILS, ASSET_LISTING, ASSET_DETAILS, ADD_ASSETS, ASSIGN_ASSETS,
     REIMBURSEMENT_LISTING, REIMBURSEMENT_EMPLOYEE_LISTING, REIMBURSEMENT_BILL_LISTING,APPLY_REIMBURSEMENT} from 'utils/constants';
 const routes = [
     {
@@ -53,16 +53,7 @@ const routes = [
     //     exact:true,
     //     nowrap:false
     // },
-    {
-        name: UPPER_BAR,
-        path: PATH_PREFIX + UPPER_BAR,
-        samplePath: PATH_PREFIX + UPPER_BAR,
-        componentId: 'pages/upperbar',
-        title: 'upper bar',
-        className: 'upper-bar-page',
-        exact: true,
-        nowrap: false
-    },
+    
     {
         name: EMPLOYEE_LISTING,
         path: PATH_PREFIX + EMPLOYEE_LISTING,
