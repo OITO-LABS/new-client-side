@@ -113,7 +113,8 @@ export class registerEmployee extends Component {
 
     this.state = {
       ...this.getStateData(this.props),
-      validation: this.validator.valid()
+      validation: this.validator.valid(),
+      // bloodgroups:[]
     };
     
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -130,8 +131,10 @@ export class registerEmployee extends Component {
      dataService.getRequest("getEmpDetails", { empId: this.props.match.params.empId })
       // .then(res => res.json())
       .then(result => {
+        // let bloodgrpFromApi = result.map(bloodgrp => { return {value: bloodgrp, display: bloodgrp} })
         this.setState({
-          ...this.getStateData(result)
+          ...this.getStateData(result),
+          // bloodgroups:[(bloodgrpFromApi).concat({value:'',display:'Select blood group'})]
         });
       })
       .catch(error => {
@@ -140,7 +143,6 @@ export class registerEmployee extends Component {
     }
   }
  
-
   getStateData(empdata) {
     return {
       firstName: empdata.firstName || "",
@@ -361,7 +363,7 @@ export class registerEmployee extends Component {
               validator={validation}
             />
             <FormField
-              type={empId == -1 ?"select" :''}
+              type="select"
               label="Blood Group"
               labelClassName="txt-label"
               fieldClassName="select-input"
@@ -378,10 +380,31 @@ export class registerEmployee extends Component {
                 { value: "O+", label: "O+" },
                 { value: "O-", label: "O-" }
               ]}
+              // this.state.bloodgroups.map((bldgrp) => <option key={bldgrp.value} value={bldgrp.value}>{bldgrp.display}</option>)}
               value={this.state.bloodGroup}
               placeholder="Blood Group"
               validator={validation}
             />
+            
+            {/* <FormField
+              type="select"
+              label="Blood Group"
+              labelClassName="txt-label"
+              fieldClassName="select-input"
+              mandatory
+              name="bloodGroup"
+              nameAlias={"abc_fullName"}
+
+              onChange={this.handleInputChange}
+              options={[
+                this.state.bloodgroups.map((bldgrp) => <option key={bldgrp.value} value={bldgrp.value}>{bldgrp.display}</option>)
+              ]}
+              value={this.state.bloodGroup}
+              placeholder="Blood Group"
+              validator={validation}
+            /> */}
+            
+
           </div>
         </div>
         

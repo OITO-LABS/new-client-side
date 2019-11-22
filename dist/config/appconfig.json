@@ -5,12 +5,12 @@
       "portalSettings": "/data/portal-settings.json",
       "getEmpDetails":"api/employee/:empId",    
       "updateEmployee":"api/employee/:empId",
+      "getAsset":"api/asset/details/:assetId",
+      "updategetAsset":"api/asset/getforupdate/:assetId",
+      "updateAsset":"api/asset/:assetId",
       "registered":"api/employee",
-      "getEmployeeNo":"api/employee",
       "assetregistered":"api/asset",
       "assetassignment":"api/assetassign/:assetId",
-      "updateAsset":"api/assetAssign/:assetId",
-      "getAsset":"api/asset/details/:assetId",
       "employeeList":"api/employee/list",
       "employeeSearch":"api/employee/search",
       "employeeDelete":"api/employee/delete/:empNo",
@@ -19,11 +19,6 @@
       "assetSearch":"api/asset/assetDetails",
       "assetDelete":"api/asset/:assetId",
       "assetHistory":"api/asset/:assetId",
-
-      "reimbursementList":"api/reimbursement/reimbursement-list",
-     
-
-
       "params": {
         "commonparams": "commonparams"
       }
