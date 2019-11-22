@@ -1,26 +1,25 @@
 import React, { Component } from "react";
 import {
-    FLIP_LOADER,
-    GOTO_URL,
-    SHOW_ALERT,
-    SHOW_ALERT_MSG,
-    ALERT_TYPE,
-  } from "utils/constants";
-  import FormField from "../common/formfield";
-//   import FormValidator from '../common/formvalidator';
+  FLIP_LOADER,
+  GOTO_URL,
+  SHOW_ALERT,
+  SHOW_ALERT_MSG,
+  ALERT_TYPE
+} from "utils/constants";
+import FormField from "../common/formfield";
+  // import FormValidator from '../common/formvalidator';
 import "assets/sass/pages/_employeeRegister.scss";
 
 class reimbursementApply extends Component {
+  constructor(props) {
+    super(props);
 
-    constructor(props) {
-        super(props)
-    
-        this.state = {
-            ...this.getStateData(this.props)  
-        }
-        this.handleInputChange = this.handleInputChange.bind(this);
-    }
-    
+    this.state = {
+      ...this.getStateData(this.props)
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
   }
@@ -31,7 +30,7 @@ class reimbursementApply extends Component {
       reimbursementDescription: reimburseData.reimbursementDescription || "",
       categoryName: reimburseData.categoryName || "",
       billNo: reimburseData.billNo || "",
-      cost: reimburseData.cost || "",
+      cost: reimburseData.cost || ""
     };
   }
 
@@ -53,8 +52,27 @@ class reimbursementApply extends Component {
             <div className="row mt-5">
               <div className="d-flex mb-4 flex-row mx-auto">
                 <div className="mr-2">
-                  <label className="txt-label">Employee Id</label>
-                  <input name="empid" className="txt-input" type="text" value="" />
+                  <FormField
+                    type="select"
+                    label="Employee Id"
+                    labelClassName="txt-label"
+                    fieldClassName="select-input"
+                    mandatory
+                    name="empid"
+                    nameAlias={"abc_fullName"}
+                    onChange={this.handleInputChange}
+                    options={[
+                      { value: "Mouse", label: "Mouse" },
+                      { value: "Wifi", label: "Wifi" },
+                      { value: "Modem", label: "Modem" },
+                      { value: "Adapter", label: "Adapter" },
+                      { value: "Laptop", label: "Laptop" },
+                      { value: "Headset", label: "Headset" }
+                    ]}
+                    value={this.state.productCategory}
+                    placeholder="Product Category"
+                    // validator={validation}
+                  />
                 </div>
                 <div>
                   <label className="txt-label">Date</label>
@@ -131,7 +149,7 @@ class reimbursementApply extends Component {
                       />
                     </td>
                     <td>
-                    <FormField
+                      <FormField
                         labelClassName="txt-label"
                         fieldClassName="txt-input"
                         mandatory
