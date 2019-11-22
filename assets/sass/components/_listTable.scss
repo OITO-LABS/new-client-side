@@ -8,3 +8,17 @@
 table.list{
     border: 1px solid #dee2e6;
 }
+
+.total-cost .total{
+    display: flex;
+}
+
+.total-cost .total .num{
+    color: #c5341c;
+    font-size: 15px;
+}
+.total-cost .total h4{
+    padding: 6px;
+    font-size: 25px;
+}
+

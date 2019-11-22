@@ -34,10 +34,21 @@ export class ReimbursementBillListing extends Component {
       // ]
     }
     this.pageHandler = this.pageHandler.bind(this);
+    this.totalCost = this.totalCost.bind(this);
+    this.gettingBill = this.gettingBill.bind(this);
+
   }
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
+    this.gettingBill();
+    this.totalCost();
 
+  }
+  pageHandler(data) {
+    console.log(data);
+  }
+
+  gettingBill() {
     dataService.getRequest("reimbursementBill", { reimbursementId: this.props.match.params.reimbursementId })
       .then(res => {
         this.setState({
@@ -45,13 +56,20 @@ export class ReimbursementBillListing extends Component {
         });
       })
       .catch(error => {
-        console.error(error);
+        console.log(error);
       });
-
   }
-  pageHandler(data) {
 
+  totalCost() {
+    let totalCost = 0;
+    this.state.datas.map((data) => {
+      totalCost = totalCost + data.cost;
+    })
+    this.setState({
+      totalCost: totalCost
+    })
   }
+
   render() {
     return (
       <div>
@@ -60,7 +78,17 @@ export class ReimbursementBillListing extends Component {
           datas={this.state.datas}
           pageHandler={this.handlePage}
         />
-
+        <div className="row total-cost">
+          <div className="col-9"></div>
+          <div className="col-3 total">
+            <table className="table ">
+              <tbody>
+                <td>Total Cost</td>
+                <td className="num">1200</td>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     );
   }

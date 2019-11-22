@@ -69,28 +69,55 @@ export class EmployeeDetails extends Component {
                 { label: "asset-key", key: "assetKey" },
                 { label: "asset-category", key: "productCategory" },
                 { label: "model", key: "model" },
-              ]
+            ]
         }
+        this.gettingEmployee = this.gettingEmployee.bind(this);
+        this.gettingAssets = this.gettingAssets.bind(this);
     }
     componentDidMount() {
         app.events.trigger(FLIP_LOADER, { status: false, reset: true });
-         
-        let abc = this.props.match.params.empId;
+            this.gettingEmployee();
+            this.gettingAssets();
 
+        // dataService.getRequest("getEmpDetails", { empId: this.props.match.params.empId })
+        //     .then(res => {
+        //         this.setState({
+        //             data: res
+        //         });
+        //     })
+        //     .catch(error => {
+        //         console.error(error);
+        //     });
+
+        // dataService.getRequest("assetsOfEmployee", { empId: this.props.match.params.empId })
+        //     .then(res => {
+        //         this.setState({
+        //             assets: res
+        //         });
+        //     })
+        //     .catch(error => {
+        //         console.error(error);
+        //     });
+    }
+
+
+    gettingEmployee() {
         dataService.getRequest("getEmpDetails", { empId: this.props.match.params.empId })
             .then(res => {
                 this.setState({
-                    data:res
+                    data: res
                 });
             })
             .catch(error => {
                 console.error(error);
             });
+    }
 
-         dataService.getRequest("assetsOfEmployee", { empId: this.props.match.params.empId })
+    gettingAssets() {
+        dataService.getRequest("assetsOfEmployee", { empId: this.props.match.params.empId })
             .then(res => {
                 this.setState({
-                    assets:res
+                    assets: res
                 });
             })
             .catch(error => {
@@ -104,10 +131,10 @@ export class EmployeeDetails extends Component {
                 <Heading heading="Employee-Details" />
                 <DetailsTable data={this.state.data} fields={this.state.employeeFields} />
                 <Heading heading="Assets In Hand " />
-                <ListTable 
-                totalRecords={1}
-                fields={this.state.assetFields}
-                datas={this.state.assets}/>
+                <ListTable
+                    totalRecords={1}
+                    fields={this.state.assetFields}
+                    datas={this.state.assets} />
             </div>
         );
     }

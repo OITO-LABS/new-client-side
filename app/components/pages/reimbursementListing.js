@@ -4,7 +4,7 @@ import dataService from 'utils/dataservice';
 import ListTable from "../listTable";
 import "assets/sass/pages/_listing.scss";
 import DateAndButtonBar from "../dateAndButtonBar";
-
+import Heading from "../heading";
 export class ReimbursementListing extends Component {
   constructor(props) {
     super(props)
@@ -115,6 +115,7 @@ export class ReimbursementListing extends Component {
     return (
       <div>
         <DateAndButtonBar button1name="apply for reimbursement" dateHandler={this.handleDate} />
+        <Heading heading="Reimbursements"/>
         <ListTable
           totalRecords={this.state.totalRecords}
           fields={this.state.fields}

@@ -126,14 +126,14 @@ export class AssetListing extends Component {
     console.log(data);
     let isConfirmed = false;
     isConfirmed = await confirm({
-      msg: 'Do you sure you want to delete this from Assetlist',
+      msg: 'Are you sure you want to delete this record?',
     });
     if (isConfirmed) {
       // const deleteData = { empNo: data.empNo }
       dataService.deleteRequest("assetDelete", { assetId: data.assetId })
         .then(res => {
           // console.log(res);
-          if(res.status=="delete successFul"){
+          if(res.status=="deleted successfully"){
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,
               type: ALERT_TYPE.SUCESS,
@@ -145,7 +145,7 @@ export class AssetListing extends Component {
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,
               type: ALERT_TYPE.SUCESS,
-              msg: "Oops !!! something went wrong"
+              msg: `Deletion Failed  ${res.message}`
             });
             this.gettingData();
           }

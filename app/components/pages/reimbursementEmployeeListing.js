@@ -60,7 +60,7 @@ export class ReimbursementEmployeeListing extends Component {
   }
 
   gettingData() {
-    const data = { page: this.state.activePage - 1, empNo:this.props.params.match.empNo,  size: this.state.recordsPerPage }
+    const data = { page: this.state.activePage - 1, empNo:this.props.match.params.empNo,  size: this.state.recordsPerPage }
     let urlKey = "reimbursementEmployee";
     dataService.postRequest(urlKey, data)
       .then((jsonData) => {
@@ -72,9 +72,10 @@ export class ReimbursementEmployeeListing extends Component {
         })
       })
       .catch((error) => {
-        console.error(error)
+        console.log(error)
       })
   }
+  
 
   handlePage(pagenum) {
     this.setState({

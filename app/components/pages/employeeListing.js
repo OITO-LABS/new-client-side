@@ -89,7 +89,7 @@ class EmployeeListing extends React.Component {
     console.log(data);
     let isConfirmed = false;
     isConfirmed = await confirm({
-      msg: 'Do you sure you want to delete this from emplist',
+      msg: 'Are you sure you want to delete this record?',
     });
     if (isConfirmed) {
       // const deleteData = { empNo: data.empNo }
@@ -107,7 +107,7 @@ class EmployeeListing extends React.Component {
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,
               type: ALERT_TYPE.SUCESS,
-              msg: "Oops !!! something went wrong"
+              msg: ` Deletion Failed  ${res.message}`
             });
             this.gettingData();
           }

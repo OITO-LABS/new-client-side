@@ -37,7 +37,7 @@ export class AssetDetails extends Component {
         { label: "Msisdn No ", key: "msisdnNO" },
         { label: "Mac Id", key: "macId" },
         { label: "Issue date", key: "issueDate" },
-        
+
       ],
       // assets:[
       //     {
@@ -74,22 +74,37 @@ export class AssetDetails extends Component {
         { label: "cause", key: "cause" },
       ]
     }
-    this.handlePage=this.handlePage.bind(this);
+    this.handlePage = this.handlePage.bind(this);
+    this.gettingHistory = this.gettingHistory.bind(this);
+    this.gettingAsset = this.gettingAsset.bind(this);
   }
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
+    this.gettingAsset();
+    this.gettingHistory();
+    // dataService.getRequest("getAsset", { assetId: this.props.match.params.assetId })
+    //   .then(res => {
+    //     debugger;
+    //     this.setState({
+    //       assetData: res[0]
+    //     });
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
 
-    dataService.getRequest("getAsset", { assetId: this.props.match.params.assetId })
-      .then(res => {
-        debugger;
-        this.setState({
-          assetData: res[0]
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    // dataService.getRequest("assetHistory", { assetId: this.props.match.params.assetId })
+    //   .then(res => {
+    //     this.setState({
+    //       historyDatas: res
+    //     });
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
+  }
 
+  gettingHistory() {
     dataService.getRequest("assetHistory", { assetId: this.props.match.params.assetId })
       .then(res => {
         this.setState({
@@ -101,8 +116,21 @@ export class AssetDetails extends Component {
       });
   }
 
-  handlePage(data){
-      console.log(data);
+  gettingAsset() {
+    dataService.getRequest("getAsset", { assetId: this.props.match.params.assetId })
+      .then(res => {
+        debugger;
+        this.setState({
+          assetData: res[0]
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  handlePage(data) {
+    console.log(data);
   }
 
   render() {

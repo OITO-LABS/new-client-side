@@ -49,8 +49,7 @@ export const EMPLOYEE_REG = 'employee-reg'
 export const ADD_ASSETS = 'add-assets'
 // ASSIGN_ASSETS
 export const ASSIGN_ASSETS = 'assign-assets'
-// ******upperbar*********
-export const UPPER_BAR ="upper-bar";
+
 export const EMPLOYEE_DETAILS ="employee-details";
 export const EMPLOYEE_LISTING = "employee-listing";
 export const ASSET_DETAILS ="asset-details";

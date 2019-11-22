@@ -18,7 +18,7 @@
 
       "reimbursementList":"api/reimbursement/reimbursement-list",
       "reimbursementDate":"api/reimbursement/reimbursement-date",
-      "reimbursementEmployee":"api/reimbursement/emp-id",
+      "reimbursementEmployee":"api/reimbursement/emp-id/",
       "reimbursementBill":"api/reimbursement/emp-id/:reimbursementId",
 
       "params": {

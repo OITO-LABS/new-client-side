@@ -6,11 +6,7 @@
       "getEmpDetails":"api/employee/:empId",    
       "updateEmployee":"api/employee/:empId",
       "getAsset":"api/asset/details/:assetId",
-      "updategetAsset":"api/asset/getforupdate/:assetId",
-      "updateAsset":"api/asset/:assetId",
       "registered":"api/employee",
-      "assetregistered":"api/asset",
-      "assetassignment":"api/assetassign/:assetId",
       "employeeList":"api/employee/list",
       "employeeSearch":"api/employee/search",
       "employeeDelete":"api/employee/delete/:empNo",
@@ -22,7 +18,7 @@
 
       "reimbursementList":"api/reimbursement/reimbursement-list",
       "reimbursementDate":"api/reimbursement/reimbursement-date",
-      "reimbursementEmployee":"api/reimbursement/emp-id",
+      "reimbursementEmployee":"api/reimbursement/emp-id/",
       "reimbursementBill":"api/reimbursement/emp-id/:reimbursementId",
 
       "params": {

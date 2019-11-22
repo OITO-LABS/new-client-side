@@ -18,7 +18,7 @@
 		
 		"getEmpDetails":"/getEmpDetails.json",
 
-		"updateAsset":"/getAsset.json",
+		"getAsset":"/getAsset.json",
 		"assetHistory":"/assetHistory.json",
 		"assetList":"/assetList.json",
 		
