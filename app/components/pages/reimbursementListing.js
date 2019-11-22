@@ -20,38 +20,38 @@ export class ReimbursementListing extends Component {
         { label: "date", key: "reimbursementDate" },
         { label: "Total cost", key: "totalCost" },
       ],
-      datas:[
-        {
-            "reimbursementId": 13,
-            "reimbursementDate": "2019-11-21",
-            "empNo": "EMP001",
-            "totalCost": 6000
-        },
-        {
-            "reimbursementId": 5,
-            "reimbursementDate": "2019-11-20",
-            "empNo": "EMP001",
-            "totalCost": 6000
-        },
-        {
-            "reimbursementId": 10,
-            "reimbursementDate": "2019-11-19",
-            "empNo": "EMP002",
-            "totalCost": 14000
-        },
-        {
-            "reimbursementId": 4,
-            "reimbursementDate": "2019-11-18",
-            "empNo": "EMP001",
-            "totalCost": 6000
-        },
-        {
-            "reimbursementId": 11,
-            "reimbursementDate": "2019-11-17",
-            "empNo": "EMP002",
-            "totalCost": 19000
-        }
-    ]
+    //   datas:[
+    //     {
+    //         "reimbursementId": 13,
+    //         "reimbursementDate": "2019-11-21",
+    //         "empNo": "EMP001",
+    //         "totalCost": 6000
+    //     },
+    //     {
+    //         "reimbursementId": 5,
+    //         "reimbursementDate": "2019-11-20",
+    //         "empNo": "EMP001",
+    //         "totalCost": 6000
+    //     },
+    //     {
+    //         "reimbursementId": 10,
+    //         "reimbursementDate": "2019-11-19",
+    //         "empNo": "EMP002",
+    //         "totalCost": 14000
+    //     },
+    //     {
+    //         "reimbursementId": 4,
+    //         "reimbursementDate": "2019-11-18",
+    //         "empNo": "EMP001",
+    //         "totalCost": 6000
+    //     },
+    //     {
+    //         "reimbursementId": 11,
+    //         "reimbursementDate": "2019-11-17",
+    //         "empNo": "EMP002",
+    //         "totalCost": 19000
+    //     }
+    // ]
 
     }
     this.handleDate = this.handleDate.bind(this);
@@ -62,20 +62,21 @@ export class ReimbursementListing extends Component {
   }
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
-    // this.gettingData();
+    this.gettingData();
   }
 
   gettingData() {
-    const data = { page: this.state.activePage - 1, fromDate:this.state.fromDate, toDate:this.state.toDate,  limit: this.state.recordsPerPage }
+    const data = { page: this.state.activePage - 1, dateFrom:this.state.fromDate, dateTo:this.state.toDate,  size: this.state.recordsPerPage };
     // dataService.getRequest("employeeUpdate", { empNo:'123',empId:123 })
     let urlKey = "";
-    if (this.state.fromDate === "" && this.state.toDate === "") {
+    if (this.state.fromDate == "" && this.state.toDate == "") {
       urlKey = "reimbursementList";
     }
-    else {
+    else if(this.state.fromDate !== "" && this.state.toDate !== "") {
       urlKey = "reimbursementDate";
     }
-    dataService.getRequest(urlKey, data)
+    
+    dataService.postRequest(urlKey, data)
       .then((jsonData) => {
         // jsonData is parsed json object received from url
         console.log(jsonData)

@@ -1,0 +1,26 @@
+[
+    {
+        "assetId": 1,
+        "assetKey": "RouterMS4Black",
+        "model": "Jio",
+        "macId": "BC8AE8432445F",
+        "simNo": "8086595711",
+        "msisdnNo": null,
+        "enableStatus": "Assigned",
+        "productCategory": "WiFi",
+        "empId": 1,
+        "id": null
+    },
+    {
+        "assetId": 3,
+        "assetKey": "DELL111",
+        "model": "Dell",
+        "macId": null,
+        "simNo": null,
+        "msisdnNo": null,
+        "enableStatus": "Assigned",
+        "productCategory": "Laptop",
+        "empId": 1,
+        "id": null
+    }
+]

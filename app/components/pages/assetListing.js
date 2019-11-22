@@ -94,7 +94,7 @@ export class AssetListing extends Component {
         // jsonData is parsed json object received from url
         console.log(jsonData);
         this.setState({
-          totalRecords: jsonData.numberOfElements,
+          totalRecords: jsonData.totalElements,
           datas: jsonData.resultSet
         })
       })
@@ -138,6 +138,14 @@ export class AssetListing extends Component {
               visible: true,
               type: ALERT_TYPE.SUCESS,
               msg: "Successfully Deleted"
+            });
+            this.gettingData();
+          }
+          else{
+            app.events.trigger(SHOW_ALERT_MSG, {
+              visible: true,
+              type: ALERT_TYPE.SUCESS,
+              msg: "Oops !!! something went wrong"
             });
             this.gettingData();
           }

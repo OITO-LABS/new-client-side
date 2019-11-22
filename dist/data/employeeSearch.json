@@ -1,0 +1,59 @@
+{
+    "content": [
+        {
+            "empId": 1,
+            "firstName": "Alex",
+            "lastName": "Mary George",
+            "email": "alexmary@gmail.com",
+            "designation": "intern",
+            "dob": "1995-12-18T18:30:00.000+0000",
+            "contactNo": 9152435352,
+            "emergencyContactName": "GeorgeThomas",
+            "emergencyContact": 9786436478,
+            "healthCardNo": "OITO101INT005",
+            "bloodGroup": "A-",
+            "status": "Y",
+            "empNo": "INT005"
+        },
+        {
+            "empId": 2,
+            "firstName": "Shahana",
+            "lastName": "Shalikh",
+            "email": "sanashalikh@gmail.com",
+            "designation": "intern",
+            "dob": "1996-10-31T18:30:00.000+0000",
+            "contactNo": 91524354343,
+            "emergencyContactName": "ShalikhJaleel",
+            "emergencyContact": 9786423448,
+            "healthCardNo": "OITO101INT002",
+            "bloodGroup": "O+",
+            "status": "Y",
+            "empNo": "INT002"
+        }    
+    ],
+    "pageable": {
+        "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+        },
+        "offset": 0,
+        "pageSize": 10,
+        "pageNumber": 0,
+        "unpaged": false,
+        "paged": true
+    },
+    "totalPages": 1,
+    "totalElements": 2,
+    "last": true,
+    "number": 0,
+    "size": 10,
+    "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+    },
+    "numberOfElements": 7,
+    "first": true,
+    "empty": false
+}

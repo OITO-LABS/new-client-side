@@ -146,7 +146,7 @@ const routes = [
     },
     {
         name: REIMBURSEMENT_BILL_LISTING,
-        path: PATH_PREFIX + REIMBURSEMENT_BILL_LISTING,
+        path: PATH_PREFIX +':reimbursementId/' + REIMBURSEMENT_BILL_LISTING,
         samplePath: PATH_PREFIX + REIMBURSEMENT_BILL_LISTING,
         componentId: 'pages/reimbursementBillListing',
         title: 'reimbursement bill listing',
