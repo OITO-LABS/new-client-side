@@ -49,9 +49,9 @@ class assetAssignment extends Component {
     ])
     this.state = {
       ...this.getStateData(this.props),
-      validation: this.validator.valid()
-      //   empnoArray,
-      //   results
+      validation: this.validator.valid(),
+        empnoArray,
+        results,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -63,23 +63,23 @@ class assetAssignment extends Component {
 
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
-    // var resultant = {};
-    // dataService.getRequest("getEmployeeNo")
-    //   .then(result => {
-    //     this.setState({
-    //     //   ...this.getStateData(result)
-    //     results: result,
-    //     empnoArray:resultant,
-    //     });
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //   });
+    var resultant = {};
+    dataService.getRequest("getEmployeeNo")
+      .then(result => {
+        this.setState({
+        //   ...this.getStateData(result)
+        results: result,
+        empnoArray:resultant,
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
 
-    //   this.state.results.map(item => {
-    //     let empData = {empno:item.empno, fname:item.fname}
-    //     resultant.push(empData);
-    // })
+      this.state.results.map(item => {
+        let empData = {empno:item.empno, fname:item.fname}
+        resultant.push(empData);
+    })
   }
 
   getStateData(assetdata) {
@@ -187,7 +187,7 @@ class assetAssignment extends Component {
                   name="empNo"
                   nameAlias={"abc_fullName"}
                   onChange={this.handleInputChange}
-                  //   options={[{ value: this.state.empnoArray.empNo, label: this.state.empnoArray.fname}]}
+                  options={[{ value: this.state.empnoArray.empNo, label: this.state.empnoArray.fname}]}
                   value={this.state.empNo}
                   placeholder="Employee Number"
                   validator={validation}

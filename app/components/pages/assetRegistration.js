@@ -50,7 +50,7 @@ class assetRegistration extends Component {
       this.props.match.params.assetId == -1
         ? ""
         : dataService
-            .getRequest("getAsset", {
+            .getRequest("updategetAsset", {
               assetId: this.props.match.params.assetId
             })
             // .then(res => res.json())
