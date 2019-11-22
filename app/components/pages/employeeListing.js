@@ -103,6 +103,14 @@ class EmployeeListing extends React.Component {
             });
             this.gettingData();
           }
+          else{
+            app.events.trigger(SHOW_ALERT_MSG, {
+              visible: true,
+              type: ALERT_TYPE.SUCESS,
+              msg: "Oops !!! something went wrong"
+            });
+            this.gettingData();
+          }
         }).catch(res => {
           console.log(res);
         });

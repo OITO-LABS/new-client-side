@@ -15,6 +15,12 @@
       "assetSearch":"api/asset/assetDetails",
       "assetDelete":"api/asset/:assetId",
       "assetHistory":"api/asset/:assetId",
+
+      "reimbursementList":"api/reimbursement/reimbursement-list",
+      "reimbursementDate":"api/reimbursement/reimbursement-date",
+      "reimbursementEmployee":"api/reimbursement/emp-id",
+      "reimbursementBill":"api/reimbursement/emp-id/:reimbursementId",
+
       "params": {
         "commonparams": "commonparams"
       }

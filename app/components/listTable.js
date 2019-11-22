@@ -62,13 +62,13 @@ class ListTable extends Component {
                      )
                   }
                   else if (item.key == "status") {
-                     if (data[item.key] == "0") {
+                     if (data[item.key] == "Assigned") {
                         return (
                            <td key={i}>
                               <button onClick={()=>this.props.unAssignHandler(data)} className="btn btn-warning">UnAssign</button>
                            </td>
                         )
-                     }else if(data[item.key] == "1"){
+                     }else if(data[item.key] == "Unassigned"){
                         return(
                            <td key={i}>
                               <button onClick={()=>this.props.assignHandler(data)} className="btn btn-success">Assign</button>
