@@ -187,7 +187,7 @@ export class registerEmployee extends Component {
         app.events.trigger(SHOW_ALERT_MSG, {
         visible: true,
         type: ALERT_TYPE.SUCESS,
-        msg: res
+        msg: "Successfully Submmited"
         });
        }
       })
@@ -212,7 +212,7 @@ export class registerEmployee extends Component {
         app.events.trigger(SHOW_ALERT_MSG, {
         visible: true,
         type: ALERT_TYPE.SUCESS,
-        msg: res
+        msg: "Successfully updated"
         });
        }
       })
