@@ -136,7 +136,7 @@ const routes = [
     },
     {
         name: REIMBURSEMENT_EMPLOYEE_LISTING,
-        path: PATH_PREFIX + REIMBURSEMENT_EMPLOYEE_LISTING,
+        path: PATH_PREFIX +':empNo/'+ REIMBURSEMENT_EMPLOYEE_LISTING,
         samplePath: PATH_PREFIX + REIMBURSEMENT_EMPLOYEE_LISTING,
         componentId: 'pages/reimbursementEmployeeListing',
         title: 'reimbursement employee listing',

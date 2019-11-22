@@ -7,6 +7,7 @@ import { confirm } from 'utils/common';
 import { fileURLToPath } from 'url';
 import dataService from 'utils/dataservice';
 import "assets/sass/pages/_listing.scss";
+import Heading from "../heading";
 
 // import { FLIP_LOADER,ALERT_TYPE,SHOW_ALERT_MSG,SHOW_ALERT } from 'utils/constants';
 
@@ -127,6 +128,9 @@ class EmployeeListing extends React.Component {
           button2name="export"
           handleRegister={this.handleRegister}
           searchHandler={this.handleSearch} />
+
+          <Heading heading="Employees"/>
+
         <ListTable
           totalRecords={this.state.totalRecords}
           fields={this.state.fields}

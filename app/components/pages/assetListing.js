@@ -5,6 +5,7 @@ import SearchAndButtonBar from "../searchAndButtonBar";
 import ListTable from "../listTable";
 import "assets/sass/pages/_listing.scss";
 import { confirm } from 'utils/common';
+import Heading from "../heading";
 
 export class AssetListing extends Component {
   constructor(props) {
@@ -176,6 +177,7 @@ export class AssetListing extends Component {
           button2name="export"
           handleRegister={this.handleRegister}
           searchHandler={this.handleSearch} />
+          <Heading heading="Assets"/>
     <ListTable
       totalRecords={this.state.totalRecords}
       fields={this.state.fields}

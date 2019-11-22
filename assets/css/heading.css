@@ -1,5 +1,5 @@
 .heading-row{
-    background: #0a0aa0;
+    background: #8f1722;
     color: white;
     justify-content: center;
     height: 40px;
@@ -8,5 +8,4 @@
 }
 .heading-row h4{
     font-size: 25px;
-    
 }

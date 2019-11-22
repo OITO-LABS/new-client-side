@@ -19,6 +19,11 @@
       "assetSearch":"api/asset/assetDetails",
       "assetDelete":"api/asset/:assetId",
       "assetHistory":"api/asset/:assetId",
+
+      "reimbursementList":"api/reimbursement/reimbursement-list",
+     
+
+
       "params": {
         "commonparams": "commonparams"
       }
