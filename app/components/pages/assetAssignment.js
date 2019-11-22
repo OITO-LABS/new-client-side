@@ -64,7 +64,7 @@ class assetAssignment extends Component {
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
     var resultant = {};
-    dataService.getRequest("getEmployeeNo")
+    dataService.getRequest("employeeList")
       .then(result => {
         this.setState({
         //   ...this.getStateData(result)

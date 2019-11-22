@@ -189,16 +189,18 @@ export class registerEmployee extends Component {
         app.events.trigger(SHOW_ALERT_MSG, {
         visible: true,
         type: ALERT_TYPE.SUCESS,
-        msg: "Successfully Submmited"
+        msg: "Successfully Submitted"
         });
        }
+       else {
+        app.events.trigger(SHOW_ALERT_MSG, {
+          visible: true,
+          type: ALERT_TYPE.DANGER,
+          msg: "Submission Failed"
+          });
+       }
       })
-      .catch(err => {app.events.trigger(SHOW_ALERT_MSG, {
-        visible: true,
-        type: ALERT_TYPE.DANGER,
-        msg: err
-        });
-      });
+      .catch(err => {console.log(err)});
       } 
     }
 
@@ -217,13 +219,15 @@ export class registerEmployee extends Component {
         msg: "Successfully updated"
         });
        }
+       else {
+        app.events.trigger(SHOW_ALERT_MSG, {
+          visible: true,
+          type: ALERT_TYPE.DANGER,
+          msg: "Updation Failed"
+          });
+        }
       })
-      .catch(err => {app.events.trigger(SHOW_ALERT_MSG, {
-        visible: true,
-        type: ALERT_TYPE.DANGER,
-        msg: err
-        });
-      });
+      .catch(err => {});
     }
   }
 

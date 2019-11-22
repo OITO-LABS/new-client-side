@@ -104,14 +104,21 @@ class assetRegistration extends Component {
           app.events.trigger(SHOW_ALERT_MSG, {
             visible: true,
             type: ALERT_TYPE.SUCESS,
-            msg: res
+            msg: "Successfully Submitted"
+          });
+         }
+         else {
+          app.events.trigger(SHOW_ALERT_MSG, {
+            visible: true,
+            type: ALERT_TYPE.DANGER,
+            msg: "Submission Failed"
           });
          }
         })
         .catch(err => {
           console.log(err);
         });
-    }
+     }
   }
 
   update() {
@@ -131,7 +138,14 @@ class assetRegistration extends Component {
           app.events.trigger(SHOW_ALERT_MSG, {
             visible: true,
             type: ALERT_TYPE.SUCESS,
-            msg: res
+            msg: "Successfully Updated"
+          });
+         }
+         else {
+          app.events.trigger(SHOW_ALERT_MSG, {
+            visible: true,
+            type: ALERT_TYPE.DANGER,
+            msg: "Updation Failed"
           });
          }
         })
