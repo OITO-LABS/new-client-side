@@ -52,7 +52,10 @@ export class ReimbursementBillListing extends Component {
     dataService.getRequest("reimbursementBill", { reimbursementId: this.props.match.params.reimbursementId })
       .then(res => {
         this.setState({
-          datas: res
+          datas: res.billDetails,
+          empName:res.empName,
+          empNo:res.empNo,
+          empDesignation:res.empDesignation
         });
       })
       .catch(error => {

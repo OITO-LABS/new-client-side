@@ -6,7 +6,7 @@ class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.appInfo = this.appInfo.bind(this);
-    this.upperClick = this.upperClick.bind(this);
+    // this.upperClick = this.upperClick.bind(this);
   }
   appInfo() {
     app.events.trigger(GOTO_URL, { routerKey: APP_INFO });

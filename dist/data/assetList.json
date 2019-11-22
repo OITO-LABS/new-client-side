@@ -1,0 +1,57 @@
+{
+    "resultSet": [
+        {
+            "assetId": 5,
+            "assetKey": "JioFi_2415671E",
+            "productCategoryName": "WiFi",
+            "status": "1",
+            "model": "Jio",
+            "empId": null,
+            "empNo": null
+        },
+        {
+            "assetId": 4,
+            "assetKey": "JioFi_2455671E",
+            "productCategoryName": "WiFi",
+            "status": "1",
+            "model": "Jio",
+            "empId": null,
+            "empNo": null
+        },
+        {
+            "assetId": 3,
+            "assetKey": "JioFi_245567EE",
+            "productCategoryName": "WiFi",
+            "status": "1",
+            "model": "Jio",
+            "empId": null,
+            "empNo": null
+        },
+        {
+            "assetId": 1,
+            "assetKey": "DL100M1",
+            "productCategoryName": "Modem",
+            "status": "0",
+            "model": "D-Link",
+            "empId": 2,
+            "empNo": "INT005"
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+        },
+        "offset": 0,
+        "pageSize": 4,
+        "pageNumber": 0,
+        "unpaged": false,
+        "paged": true
+    },
+    "number": 0,
+    "numberOfElements": 4,
+    "size": 4,
+    "totalElements": 6,
+    "totalPages": 2
+}
