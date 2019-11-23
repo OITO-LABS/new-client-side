@@ -89,7 +89,7 @@ export class AssetListing extends Component {
     else {
       urlKey = "assetSearch";
     }
-    dataService.postRequest(urlKey, data)
+    dataService.getRequest(urlKey, data)
       .then((jsonData) => {
         // jsonData is parsed json object received from url
         console.log(jsonData);
@@ -168,13 +168,13 @@ export class AssetListing extends Component {
   handleAssign(data){
     console.log("assign");
     console.log(data);
-    app.events.trigger(GOTO_URL, { routerKey: ASSIGN_ASSETS, params: { assetId: -1 } });
+    app.events.trigger(GOTO_URL, { routerKey: ASSIGN_ASSETS, params: { assetId: data.assetId, status: data.status} });
   }
 
   handleUnAssign(data){
     console.log("unAssign");
     console.log(data);
-    app.events.trigger(GOTO_URL, { routerKey: ASSIGN_ASSETS, params: { assetId: data.assetId } });
+    app.events.trigger(GOTO_URL, { routerKey: ASSIGN_ASSETS, params: { assetId: data.assetId, status: data.status} });
   }
 
   render() {

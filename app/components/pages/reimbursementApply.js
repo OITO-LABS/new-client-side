@@ -7,7 +7,8 @@ import {
   ALERT_TYPE
 } from "utils/constants";
 import FormField from "../common/formfield";
-  // import FormValidator from '../common/formvalidator';
+import dataService from "utils/dataservice";
+// import FormValidator from '../common/formvalidator';
 import "assets/sass/pages/_employeeRegister.scss";
 
 class reimbursementApply extends Component {
@@ -15,34 +16,62 @@ class reimbursementApply extends Component {
     super(props);
 
     this.state = {
-      ...this.getStateData(this.props)
+      // ...this.getStateData(this.props)
+      reimbursementDetails:[{ index: Math.random(),billDate:"",reimbursementDescription:"",categoryName:"",billNo:"",cost:"" }],
+      empNo:"",
+      date:"",
+      empData:[]
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.getOptions = this.getOptions.bind(this);
+    this.fieldData = {};
   }
 
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
+    dataService.getRequest("getEmpData")
+      .then(result =>{
+        this.setState({
+          empData: result,
+        })
+      })
+      .catch(error =>{
+        console.log(error);
+      });  
   }
 
-  getStateData(reimburseData) {
-    return {
-      billDate: reimburseData.billDate || "",
-      reimbursementDescription: reimburseData.reimbursementDescription || "",
-      categoryName: reimburseData.categoryName || "",
-      billNo: reimburseData.billNo || "",
-      cost: reimburseData.cost || ""
-    };
+  getOptions() {
+    let optionData=[];
+    optionData= this.state.empData.map(item => ({value:item.empNo,label:item.firstName}));
+    return optionData;
   }
 
-  handleInputChange(event, fieldData = {}) {
-    let field = fieldData.field || event.target.name;
-    let value = fieldData.value || event.target.value || "";
-    this.fieldData[field] = fieldData;
-    event &&
-      this.setState({
-        [field]: event.target.type == "checkbox" ? event.target.checked : value
-      });
+  handleInputChange() {
+    
   }
+
+  // getStateData(reimburseData) {
+  //   return {
+  //     empNo:reimburseData.empNo || "",
+  //     reimbursementDate: reimburseData.reimbursementDate || "",
+  //     totalCost: reimburseData.totalCost || "",
+  //     billDate: reimburseData.billDate || "",
+  //     reimbursementDescription: reimburseData.reimbursementDescription || "",
+  //     categoryName: reimburseData.categoryName || "",
+  //     billNo: reimburseData.billNo || "",
+  //     cost: reimburseData.cost || ""
+  //   };
+  // }
+
+  // handleInputChange(event, fieldData = {}) {
+  //   let field = fieldData.field || event.target.name;
+  //   let value = fieldData.value || event.target.value || "";
+  //   this.fieldData[field] = fieldData;
+  //   event &&
+  //     this.setState({
+  //       [field]: event.target.type == "checkbox" ? event.target.checked : value
+  //     });
+  // }
 
   render() {
     return (
@@ -58,29 +87,27 @@ class reimbursementApply extends Component {
                     labelClassName="txt-label"
                     fieldClassName="select-input"
                     mandatory
-                    name="empid"
+                    name="empNo"
                     nameAlias={"abc_fullName"}
                     onChange={this.handleInputChange}
-                    options={[
-                      { value: "Mouse", label: "Mouse" },
-                      { value: "Wifi", label: "Wifi" },
-                      { value: "Modem", label: "Modem" },
-                      { value: "Adapter", label: "Adapter" },
-                      { value: "Laptop", label: "Laptop" },
-                      { value: "Headset", label: "Headset" }
-                    ]}
-                    value={this.state.productCategory}
-                    placeholder="Product Category"
+                    options={this.getOptions()}
+                    value={this.state.empNo}
+                    placeholder="Empoyee Number"
                     // validator={validation}
                   />
                 </div>
                 <div>
-                  <label className="txt-label">Date</label>
-                  <input
-                    name="curdate"
-                    className="txt-input"
+                  <FormField
+                    label="Reimbursement Date"
+                    labelClassName="txt-label"
+                    fieldClassName="txt-input"
+                    mandatory
+                    onChange={this.handleInputChange}
+                    name="reimbursementDate"
                     type="date"
-                    value=""
+                    value={this.state.reimbursementDate}
+                    placeholder="reimbursementDate"
+                    // validator={validation}
                   />
                 </div>
               </div>
@@ -90,11 +117,11 @@ class reimbursementApply extends Component {
               <table className="table single-asset input-style">
                 <thead>
                   <tr>
-                    <td>Date</td>
-                    <td>Description</td>
-                    <td>Category</td>
-                    <td>Bill Number</td>
-                    <td>Cost</td>
+                    <th>Bill Date</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Bill Number</th>
+                    <th>Cost</th>
                   </tr>
                 </thead>
                 <tbody>

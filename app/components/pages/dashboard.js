@@ -10,22 +10,22 @@ class dashboard extends Component {
 
   render() {
     return (
-      <div class="row" id="content">
-        <div class="box-content">
+      <div className="row" id="content">
+        <div className="box-content">
           {/* Image Wrapper */}
-          <div class="image-wrapper">
-            <img class="image-subwrapper" src={Admin_Logo} />
+          <div className="image-wrapper">
+            <img className="image-subwrapper" src={Admin_Logo} />
           </div>
 
           {/* Heading */}
-          <p class="greeting">Welcome</p>
+          <p className="greeting">Welcome</p>
 
-          <div class="d-flex justify-content-around">
+          <div className="d-flex justify-content-around">
             {/* Employee Id */}
-            <div class="input-wrapper">
-              <label class="txt-label readonly-label">Employee Id</label>
+            <div className="input-wrapper">
+              <label className="txt-label readonly-label">Employee Id</label>
               <input
-                class="txt-input readonly-input"
+                className="txt-input readonly-input"
                 type="text"
                 name="empid"
                 value="EMP100"
@@ -33,10 +33,10 @@ class dashboard extends Component {
               />
             </div>
             {/* Name */}
-            <div class="input-wrapper">
-              <label class="txt-label readonly-label">Name</label>
+            <div className="input-wrapper">
+              <label className="txt-label readonly-label">Name</label>
               <input
-                class="txt-input  readonly-input"
+                className="txt-input  readonly-input"
                 type="text"
                 name="name"
                 value="Abc"
@@ -45,12 +45,12 @@ class dashboard extends Component {
             </div>
           </div>
 
-          <div class="d-flex justify-content-around">
+          <div className="d-flex justify-content-around">
             {/* Designation */}
-            <div class="input-wrapper">
-              <label class="txt-label readonly-label">Designation</label>
+            <div className="input-wrapper">
+              <label className="txt-label readonly-label">Designation</label>
               <input
-                class="txt-input  readonly-input"
+                className="txt-input  readonly-input"
                 type="text"
                 name="designation"
                 value="Operational"
@@ -58,10 +58,10 @@ class dashboard extends Component {
               />
             </div>
             {/* Contact Number */}
-            <div class="input-wrapper">
-              <label class="txt-label readonly-label">Contact Number</label>
+            <div className="input-wrapper">
+              <label className="txt-label readonly-label">Contact Number</label>
               <input
-                class="txt-input readonly-input"
+                className="txt-input readonly-input"
                 type="text"
                 name="contactno"
                 value="9756745633"
@@ -70,24 +70,24 @@ class dashboard extends Component {
             </div>
           </div>
 
-          <div class="d-flex justify-content-around">
+          <div className="d-flex justify-content-around">
             {/* Email */}
-            <div class="input-wrapper">
-              <label class="txt-label readonly-label">Email</label>
+            <div className="input-wrapper">
+              <label className="txt-label readonly-label">Email</label>
               <input
                 type="text"
-                class="txt-input readonly-input"
+                className="txt-input readonly-input"
                 name="email"
                 value="abc@gmail.com"
                 readonly
               />
             </div>
              {/*DOB  */}
-            <div class="input-wrapper">
-              <label class="txt-label readonly-label">DOB</label>
+            <div className="input-wrapper">
+              <label className="txt-label readonly-label">DOB</label>
               <input
                 type="text"
-                class="txt-input readonly-input"
+                className="txt-input readonly-input"
                 name="dob"
                 value="7-11-2019"
                 readonly
@@ -95,24 +95,24 @@ class dashboard extends Component {
             </div>
           </div>
 
-          <div class="d-flex justify-content-around">
+          <div className="d-flex justify-content-around">
             {/* Blood Group */}
-            <div class="input-wrapper">
-              <label class="txt-label readonly-label">Blood Group</label>
+            <div className="input-wrapper">
+              <label className="txt-label readonly-label">Blood Group</label>
               <input
                 type="text"
-                class="txt-input readonly-input"
+                className="txt-input readonly-input"
                 name="bgrp"
                 value="B+ve"
                 readonly
               />
             </div>
             {/* Health Card Number */}
-            <div class="input-wrapper">
-              <label class="txt-label readonly-label">Health Card Number</label>
+            <div className="input-wrapper">
+              <label className="txt-label readonly-label">Health Card Number</label>
               <input
                 type="text"
-                class="txt-input readonly-input"
+                className="txt-input readonly-input"
                 name="hcard"
                 value="AH67570K9"
                 readonly
@@ -120,28 +120,28 @@ class dashboard extends Component {
             </div>
           </div>
 
-          <div class="d-flex justify-content-around">
+          <div className="d-flex justify-content-around">
             {/* Emergency Contact Person */}
-            <div class="input-wrapper">
-              <label class="txt-label readonly-label">
+            <div className="input-wrapper">
+              <label className="txt-label readonly-label">
                 Emergency Contact Person
               </label>
               <input
                 type="text"
-                class="txt-input readonly-input"
+                className="txt-input readonly-input"
                 name="econtactperson"
                 value="Xyz"
                 readonly
               />
             </div>
             {/* Emergency Contact Number */}
-            <div class="input-wrapper">
-              <label class="txt-label readonly-label">
+            <div className="input-wrapper">
+              <label className="txt-label readonly-label">
                 Emergency Contact Number
               </label>
               <input
                 type="text"
-                class="txt-input readonly-input"
+                className="txt-input readonly-input"
                 name="econtactno"
                 value="8956235672"
                 readonly

@@ -4,7 +4,7 @@
             "assetId": 5,
             "assetKey": "JioFi_2415671E",
             "productCategoryName": "WiFi",
-            "status": "1",
+            "status": "Unassigned",
             "model": "Jio",
             "empId": null,
             "empNo": null
@@ -13,7 +13,7 @@
             "assetId": 4,
             "assetKey": "JioFi_2455671E",
             "productCategoryName": "WiFi",
-            "status": "1",
+            "status": "Unassigned",
             "model": "Jio",
             "empId": null,
             "empNo": null
@@ -22,7 +22,7 @@
             "assetId": 3,
             "assetKey": "JioFi_245567EE",
             "productCategoryName": "WiFi",
-            "status": "1",
+            "status": "Unassigned",
             "model": "Jio",
             "empId": null,
             "empNo": null
@@ -31,7 +31,7 @@
             "assetId": 1,
             "assetKey": "DL100M1",
             "productCategoryName": "Modem",
-            "status": "0",
+            "status": "Assigned",
             "model": "D-Link",
             "empId": 2,
             "empNo": "INT005"

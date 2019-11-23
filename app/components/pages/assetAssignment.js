@@ -5,7 +5,6 @@ import {
   SHOW_ALERT,
   SHOW_ALERT_MSG,
   ALERT_TYPE,
-  ASSIGN_ASSETS,
   ASSET_LISTING
 } from "utils/constants";
 import FormField from "../common/formfield";
@@ -48,47 +47,47 @@ class assetAssignment extends Component {
       }
     ])
     this.state = {
-      ...this.getStateData(this.props),
+      // ...this.getStateData(this.props),
       validation: this.validator.valid(),
-        empnoArray,
-        results,
+      empData:[]
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.cancel = this.cancel.bind(this);
     this.assign = this.assign.bind(this);
     this.unassign = this.unassign.bind(this);
+    this.getOptions = this.getOptions.bind(this);
     this.fieldData = {};
   }
 
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
-    var resultant = {};
-    dataService.getRequest("employeeList")
+    dataService.getRequest("getEmpData")
       .then(result => {
         this.setState({
-        //   ...this.getStateData(result)
-        results: result,
-        empnoArray:resultant,
+        // ...this.getStateData(result),
+        empData: result,
         });
       })
       .catch(error => {
         console.error(error);
       });
-
-      this.state.results.map(item => {
-        let empData = {empno:item.empno, fname:item.fname}
-        resultant.push(empData);
-    })
   }
 
-  getStateData(assetdata) {
-    return {
-      employee: { empNo: assetdata.empNo || "" },
-      issueDate: assetdata.issueDate || "",
-      returnDate: assetdata.returnDate || "",
-      cause: assetdata.cause || ""
-    };
+  // getStateData(assetdata) {
+  //   return {
+  //     empNo: assetdata.empNo || "",
+  //     issueDate: assetdata.issueDate || "",
+  //     returnDate: assetdata.returnDate || "",
+  //     cause: assetdata.cause || "",
+  //   };
+  // }
+
+  getOptions() {
+    let optionData=[];
+    optionData= this.state.empData.map(item => ({value:item.empNo,label:item.firstName}));
+    return optionData;
+    // console.log(empData);
   }
 
   validateFieldData(value,args, state, validation,field){
@@ -99,10 +98,11 @@ class assetAssignment extends Component {
     const validation = this.validator.validate(this.state);
     this.setState({ validation });
     this.submitted = true;
+    var updatedId=1;
 
     if (validation.isValid) {
-    dataService
-      .postRequest("assetassignment", { ...this.getStateData(this.state),updatedId:1 })
+      dataService
+      .postRequest("assetassignment", {...this.fieldData,updatedId })
       .then(res => {
         if(res.status == "success") {
         app.events.trigger(SHOW_ALERT_MSG, {
@@ -116,7 +116,7 @@ class assetAssignment extends Component {
         app.events.trigger(SHOW_ALERT_MSG, {
           visible: true,
           type: ALERT_TYPE.DANGER,
-          msg: err
+          msg: "Failed To Assign"
         });
       });
     }
@@ -126,16 +126,17 @@ class assetAssignment extends Component {
     const validation = this.validator.validate(this.state);
     this.setState({ validation });
     this.submitted = true;
+    var updatedId= 1;
 
     if (validation.isValid) {
     dataService
-      .putRequest("assetassignment", { ...this.getStateData(this.state),updatedId:1 })
+      .putRequest("assetassignment", { ...this.fieldData,updatedId })
       .then(res => {
         if(res.status == "success") {
         app.events.trigger(SHOW_ALERT_MSG, {
           visible: true,
           type: ALERT_TYPE.SUCESS,
-          msg: "Unassigned Assets"
+          msg: "Unassigned Assets Successfully"
         });
       }
       })
@@ -143,7 +144,7 @@ class assetAssignment extends Component {
         app.events.trigger(SHOW_ALERT_MSG, {
           visible: true,
           type: ALERT_TYPE.DANGER,
-          msg: err
+          msg: "Failed To Unassign"
         });
       });
     }
@@ -165,16 +166,16 @@ class assetAssignment extends Component {
 
   render() {
     let validation = this.submitted ?this.validator.validate(this.state) : this.state.validation;
-    var assetId = this.props.match.params.assetId;
+    var status = this.props.match.params.status;
     return (
       <React.Fragment>
         <div className="form-wrapper">
-          {assetId == -1 ? (
+          {status == "Unassigned" ? (
             <Heading heading="ASSIGN ASSET" />
           ) : (
             <Heading heading="UNASSIGN ASSET" />
           )}
-          {assetId == -1 ? (
+          {this.state.empData && status == "Unassigned" ? (
             <div className="d-flex justify-content-sm-around">
               {/* Input details first block  */}
               <div className="p-2 w-25 mt-5">
@@ -187,7 +188,7 @@ class assetAssignment extends Component {
                   name="empNo"
                   nameAlias={"abc_fullName"}
                   onChange={this.handleInputChange}
-                  options={[{ value: this.state.empnoArray.empNo, label: this.state.empnoArray.fname}]}
+                  options={this.getOptions()}
                   value={this.state.empNo}
                   placeholder="Employee Number"
                   validator={validation}
@@ -206,7 +207,7 @@ class assetAssignment extends Component {
                 />
               </div>
             </div>
-          ) : (
+          ) : (this.state.empData && status == "Assigned" &&
             <div className="d-flex justify-content-sm-around">
               {/* Input details first block  */}
               <div className="p-2 w-25 mt-5">
@@ -239,7 +240,7 @@ class assetAssignment extends Component {
           )}
           <div className="btn-wrapper">
             <div className="btn-wrapper">
-              {assetId == -1 ? (
+              {status == "Unassigned" ? (
                 <button
                   type="button"
                   className="btn submit-btn"

@@ -18,6 +18,8 @@
 		
 		"getEmpDetails":"/getEmpDetails.json",
 
+		"getEmpData":"/getEmpData.json",
+
 		"getAsset":"/getAsset.json",
 		"assetHistory":"/assetHistory.json",
 		"assetList":"/assetList.json",
