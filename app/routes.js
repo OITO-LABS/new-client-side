@@ -107,7 +107,7 @@ const routes = [
     },
     {
         name: ASSIGN_ASSETS,
-        path: PATH_PREFIX + ':assetId/' + ASSIGN_ASSETS,
+        path: PATH_PREFIX +':assetId/' + ':status/' + ASSIGN_ASSETS,
         samplePath: PATH_PREFIX + ASSIGN_ASSETS,
         componentId: 'pages/assetAssignment',
         title: 'asset assignment',

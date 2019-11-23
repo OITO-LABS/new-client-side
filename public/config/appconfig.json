@@ -20,7 +20,8 @@
       "updategetAsset":"api/asset/getforupdate/details/:assetId",
       "updateAsset":"api/asset/:assetId",
       "assetassignment":"api/assetassign/:assetId",
-      
+      "assetsaranya":"api/employee/get/:empId",
+      "getEmpData":"api/employee/listall",
 
       "reimbursementList":"api/reimbursement/reimbursement-list",
       "reimbursementDate":"api/reimbursement/reimbursement-date",
