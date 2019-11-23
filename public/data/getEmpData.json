@@ -1,0 +1,47 @@
+[
+    {
+        "empId": 1,
+        "firstName": "Alex",
+        "lastName": "Mary George",
+        "email": "alexmary@gmail.com",
+        "designation": "intern",
+        "dob": "1995-12-18T18:30:00.000+0000",
+        "contactNo": "9152435352",
+        "emergencyContactName": "GeorgeThomas",
+        "emergencyContact": "9786436478",
+        "healthCardNo": "OITO101INT005",
+        "bloodGroup": "A-",
+        "status": "Active",
+        "empNo": "INT001"
+    },
+    {
+        "empId": 2,
+        "firstName": "Tands",
+        "lastName": "Mary George",
+        "email": "alexmary@gmail.com",
+        "designation": "intern",
+        "dob": "1995-12-18T18:30:00.000+0000",
+        "contactNo": "9152435352",
+        "emergencyContactName": "GeorgeThomas",
+        "emergencyContact": "9786436478",
+        "healthCardNo": "OITO101INT005",
+        "bloodGroup": "A-",
+        "status": "Active",
+        "empNo": "INT002"
+    },
+    {
+        "empId": 3,
+        "firstName": "Christo",
+        "lastName": "Mary George",
+        "email": "alexmary@gmail.com",
+        "designation": "intern",
+        "dob": "1995-12-18T18:30:00.000+0000",
+        "contactNo": "9152435352",
+        "emergencyContactName": "GeorgeThomas",
+        "emergencyContact": "9786436478",
+        "healthCardNo": "OITO101INT005",
+        "bloodGroup": "A-",
+        "status": "Active",
+        "empNo": "INT003"
+    }
+]
