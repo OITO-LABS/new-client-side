@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, ASSET_DETAILS,ADD_ASSETS,ASSIGN_ASSETS } from 'utils/constants';
+import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, ASSET_DETAILS, ADD_ASSETS, ASSIGN_ASSETS } from 'utils/constants';
 import dataService from 'utils/dataservice';
 import SearchAndButtonBar from "../searchAndButtonBar";
 import ListTable from "../listTable";
@@ -118,7 +118,7 @@ export class AssetListing extends Component {
 
   handleEdit(data) {
     // console.log(data);
-    app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS,params:{assetId : data.assetId} });
+    app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS, params: { assetId: data.assetId } });
   }
 
   async handleDelete(data) {
@@ -133,7 +133,7 @@ export class AssetListing extends Component {
       dataService.deleteRequest("assetDelete", { assetId: data.assetId })
         .then(res => {
           // console.log(res);
-          if(res.status=="deleted successfully"){
+          if (res.status == "deleted successfully") {
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,
               type: ALERT_TYPE.SUCESS,
@@ -141,7 +141,7 @@ export class AssetListing extends Component {
             });
             this.gettingData();
           }
-          else{
+          else {
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,
               type: ALERT_TYPE.SUCESS,
@@ -165,13 +165,13 @@ export class AssetListing extends Component {
     app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS, params: { assetId: -1 } });
   }
 
-  handleAssign(data){
+  handleAssign(data) {
     console.log("assign");
     console.log(data);
     app.events.trigger(GOTO_URL, { routerKey: ASSIGN_ASSETS, params: { assetId: data.assetId, status: data.status} });
   }
 
-  handleUnAssign(data){
+  handleUnAssign(data) {
     console.log("unAssign");
     console.log(data);
     app.events.trigger(GOTO_URL, { routerKey: ASSIGN_ASSETS, params: { assetId: data.assetId, status: data.status} });
@@ -185,17 +185,17 @@ export class AssetListing extends Component {
           button2name="export"
           handleRegister={this.handleRegister}
           searchHandler={this.handleSearch} />
-          <Heading heading="Assets"/>
-    <ListTable
-      totalRecords={this.state.totalRecords}
-      fields={this.state.fields}
-      datas={this.state.datas}
-      pageHandler={this.handlePage}
-      editHandler={this.handleEdit}
-      deleteHandler={this.handleDelete}
-      detailsHandler={this.handleDetails}
-      assignHandler={this.handleAssign}
-      unAssignHandler={this.handleUnAssign} />
+        <Heading heading="Assets" />
+        <ListTable
+          totalRecords={this.state.totalRecords}
+          fields={this.state.fields}
+          datas={this.state.datas}
+          pageHandler={this.handlePage}
+          editHandler={this.handleEdit}
+          deleteHandler={this.handleDelete}
+          detailsHandler={this.handleDetails}
+          assignHandler={this.handleAssign}
+          unAssignHandler={this.handleUnAssign} />
       </div>
     );
   }

@@ -64,7 +64,6 @@ export class ReimbursementEmployeeListing extends Component {
     let urlKey = "reimbursementEmployee";
     dataService.postRequest(urlKey, data)
       .then((jsonData) => {
-        // jsonData is parsed json object received from url
         console.log(jsonData)
         this.setState({
           totalRecords: jsonData.totalElements,
