@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FLIP_LOADER, GOTO_URL,REIMBURSEMENT_EMPLOYEE_LISTING } from 'utils/constants';
+import { FLIP_LOADER, GOTO_URL, REIMBURSEMENT_EMPLOYEE_LISTING } from 'utils/constants';
 import dataService from 'utils/dataservice';
 import ListTable from "../listTable";
 import "assets/sass/pages/_listing.scss";
@@ -20,44 +20,46 @@ export class ReimbursementListing extends Component {
         { label: "date", key: "reimbursementDate" },
         { label: "Total cost", key: "totalCost" },
       ],
-    //   datas:[
-    //     {
-    //         "reimbursementId": 13,
-    //         "reimbursementDate": "2019-11-21",
-    //         "empNo": "EMP001",
-    //         "totalCost": 6000
-    //     },
-    //     {
-    //         "reimbursementId": 5,
-    //         "reimbursementDate": "2019-11-20",
-    //         "empNo": "EMP001",
-    //         "totalCost": 6000
-    //     },
-    //     {
-    //         "reimbursementId": 10,
-    //         "reimbursementDate": "2019-11-19",
-    //         "empNo": "EMP002",
-    //         "totalCost": 14000
-    //     },
-    //     {
-    //         "reimbursementId": 4,
-    //         "reimbursementDate": "2019-11-18",
-    //         "empNo": "EMP001",
-    //         "totalCost": 6000
-    //     },
-    //     {
-    //         "reimbursementId": 11,
-    //         "reimbursementDate": "2019-11-17",
-    //         "empNo": "EMP002",
-    //         "totalCost": 19000
-    //     }
-    // ]
+      //   datas:[
+      //     {
+      //         "reimbursementId": 13,
+      //         "reimbursementDate": "2019-11-21",
+      //         "empNo": "EMP001",
+      //         "totalCost": 6000
+      //     },
+      //     {
+      //         "reimbursementId": 5,
+      //         "reimbursementDate": "2019-11-20",
+      //         "empNo": "EMP001",
+      //         "totalCost": 6000
+      //     },
+      //     {
+      //         "reimbursementId": 10,
+      //         "reimbursementDate": "2019-11-19",
+      //         "empNo": "EMP002",
+      //         "totalCost": 14000
+      //     },
+      //     {
+      //         "reimbursementId": 4,
+      //         "reimbursementDate": "2019-11-18",
+      //         "empNo": "EMP001",
+      //         "totalCost": 6000
+      //     },
+      //     {
+      //         "reimbursementId": 11,
+      //         "reimbursementDate": "2019-11-17",
+      //         "empNo": "EMP002",
+      //         "totalCost": 19000
+      //     }
+      // ]
 
     }
     this.handleDate = this.handleDate.bind(this);
     this.handlePage = this.handlePage.bind(this);
     this.handleDetails = this.handleDetails.bind(this);
     this.gettingData = this.gettingData.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
+    this.fetchingData=this.fetchingData.bind(this);
 
   }
   componentDidMount() {
@@ -66,16 +68,19 @@ export class ReimbursementListing extends Component {
   }
 
   gettingData() {
-    const data = { page: this.state.activePage - 1, dateFrom:this.state.fromDate, dateTo:this.state.toDate,  size: this.state.recordsPerPage };
-    // dataService.getRequest("employeeUpdate", { empNo:'123',empId:123 })
+    const data = { page: this.state.activePage - 1, dateFrom: this.state.fromDate, dateTo: this.state.toDate, size: this.state.recordsPerPage };
     let urlKey = "";
     if (this.state.fromDate == "" && this.state.toDate == "") {
       urlKey = "reimbursementList";
+      this.fetchingData(urlKey,data);
     }
-    else if(this.state.fromDate !== "" && this.state.toDate !== "") {
+    else if (this.state.fromDate !== "" && this.state.toDate !== "") {
       urlKey = "reimbursementDate";
+      this.fetchingData(urlKey,data);
     }
-    
+  }
+
+  fetchingData(urlKey,data) {
     dataService.postRequest(urlKey, data)
       .then((jsonData) => {
         // jsonData is parsed json object received from url
@@ -89,7 +94,6 @@ export class ReimbursementListing extends Component {
         console.error(error)
       })
   }
-
 
   handleDate(fromDate, toDate) {
     this.setState({
@@ -111,11 +115,15 @@ export class ReimbursementListing extends Component {
     app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_EMPLOYEE_LISTING, params: { empNo: data.empNo } });
   }
 
+  handleRegister() {
+    alert("handlehandleRegister clicked")
+  }
+
   render() {
     return (
       <div>
-        <DateAndButtonBar button1name="apply for reimbursement" dateHandler={this.handleDate} />
-        <Heading heading="Reimbursements"/>
+        <DateAndButtonBar button1name="apply for reimbursement" dateHandler={this.handleDate} handleRegister={this.handleRegister} />
+        <Heading heading="Reimbursements" />
         <ListTable
           totalRecords={this.state.totalRecords}
           fields={this.state.fields}
