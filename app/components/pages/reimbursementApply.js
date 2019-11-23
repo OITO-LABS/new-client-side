@@ -46,8 +46,10 @@ class reimbursementApply extends Component {
     return optionData;
   }
 
-  handleInputChange() {
-    
+  handleInputChange(e) {
+    if(["billDate","reimbursementDescription","categoryName","billNo","cost"].includes(e.target.name)) {
+      let reimbursementDate
+    }
   }
 
   // getStateData(reimburseData) {
