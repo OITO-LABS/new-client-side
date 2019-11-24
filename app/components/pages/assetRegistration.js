@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import {FLIP_LOADER,GOTO_URL,SHOW_ALERT,SHOW_ALERT_MSG,ALERT_TYPE,ASSET_LISTING} from "utils/constants";
+import { FLIP_LOADER,GOTO_URL,SHOW_ALERT,SHOW_ALERT_MSG,ALERT_TYPE,ASSET_LISTING} from "utils/constants";
 import FormField from "../common/formfield";
 import dataService from "utils/dataservice";
-import FormValidator from '../common/formvalidator';
+import FormValidator from "../common/formvalidator";
 import Heading from "../heading";
 
 class assetRegistration extends Component {
@@ -18,19 +18,19 @@ class assetRegistration extends Component {
         message: "Asset Key is empty"
       },
       {
-        field: 'model', 
-        method: 'isEmpty', 
-        args:[{ignore_whitespace:true}],
-        validWhen: false, 
-        message: 'Model is empty'
+        field: "model",
+        method: "isEmpty",
+        args: [{ ignore_whitespace: true }],
+        validWhen: false,
+        message: "Model is empty"
       },
       {
-        field: 'productCategory', 
-        method: 'isEmpty', 
-        args:[{ignore_whitespace:true}],
-        validWhen: false, 
-        message: 'Product Category is empty'
-      },
+        field: "productCategory",
+        method: "isEmpty",
+        args: [{ ignore_whitespace: true }],
+        validWhen: false,
+        message: "Product Category is empty"
+      }
     ]);
 
     this.state = {
@@ -48,21 +48,19 @@ class assetRegistration extends Component {
     // updategetAsset
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
     {
-      this.props.match.params.assetId == -1
-        ? ""
-        : dataService
-            .getRequest("updategetAsset", {assetId: this.props.match.params.assetId})
-            // .then(res => res.json())
-            .then(result => {
-              this.setState({
-                ...this.getStateData(result)
-              });
-            })
-            .catch(error => {
-              console.error(error);
-            });
-        }
-  }
+      this.props.match.params.assetId == -1 ? "": 
+      dataService.getRequest("updategetAsset", { assetId: this.props.match.params.assetId})
+        // .then(res => res.json())
+        .then(result => {
+        this.setState({
+          ...this.getStateData(result)
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      }
+    }
 
   getStateData(assetdata) {
     return {
@@ -97,27 +95,26 @@ class assetRegistration extends Component {
     // Submit data if validation is successful
     if (validation.isValid) {
       dataService
-        .postRequest("assetregistered", { ...this.getStateData(this.state) })
+        .getRequest("assetregistered", { ...this.getStateData(this.state) })
         .then(res => {
-          if(res.status == "success") {
-          app.events.trigger(SHOW_ALERT_MSG, {
-            visible: true,
-            type: ALERT_TYPE.SUCESS,
-            msg: "Successfully Submitted"
-          });
-         }
-         else {
-          app.events.trigger(SHOW_ALERT_MSG, {
-            visible: true,
-            type: ALERT_TYPE.DANGER,
-            msg: "Submission Failed"
-          });
-         }
+          if (res.status == "success") {
+            app.events.trigger(SHOW_ALERT_MSG, {
+              visible: true,
+              type: ALERT_TYPE.SUCESS,
+              msg: "Successfully Submitted"
+            });
+          } else {
+            app.events.trigger(SHOW_ALERT_MSG, {
+              visible: true,
+              type: ALERT_TYPE.DANGER,
+              msg: "Submission Failed"
+            });
+          }
         })
         .catch(err => {
           console.log(err);
         });
-     }
+    }
   }
 
   update() {
@@ -127,26 +124,21 @@ class assetRegistration extends Component {
 
     if (validation.isValid) {
       dataService
-        .putRequest(
-          "updateAsset",
-          { assetId: this.props.match.params.assetId },
-          { ...this.getStateData(this.state) }
-        )
+        .putRequest("updateAsset",{ ...this.getStateData(this.state),assetId: this.props.match.params.assetId })
         .then(res => {
-          if(res.status == "success") {
-          app.events.trigger(SHOW_ALERT_MSG, {
-            visible: true,
-            type: ALERT_TYPE.SUCESS,
-            msg: "Successfully Updated"
-          });
-         }
-         else {
-          app.events.trigger(SHOW_ALERT_MSG, {
-            visible: true,
-            type: ALERT_TYPE.DANGER,
-            msg: "Updation Failed"
-          });
-         }
+          if (res.status == "success") {
+            app.events.trigger(SHOW_ALERT_MSG, {
+              visible: true,
+              type: ALERT_TYPE.SUCESS,
+              msg: "Successfully Updated"
+            });
+          } else {
+            app.events.trigger(SHOW_ALERT_MSG, {
+              visible: true,
+              type: ALERT_TYPE.DANGER,
+              msg: "Updation Failed"
+            });
+          }
         })
         .catch(err => {
           console.log(err);
@@ -165,7 +157,11 @@ class assetRegistration extends Component {
     var assetId = this.props.match.params.assetId;
     return (
       <div className="form-wrapper">
-      {assetId == -1 ? <Heading heading="REGISTER ASSET" />: <Heading heading="UPDATE ASSET" />}
+        {assetId == -1 ? (
+          <Heading heading="REGISTER ASSET" />
+        ) : (
+          <Heading heading="UPDATE ASSET" />
+        )}
         <div className="d-flex justify-content-sm-around">
           {/* Input details first block  */}
           <div className="p-2 w-25 mt-5">
@@ -174,7 +170,7 @@ class assetRegistration extends Component {
               labelClassName="txt-label"
               fieldClassName="txt-input"
               mandatory
-              disabled = {assetId !='-1'}
+              disabled={assetId != "-1"}
               name="assetKey"
               onChange={this.handleInputChange}
               value={this.state.assetKey}
@@ -220,7 +216,7 @@ class assetRegistration extends Component {
               placeholder="MSISDN Number"
             />
             <FormField
-              type={assetId == -1? "select": ""}
+              type={assetId == -1 ? "select" : ""}
               label="Product Category"
               labelClassName="txt-label"
               fieldClassName="select-input"
