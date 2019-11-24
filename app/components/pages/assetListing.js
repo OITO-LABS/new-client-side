@@ -89,7 +89,7 @@ export class AssetListing extends Component {
     else {
       urlKey = "assetSearch";
     }
-    dataService.postRequest(urlKey, data)
+    dataService.getRequest(urlKey, data)
       .then((jsonData) => {
         // jsonData is parsed json object received from url
         console.log(jsonData);

@@ -196,7 +196,7 @@ export class registerEmployee extends Component {
         app.events.trigger(SHOW_ALERT_MSG, {
           visible: true,
           type: ALERT_TYPE.DANGER,
-          msg: "Submission Failed"
+          msg: `Submission Failed. ${res.message}`
           });
        }
       })
@@ -223,7 +223,7 @@ export class registerEmployee extends Component {
         app.events.trigger(SHOW_ALERT_MSG, {
           visible: true,
           type: ALERT_TYPE.DANGER,
-          msg: "Updation Failed"
+          msg: `Updation Failed. ${res.message}`
           });
         }
       })
