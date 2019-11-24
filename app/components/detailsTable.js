@@ -80,13 +80,13 @@ export class DetailsTable extends Component {
         return (
             <div className="row multiple-table">
                 <div className="col-6 detailsTable">
-                    <table className="table table-bordered">
+                    <table className="table table-bordered text-center">
                         <thead></thead>
                         {this.renderTableData1()}
                     </table>
                 </div>
                 <div className="col-6 detailsTable">
-                    <table className="table table-bordered">
+                    <table className="table table-bordered text-center">
                         <thead></thead>
                         {this.renderTableData2()}
                     </table>

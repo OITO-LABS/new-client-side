@@ -97,7 +97,7 @@ class ListTable extends Component {
       // readData();
       return (
          <div>
-            <table className="table  list">
+            <table className="table  list text-center">
                <thead>
                   <tr>
                      {this.renderTableHeader()}
