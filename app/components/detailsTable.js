@@ -34,7 +34,6 @@ export class DetailsTable extends Component {
         }
         this.renderTableData1 = this.renderTableData1.bind(this);
         this.renderTableData2 = this.renderTableData2.bind(this);
-
     }
 
     renderTableData1() {

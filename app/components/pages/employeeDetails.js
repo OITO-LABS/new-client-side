@@ -128,9 +128,9 @@ export class EmployeeDetails extends Component {
     render() {
         return (
             <div >
-                <Heading heading="Employee-Details" />
+                <Heading heading="EMPLOYEE DETAILS" />
                 <DetailsTable data={this.state.data} fields={this.state.employeeFields} />
-                <Heading heading="Assets In Hand " />
+                <Heading heading="ASSETS IN HAND" />
                 <ListTable
                     totalRecords={1}
                     fields={this.state.assetFields}

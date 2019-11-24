@@ -136,7 +136,7 @@ class EmployeeListing extends React.Component {
           handleRegister={this.handleRegister}
           searchHandler={this.handleSearch} />
 
-          <Heading heading="Employees"/>
+          <Heading heading="EMPLOYEES"/>
 
         <ListTable
           totalRecords={this.state.totalRecords}

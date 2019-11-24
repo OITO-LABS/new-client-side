@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { FLIP_LOADER } from "utils/constants";
 import PropTypes from 'prop-types';
-// import {SHOW_ALERT} from "../../utils/constants";
 import "assets/css/dateAndButtonBar.css"
 
 class DateAndButtonBar extends Component {
@@ -53,11 +52,11 @@ export default DateAndButtonBar;
 
 DateAndButtonBar.propTypes = {
     button1name: PropTypes.string,
-    button2name: PropTypes.string,
+    // button2name: PropTypes.string,
     // dateHandler:PropTypes.func.isRequired
 };
 
 DateAndButtonBar.defaultProps = {
     button1name: "add",
-    button2name: "export"
+    // button2name: "export"
 };

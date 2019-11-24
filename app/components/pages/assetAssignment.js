@@ -137,7 +137,7 @@ class assetAssignment extends Component {
 
     if (validation.isValid) {
     dataService
-      .putRequest("assetassignment",{putAsset})
+      .putRequest("assetassignment",putAsset,{assetId: this.props.match.params.assetId})
       .then(res => {
         if(res.status == "success") {
         app.events.trigger(SHOW_ALERT_MSG, {

@@ -123,7 +123,7 @@ export class ReimbursementListing extends Component {
     return (
       <div>
         <DateAndButtonBar button1name="apply for reimbursement" dateHandler={this.handleDate} handleRegister={this.handleRegister} />
-        <Heading heading="Reimbursements" />
+        <Heading heading="REIMBURSEMENTS" />
         <ListTable
           totalRecords={this.state.totalRecords}
           fields={this.state.fields}

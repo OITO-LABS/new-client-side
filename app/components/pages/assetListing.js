@@ -185,7 +185,7 @@ export class AssetListing extends Component {
           button2name="export"
           handleRegister={this.handleRegister}
           searchHandler={this.handleSearch} />
-        <Heading heading="Assets" />
+        <Heading heading="ASSETS" />
         <ListTable
           totalRecords={this.state.totalRecords}
           fields={this.state.fields}

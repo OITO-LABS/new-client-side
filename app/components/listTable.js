@@ -3,7 +3,6 @@ import { SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE } from "utils/constants";
 import PropTypes from 'prop-types';
 import Pagination from './common/pagination';
 // import "assets/css/listTable.css";
-// import {confirm} from 'utils/common';
 
 class ListTable extends Component {
    constructor(props) {
@@ -14,20 +13,13 @@ class ListTable extends Component {
       }
       this.renderTableHeader = this.renderTableHeader.bind(this);
       this.renderTableData = this.renderTableData.bind(this);
-      this.handleDetails = this.handleDetails.bind(this);
       this.onPageChange = this.onPageChange.bind(this);
    }
 
    renderTableHeader() {
-
       return this.props.fields.map((item, index) => {
          return <th key={index}>{item.label.toUpperCase()}</th>
       })
-   }
-
-
-   handleDetails() {
-      alert("this.handledetails clicked")
    }
 
    renderTableData() {
@@ -76,9 +68,6 @@ class ListTable extends Component {
                         ) 
                      }
                   }
-                  // return(
-                  // item.key == 'index' ?<td key={i}>{index+1}</td> :<td key={i}>{data[item.key]}</td>
-                  // )
                })}
             </tr>
          )
@@ -90,11 +79,9 @@ class ListTable extends Component {
          activePage: paginationInfo.activePage
       })
       this.props.pageHandler(paginationInfo.activePage);
-      // alert(paginationInfo.activePage);
    }
 
    render() {
-      // readData();
       return (
          <div>
             <table className="table  list text-center">

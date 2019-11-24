@@ -136,9 +136,9 @@ export class AssetDetails extends Component {
   render() {
     return (
       <div >
-        <Heading heading="Asset-Details" />
+        <Heading heading="ASSET DETAILS" />
         <DetailsTable data={this.state.assetData} fields={this.state.assetFields} />
-        <Heading heading="Asset-History " />
+        <Heading heading="ASSET HISTORY " />
         <ListTable
           totalRecords={1}
           fields={this.state.historyFields}
