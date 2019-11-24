@@ -45,14 +45,13 @@ class assetRegistration extends Component {
   }
 
   componentDidMount() {
+    // updategetAsset
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
     {
       this.props.match.params.assetId == -1
         ? ""
         : dataService
-            .getRequest("updategetAsset", {
-              assetId: this.props.match.params.assetId
-            })
+            .getRequest("updategetAsset", {assetId: this.props.match.params.assetId})
             // .then(res => res.json())
             .then(result => {
               this.setState({

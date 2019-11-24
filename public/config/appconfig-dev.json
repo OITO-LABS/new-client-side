@@ -23,6 +23,8 @@
 		"getAsset":"/getAsset.json",
 		"assetHistory":"/assetHistory.json",
 		"assetList":"/assetList.json",
+		"assetassignment":"/assetAssign.json",
+		"getAssetForUpdate":"/getAssetForUpdate.json",
 
 		"reimbursementBill":"/reimbursementBill.json",
 		

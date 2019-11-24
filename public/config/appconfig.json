@@ -19,8 +19,7 @@
       "assetregistered":"api/asset",
       "updategetAsset":"api/asset/getforupdate/details/:assetId",
       "updateAsset":"api/asset/:assetId",
-      "assetassignment":"api/assetassign/:assetId",
-      "assetsaranya":"api/employee/get/:empId",
+      "assetassignment":"api/assetassign/:assetId/:status",
       "getEmpData":"api/employee/listall",
 
       "reimbursementList":"api/reimbursement/reimbursement-list",
