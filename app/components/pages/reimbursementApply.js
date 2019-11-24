@@ -11,7 +11,7 @@ import dataService from "utils/dataservice";
 // import FormValidator from '../common/formvalidator';
 import "assets/sass/pages/_employeeRegister.scss";
 
-class reimbursementApply extends Component {
+class ReimbursementApply extends Component {
   constructor(props) {
     super(props);
 
@@ -46,34 +46,39 @@ class reimbursementApply extends Component {
     return optionData;
   }
 
-  handleInputChange(e) {
-    if(["billDate","reimbursementDescription","categoryName","billNo","cost"].includes(e.target.name)) {
-      let reimbursementDate
-    }
+  // handleInputChange(e) {
+  //   if(["billDate","reimbursementDescription","categoryName","billNo","cost"].includes(e.target.name)) {
+  //     let reimbursementDetails = [this.state.reimbursementDetails];
+  //     reimbursementDetails[e.target.dataset.id][e.target.name]=e.target.value;
+  //   }
+  //   else {
+  //     this.setState({[e.target.name]:e.target.value})
+  //   }
+  // }
+
+   handleInputChange(event, fieldData = {}) {
+    let field = fieldData.field || event.target.name;
+    let value = fieldData.value || event.target.value || "";
+    this.fieldData[field] = fieldData;
+    event &&
+      this.setState({
+        [field]: event.target.type == "checkbox" ? event.target.checked : value,
+      });
   }
 
-  // getStateData(reimburseData) {
-  //   return {
-  //     empNo:reimburseData.empNo || "",
-  //     reimbursementDate: reimburseData.reimbursementDate || "",
-  //     totalCost: reimburseData.totalCost || "",
-  //     billDate: reimburseData.billDate || "",
-  //     reimbursementDescription: reimburseData.reimbursementDescription || "",
-  //     categoryName: reimburseData.categoryName || "",
-  //     billNo: reimburseData.billNo || "",
-  //     cost: reimburseData.cost || ""
-  //   };
-  // }
+  getStateData(reimburseData) {
+    return {
+      billDate: reimburseData.billDate || "",
+      // totalCost: reimburseData.totalCost || "",
+      billDate: reimburseData.billDate || "",
+      reimbursementDescription: reimburseData.reimbursementDescription || "",
+      categoryName: reimburseData.categoryName || "",
+      billNo: reimburseData.billNo || "",
+      cost: reimburseData.cost || ""
+    };
+  }
 
-  // handleInputChange(event, fieldData = {}) {
-  //   let field = fieldData.field || event.target.name;
-  //   let value = fieldData.value || event.target.value || "";
-  //   this.fieldData[field] = fieldData;
-  //   event &&
-  //     this.setState({
-  //       [field]: event.target.type == "checkbox" ? event.target.checked : value
-  //     });
-  // }
+ 
 
   render() {
     return (
@@ -217,4 +222,4 @@ class reimbursementApply extends Component {
   }
 }
 
-export default reimbursementApply;
+export default ReimbursementApply;

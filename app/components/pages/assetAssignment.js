@@ -47,9 +47,9 @@ class assetAssignment extends Component {
       }
     ])
     this.state = {
-      // ...this.getStateData(this.props),
+      ...this.getStateData(this.props),
       validation: this.validator.valid(),
-      empData:[]
+      empData:[],
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -65,7 +65,7 @@ class assetAssignment extends Component {
     dataService.getRequest("getEmpData")
       .then(result => {
         this.setState({
-        // ...this.getStateData(result),
+        ...this.getStateData(result),
         empData: result,
         });
       })
@@ -74,14 +74,13 @@ class assetAssignment extends Component {
       });
   }
 
-  // getStateData(assetdata) {
-  //   return {
-  //     empNo: assetdata.empNo || "",
-  //     issueDate: assetdata.issueDate || "",
-  //     returnDate: assetdata.returnDate || "",
-  //     cause: assetdata.cause || "",
-  //   };
-  // }
+  getStateData(assetdata) {
+    return {
+      issueDate: assetdata.issueDate || "",
+      returnDate: assetdata.returnDate || "",
+      // cause: assetdata.cause || "",
+    };
+  }
 
   getOptions() {
     let optionData=[];
@@ -98,11 +97,16 @@ class assetAssignment extends Component {
     const validation = this.validator.validate(this.state);
     this.setState({ validation });
     this.submitted = true;
+    // empNo: {field: "empNo", value: "INT002", id: "empNo1574532703726", label: "Tands", key: "INT002"}
+    
+    var empNo = this.fieldData.empNo.value;
+    var employee={empNo:empNo};
+    var issueDate= this.state.issueDate;
     var updatedId=1;
+    var postAsset = {employee:employee,issueDate:issueDate,updatedId:updatedId}
 
     if (validation.isValid) {
-      dataService
-      .postRequest("assetassignment", {...this.fieldData,updatedId })
+      dataService.postRequest("assetassignment", {postAsset})
       .then(res => {
         if(res.status == "success") {
         app.events.trigger(SHOW_ALERT_MSG, {
@@ -126,11 +130,14 @@ class assetAssignment extends Component {
     const validation = this.validator.validate(this.state);
     this.setState({ validation });
     this.submitted = true;
-    var updatedId= 1;
+    var returnDate = this.state.returnDate;
+    var cause = this.state.cause;
+    var updatedId = 1;
+    var putAsset = {returnDate:returnDate,cause:cause,updatedId:updatedId}
 
     if (validation.isValid) {
     dataService
-      .putRequest("assetassignment", { ...this.fieldData,updatedId })
+      .putRequest("assetassignment",{putAsset})
       .then(res => {
         if(res.status == "success") {
         app.events.trigger(SHOW_ALERT_MSG, {
