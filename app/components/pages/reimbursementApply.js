@@ -7,6 +7,7 @@ import {
   ALERT_TYPE
 } from "utils/constants";
 import FormField from "../common/formfield";
+// import FormValidator from '../common/formvalidator';
 import dataService from "utils/dataservice";
 // import FormValidator from '../common/formvalidator';
 import "assets/sass/pages/_employeeRegister.scss";
@@ -14,12 +15,22 @@ import "assets/sass/pages/_employeeRegister.scss";
 class ReimbursementApply extends Component {
   constructor(props) {
     super(props);
+    // this.validateFieldData = this.validateFieldData.bind(this);
+    // this.validEmailData = this.validEmailData.bind(this);
+    // this.validator = new FormValidator([
+    //   {
+    //     field: 'empNo', 
+    //     method: 'isEmpty', 
+    //     args:[{ignore_whitespace:true}],
+    //     validWhen: false, 
+    //     message: 'Select employee number'
+    //   },
 
+    // ])
     this.state = {
       // ...this.getStateData(this.props)
       reimbursementDetails: [{ index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0, flag: false }],
       empNo: "",
-      date: "",
       empData: [],
       // row: { index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0 ,flag:false}
 
@@ -29,6 +40,7 @@ class ReimbursementApply extends Component {
     this.fieldData = {};
     this.handleInputChange2 = this.handleInputChange2.bind(this);
     this.subTotal=this.subTotal.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -50,16 +62,6 @@ class ReimbursementApply extends Component {
     return optionData;
   }
 
-  // handleInputChange(e) {
-  //   if(["billDate","reimbursementDescription","categoryName","billNo","cost"].includes(e.target.name)) {
-  //     let reimbursementDetails = [this.state.reimbursementDetails];
-  //     reimbursementDetails[e.target.dataset.id][e.target.name]=e.target.value;
-  //   }
-  //   else {
-  //     this.setState({[e.target.name]:e.target.value})
-  //   }
-  // }
-
   handleInputChange2(event, fieldData) {
     let field = fieldData.field || event.target.name;
     let value = fieldData.value || event.target.value || "";
@@ -73,10 +75,10 @@ class ReimbursementApply extends Component {
     })
     console.log(filteredRow);
     filteredRow[field] = value;
-    if (filteredRow.flag == false) {
-      filteredRow.flag = true
-      reimbursementDetails.push({ index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0, flag: false });
-    }
+      // if (filteredRow.flag == false) {
+      //   filteredRow.flag = true
+      //   reimbursementDetails.push({ index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0, flag: false });
+      // }
     this.setState(
       filteredRow
     )
@@ -96,11 +98,37 @@ class ReimbursementApply extends Component {
   subTotal() {
     let total = 0
     this.state.reimbursementDetails.forEach((row) => {
-      total=total+row.cost;
+      total=total+parseInt(row.cost);
       this.setState({
-        total:total
+        totalCost:total
       })
     })
+  }
+
+  onSubmit() {
+    var empNo = this.fieldData.empNo;
+    var  reimbursementDate = this.state.reimbursementDate;
+    var totalCost = this.state.totalCost;
+    var reimbursementDetails = this.state.reimbursementDetails;
+
+    dataService.postRequest("reimbursementApply",{empNo:empNo,reimbursementDate:reimbursementDate,totalCost:totalCost,reimbursementDetails:reimbursementDetails})
+    .then(res => {
+      if(res.status == "success") {
+      app.events.trigger(SHOW_ALERT_MSG, {
+      visible: true,
+      type: ALERT_TYPE.SUCESS,
+      msg: "Successfully Submitted"
+      });
+     }
+     else {
+      app.events.trigger(SHOW_ALERT_MSG, {
+        visible: true,
+        type: ALERT_TYPE.DANGER,
+        msg: `Submission Failed.`
+        });
+     }
+    })
+    .catch(err => {console.log(err)});
   }
 
   getStateData(reimburseData) {
@@ -139,7 +167,7 @@ class ReimbursementApply extends Component {
                     options={this.getOptions()}
                     value={this.state.empNo}
                     placeholder="Empoyee Number"
-                  // validator={validation}
+                    // validator={validation}
                   />
                 </div>
                 <div>
@@ -153,7 +181,7 @@ class ReimbursementApply extends Component {
                     type="date"
                     value={this.state.reimbursementDate}
                     placeholder="reimbursementDate"
-                  // validator={validation}
+                    // validator={validation}
                   />
                 </div>
               </div>
@@ -187,7 +215,7 @@ class ReimbursementApply extends Component {
                             type="date"
                             value={detail.billDate}
                             placeholder="Bill Date"
-                          // validator={validation}
+                            // validator={validation}
                           />
                         </td>
                         <td>
@@ -199,7 +227,7 @@ class ReimbursementApply extends Component {
                             name="reimbursementDescription"
                             value={detail.reimbursementDescription}
                             placeholder="Reimbursement Description"
-                          // validator={validation}
+                            // validator={validation}
                           />
                         </td>
                         <td>
@@ -211,7 +239,7 @@ class ReimbursementApply extends Component {
                             name="categoryName"
                             value={detail.categoryName}
                             placeholder="Category Name"
-                          // validator={validation}
+                            // validator={validation}
                           />
                         </td>
                         <td>
@@ -223,7 +251,7 @@ class ReimbursementApply extends Component {
                             name="billNo"
                             value={detail.billNo}
                             placeholder="Bill Number"
-                          // validator={validation}
+                            // validator={validation}
                           />
                         </td>
                         <td>
@@ -236,11 +264,11 @@ class ReimbursementApply extends Component {
                             value={detail.cost}
                             placeholder="Cost"
                             type="number"
-                          // validator={validation}
+                            // validator={validation}
                           />
                         </td>
                         <td>
-                          <button className="btn btn-danger">delete</button>
+                          <button className="btn btn-danger">Add</button>
                         </td>
                       </tr>
                     )
@@ -257,7 +285,7 @@ class ReimbursementApply extends Component {
                       </label>
                     </td>
                     <td>
-                      <label className="txt-label d-flex">Rs.</label>
+                      <label className="txt-label d-flex">Rs.{this.state.totalCost}</label>
                     </td>
                   </tr>
 
@@ -266,7 +294,7 @@ class ReimbursementApply extends Component {
               </table>
 
               <div className="mx-auto">
-                <button className="submit-btn">Submit</button>
+                <button className="submit-btn" onClick={this.onSubmit}>Submit</button>
               </div>
             </div>
           </div>
