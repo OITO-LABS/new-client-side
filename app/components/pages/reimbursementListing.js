@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FLIP_LOADER, GOTO_URL, REIMBURSEMENT_EMPLOYEE_LISTING } from 'utils/constants';
+import { FLIP_LOADER, GOTO_URL, REIMBURSEMENT_EMPLOYEE_LISTING,APPLY_REIMBURSEMENT } from 'utils/constants';
 import dataService from 'utils/dataservice';
 import ListTable from "../listTable";
 import "assets/sass/pages/_listing.scss";
@@ -116,7 +116,7 @@ export class ReimbursementListing extends Component {
   }
 
   handleRegister() {
-    alert("handlehandleRegister clicked")
+    app.events.trigger(GOTO_URL, { routerKey: APPLY_REIMBURSEMENT });
   }
 
   render() {

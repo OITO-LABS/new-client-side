@@ -95,7 +95,7 @@ class assetRegistration extends Component {
     // Submit data if validation is successful
     if (validation.isValid) {
       dataService
-        .getRequest("assetregistered", { ...this.getStateData(this.state) })
+        .postRequest("assetregistered", { ...this.getStateData(this.state) })
         .then(res => {
           if (res.status == "success") {
             app.events.trigger(SHOW_ALERT_MSG, {
@@ -216,7 +216,7 @@ class assetRegistration extends Component {
               placeholder="MSISDN Number"
             />
             <FormField
-              type={assetId == -1 ? "select" : ""}
+              type="select"
               label="Product Category"
               labelClassName="txt-label"
               fieldClassName="select-input"
@@ -226,6 +226,7 @@ class assetRegistration extends Component {
               onChange={this.handleInputChange}
               options={[
                 { value: "Mouse", label: "Mouse" },
+                { value: "Keyboard", label: "Keyboard" },
                 { value: "Wifi", label: "Wifi" },
                 { value: "Modem", label: "Modem" },
                 { value: "Adapter", label: "Adapter" },
