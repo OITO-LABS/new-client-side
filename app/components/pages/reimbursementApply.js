@@ -7,33 +7,80 @@ import {
   ALERT_TYPE
 } from "utils/constants";
 import FormField from "../common/formfield";
-// import FormValidator from '../common/formvalidator';
+import FormValidator from "../common/formvalidator";
 import dataService from "utils/dataservice";
-// import FormValidator from '../common/formvalidator';
 import "assets/sass/pages/_employeeRegister.scss";
 
 class ReimbursementApply extends Component {
   constructor(props) {
     super(props);
-    // this.validateFieldData = this.validateFieldData.bind(this);
-    // this.validEmailData = this.validEmailData.bind(this);
-    // this.validator = new FormValidator([
-    //   {
-    //     field: 'empNo', 
-    //     method: 'isEmpty', `
-    //     args:[{ignore_whitespace:true}],
-    //     validWhen: false, 
-    //     message: 'Select employee number'
-    //   },
-
-    // ])
+    this.validateFieldData = this.validateFieldData.bind(this);
+    this.validator = new FormValidator([
+      {
+        field: "empNo",
+        method: "isEmpty",
+        args: [{ ignore_whitespace: true }],
+        validWhen: false,
+        message: "Select employee number"
+      },
+      {
+        field: "reimbursementDate",
+        method: "isEmpty",
+        args: [{ ignore_whitespace: true }],
+        validWhen: false,
+        message: "Reimbursement date is empty"
+      },
+      {
+        field: "billDate",
+        method: "isEmpty",
+        args: [{ ignore_whitespace: true }],
+        validWhen: false,
+        message: "Reimbursement date is empty"
+      },
+      {
+        field: "reimbursementDescription",
+        method: "isEmpty",
+        args: [{ ignore_whitespace: true }],
+        validWhen: false,
+        message: "Reimbursement description is empty"
+      },
+      {
+        field: "categoryName",
+        method: "isEmpty",
+        args: [{ ignore_whitespace: true }],
+        validWhen: false,
+        message: "Category name description is empty"
+      },
+      {
+        field: "billNo",
+        method: "isEmpty",
+        args: [{ ignore_whitespace: true }],
+        validWhen: false,
+        message: "Bill number is empty"
+      },
+      {
+        field: "cost",
+        method: "isEmpty",
+        args: [{ ignore_whitespace: true }],
+        validWhen: false,
+        message: "Cost is empty"
+      }
+    ]);
     this.state = {
-      // ...this.getStateData(this.props)
-      reimbursementDetails: [{ index: 1, billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0, flag: false }],
+      reimbursementDetails: [
+        {
+          index: 1,
+          billDate: "",
+          reimbursementDescription: "",
+          categoryName: "",
+          billNo: "",
+          cost: 0,
+          flag: false
+        }
+      ],
       empNo: "",
       empData: [],
-      // row: { index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0 ,flag:false}
-
+      validation: this.validator.valid()
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.getOptions = this.getOptions.bind(this);
@@ -43,16 +90,16 @@ class ReimbursementApply extends Component {
     this.subTotal = this.subTotal.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-
   }
 
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
-    dataService.getRequest("getEmpData")
+    dataService
+      .getRequest("getEmpData")
       .then(result => {
         this.setState({
-          empData: result,
-        })
+          empData: result
+        });
       })
       .catch(error => {
         console.log(error);
@@ -61,7 +108,10 @@ class ReimbursementApply extends Component {
 
   getOptions() {
     let optionData = [];
-    optionData = this.state.empData.map(item => ({ value: item.empNo, label: item.firstName }));
+    optionData = this.state.empData.map(item => ({
+      value: item.empNo,
+      label: item.firstName
+    }));
     return optionData;
   }
 
@@ -71,29 +121,33 @@ class ReimbursementApply extends Component {
     let index = fieldData.index;
     console.log(index);
     let reimbursementDetails = this.state.reimbursementDetails;
-    let filteredRow = reimbursementDetails.find((detail) => {
-      return (
-        detail.index == index
-      )
-    })
+    let filteredRow = reimbursementDetails.find(detail => {
+      return detail.index == index;
+    });
     console.log(filteredRow);
     filteredRow[field] = value;
     // if (filteredRow.flag == false) {
     //   filteredRow.flag = true
     //   reimbursementDetails.push();
     // }
-    this.setState(
-      filteredRow
-    )
+    this.setState(filteredRow);
     this.subTotal();
   }
 
   handleAdd() {
-    let add = [...this.state.reimbursementDetails]
-    add.push({ index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0, flag: false });
+    let add = [...this.state.reimbursementDetails];
+    add.push({
+      index: Math.random(),
+      billDate: "",
+      reimbursementDescription: "",
+      categoryName: "",
+      billNo: "",
+      cost: 0,
+      flag: false
+    });
     this.setState({
       reimbursementDetails: add
-    })
+    });
   }
 
   handleInputChange(event, fieldData = {}) {
@@ -102,44 +156,56 @@ class ReimbursementApply extends Component {
     this.fieldData[field] = fieldData;
     event &&
       this.setState({
-        [field]: event.target.type == "checkbox" ? event.target.checked : value,
+        [field]: event.target.type == "checkbox" ? event.target.checked : value
       });
   }
 
   subTotal() {
-    let total = 0
-    this.state.reimbursementDetails.forEach((row) => {
-      total=total+parseInt(row.cost);
+    let total = 0;
+    this.state.reimbursementDetails.forEach(row => {
+      total = total + parseInt(row.cost);
       this.setState({
-        totalCost:total
-      })
-    })
+        totalCost: total
+      });
+    });
   }
 
   onSubmit() {
+    const validation = this.validator.validate(this.state);
+    this.setState({ validation });
+    this.submitted = true;
     var empNo = this.state.empNo;
-    var  reimbursementDate = this.state.reimbursementDate;
+    var reimbursementDate = this.state.reimbursementDate;
     var totalCost = this.state.totalCost;
     var reimbursementDetails = this.state.reimbursementDetails;
 
-    dataService.postRequest("reimbursementApply",{empNo:empNo,reimbursementDate:reimbursementDate,totalCost:totalCost,reimbursementDetails:reimbursementDetails})
-    .then(res => {
-      if(res.status == "success") {
-      app.events.trigger(SHOW_ALERT_MSG, {
-      visible: true,
-      type: ALERT_TYPE.SUCESS,
-      msg: "Successfully Submitted"
-      });
-     }
-     else {
-      app.events.trigger(SHOW_ALERT_MSG, {
-        visible: true,
-        type: ALERT_TYPE.DANGER,
-        msg: `Submission Failed.`
+    if (validation.isValid) {
+      dataService
+        .postRequest("reimbursementApply", {
+          empNo: empNo,
+          reimbursementDate: reimbursementDate,
+          totalCost: totalCost,
+          reimbursementDetails: reimbursementDetails
+        })
+        .then(res => {
+          if (res.status == "success") {
+            app.events.trigger(SHOW_ALERT_MSG, {
+              visible: true,
+              type: ALERT_TYPE.SUCESS,
+              msg: "Successfully Submitted"
+            });
+          } else {
+            app.events.trigger(SHOW_ALERT_MSG, {
+              visible: true,
+              type: ALERT_TYPE.DANGER,
+              msg: `Submission Failed.`
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
         });
-     }
-    })
-    .catch(err => {console.log(err)});
+    }
   }
 
   getStateData(reimburseData) {
@@ -154,23 +220,33 @@ class ReimbursementApply extends Component {
     };
   }
 
+  validateFieldData(value, args, state, validation, field) {
+    return this.fieldData[field] && !!this.fieldData[field][args.propName];
+  }
+
   handleInputChange1(row) {
     console.log(row);
   }
   handleDelete(row) {
-    let filteredData = this.state.reimbursementDetails.filter((data) => {
-      return (
-        data.index != row.index
-      )
-    })
-    if (filteredData.length>=1) {
-      this.setState({
-        reimbursementDetails: filteredData
-      },()=>{this.subTotal()})
+    let filteredData = this.state.reimbursementDetails.filter(data => {
+      return data.index != row.index;
+    });
+    if (filteredData.length >= 1) {
+      this.setState(
+        {
+          reimbursementDetails: filteredData
+        },
+        () => {
+          this.subTotal();
+        }
+      );
     }
   }
 
   render() {
+    let validation = this.submitted
+      ? this.validator.validate(this.state)
+      : this.state.validation;
     return (
       <React.Fragment>
         <div className="container-fluid">
@@ -180,7 +256,7 @@ class ReimbursementApply extends Component {
                 <div className="mr-2">
                   <FormField
                     type="select"
-                    label="Employee Id"
+                    label="Employee Name"
                     labelClassName="txt-label"
                     fieldClassName="select-input"
                     mandatory
@@ -190,7 +266,7 @@ class ReimbursementApply extends Component {
                     options={this.getOptions()}
                     value={this.state.empNo}
                     placeholder="Empoyee Number"
-                    // validator={validation}
+                    validator={validation}
                   />
                 </div>
                 <div>
@@ -204,7 +280,7 @@ class ReimbursementApply extends Component {
                     type="date"
                     value={this.state.reimbursementDate}
                     placeholder="reimbursementDate"
-                    // validator={validation}
+                    validator={validation}
                   />
                 </div>
               </div>
@@ -222,10 +298,7 @@ class ReimbursementApply extends Component {
                   </tr>
                 </thead>
                 <tbody>
-
-
-
-                  {this.state.reimbursementDetails.map((detail) => {
+                  {this.state.reimbursementDetails.map(detail => {
                     return (
                       <tr>
                         <td>
@@ -233,12 +306,14 @@ class ReimbursementApply extends Component {
                             labelClassName="txt-label"
                             fieldClassName="txt-input"
                             mandatory
-                            onChange={() => this.handleInputChange2(event, detail)}
+                            onChange={() =>
+                              this.handleInputChange2(event, detail)
+                            }
                             name="billDate"
                             type="date"
                             value={detail.billDate}
                             placeholder="Bill Date"
-                            // validator={validation}
+                            validator={validation}
                           />
                         </td>
                         <td>
@@ -246,11 +321,13 @@ class ReimbursementApply extends Component {
                             labelClassName="txt-label"
                             fieldClassName="txt-input"
                             mandatory
-                            onChange={() => this.handleInputChange2(event, detail)}
+                            onChange={() =>
+                              this.handleInputChange2(event, detail)
+                            }
                             name="reimbursementDescription"
                             value={detail.reimbursementDescription}
                             placeholder="Reimbursement Description"
-                            // validator={validation}
+                            validator={validation}
                           />
                         </td>
                         <td>
@@ -258,11 +335,13 @@ class ReimbursementApply extends Component {
                             labelClassName="txt-label"
                             fieldClassName="txt-input"
                             mandatory
-                            onChange={() => this.handleInputChange2(event, detail)}
+                            onChange={() =>
+                              this.handleInputChange2(event, detail)
+                            }
                             name="categoryName"
                             value={detail.categoryName}
                             placeholder="Category Name"
-                            // validator={validation}
+                            validator={validation}
                           />
                         </td>
                         <td>
@@ -270,11 +349,13 @@ class ReimbursementApply extends Component {
                             labelClassName="txt-label"
                             fieldClassName="txt-input"
                             mandatory
-                            onChange={() => this.handleInputChange2(event, detail)}
+                            onChange={() =>
+                              this.handleInputChange2(event, detail)
+                            }
                             name="billNo"
                             value={detail.billNo}
                             placeholder="Bill Number"
-                            // validator={validation}
+                            validator={validation}
                           />
                         </td>
                         <td>
@@ -282,24 +363,37 @@ class ReimbursementApply extends Component {
                             labelClassName="txt-label"
                             fieldClassName="txt-input"
                             mandatory
-                            onChange={() => this.handleInputChange2(event, detail)}
+                            onChange={() =>
+                              this.handleInputChange2(event, detail)
+                            }
                             name="cost"
                             value={detail.cost}
                             placeholder="Cost"
                             type="number"
-                            // validator={validation}
+                            validator={validation}
                           />
                         </td>
                         <td>
-                          <button className="btn btn-success" onClick={this.handleAdd}>Add</button>
+                          <button
+                            className="btn btn-success"
+                            onClick={this.handleAdd}
+                          >
+                            Add
+                          </button>
                         </td>
                         <td>
-                          <button className="btn btn-danger" onClick={() => { this.handleDelete(detail) }}>delete</button>
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => {
+                              this.handleDelete(detail);
+                            }}
+                          >
+                            delete
+                          </button>
                         </td>
                       </tr>
-                    )
+                    );
                   })}
-
 
                   <tr>
                     <td></td>
@@ -311,16 +405,18 @@ class ReimbursementApply extends Component {
                       </label>
                     </td>
                     <td>
-                      <label className="txt-label d-flex">Rs.{this.state.totalCost}</label>
+                      <label className="txt-label d-flex">
+                        Rs.{this.state.totalCost}
+                      </label>
                     </td>
                   </tr>
-
-
                 </tbody>
               </table>
 
               <div className="mx-auto">
-                <button className="submit-btn" onClick={this.onSubmit}>Submit</button>
+                <button className="submit-btn" onClick={this.onSubmit}>
+                  Submit
+                </button>
               </div>
             </div>
           </div>
