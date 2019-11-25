@@ -40,7 +40,7 @@ class ReimbursementApply extends Component {
     this.fieldData = {};
     this.handleInputChange2 = this.handleInputChange2.bind(this);
     this.subTotal=this.subTotal.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.handleAdd=this.handleAdd.bind(this);
   }
 
   componentDidMount() {
@@ -75,14 +75,22 @@ class ReimbursementApply extends Component {
     })
     console.log(filteredRow);
     filteredRow[field] = value;
-      // if (filteredRow.flag == false) {
-      //   filteredRow.flag = true
-      //   reimbursementDetails.push({ index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0, flag: false });
-      // }
+    // if (filteredRow.flag == false) {
+    //   filteredRow.flag = true
+    //   reimbursementDetails.push();
+    // }
     this.setState(
       filteredRow
     )
     this.subTotal();
+  }
+
+  handleAdd(){
+    let add = [...this.state.reimbursementDetails]
+    add.push({ index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0, flag: false });
+    this.setState({
+      reimbursementDetails:add
+    })
   }
 
   handleInputChange(event, fieldData = {}) {
@@ -268,7 +276,10 @@ class ReimbursementApply extends Component {
                           />
                         </td>
                         <td>
-                          <button className="btn btn-danger">Add</button>
+                          <button className="btn btn-success" onClick={this.handleAdd}>Add</button>
+                        </td>
+                        <td>
+                          <button className="btn btn-danger" onClick={this.handleDelete}>delete</button>
                         </td>
                       </tr>
                     )
