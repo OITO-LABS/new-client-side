@@ -26,6 +26,7 @@
       "reimbursementDate":"api/reimbursement/reimbursement-date",
       "reimbursementEmployee":"api/reimbursement/emp-id/",
       "reimbursementBill":"api/reimbursement/emp-id/:reimbursementId",
+      "reimbursementApply":"api/reimbursement/apply",
 
       "params": {
         "commonparams": "commonparams"
