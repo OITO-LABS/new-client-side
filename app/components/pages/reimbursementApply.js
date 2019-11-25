@@ -165,7 +165,7 @@ class ReimbursementApply extends Component {
     if (filteredData.length>=1) {
       this.setState({
         reimbursementDetails: filteredData
-      })
+      },()=>{this.subTotal()})
     }
   }
 
