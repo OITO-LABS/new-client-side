@@ -20,7 +20,7 @@ class ReimbursementApply extends Component {
     // this.validator = new FormValidator([
     //   {
     //     field: 'empNo', 
-    //     method: 'isEmpty', 
+    //     method: 'isEmpty', `
     //     args:[{ignore_whitespace:true}],
     //     validWhen: false, 
     //     message: 'Select employee number'
@@ -29,7 +29,7 @@ class ReimbursementApply extends Component {
     // ])
     this.state = {
       // ...this.getStateData(this.props)
-      reimbursementDetails: [{ index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0, flag: false }],
+      reimbursementDetails: [{ index: 1, billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0, flag: false }],
       empNo: "",
       empData: [],
       // row: { index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0 ,flag:false}
@@ -39,9 +39,11 @@ class ReimbursementApply extends Component {
     this.getOptions = this.getOptions.bind(this);
     this.fieldData = {};
     this.handleInputChange2 = this.handleInputChange2.bind(this);
-    this.subTotal=this.subTotal.bind(this);
-    this.handleAdd=this.handleAdd.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.subTotal = this.subTotal.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+
   }
 
   componentDidMount() {
@@ -86,11 +88,11 @@ class ReimbursementApply extends Component {
     this.subTotal();
   }
 
-  handleAdd(){
+  handleAdd() {
     let add = [...this.state.reimbursementDetails]
     add.push({ index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0, flag: false });
     this.setState({
-      reimbursementDetails:add
+      reimbursementDetails: add
     })
   }
 
@@ -154,6 +156,18 @@ class ReimbursementApply extends Component {
 
   handleInputChange1(row) {
     console.log(row);
+  }
+  handleDelete(row) {
+    let filteredData = this.state.reimbursementDetails.filter((data) => {
+      return (
+        data.index != row.index
+      )
+    })
+    if (filteredData.length>=1) {
+      this.setState({
+        reimbursementDetails: filteredData
+      },()=>{this.subTotal()})
+    }
   }
 
   render() {
@@ -280,7 +294,7 @@ class ReimbursementApply extends Component {
                           <button className="btn btn-success" onClick={this.handleAdd}>Add</button>
                         </td>
                         <td>
-                          <button className="btn btn-danger" onClick={this.handleDelete}>delete</button>
+                          <button className="btn btn-danger" onClick={() => { this.handleDelete(detail) }}>delete</button>
                         </td>
                       </tr>
                     )
