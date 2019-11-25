@@ -41,6 +41,7 @@ class ReimbursementApply extends Component {
     this.handleInputChange2 = this.handleInputChange2.bind(this);
     this.subTotal=this.subTotal.bind(this);
     this.handleAdd=this.handleAdd.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -114,7 +115,7 @@ class ReimbursementApply extends Component {
   }
 
   onSubmit() {
-    var empNo = this.fieldData.empNo;
+    var empNo = this.state.empNo;
     var  reimbursementDate = this.state.reimbursementDate;
     var totalCost = this.state.totalCost;
     var reimbursementDetails = this.state.reimbursementDetails;
