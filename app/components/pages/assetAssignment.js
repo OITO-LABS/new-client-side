@@ -16,9 +16,9 @@ class assetAssignment extends Component {
   constructor(props) {
     super(props);
     this.validateFieldData = this.validateFieldData.bind(this);
-    this.validator = new FormValidator([
+    this.validator = new FormValidator(this.props.match.params.status == "Unassigned" ?[
       {
-        field: 'empNO', 
+        field: 'empNo', 
         method: 'isEmpty', 
         args:[{ignore_whitespace:true}],
         validWhen: false, 
@@ -30,8 +30,9 @@ class assetAssignment extends Component {
         args:[{ignore_whitespace:true}],
         validWhen: false, 
         message: 'Issue date is empty'
-      },
-      {
+      }]
+      :
+      [{
         field: 'returnDate', 
         method: 'isEmpty', 
         args:[{ignore_whitespace:true}],
@@ -44,8 +45,8 @@ class assetAssignment extends Component {
         args:[{ignore_whitespace:true}],
         validWhen: false, 
         message: 'Cause is empty'
-      }
-    ])
+      }]
+    )
     this.state = {
       ...this.getStateData(this.props),
       validation: this.validator.valid(),
@@ -76,9 +77,10 @@ class assetAssignment extends Component {
 
   getStateData(assetdata) {
     return {
+      empNo: assetdata.empNo || "",
       issueDate: assetdata.issueDate || "",
       returnDate: assetdata.returnDate || "",
-      // cause: assetdata.cause || "",
+      cause: assetdata.cause || "",
     };
   }
 
@@ -97,31 +99,25 @@ class assetAssignment extends Component {
     const validation = this.validator.validate(this.state);
     this.setState({ validation });
     this.submitted = true;
-    // empNo: {field: "empNo", value: "INT002", id: "empNo1574532703726", label: "Tands", key: "INT002"}
     
-    var empNo = this.fieldData.empNo.value;
-    var employee={empNo:empNo};
-    var issueDate= this.state.issueDate;
-    var updatedId=1;
-    var postAsset = {employee:employee,issueDate:issueDate,updatedId:updatedId}
+    var empNo = this.fieldData.empNo;
+    var employee = {empNo:empNo};
+    var issueDate = this.state.issueDate;
+    var updatedId = "1";
 
     if (validation.isValid) {
-      dataService.postRequest("assetassignment", {postAsset,assetId:this.props.match.params.assetId})
+      dataService.postRequest("assetassignment", {employee:employee,issueDate:issueDate,updatedId:updatedId,assetId:this.props.assetId})
       .then(res => {
         if(res.status == "success") {
-        app.events.trigger(SHOW_ALERT_MSG, {
-          visible: true,
-          type: ALERT_TYPE.SUCESS,
-          msg: "Successfully Assigned"
-        });
+          app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Assigned"}); 
         }
+        app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
       })
       .catch(err => {
         app.events.trigger(SHOW_ALERT_MSG, {
           visible: true,
           type: ALERT_TYPE.DANGER,
-          msg: "Failed To Assign"
-        });
+          msg: "Failed To Assign"});
       });
     }
   }
@@ -132,12 +128,11 @@ class assetAssignment extends Component {
     this.submitted = true;
     var returnDate = this.state.returnDate;
     var cause = this.state.cause;
-    var updatedId = 1;
-    var putAsset = {returnDate:returnDate,cause:cause,updatedId:updatedId}
+    var updatedId = "1";
 
     if (validation.isValid) {
     dataService
-      .putRequest("assetassignment",{putAsset,assetId:this.props.match.params.assetId})
+      .putRequest("assetassignment",{returnDate:returnDate,cause:cause,updatedId:updatedId,assetId:this.props.match.params.assetId})
       .then(res => {
         if(res.status == "success") {
         app.events.trigger(SHOW_ALERT_MSG, {
@@ -146,6 +141,7 @@ class assetAssignment extends Component {
           msg: "Unassigned Assets Successfully"
         });
       }
+      app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
       })
       .catch(err => {
         app.events.trigger(SHOW_ALERT_MSG, {
@@ -164,7 +160,7 @@ class assetAssignment extends Component {
   handleInputChange(event, fieldData = {}) {
     let field = fieldData.field || event.target.name;
     let value = fieldData.value || event.target.value || "";
-    this.fieldData[field] = fieldData;
+    this.fieldData[field] = value;
     event &&
       this.setState({
         [field]: event.target.type == "checkbox" ? event.target.checked : value

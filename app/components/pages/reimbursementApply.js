@@ -17,10 +17,12 @@ class ReimbursementApply extends Component {
 
     this.state = {
       // ...this.getStateData(this.props)
-      reimbursementDetails:[{ index: Math.random(),billDate:"",reimbursementDescription:"",categoryName:"",billNo:"",cost:"" }],
+      reimbursementDetails:[{ index: Math.random(),billDate:"",reimbursementDescription:"",categoryName:"",billNo:"",cost:0 }],
       empNo:"",
       date:"",
-      empData:[]
+      empData:[],
+      row:{ index: Math.random(),billDate:"",reimbursementDescription:"",categoryName:"",billNo:"",cost:0 }
+      
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.getOptions = this.getOptions.bind(this);
@@ -56,7 +58,7 @@ class ReimbursementApply extends Component {
   //   }
   // }
 
-   handleInputChange(event, fieldData = {}) {
+  handleInputChange(event, fieldData = {}) {
     let field = fieldData.field || event.target.name;
     let value = fieldData.value || event.target.value || "";
     this.fieldData[field] = fieldData;
@@ -130,6 +132,11 @@ class ReimbursementApply extends Component {
                   </tr>
                 </thead>
                 <tbody>
+
+
+
+                  {this.state.reimbursementDetails.map((detail)=>{
+                    return(
                   <tr>
                     <td>
                       <FormField
@@ -139,7 +146,7 @@ class ReimbursementApply extends Component {
                         onChange={this.handleInputChange}
                         name="billDate"
                         type="date"
-                        value={this.state.billDate}
+                        value={detail.billDate}
                         placeholder="Bill Date"
                         // validator={validation}
                       />
@@ -151,7 +158,7 @@ class ReimbursementApply extends Component {
                         mandatory
                         onChange={this.handleInputChange}
                         name="reimbursementDescription"
-                        value={this.state.reimbursementDescription}
+                        value={detail.reimbursementDescription}
                         placeholder="Reimbursement Description"
                         // validator={validation}
                       />
@@ -163,7 +170,7 @@ class ReimbursementApply extends Component {
                         mandatory
                         onChange={this.handleInputChange}
                         name="categoryName"
-                        value={this.state.categoryName}
+                        value={detail.categoryName}
                         placeholder="Category Name"
                         // validator={validation}
                       />
@@ -175,7 +182,7 @@ class ReimbursementApply extends Component {
                         mandatory
                         onChange={this.handleInputChange}
                         name="billNo"
-                        value={this.state.billNo}
+                        value={detail.billNo}
                         placeholder="Bill Number"
                         // validator={validation}
                       />
@@ -187,12 +194,16 @@ class ReimbursementApply extends Component {
                         mandatory
                         onChange={this.handleInputChange}
                         name="cost"
-                        value={this.state.cost}
+                        value={detail.cost}
                         placeholder="Cost"
                         // validator={validation}
                       />
                     </td>
                   </tr>
+                    )
+                  })}
+
+
                   <tr>
                     <td></td>
                     <td></td>
@@ -206,6 +217,8 @@ class ReimbursementApply extends Component {
                       <label className="txt-label d-flex">Rs.</label>
                     </td>
                   </tr>
+
+
                 </tbody>
               </table>
 

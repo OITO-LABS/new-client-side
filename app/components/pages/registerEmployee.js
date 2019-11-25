@@ -377,6 +377,7 @@ export class registerEmployee extends Component {
               onChange={this.handleInputChange}
               options={[
                 { value: "A+", label: "A+" },
+                { value: "A-", label: "A-" },
                 { value: "B", label: "B+" },
                 { value: "B-", label: "B-" },
                 { value: "AB+", label: "AB+" },
@@ -384,7 +385,6 @@ export class registerEmployee extends Component {
                 { value: "O+", label: "O+" },
                 { value: "O-", label: "O-" }
               ]}
-              // this.state.bloodgroups.map((bldgrp) => <option key={bldgrp.value} value={bldgrp.value}>{bldgrp.display}</option>)}
               value={this.state.bloodGroup}
               placeholder="Blood Group"
               validator={validation}
