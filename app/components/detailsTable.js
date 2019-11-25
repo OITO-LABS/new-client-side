@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "assets/css/detailsTable.css";
+// import "assets/css/detailsTable.css";
 export class DetailsTable extends Component {
     constructor(props) {
         super(props)

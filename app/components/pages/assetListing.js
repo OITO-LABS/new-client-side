@@ -89,7 +89,7 @@ export class AssetListing extends Component {
     else {
       urlKey = "assetSearch";
     }
-    dataService.getRequest(urlKey, data)
+    dataService.postRequest(urlKey, data)
       .then((jsonData) => {
         // jsonData is parsed json object received from url
         console.log(jsonData);
@@ -144,7 +144,7 @@ export class AssetListing extends Component {
           else {
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,
-              type: ALERT_TYPE.SUCESS,
+              type: ALERT_TYPE.DANGER,
               msg: `Deletion Failed  ${res.message}`
             });
             this.gettingData();

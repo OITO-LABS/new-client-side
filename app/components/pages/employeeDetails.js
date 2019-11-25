@@ -4,6 +4,9 @@ import Heading from "../heading"
 import DetailsTable from "../detailsTable"
 import ListTable from "../listTable"
 import dataService from 'utils/dataservice';
+import "assets/sass/pages/_details.scss";
+import "assets/sass/pages/_listing.scss";
+
 
 export class EmployeeDetails extends Component {
     constructor(props) {

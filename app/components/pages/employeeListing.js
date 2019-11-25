@@ -106,7 +106,7 @@ class EmployeeListing extends React.Component {
           else{
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,
-              type: ALERT_TYPE.SUCESS,
+              type: ALERT_TYPE.DANGER,
               msg: ` Deletion Failed  ${res.message}`
             });
             this.gettingData();

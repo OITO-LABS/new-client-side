@@ -5,6 +5,8 @@ import DetailsTable from "../detailsTable"
 import ListTable from "../listTable"
 import dataService from 'utils/dataservice';
 import "assets/sass/pages/_listing.scss";
+import "assets/sass/pages/_details.scss";
+
 
 
 export class AssetDetails extends Component {

@@ -28,7 +28,6 @@ class InfoIcon extends React.Component {
                 </React.Fragment>
             );
     }
-    
 }
 class FormField extends React.PureComponent{
     getComp(id){
