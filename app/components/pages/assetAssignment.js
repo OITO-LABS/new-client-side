@@ -193,7 +193,7 @@ class assetAssignment extends Component {
               <div className="p-2 w-25 mt-5">
                 <FormField
                   type="select"
-                  label="Employee Number"
+                  label="Employee Name"
                   labelClassName="txt-label"
                   fieldClassName="select-input"
                   mandatory

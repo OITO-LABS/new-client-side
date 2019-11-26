@@ -73,35 +73,35 @@ class Sidebar extends React.Component {
                 {/* View Employee */}
                 <li>
                   <a href="#" onClick={this.empList}>
-                    <i className="fas fa-user-cog"></i>
+                    <i className="fas fa-users"></i>
                     Employees
                   </a>
                 </li>
                 {/* Add Assets  */}
                 <li>
                   <a href="#" onClick={this.addAssets}>
-                    <i className="fas fa-users"></i>
+                    <i class="fas fa-th-list"></i>
                     Add Assets
                   </a>
                 </li>
                 {/* View Assets  */}
                 <li>
                   <a href="#" onClick={this.viewAssets}>
-                    <i className="fas fa-wallet"></i>
+                    <i class="fab fa-accusoft"></i>
                     Assets 
                   </a>
                 </li>
                  {/* Apply Reimbursement */}
                  <li>
                   <a href="#" onClick={this.applyReimbursement}>
-                    <i className="fas fa-wallet"></i>
+                    <i class="fas fa-money-bill"></i>
                     Apply Reimbursement 
                   </a>
                 </li>
                 {/* Reimbursement */}
                 <li>
                   <a href="#" onClick={this.viewReimbursements}>
-                    <i className="fas fa-wallet"></i>
+                    <i class="fas fa-money-bill-wave-alt"></i>
                     Reimbursements
                   </a>
                 </li>

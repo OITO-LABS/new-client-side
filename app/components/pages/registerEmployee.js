@@ -127,7 +127,7 @@ export class registerEmployee extends Component {
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
     {this.props.match.params.empId == -1 ?
-     '': 
+      '':
      dataService.getRequest("getEmpDetails", { empId: this.props.match.params.empId })
       .then(result => {
         this.setState({
