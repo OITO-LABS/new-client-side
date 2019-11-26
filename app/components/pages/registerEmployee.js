@@ -191,6 +191,7 @@ export class registerEmployee extends Component {
         type: ALERT_TYPE.SUCESS,
         msg: "Successfully Submitted"
         });
+        app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });
        }
        else {
         app.events.trigger(SHOW_ALERT_MSG, {
@@ -213,18 +214,11 @@ export class registerEmployee extends Component {
       dataService.putRequest("updateEmployee", { empId: this.props.match.params.empId , ...this.getStateData(this.state) } )
       .then(res => {
         if(res.status == "success") {
-        app.events.trigger(SHOW_ALERT_MSG, {
-        visible: true,
-        type: ALERT_TYPE.SUCESS,
-        msg: "Successfully updated"
-        });
+        app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully updated"});
+        app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });
        }
        else {
-        app.events.trigger(SHOW_ALERT_MSG, {
-          visible: true,
-          type: ALERT_TYPE.DANGER,
-          msg: `Updation Failed. ${res.message}`
-          });
+        app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `Updation Failed. ${res.message}`});
         }
       })
       .catch(err => {});

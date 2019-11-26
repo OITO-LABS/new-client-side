@@ -15,8 +15,6 @@
 		"employeeList":"/employeeList.json",
 		"employeeSearch":"/employeeSearch.json",
 		"assetsOfEmployee":"/assetsOfEmployee.json",
-		
-		"getEmpDetails":"/getEmpDetails.json",
 
 		"getEmpData":"/getEmpData.json",
 

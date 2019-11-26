@@ -136,15 +136,7 @@ class ReimbursementApply extends Component {
 
   handleAdd() {
     let add = [...this.state.reimbursementDetails];
-    add.push({
-      index: Math.random(),
-      billDate: "",
-      reimbursementDescription: "",
-      categoryName: "",
-      billNo: "",
-      cost: 0,
-      flag: false
-    });
+    add.push({ index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0, flag: false });
     this.setState({
       reimbursementDetails: add
     });
@@ -188,12 +180,13 @@ class ReimbursementApply extends Component {
           reimbursementDetails: reimbursementDetails
         })
         .then(res => {
-          if (res.status == "success") {
+          if (res.status == "Success") {
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,
               type: ALERT_TYPE.SUCESS,
               msg: "Successfully Submitted"
             });
+            app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_LISTING });
           } else {
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,
