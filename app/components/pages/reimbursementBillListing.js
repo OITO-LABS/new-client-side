@@ -122,11 +122,11 @@ export class ReimbursementBillListing extends Component {
         <div className="row total-cost">
           <div className="col-8"></div>
           <div className="col-4 total table-wrap">
-            <table className="table table-bordered ">
+            <table className="table table-bordered text-center">
               <tbody>
                 <tr>
                   <td>Total Cost</td>
-                  <td className="num">{this.state.subtotal}</td>
+                  <td className="num text-right">{this.state.subtotal}</td>
                 </tr>
               </tbody>
             </table>
