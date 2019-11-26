@@ -186,7 +186,6 @@ class ReimbursementApply extends Component {
               type: ALERT_TYPE.SUCESS,
               msg: "Successfully Submitted"
             });
-            app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_LISTING });
           } else {
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,

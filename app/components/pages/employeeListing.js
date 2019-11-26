@@ -52,7 +52,7 @@ class EmployeeListing extends React.Component {
     else {
       urlKey = "employeeSearch";
     }
-    dataService.getRequest(urlKey, data)
+    dataService.postRequest(urlKey, data)
       .then((jsonData) => {
         // jsonData is parsed json object received from url
         console.log(jsonData)
