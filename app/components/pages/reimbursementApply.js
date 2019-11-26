@@ -64,7 +64,8 @@ class ReimbursementApply extends Component {
         args: [{ ignore_whitespace: true }],
         validWhen: false,
         message: "Cost is empty"
-      }
+      },
+    
     ]);
     this.state = {
       reimbursementDetails: [
@@ -105,6 +106,8 @@ class ReimbursementApply extends Component {
         console.log(error);
       });
   }
+
+  
 
   getOptions() {
     let optionData = [];
@@ -155,10 +158,12 @@ class ReimbursementApply extends Component {
   subTotal() {
     let total = 0;
     this.state.reimbursementDetails.forEach(row => {
-      total = total + parseInt(row.cost);
-      this.setState({
-        totalCost: total
-      });
+      if(row.cost!=""){
+        total = total + parseInt(row.cost);
+      }
+    });
+    this.setState({
+      totalCost: total
     });
   }
 
