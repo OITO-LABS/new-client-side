@@ -38,10 +38,12 @@ class DateAndButtonBar extends Component {
                 <div className="row header-bar">
                     <button type="button" onClick={this.props.handleRegister} className="btn btn-primary button">{this.props.button1name}</button>
                     {/* <button type="button" onClick={this.exportHandler} className="btn btn-success button">{this.props.button2name}</button> */}
+                    
                     <div className="form-group has-search ml-auto date-bar">
                     From-Date:<input type="date" id="start" onChange={this.dateHandler} name="fromDate" className="search-box date" />
                     To-Date:<input type="date" id="start" onChange={this.dateHandler} name="toDate" className="search-box date" />
                     </div>
+                    
                 </div>
             </React.Fragment>
         );

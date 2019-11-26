@@ -213,7 +213,7 @@ export function replaceDynaParams(url,params)
 }
 
 export function setPageTitle(title){
-  return document.title = (title?title+' - ':'')+translate('app.page_title');
+  return document.title = (title?title+' - ':'')+translate('OITO-TRV Management-System');
 }
 
 export function withRelativePath(uri){

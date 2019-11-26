@@ -23,7 +23,7 @@
 		"assetList":"/assetList.json",
 		"assetassignment":"/assetAssign.json",
 		"updategetAsset":"/updategetAsset.json",
-
+		"getEmpDetails":"/getEmpDetails.json",
 		"reimbursementBill":"/reimbursementBill.json",
 		
 	    "params": {
