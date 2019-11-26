@@ -137,6 +137,7 @@ export class registerEmployee extends Component {
       .catch(error => {
         console.error(error);
       });
+    }
   }
  
   getStateData(empdata) {
