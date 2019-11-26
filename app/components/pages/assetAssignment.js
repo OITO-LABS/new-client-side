@@ -108,18 +108,19 @@ class assetAssignment extends Component {
     if (validation.isValid) {
       dataService.postRequest("assetassignment", { employee: employee, issueDate: issueDate, updatedId: updatedId, assetId: this.props.assetId })
         .then(res => {
-          if (res.status == "success") {
+          if (res.status == "Success") {
             app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.SUCESS, msg: "Successfully Assigned" });
+          }
+          else {
+            app.events.trigger(SHOW_ALERT_MSG, {
+              visible: true,
+              type: ALERT_TYPE.DANGER,
+              msg: `Assignment Failed.`
+            });
           }
           app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
         })
-        .catch(err => {
-          app.events.trigger(SHOW_ALERT_MSG, {
-            visible: true,
-            type: ALERT_TYPE.DANGER,
-            msg: "Failed To Assign"
-          });
-        });
+        .catch(err => {console.log(err)});
     }
   }
 
@@ -135,11 +136,18 @@ class assetAssignment extends Component {
       dataService
         .putRequest("assetassignment", { returnDate: returnDate, cause: cause, updatedId: updatedId, assetId: this.props.match.params.assetId })
         .then(res => {
-          if (res.status == "success") {
+          if (res.status == "Success") {
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,
               type: ALERT_TYPE.SUCESS,
-              msg: "Unassigned Assets Successfully"
+              msg: "Assets Unassigned Successfully"
+            });
+          }
+          else {
+            app.events.trigger(SHOW_ALERT_MSG, {
+              visible: true,
+              type: ALERT_TYPE.DANGER,
+              msg: `Unassignment Failed.`
             });
           }
           app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });

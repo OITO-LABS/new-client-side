@@ -129,12 +129,9 @@ export class registerEmployee extends Component {
     {this.props.match.params.empId == -1 ?
      '': 
      dataService.getRequest("getEmpDetails", { empId: this.props.match.params.empId })
-      // .then(res => res.json())
       .then(result => {
-        // let bloodgrpFromApi = result.map(bloodgrp => { return {value: bloodgrp, display: bloodgrp} })
         this.setState({
           ...this.getStateData(result),
-          // bloodgroups:[(bloodgrpFromApi).concat({value:'',display:'Select blood group'})]
         });
       })
       .catch(error => {
@@ -186,19 +183,10 @@ export class registerEmployee extends Component {
       dataService.postRequest("registered", { ...this.getStateData(this.state) })
       .then(res => {
         if(res.status == "success") {
-        app.events.trigger(SHOW_ALERT_MSG, {
-        visible: true,
-        type: ALERT_TYPE.SUCESS,
-        msg: "Successfully Submitted"
-        });
-        app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });
+        app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
        }
        else {
-        app.events.trigger(SHOW_ALERT_MSG, {
-          visible: true,
-          type: ALERT_TYPE.DANGER,
-          msg: `Submission Failed. ${res.message}`
-          });
+        app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
        }
       })
       .catch(err => {console.log(err)});
@@ -215,13 +203,12 @@ export class registerEmployee extends Component {
       .then(res => {
         if(res.status == "success") {
         app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully updated"});
-        app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });
        }
        else {
-        app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `Updation Failed. ${res.message}`});
+        app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
         }
       })
-      .catch(err => {});
+      .catch(err => {console.log(err)});
     }
   }
 
