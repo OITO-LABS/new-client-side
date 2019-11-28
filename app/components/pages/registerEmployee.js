@@ -184,6 +184,9 @@ export class registerEmployee extends Component {
       .then(res => {
         if(res.status == "success") {
         app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
+        setTimeout(()=>{
+          app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });
+        },3000)
        }
        else {
         app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
@@ -203,14 +206,16 @@ export class registerEmployee extends Component {
       .then(res => {
         if(res.status == "success") {
         app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully updated"});
-       }
-       else {
-        app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
+        setTimeout(()=>{
+          app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });},3000)
+        }
+        else {
+          app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
         }
       })
-      .catch(err => {console.log(err)});
+        .catch(err => {console.log(err)});
+      }
     }
-  }
 
   cancel() {
     app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });
