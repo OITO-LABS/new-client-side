@@ -32,7 +32,7 @@ import dataService from "utils/dataservice";
 import Loader from "components/common/loader";
 import "assets/sass/home.scss";
 // import NoRecordsFound from "../app/components/noRecordsFound";
-// import Login from "components/pages/login";
+import Login from "components/pages/login";
 
 
 initApp();

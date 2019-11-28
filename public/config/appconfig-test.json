@@ -1,0 +1,35 @@
+{
+  "env": "production",
+  "apis": {
+      "baseurl": "http://localhost:3000",
+      "portalSettings": "/data/portal-settings.json",
+      "getEmpDetails":"api/employee/:empId",    
+      "updateEmployee":"api/employee/:empId",
+      "getAsset":"api/asset/details/:assetId",
+      "registered":"api/employee",
+      "employeeList":"api/employee/list",
+      "employeeSearch":"api/employee/search",
+      "employeeDelete":"api/employee/delete/:empNo",
+      "assetsOfEmployee":"api/employee/asset/:empId",
+      "assetList":"api/asset/getAll",
+      "assetSearch":"api/asset/assetDetails",
+      "assetDelete":"api/asset/:assetId",
+      "assetHistory":"api/asset/:assetId",
+
+      "assetregistered":"api/asset",
+      "updategetAsset":"api/asset/getforupdate/details/:assetId",
+      "updateAsset":"api/asset/:assetId",
+      "assetassignment":"api/assetassign/:assetId/:status",
+      "getEmpData":"api/employee/listall",
+
+      "reimbursementList":"api/reimbursement/reimbursement-list",
+      "reimbursementDate":"api/reimbursement/reimbursement-date",
+      "reimbursementEmployee":"api/reimbursement/emp-id/",
+      "reimbursementBill":"api/reimbursement/emp-id/:reimbursementId",
+      "reimbursementApply":"api/reimbursement/apply",
+
+      "params": {
+        "commonparams": "commonparams"
+      }
+  }
+}
