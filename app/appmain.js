@@ -31,8 +31,9 @@ import { initApp, initPortalSettings } from "./appinitializer";
 import dataService from "utils/dataservice";
 import Loader from "components/common/loader";
 import "assets/sass/home.scss";
+// import NoRecordsFound from "../app/components/noRecordsFound";
+// import Login from "components/pages/login";
 
-// import UpperBar from "./components/pages/upperbar";
 
 initApp();
 
@@ -105,10 +106,10 @@ class Main extends React.Component {
     if (!this.state.appinit) return <Loader inline />;
     return (
       <React.Fragment>
+      {/* <Login/> */}
         <Loader />
         {/* <Collapse/> */}
-        <Header pageQuery />
-        
+        <Header pageQuery /> 
         <div className="row content-height">
           <div className="col-2"><Sidebar/></div>
           <div className="col-10">
@@ -128,9 +129,7 @@ class Main extends React.Component {
             </Router>
           </div>
         </div>
-        
           <Footer />
-     
       </React.Fragment>
     );
   }
