@@ -328,7 +328,43 @@ class ReimbursementApply extends Component {
                           />
                         </td>
                         <td>
-                          <FormField
+                        <FormField
+                          type="select"
+                          labelClassName="txt-label"
+                          fieldClassName="select-input"
+                          mandatory
+                          name="categoryName"
+                          nameAlias={"abc_fullName"}
+                          onChange={() =>
+                              this.handleInputChange2(event, detail)
+                          }
+                          options={[
+                            { value: "Business Meals", label: "Business Meals" },
+                            { value: "Legal Fees", label: "Legal Fees" },
+                            { value: "Dues ", label: "Dues" },
+                            { value: "Business Cards", label: "Business Cards" },
+                            { value: "License Fees", label: "License Fees" },
+                            { value: "Mileage", label: "Mileage" },
+                            { value: "Office Supplies", label: "Office Supplies" },
+                            { value: "Passport fee", label: "Passport fee" },
+                            { value: "Postage", label: "Postage" },
+                            { value: "Printer Cartridges", label: "Printer Cartridges" },
+                            { value: "Printer Paper", label: "Printer Paper" },
+                            { value: "Software", label: "Software" },
+                            { value: "Stationery", label: "Stationery" },
+                            { value: "Subscriptions", label: "Subscriptions" },
+                            { value: "Telephones", label: "Telephones" },
+                            { value: "Tools", label: "Tools" },
+                            { value: "Training Fees", label: "Training Fees" },
+                            { value: "Travel", label: "Travel" },
+                            { value: "Others", label: "Others" }
+    
+                          ]}
+                            value={this.state.categoryName}
+                            placeholder="Category Name"
+                            validator={validation}
+                          />
+                          {/* <FormField
                             labelClassName="txt-label"
                             fieldClassName="txt-input"
                             mandatory
@@ -339,7 +375,7 @@ class ReimbursementApply extends Component {
                             value={detail.categoryName}
                             placeholder="Category Name"
                             validator={validation}
-                          />
+                          /> */}
                         </td>
                         <td>
                           <FormField
