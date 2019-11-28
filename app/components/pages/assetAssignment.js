@@ -22,7 +22,8 @@ class assetAssignment extends Component {
         method: 'isEmpty',
         args: [{ ignore_whitespace: true }],
         validWhen: false,
-        message: 'Select employee number'
+        message: 'Select employee number',
+        
       },
       {
         field: 'issueDate',
@@ -54,6 +55,7 @@ class assetAssignment extends Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    // this.handleSearchChange = this.handleSearchChange.bind(this);
     this.cancel = this.cancel.bind(this);
     this.assign = this.assign.bind(this);
     this.unassign = this.unassign.bind(this);
@@ -163,6 +165,15 @@ class assetAssignment extends Component {
     });
   }
 
+  // handleSearchChange(event){
+  //   let field = event.target.name;
+  //   let value = event.target.value;
+  //   this.fieldData[field] = value;
+  //   event && this.setState({
+  //     [field]: value
+  //   })
+  // }
+
   render() {
     let validation = this.submitted ? this.validator.validate(this.state) : this.state.validation;
     var status = this.props.match.params.status;
@@ -179,16 +190,18 @@ class assetAssignment extends Component {
             <div className="d-flex justify-content-sm-around">
               {/* Input details first block  */}
               <div className="p-2 w-25 mt-5">
-              {/* <Select options={this.getOptions()} name="empNo" placeholder="Employee Number" onChange={this.handleInputChange} value={this.state.empNo}/> */}
+              
                 <FormField
                    type="select"
-                   label="Name"
+                   searchable
+                   label="Employee Name"
                    labelClassName="txt-label"
                    fieldClassName="select-input"
                    mandatory
                    name="empNo"
-                   nameAlias={"abc_fullName"}
+                   nameAlias={"empNo"}
                    onChange={this.handleInputChange}
+                   onSearch
                    options={this.getOptions()}
                    value={this.state.empNo}
                    placeholder="Employee Number"
