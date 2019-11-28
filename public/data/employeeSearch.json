@@ -29,7 +29,7 @@
             "bloodGroup": "O+",
             "status": "Y",
             "empNo": "INT002"
-        }    
+        }     
     ],
     "pageable": {
         "sort": {

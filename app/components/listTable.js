@@ -96,12 +96,13 @@ class ListTable extends Component {
                      {this.renderTableHeader()}
                   </tr>
                </thead>
-               {this.props.datas != [] ?
-                  <tbody>
-                     {this.renderTableData()}
-                  </tbody> :
-                  <NoRecordsFound />}
+               <tbody>
+                  {this.renderTableData()}
+               </tbody>
             </table>
+            
+            {this.props.datas && this.props.datas.length < 1 && <NoRecordsFound />}
+
             <Pagination totalItems={this.props.totalRecords || 1} onPageChange={this.onPageChange} />
          </div>
       );
