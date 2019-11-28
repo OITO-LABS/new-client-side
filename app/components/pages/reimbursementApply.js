@@ -411,7 +411,7 @@ class ReimbursementApply extends Component {
                             className="btn btn-success"
                             onClick={this.handleAdd}
                           >
-                            Add
+                            <i class="fas fa-plus"></i>
                           </button>
                         </td>
                         <td>
@@ -421,7 +421,7 @@ class ReimbursementApply extends Component {
                               this.handleDelete(detail);
                             }}
                           >
-                            delete
+                            <i class="fas fa-minus"></i>
                           </button>
                         </td>
                       </tr>

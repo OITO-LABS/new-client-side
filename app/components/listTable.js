@@ -3,6 +3,7 @@ import { SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE } from "utils/constants";
 import PropTypes from 'prop-types';
 import Pagination from './common/pagination';
 // import "assets/css/listTable.css";
+import NoRecordsFound from './noRecordsFound';
 
 class ListTable extends Component {
    constructor(props) {
@@ -40,7 +41,7 @@ class ListTable extends Component {
                         // <td key={i}>{indexValue}</td>
                      )
                   }
-                  else if (item.key !== "editDelete"&& item.key !== "status") {
+                  else if (item.key !== "editDelete" && item.key !== "status") {
                      if (i == 1) {
                         return (
                            <td key={i} onClick={() => { this.props.detailsHandler(data) }}><a href="#">{data[item.key]}</a></td>
@@ -62,15 +63,15 @@ class ListTable extends Component {
                      if (data[item.key] == "Assigned") {
                         return (
                            <td key={i}>
-                              <button onClick={()=>this.props.unAssignHandler(data)} className="btn btn-warning">UnAssign</button>
+                              <button onClick={() => this.props.unAssignHandler(data)} className="btn btn-warning">UnAssign</button>
                            </td>
                         )
-                     }else if(data[item.key] == "Unassigned"){
-                        return(
+                     } else if (data[item.key] == "Unassigned") {
+                        return (
                            <td key={i}>
-                              <button onClick={()=>this.props.assignHandler(data)} className="btn btn-success">Assign</button>
+                              <button onClick={() => this.props.assignHandler(data)} className="btn btn-success">Assign</button>
                            </td>
-                        ) 
+                        )
                      }
                   }
                })}
@@ -95,9 +96,11 @@ class ListTable extends Component {
                      {this.renderTableHeader()}
                   </tr>
                </thead>
-               <tbody>
-                  {this.renderTableData()}
-               </tbody>
+               {this.props.datas != [] ?
+                  <tbody>
+                     {this.renderTableData()}
+                  </tbody> :
+                  <NoRecordsFound />}
             </table>
             <Pagination totalItems={this.props.totalRecords || 1} onPageChange={this.onPageChange} />
          </div>

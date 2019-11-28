@@ -16,11 +16,11 @@ export class AssetListing extends Component {
       searchValue: "",
       recordsPerPage: 10,
       fields: [
-        { label: "si no", key: "index" },
-        { label: "asset Key", key: "assetKey" },
-        { label: "asset category", key: "productCategoryName" },
+        { label: "sl no", key: "index" },
+        { label: "Key", key: "assetKey" },
+        { label: "category", key: "productCategoryName" },
         { label: "model", key: "model" },
-        { label: "asset owner", key: "empNo" },
+        { label: "owner id", key: "empNo" },
         { label: "action", key: "editDelete" },
         { label: "assign/unassign", key: "status" }
       ],
@@ -81,7 +81,6 @@ export class AssetListing extends Component {
 
   gettingData() {
     const data = { page: this.state.activePage - 1, searchkey: this.state.searchValue, limit: this.state.recordsPerPage }
-    // dataService.getRequest("employeeUpdate", { empNo:'123',empId:123 })
     let urlKey = "";
     if (this.state.searchValue === "") {
       urlKey = "assetList";
@@ -91,7 +90,6 @@ export class AssetListing extends Component {
     }
     dataService.postRequest(urlKey, data)
       .then((jsonData) => {
-        // jsonData is parsed json object received from url
         console.log(jsonData);
         this.setState({
           totalRecords: jsonData.totalElements,
@@ -122,17 +120,14 @@ export class AssetListing extends Component {
   }
 
   async handleDelete(data) {
-    // alert(data);
     console.log(data);
     let isConfirmed = false;
     isConfirmed = await confirm({
       msg: 'Are you sure you want to delete this record?',
     });
     if (isConfirmed) {
-      // const deleteData = { empNo: data.empNo }
       dataService.deleteRequest("assetDelete", { assetId: data.assetId })
         .then(res => {
-          // console.log(res);
           if (res.status == "deleted successfully") {
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,

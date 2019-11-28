@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, } from 'utils/constants';
+import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE,ASSET_DETAILS } from 'utils/constants';
 import Heading from "../heading"
 import DetailsTable from "../detailsTable"
 import ListTable from "../listTable"
@@ -39,7 +39,7 @@ export class EmployeeDetails extends Component {
                 { label: "Emergency Contact No ", key: "emergencyContact" },
                 { label: "Health Card Number ", key: "healthCardNo" },
                 { label: "Blood Group ", key: "bloodGroup" },
-                { label: "dob", key: "dob" },
+                { label: "Date Of Birth", key: "dob" },
             ],
             // assets:[
             //     {
@@ -76,33 +76,13 @@ export class EmployeeDetails extends Component {
         }
         this.gettingEmployee = this.gettingEmployee.bind(this);
         this.gettingAssets = this.gettingAssets.bind(this);
+        this.handleDetails=this.handleDetails.bind(this);
     }
     componentDidMount() {
         app.events.trigger(FLIP_LOADER, { status: false, reset: true });
             this.gettingEmployee();
-            this.gettingAssets();
-
-        // dataService.getRequest("getEmpDetails", { empId: this.props.match.params.empId })
-        //     .then(res => {
-        //         this.setState({
-        //             data: res
-        //         });
-        //     })
-        //     .catch(error => {
-        //         console.error(error);
-        //     });
-
-        // dataService.getRequest("assetsOfEmployee", { empId: this.props.match.params.empId })
-        //     .then(res => {
-        //         this.setState({
-        //             assets: res
-        //         });
-        //     })
-        //     .catch(error => {
-        //         console.error(error);
-        //     });
+            this.gettingAssets();  
     }
-
 
     gettingEmployee() {
         dataService.getRequest("getEmpDetails", { empId: this.props.match.params.empId })
@@ -128,6 +108,12 @@ export class EmployeeDetails extends Component {
             });
     }
 
+    handleDetails(data) {
+        console.log("details");
+        console.log(data.assetId);
+        app.events.trigger(GOTO_URL, { routerKey: ASSET_DETAILS, params: { assetId: data.assetId } });
+      }
+
     render() {
         return (
             <div >
@@ -137,7 +123,8 @@ export class EmployeeDetails extends Component {
                 <ListTable
                     totalRecords={1}
                     fields={this.state.assetFields}
-                    datas={this.state.assets} />
+                    datas={this.state.assets}
+                    detailsHandler={this.handleDetails} />
             </div>
         );
     }

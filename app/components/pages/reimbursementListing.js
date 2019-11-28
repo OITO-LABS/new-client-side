@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FLIP_LOADER, GOTO_URL, REIMBURSEMENT_EMPLOYEE_LISTING,APPLY_REIMBURSEMENT } from 'utils/constants';
+import { FLIP_LOADER, GOTO_URL, REIMBURSEMENT_EMPLOYEE_LISTING, APPLY_REIMBURSEMENT } from 'utils/constants';
 import dataService from 'utils/dataservice';
 import ListTable from "../listTable";
 import "assets/sass/pages/_listing.scss";
@@ -15,8 +15,8 @@ export class ReimbursementListing extends Component {
       toDate: "",
       recordsPerPage: 10,
       fields: [
-        { label: "si no", key: "index" },
-        { label: "employee id", key: "empNo" },
+        { label: "sl no", key: "index" },
+        { label: "id", key: "empNo" },
         { label: "date", key: "reimbursementDate" },
         { label: "Total cost", key: "totalCost" },
       ],
@@ -59,7 +59,8 @@ export class ReimbursementListing extends Component {
     this.handleDetails = this.handleDetails.bind(this);
     this.gettingData = this.gettingData.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
-    this.fetchingData=this.fetchingData.bind(this);
+    this.fetchingData = this.fetchingData.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
 
   }
   componentDidMount() {
@@ -72,15 +73,15 @@ export class ReimbursementListing extends Component {
     let urlKey = "";
     if (this.state.fromDate == "" && this.state.toDate == "") {
       urlKey = "reimbursementList";
-      this.fetchingData(urlKey,data);
+      this.fetchingData(urlKey, data);
     }
     else if (this.state.fromDate !== "" && this.state.toDate !== "") {
       urlKey = "reimbursementDate";
-      this.fetchingData(urlKey,data);
+      this.fetchingData(urlKey, data);
     }
   }
 
-  fetchingData(urlKey,data) {
+  fetchingData(urlKey, data) {
     dataService.postRequest(urlKey, data)
       .then((jsonData) => {
         // jsonData is parsed json object received from url
@@ -119,10 +120,20 @@ export class ReimbursementListing extends Component {
     app.events.trigger(GOTO_URL, { routerKey: APPLY_REIMBURSEMENT });
   }
 
+  handleSearch(value) {
+    console.log(value);
+    this.setState({
+      activePage: 1,
+      searchValue: value
+    },
+    //  () => { this.gettingData() }
+     )
+  }
+
   render() {
     return (
       <div>
-        <DateAndButtonBar button1name="apply for reimbursement" dateHandler={this.handleDate} handleRegister={this.handleRegister} />
+        <DateAndButtonBar button1name="apply for reimbursement" dateHandler={this.handleDate} handleRegister={this.handleRegister} searchHandler={this.handleSearch}/>
         <Heading heading="REIMBURSEMENTS" />
         <ListTable
           totalRecords={this.state.totalRecords}
