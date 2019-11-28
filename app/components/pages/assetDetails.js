@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, } from 'utils/constants';
+import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE,EMPLOYEE_DETAILS } from 'utils/constants';
 import Heading from "../heading"
 import DetailsTable from "../detailsTable"
 import ListTable from "../listTable"
@@ -79,31 +79,12 @@ export class AssetDetails extends Component {
     this.handlePage = this.handlePage.bind(this);
     this.gettingHistory = this.gettingHistory.bind(this);
     this.gettingAsset = this.gettingAsset.bind(this);
+    this.handleDetails=this.handleDetails.bind(this);
   }
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
     this.gettingAsset();
     this.gettingHistory();
-    // dataService.getRequest("getAsset", { assetId: this.props.match.params.assetId })
-    //   .then(res => {
-    //     debugger;
-    //     this.setState({
-    //       assetData: res[0]
-    //     });
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //   });
-
-    // dataService.getRequest("assetHistory", { assetId: this.props.match.params.assetId })
-    //   .then(res => {
-    //     this.setState({
-    //       historyDatas: res
-    //     });
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //   });
   }
 
   gettingHistory() {
@@ -135,6 +116,12 @@ export class AssetDetails extends Component {
     console.log(data);
   }
 
+  handleDetails(data) {
+    console.log("details");
+    console.log(data.empId);
+    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_DETAILS, params: { empId: data.empId } });
+  }
+
   render() {
     return (
       <div >
@@ -145,7 +132,8 @@ export class AssetDetails extends Component {
           totalRecords={1}
           fields={this.state.historyFields}
           pageHandler={this.handlePage}
-          datas={this.state.historyDatas} />
+          datas={this.state.historyDatas}
+          detailsHandler={this.handleDetails} />
       </div>
     );
   }

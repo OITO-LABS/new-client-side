@@ -13,6 +13,7 @@ class DateAndButtonBar extends Component {
         }
         this.dateHandler = this.dateHandler.bind(this);
         this.exportHandler = this.exportHandler.bind(this);
+        this.searchHandler= this.searchHandler.bind(this);
     }
 
     exportHandler() {
@@ -32,6 +33,13 @@ class DateAndButtonBar extends Component {
         app.events.trigger(FLIP_LOADER, { status: false, reset: true });
     }
 
+    searchHandler(e) {
+        let searchValue = e.target.value;
+        this.setState({
+            searchValue: searchValue
+        },()=>this.props.searchHandler(searchValue))
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -39,6 +47,11 @@ class DateAndButtonBar extends Component {
                     <button type="button" onClick={this.props.handleRegister} className="btn btn-primary button">{this.props.button1name}</button>
                     {/* <button type="button" onClick={this.exportHandler} className="btn btn-success button">{this.props.button2name}</button> */}
                     
+                    <div className="form-group has-search ml-auto">
+                        <span className="fa fa-search form-control-feedback"></span>
+                        <input type="text" onChange={this.searchHandler} className="form-control search-box" placeholder="Search..." value={this.state.employeeSearchValue} />
+                    </div>
+
                     <div className="form-group has-search ml-auto date-bar">
                     From-Date:<input type="date" id="start" onChange={this.dateHandler} name="fromDate" className="search-box date" />
                     To-Date:<input type="date" id="start" onChange={this.dateHandler} name="toDate" className="search-box date" />

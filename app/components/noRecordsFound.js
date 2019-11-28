@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "assets/sass/components/_noRecordsFound.scss";
 
 export class NoRecordsFound extends Component {
     constructor(props) {
@@ -11,8 +12,8 @@ export class NoRecordsFound extends Component {
 
     render() {
         return (
-            <div>
-                <h5 className="text-center">No Records Found</h5>
+            <div  class=" no-records">
+                <h1 className="text-center">No Records Found</h1>
             </div>
         );
     }

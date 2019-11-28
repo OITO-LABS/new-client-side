@@ -20,8 +20,8 @@ class EmployeeListing extends React.Component {
       searchValue: "",
       recordsPerPage: 10,
       fields: [
-        { label: "si no", key: "index" },
-        { label: "employee id", key: "empNo" },
+        { label: "sl no", key: "index" },
+        { label: "id", key: "empNo" },
         { label: "NAME", key: "firstName" },
         { label: "email", key: "email" },
         { label: "contact no", key: "contactNo" },
