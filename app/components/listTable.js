@@ -31,14 +31,14 @@ class ListTable extends Component {
             <tr key={index}>
 
                {fields.map((item, i) => {
-                  // let activePage=this.props.activePage-1;
-                  // let recordsPerPage=this.props.recordsPerPage;
-                  // let newIndex=index+1 
-                  // let indexValue=(activePage*recordsPerPage)+newIndex;
+                  let activePage=this.state.activePage-1||0;
+                  let recordsPerPage=this.props.recordsPerPage;
+                  let newIndex=index+1 
+                  let indexValue=(activePage*recordsPerPage)+newIndex;
                   if (item.key == "index") {
                      return (
-                        <td key={i}>{index + 1}</td>
-                        // <td key={i}>{indexValue}</td>
+                        // <td key={i}>{index + 1}</td>
+                        <td key={i}>{indexValue}</td>
                      )
                   }
                   else if (item.key !== "editDelete" && item.key !== "status") {
