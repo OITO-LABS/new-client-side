@@ -110,19 +110,17 @@ class assetAssignment extends Component {
         .then(res => {
           if (res.status == "Success") {
             app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.SUCESS, msg: "Successfully Assigned" });
+            setTimeout(()=>{
+              app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
+            },3000)
           }
           else {
-            app.events.trigger(SHOW_ALERT_MSG, {
-              visible: true,
-              type: ALERT_TYPE.DANGER,
-              msg: `Assignment Failed.`
-            });
+            app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
           }
-          app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
         })
         .catch(err => {console.log(err)});
+      }
     }
-  }
 
   unassign() {
     const validation = this.validator.validate(this.state);
@@ -137,30 +135,20 @@ class assetAssignment extends Component {
         .putRequest("assetassignment", { returnDate: returnDate, cause: cause, updatedId: updatedId, assetId: this.props.match.params.assetId })
         .then(res => {
           if (res.status == "Success") {
-            app.events.trigger(SHOW_ALERT_MSG, {
-              visible: true,
-              type: ALERT_TYPE.SUCESS,
-              msg: "Assets Unassigned Successfully"
-            });
+            app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Assets Unassigned Successfully"});
+            setTimeout(()=>{
+              app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
+            },3000)
           }
           else {
-            app.events.trigger(SHOW_ALERT_MSG, {
-              visible: true,
-              type: ALERT_TYPE.DANGER,
-              msg: `Unassignment Failed.`
-            });
+            app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
           }
-          app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
         })
         .catch(err => {
-          app.events.trigger(SHOW_ALERT_MSG, {
-            visible: true,
-            type: ALERT_TYPE.DANGER,
-            msg: "Failed To Unassign"
-          });
+          app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: "Failed To Unassign"});
         });
-    }
-  }
+      }
+   }
 
   cancel() {
     app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
@@ -170,15 +158,15 @@ class assetAssignment extends Component {
     let field = fieldData.field || event.target.name;
     let value = fieldData.value || event.target.value || "";
     this.fieldData[field] = value;
-    event &&
-      this.setState({
-        [field]: event.target.type == "checkbox" ? event.target.checked : value
-      });
+    event && this.setState({
+      [field]: event.target.type == "checkbox" ? event.target.checked : value
+    });
   }
 
   render() {
     let validation = this.submitted ? this.validator.validate(this.state) : this.state.validation;
     var status = this.props.match.params.status;
+   
     return (
       <React.Fragment>
         <div className="form-wrapper">
@@ -191,19 +179,20 @@ class assetAssignment extends Component {
             <div className="d-flex justify-content-sm-around">
               {/* Input details first block  */}
               <div className="p-2 w-25 mt-5">
+              {/* <Select options={this.getOptions()} name="empNo" placeholder="Employee Number" onChange={this.handleInputChange} value={this.state.empNo}/> */}
                 <FormField
-                  type="select"
-                  label="Name"
-                  labelClassName="txt-label"
-                  fieldClassName="select-input"
-                  mandatory
-                  name="empNo"
-                  nameAlias={"abc_fullName"}
-                  onChange={this.handleInputChange}
-                  options={this.getOptions()}
-                  value={this.state.empNo}
-                  placeholder="Employee Number"
-                  validator={validation}
+                   type="select"
+                   label="Name"
+                   labelClassName="txt-label"
+                   fieldClassName="select-input"
+                   mandatory
+                   name="empNo"
+                   nameAlias={"abc_fullName"}
+                   onChange={this.handleInputChange}
+                   options={this.getOptions()}
+                   value={this.state.empNo}
+                   placeholder="Employee Number"
+                   validator={validation} 
                 />
                 <FormField
                   label="Issue Date"

@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  FLIP_LOADER,
-  GOTO_URL,
-  SHOW_ALERT,
-  SHOW_ALERT_MSG,
-  ALERT_TYPE
-} from "utils/constants";
+import {FLIP_LOADER,GOTO_URL,SHOW_ALERT,SHOW_ALERT_MSG,ALERT_TYPE} from "utils/constants";
 import FormField from "../common/formfield";
 import FormValidator from "../common/formvalidator";
 import dataService from "utils/dataservice";
@@ -107,14 +101,9 @@ class ReimbursementApply extends Component {
       });
   }
 
-  
-
   getOptions() {
     let optionData = [];
-    optionData = this.state.empData.map(item => ({
-      value: item.empNo,
-      label: item.firstName
-    }));
+    optionData = this.state.empData.map(item => ({value: item.empNo,label: item.firstName}));
     return optionData;
   }
 
@@ -178,25 +167,15 @@ class ReimbursementApply extends Component {
 
     if (validation.isValid) {
       dataService
-        .postRequest("reimbursementApply", {
-          empNo: empNo,
-          reimbursementDate: reimbursementDate,
-          totalCost: totalCost,
-          reimbursementDetails: reimbursementDetails
-        })
+        .postRequest("reimbursementApply", {empNo: empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementDetails: reimbursementDetails})
         .then(res => {
           if (res.status == "Success") {
-            app.events.trigger(SHOW_ALERT_MSG, {
-              visible: true,
-              type: ALERT_TYPE.SUCESS,
-              msg: "Successfully Submitted"
-            });
+            app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
+            setTimeout(()=>{
+              app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_LISTING });
+            },3000)
           } else {
-            app.events.trigger(SHOW_ALERT_MSG, {
-              visible: true,
-              type: ALERT_TYPE.DANGER,
-              msg: `Submission Failed.`
-            });
+            app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
           }
         })
         .catch(err => {
