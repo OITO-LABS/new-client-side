@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  FLIP_LOADER,
-  GOTO_URL,
-  SHOW_ALERT,
-  SHOW_ALERT_MSG,
-  ALERT_TYPE,
-  ASSET_LISTING
-} from "utils/constants";
+import {FLIP_LOADER,GOTO_URL,SHOW_ALERT,SHOW_ALERT_MSG,ALERT_TYPE,ASSET_LISTING} from "utils/constants";
 import FormField from "../common/formfield";
 import dataService from "utils/dataservice";
 import Heading from "../heading";
@@ -55,7 +48,6 @@ class assetAssignment extends Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    // this.handleSearchChange = this.handleSearchChange.bind(this);
     this.cancel = this.cancel.bind(this);
     this.assign = this.assign.bind(this);
     this.unassign = this.unassign.bind(this);
@@ -90,7 +82,6 @@ class assetAssignment extends Component {
     let optionData = [];
     optionData = this.state.empData.map(item => ({ value: item.empNo, label: item.firstName }));
     return optionData;
-    // console.log(empData);
   }
 
   validateFieldData(value, args, state, validation, field) {
@@ -110,7 +101,7 @@ class assetAssignment extends Component {
     if (validation.isValid) {
       dataService.postRequest("assetassignment", { employee: employee, issueDate: issueDate, updatedId: updatedId, assetId: this.props.assetId })
         .then(res => {
-          if (res.status == "Success") {
+          if (res.status == "success") {
             app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.SUCESS, msg: "Successfully Assigned" });
             setTimeout(()=>{
               app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
@@ -136,7 +127,7 @@ class assetAssignment extends Component {
       dataService
         .putRequest("assetassignment", { returnDate: returnDate, cause: cause, updatedId: updatedId, assetId: this.props.match.params.assetId })
         .then(res => {
-          if (res.status == "Success") {
+          if (res.status == "success") {
             app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Assets Unassigned Successfully"});
             setTimeout(()=>{
               app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
@@ -165,15 +156,6 @@ class assetAssignment extends Component {
     });
   }
 
-  // handleSearchChange(event){
-  //   let field = event.target.name;
-  //   let value = event.target.value;
-  //   this.fieldData[field] = value;
-  //   event && this.setState({
-  //     [field]: value
-  //   })
-  // }
-
   render() {
     let validation = this.submitted ? this.validator.validate(this.state) : this.state.validation;
     var status = this.props.match.params.status;
@@ -190,7 +172,6 @@ class assetAssignment extends Component {
             <div className="d-flex justify-content-sm-around">
               {/* Input details first block  */}
               <div className="p-2 w-25 mt-5">
-              
                 <FormField
                    type="select"
                    searchable
@@ -201,7 +182,6 @@ class assetAssignment extends Component {
                    name="empNo"
                    nameAlias={"empNo"}
                    onChange={this.handleInputChange}
-                   onSearch
                    options={this.getOptions()}
                    value={this.state.empNo}
                    placeholder="Employee Number"
