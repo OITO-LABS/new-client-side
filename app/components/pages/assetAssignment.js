@@ -5,7 +5,7 @@ import dataService from "utils/dataservice";
 import Heading from "../heading";
 import FormValidator from '../common/formvalidator';
 
-class assetAssignment extends Component {
+class AssetAssignment extends Component {
   constructor(props) {
     super(props);
     this.validateFieldData = this.validateFieldData.bind(this);
@@ -266,4 +266,4 @@ class assetAssignment extends Component {
   }
 }
 
-export default assetAssignment;
+export default AssetAssignment;
