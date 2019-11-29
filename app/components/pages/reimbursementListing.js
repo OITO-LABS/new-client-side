@@ -14,6 +14,7 @@ export class ReimbursementListing extends Component {
       fromDate: "",
       toDate: "",
       recordsPerPage: 10,
+      searchValue:"",
       fields: [
         { label: "sl no", key: "index" },
         { label: "id", key: "empNo" },
@@ -69,14 +70,22 @@ export class ReimbursementListing extends Component {
   }
 
   gettingData() {
-    const data = { page: this.state.activePage - 1, dateFrom: this.state.fromDate, dateTo: this.state.toDate, size: this.state.recordsPerPage };
+    const data = { page: this.state.activePage - 1, dateFrom: this.state.fromDate, dateTo: this.state.toDate, size: this.state.recordsPerPage, empNo:this.state.searchValue };
     let urlKey = "";
-    if (this.state.fromDate == "" && this.state.toDate == "") {
+    if ((this.state.fromDate == "" && this.state.toDate == "") && this.state.searchValue == "") {
       urlKey = "reimbursementList";
       this.fetchingData(urlKey, data);
     }
-    else if (this.state.fromDate !== "" && this.state.toDate !== "") {
+    else if ((this.state.fromDate !== "" && this.state.toDate !== "") && this.state.searchValue == "") {
       urlKey = "reimbursementDate";
+      this.fetchingData(urlKey, data);
+    }
+    else if ((this.state.fromDate == "" && this.state.toDate == "") && this.state.searchValue !== "") {
+      urlKey = "reimbursementSearch";
+      this.fetchingData(urlKey, data);
+    }
+    else if ((this.state.fromDate !== "" && this.state.toDate !== "") && this.state.searchValue !== "") {
+      urlKey = "reimbursementDateAndSearch";
       this.fetchingData(urlKey, data);
     }
   }
@@ -126,14 +135,14 @@ export class ReimbursementListing extends Component {
       activePage: 1,
       searchValue: value
     },
-    //  () => { this.gettingData() }
-     )
+       () => { this.gettingData() }
+    )
   }
 
   render() {
     return (
       <div>
-        <DateAndButtonBar button1name="apply for reimbursement" dateHandler={this.handleDate} handleRegister={this.handleRegister} searchHandler={this.handleSearch}/>
+        <DateAndButtonBar button1name="apply for reimbursement" dateHandler={this.handleDate} handleRegister={this.handleRegister} searchHandler={this.handleSearch} />
         <Heading heading="REIMBURSEMENTS" />
         <ListTable
           totalRecords={this.state.totalRecords}
