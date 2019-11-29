@@ -26,13 +26,13 @@ export class Login extends Component {
                 message: "Password is empty"
             },
             {
-                field: 'username', 
-                method: this.validEmailData, 
-                args:[{ignore_whitespace:true}],
-                validWhen: true, 
+                field: 'username',
+                method: this.validEmailData,
+                args: [{ ignore_whitespace: true }],
+                validWhen: true,
                 message: 'Invalid format'
-              },
-              {
+            },
+            {
                 field: "password",
                 method: this.validatePassword,
                 args: [{ ignore_whitespace: true }],
@@ -53,9 +53,9 @@ export class Login extends Component {
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.handleForgotPassword = this.handleForgotPassword.bind(this);
         this.validEmailData = this.validEmailData.bind(this);
-        this.validatePassword=this.validatePassword.bind(this);
+        this.handleForgotPassword = this.handleForgotPassword.bind(this);
+        this.validatePassword = this.validatePassword.bind(this);
     }
 
     handleInputChange(field) {
@@ -78,19 +78,21 @@ export class Login extends Component {
         this.submitted = true;
         // alert("onsubmit-clicked");
     }
+    
     handleForgotPassword() {
         alert("forgot password clicked");
     }
 
-    validEmailData(value,args, state, validation,field) {
+    validEmailData(value, args, state, validation, field) {
         const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
-        return(validEmailRegex.test(value));
-      }
-      validatePassword(value,args, state, validation,field){
+        return (validEmailRegex.test(value));
+    }
+
+    validatePassword(value, args, state, validation, field) {
         // const validPasswordRegex = RegExp(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/);
-               const validPasswordRegex = RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/i);
-        return(validPasswordRegex.test(value));
-      }
+        const validPasswordRegex = RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/i);
+        return (validPasswordRegex.test(value));
+    }
 
     render() {
         let validation = this.submitted

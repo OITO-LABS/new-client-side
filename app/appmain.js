@@ -33,6 +33,8 @@ import Loader from "components/common/loader";
 import "assets/sass/home.scss";
 // import NoRecordsFound from "../app/components/noRecordsFound";
 import Login from "components/pages/login";
+import ForgotPassword from "components/pages/forgotPassword";
+
 
 
 initApp();
@@ -107,6 +109,7 @@ class Main extends React.Component {
     return (
       <React.Fragment>
       {/* <Login/> */}
+      <ForgotPassword/>
         <Loader />
         {/* <Collapse/> */}
         <Header pageQuery /> 
