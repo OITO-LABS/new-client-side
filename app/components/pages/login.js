@@ -37,7 +37,7 @@ export class Login extends Component {
                 method: this.validatePassword,
                 args: [{ ignore_whitespace: true }],
                 validWhen: true,
-                message: "Password is wrong format"
+                message: "Password must contain numbers,special characters,lowercase & uppercase alphabets"
             },
             // {
             //     field: 'newPassword',

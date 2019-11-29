@@ -42,7 +42,7 @@ class ResetPassword extends Component {
                 aliasField:'newPassword',
                 method: this.checkPswdRulesMatched,
                 validWhen: true,
-                message: 'Weak password'
+                message: 'Password must contain numbers,special characters,lowercase & uppercase alphabets'
             },
             {
                 field: 'cpassword',
@@ -63,7 +63,6 @@ class ResetPassword extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.onReset = this.onReset.bind(this);
         this.checkPswdRulesMatched = this.checkPswdRulesMatched.bind(this);
-        this.passwordMatch = this.passwordMatch.bind(this);
     }
     
     componentDidMount() {
@@ -76,14 +75,15 @@ class ResetPassword extends Component {
     }
 
     checkPswdRulesMatched(value,args, state, validation,field) {
-
+        const validPasswordRegex = RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/i);
+        return(validPasswordRegex.test(value));
     }
 
-    
     onReset() {
         const validation = this.validator.validate(this.state);
         this.setState({ validation });
         this.submitted = true;
+        
     }
 
     getStateData(data) {
