@@ -25,7 +25,27 @@ export class Login extends Component {
                 validWhen: false,
                 message: "Password is empty"
             },
-
+            {
+                field: 'username', 
+                method: this.validEmailData, 
+                args:[{ignore_whitespace:true}],
+                validWhen: true, 
+                message: 'Invalid format'
+              },
+              {
+                field: "password",
+                method: this.validatePassword,
+                args: [{ ignore_whitespace: true }],
+                validWhen: true,
+                message: "Password is wrong format"
+            },
+            // {
+            //     field: 'newPassword',
+            //     aliasField:'newPassword',
+            //     method: this.checkPswdRulesMatched,
+            //     validWhen: true,
+            //     message: 'app.login.pswd_rules_invalid'
+            // },
         ]);
 
         this.state = {
@@ -34,8 +54,8 @@ export class Login extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.handleForgotPassword = this.handleForgotPassword.bind(this);
-
-
+        this.validEmailData = this.validEmailData.bind(this);
+        this.validatePassword=this.validatePassword.bind(this);
     }
 
     handleInputChange(field) {
@@ -62,28 +82,38 @@ export class Login extends Component {
         alert("forgot password clicked");
     }
 
+    validEmailData(value,args, state, validation,field) {
+        const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+        return(validEmailRegex.test(value));
+      }
+      validatePassword(value,args, state, validation,field){
+        // const validPasswordRegex = RegExp(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/);
+               const validPasswordRegex = RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/i);
+        return(validPasswordRegex.test(value));
+      }
+
     render() {
         let validation = this.submitted
             ? this.validator.validate(this.state)
             : this.state.validation;
         // var assetId = this.props.match.params.assetId;
         return (
-            <div class="container-fluid fluid">
-                <div class="container">
+            <div className="container-fluid fluid">
+                <div className="container">
 
-                    <div class="row">
-                        <div class="col-md-8 mx-auto form">
-                            <form class="col-md-12 mx-auto login-form text-center">
-                                <div class="login-form-avatar col-md-4 mx-auto">
-                                    <img src={Logo} alt="AVATAR" class="login-avatar" />
+                    <div className="row">
+                        <div className="col-md-8 mx-auto form">
+                            <div className="col-md-12 mx-auto login-form text-center">
+                                <div className="login-form-avatar col-md-4 mx-auto">
+                                    <img src={Logo} alt="AVATAR" className="login-avatar" />
                                 </div>
 
-                                <span class="login100-form-title ">
+                                <span className="login100-form-title ">
                                     Account Login
                                 </span>
-                                <div class="row col-md-6 mx-auto input-fields">
-                                    <div class="wrap-input100 validate-input" data-validate="Username is required">
-                                        {/* <input class="input100" type="text" name="username" placeholder="Username"/> */}
+                                <div className="row col-md-6 mx-auto input-fields">
+                                    <div className="wrap-input100 validate-input" data-validate="Username is required">
+                                        {/* <input className="input100" type="text" name="username" placeholder="Username"/> */}
                                         <FormField
                                             // label="Asset Key"
                                             // labelClassName="txt-label"
@@ -96,14 +126,14 @@ export class Login extends Component {
                                             placeholder="username"
                                             validator={validation}
                                         />
-                                        <span class="focus-input100"></span>
-                                        <span class="symbol-input100">
-                                            <i class="fa fa-user"></i>
+                                        <span className="focus-input100"></span>
+                                        <span className="symbol-input100">
+                                            <i className="fa fa-user"></i>
                                         </span>
                                     </div>
 
-                                    <div class="wrap-input100 validate-input" data-validate="Password is required">
-                                        {/* <input class="input100" type="password" name="password" placeholder="Password" /> */}
+                                    <div className="wrap-input100 validate-input" data-validate="Password is required">
+                                        {/* <input className="input100" type="password" name="password" placeholder="Password" /> */}
                                         <FormField
                                             // label="Asset Key"
                                             // labelClassName="txt-label"
@@ -117,26 +147,26 @@ export class Login extends Component {
                                             type="password"
                                             validator={validation}
                                         />
-                                        <span class="focus-input100"></span>
-                                        <span class="symbol-input100">
-                                            <i class="fa fa-lock"></i>
+                                        <span className="focus-input100"></span>
+                                        <span className="symbol-input100">
+                                            <i className="fa fa-lock"></i>
                                         </span>
                                     </div>
 
-                                    <div class="submit text-center mx-auto">
-                                        <button class="login100-form-btn" onClick={this.onSubmit}>
+                                    <div className="submit text-center mx-auto">
+                                        <button className="login100-form-btn" onClick={this.onSubmit}>
                                             Login
                                         </button>
                                     </div>
                                 </div>
 
-                                <div class="text-center forgot-credentials">
-                                    <a href="#" class="txt1" onClick={this.handleForgotPassword}>
+                                <div className="text-center forgot-credentials">
+                                    <a href="#" className="txt1" onClick={this.handleForgotPassword}>
                                         Forgot Username / Password?
                                     </a>
                                 </div>
 
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
