@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import "assets/sass/pages/_login.scss";
 import Logo from 'assets/images/logo.png';
-import {FLIP_LOADER}  from "utils/constants";
+import {FLIP_LOADER,RESET_PASSWORD}  from "utils/constants";
 import FormValidator from '../common/formvalidator';
 import FormField from "../common/formfield";
+import dataService from "utils/dataservice";
 
 class ResetPassword extends Component {
 
@@ -51,7 +52,15 @@ class ResetPassword extends Component {
                 args:[{ignore_whitespace:true}],
                 validWhen: false,
                 message: 'Password is empty'
-              },
+            },
+            {
+                field: 'cpassword',
+                aliasField:'cpassword',
+                method: this.passwordMatch,   
+                args:['eq','newPassword'],
+                validWhen: true,
+                message: 'Password mismatch'
+            }
         ])
 
         this.state = {
@@ -63,6 +72,7 @@ class ResetPassword extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.onReset = this.onReset.bind(this);
         this.checkPswdRulesMatched = this.checkPswdRulesMatched.bind(this);
+        this.passwordMatch = this.passwordMatch.bind(this);
     }
     
     componentDidMount() {
@@ -79,11 +89,35 @@ class ResetPassword extends Component {
         return(validPasswordRegex.test(value));
     }
 
+    passwordMatch(value,args, state, validation,field) {
+        if(validation.cpassword !== validation.newPassword) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
     onReset() {
         const validation = this.validator.validate(this.state);
         this.setState({ validation });
         this.submitted = true;
-        
+
+        if (validation.isValid) {
+            dataService.postRequest("reset", { ...this.getStateData(this.state) })
+            .then(res => {
+                if(res.status == "success") {
+                    app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Password successfully reset"});
+                    setTimeout(()=>{
+                        app.events.trigger(GOTO_URL, { routerKey: RESET_PASSWORD });
+                      },3000)
+                }
+                else {
+                    app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
+                }  
+            })
+            .catch(err => {console.log(err)});   
+        }
     }
 
     getStateData(data) {
