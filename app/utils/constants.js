@@ -41,19 +41,17 @@ export const PATH_CHANGED = 'path:changed';
 //routes
 export const LANDING = 'landing';
 export const APP_INFO = 'app-info';
-// *********DASHBOARD*********
+export const RESET_PASSWORD = 'reset-password';
 export const DASHBOARD = 'dashboard';
-// *********EMPLOYEE_REG*********
-export const EMPLOYEE_REG = 'employee-reg'
-// *********ADD_ASSETS*********
-export const ADD_ASSETS = 'add-assets'
-// ASSIGN_ASSETS
-export const ASSIGN_ASSETS = 'assign-assets'
 
+export const EMPLOYEE_REG = 'employee-reg'
 export const EMPLOYEE_DETAILS ="employee-details";
 export const EMPLOYEE_LISTING = "employee-listing";
+
+export const ADD_ASSETS = 'add-assets'
 export const ASSET_DETAILS ="asset-details";
 export const ASSET_LISTING = "asset-listing";
+export const ASSIGN_ASSETS = 'assign-assets'
 
 export const REIMBURSEMENT_LISTING ="reimbursement-listing";
 export const REIMBURSEMENT_EMPLOYEE_LISTING = "reimbursement-employee-listing";

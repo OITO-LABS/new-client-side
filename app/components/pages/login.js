@@ -73,7 +73,7 @@ export class Login extends Component {
 
                     <div class="row">
                         <div class="col-md-8 mx-auto form">
-                            <form class="col-md-12 mx-auto login-form text-center">
+                            <div class="col-md-12 mx-auto login-form text-center">
                                 <div class="login-form-avatar col-md-4 mx-auto">
                                     <img src={Logo} alt="AVATAR" class="login-avatar" />
                                 </div>
@@ -136,7 +136,7 @@ export class Login extends Component {
                                     </a>
                                 </div>
 
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
