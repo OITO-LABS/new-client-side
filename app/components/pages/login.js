@@ -47,6 +47,7 @@ export class Login extends Component {
         })
     }
 
+
     validateFieldData(value, args, state, validation, field) {
         return this.fieldData[field] && !!this.fieldData[field][args.propName];
     }
@@ -55,13 +56,17 @@ export class Login extends Component {
         const validation = this.validator.validate(this.state);
         this.setState({ validation });
         this.submitted = true;
-        alert("onsubmit-clicked");
+        // alert("onsubmit-clicked");
     }
     handleForgotPassword() {
         alert("forgot password clicked");
     }
 
     render() {
+        let validation = this.submitted
+            ? this.validator.validate(this.state)
+            : this.state.validation;
+        // var assetId = this.props.match.params.assetId;
         return (
             <div class="container-fluid fluid">
                 <div class="container">

@@ -27,7 +27,8 @@
       "reimbursementEmployee":"api/reimbursement/emp-id/",
       "reimbursementBill":"api/reimbursement/emp-id/:reimbursementId",
       "reimbursementApply":"api/reimbursement/apply",
-
+      "reimbursementSearch":"api/reimbursement/search-emp-id",
+      "reimbursementDateAndSearch":"api/reimbursement/search-emp-id-date",
       "params": {
         "commonparams": "commonparams"
       }

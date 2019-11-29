@@ -106,7 +106,7 @@ class Main extends React.Component {
     if (!this.state.appinit) return <Loader inline />;
     return (
       <React.Fragment>
-      {/* <Login/> */}
+      <Login/>
         <Loader />
         {/* <Collapse/> */}
         <Header pageQuery /> 
