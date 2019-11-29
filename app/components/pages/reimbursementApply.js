@@ -134,7 +134,7 @@ class ReimbursementApply extends Component {
     });
   }
 
-  handleInputChange(event, fieldData = {}) {
+  handleInputChange(event, fieldData={}) {
     let field = fieldData.field || event.target.name;
     let value = fieldData.value || event.target.value || "";
     this.fieldData[field] = fieldData;
@@ -169,7 +169,7 @@ class ReimbursementApply extends Component {
       dataService
         .postRequest("reimbursementApply", {empNo: empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementDetails: reimbursementDetails})
         .then(res => {
-          if (res.status == "Success") {
+          if (res.status == "success") {
             app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
             setTimeout(()=>{
               app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_LISTING });
@@ -232,12 +232,13 @@ class ReimbursementApply extends Component {
                 <div className="mr-2">
                   <FormField
                     type="select"
+                    searchable
                     label="Employee Name"
                     labelClassName="txt-label"
                     fieldClassName="select-input"
                     mandatory
                     name="empNo"
-                    nameAlias={"abc_fullName"}
+                    nameAlias={"empNo"}
                     onChange={this.handleInputChange}
                     options={this.getOptions()}
                     value={this.state.empNo}
@@ -309,14 +310,16 @@ class ReimbursementApply extends Component {
                         <td>
                         <FormField
                           type="select"
+                          searchable
                           labelClassName="txt-label"
                           fieldClassName="select-input"
                           mandatory
                           name="categoryName"
-                          nameAlias={"abc_fullName"}
-                          onChange={() =>
-                              this.handleInputChange2(event, detail)
-                          }
+                          nameAlias={"categoryName"}
+                          onChange = {this.handleInputChange}
+                          // onChange={() =>
+                          //     this.handleInputChange2(event, detail)
+                          // }
                           options={[
                             { value: "Business Meals", label: "Business Meals" },
                             { value: "Legal Fees", label: "Legal Fees" },
