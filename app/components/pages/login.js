@@ -37,7 +37,7 @@ export class Login extends Component {
                 method: this.validatePassword,
                 args: [{ ignore_whitespace: true }],
                 validWhen: true,
-                message: "Password is wrong format"
+                message: "Your password should be at least 8 characters, have both upper and lower case letters, and contain at least 1 number or special character."
             },
             // {
             //     field: 'newPassword',
