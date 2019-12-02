@@ -15,7 +15,7 @@ class ReimbursementApply extends Component {
         method: "isEmpty",
         args: [{ ignore_whitespace: true }],
         validWhen: false,
-        message: "Select employee number"
+        message: "Select employee name"
       },
       {
         field: "reimbursementDate",
