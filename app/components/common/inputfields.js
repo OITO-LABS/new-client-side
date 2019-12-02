@@ -88,8 +88,9 @@ export class Select extends React.Component{
     {
         let value = event.currentTarget.attributes.valuekey.value;
         this.p.value = value;
+        const index = this.p.extraProps && this.props.extraProps.index
         this.setState({dropDownToggle:false});
-        this.props.onChange && this.props.onChange(event,{field:this.props.name,value,id:this.id,...this.getItemInfo(value)});
+        this.props.onChange && this.props.onChange(event,{index:index,field:this.props.name,value,id:this.id,...this.getItemInfo(value)});
     }
     getItemInfo(value){
         return (this.options[value] || {} );

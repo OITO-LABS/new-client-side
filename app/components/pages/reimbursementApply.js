@@ -275,9 +275,9 @@ class ReimbursementApply extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.reimbursementDetails.map(detail => {
+                  {this.state.reimbursementDetails.map((detail, index ) => {
                     return (
-                      <tr>
+                      <tr key={index}>
                         <td>
                           <FormField
                             labelClassName="txt-label"
@@ -316,10 +316,8 @@ class ReimbursementApply extends Component {
                           mandatory
                           name="categoryName"
                           nameAlias={"categoryName"}
-                          onChange = {this.handleInputChange}
-                          // onChange={() =>
-                          //     this.handleInputChange2(event, detail)
-                          // }
+                          extraProps={detail}
+                          onChange = {this.handleInputChange2}
                           options={[
                             { value: "Business Meals", label: "Business Meals" },
                             { value: "Legal Fees", label: "Legal Fees" },
@@ -342,22 +340,10 @@ class ReimbursementApply extends Component {
                             { value: "Others", label: "Others" }
     
                           ]}
-                            value={this.state.categoryName}
-                            placeholder="Category Name"
-                            validator={validation}
-                          />
-                          {/* <FormField
-                            labelClassName="txt-label"
-                            fieldClassName="txt-input"
-                            mandatory
-                            onChange={() =>
-                              this.handleInputChange2(event, detail)
-                            }
-                            name="categoryName"
                             value={detail.categoryName}
                             placeholder="Category Name"
                             validator={validation}
-                          /> */}
+                          />
                         </td>
                         <td>
                           <FormField
@@ -393,7 +379,7 @@ class ReimbursementApply extends Component {
                             className="btn btn-success"
                             onClick={this.handleAdd}
                           >
-                            <i class="fas fa-plus"></i>
+                            <i className="fas fa-plus"></i>
                           </button>
                         </td>
                         <td>
@@ -403,7 +389,7 @@ class ReimbursementApply extends Component {
                               this.handleDelete(detail);
                             }}
                           >
-                            <i class="fas fa-minus"></i>
+                            <i className="fas fa-minus"></i>
                           </button>
                         </td>
                       </tr>
