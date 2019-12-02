@@ -3,6 +3,9 @@ import "assets/sass/pages/_login.scss";
 import Logo from 'assets/images/logo.png';
 import FormField from "../common/formfield";
 import FormValidator from "../common/formvalidator";
+import { FORGOT_PASSWORD,GOTO_URL,FLIP_LOADER, DASHBOARD } from '../../utils/constants';
+import dataService from "utils/dataservice";
+
 
 
 
@@ -49,6 +52,8 @@ export class Login extends Component {
         ]);
 
         this.state = {
+            username:"",
+            password:""
 
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -77,11 +82,28 @@ export class Login extends Component {
         this.setState({ validation });
         this.submitted = true;
         // alert("onsubmit-clicked");
+
+        if (validation.isValid) {
+            let data={userName:this.state.username,password:this.state.password}
+            dataService.postRequest("login", data)
+            .then(res => {
+                if(res.status == "success") {
+                    app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Password successfully reset"});
+                    setTimeout(()=>{
+                        app.events.trigger(GOTO_URL, { routerKey: HOME });
+                      },3000)
+                }
+                else {
+                    app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
+                }  
+            })
+            .catch(err => {console.log(err)});   
+        }
     }
     
     handleForgotPassword() {
-        alert("forgot password clicked");
-    }
+        app.events.trigger(GOTO_URL, { routerKey: FORGOT_PASSWORD});
+   }
 
     validEmailData(value, args, state, validation, field) {
         const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
@@ -92,6 +114,10 @@ export class Login extends Component {
         // const validPasswordRegex = RegExp(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/);
         const validPasswordRegex = RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/i);
         return (validPasswordRegex.test(value));
+    }
+
+    componentDidMount() {
+        app.events.trigger(FLIP_LOADER, { status: false, reset: true });
     }
 
     render() {

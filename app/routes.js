@@ -1,6 +1,6 @@
 import {
     PATH_PREFIX, LANDING, DASHBOARD, APP_INFO, EMPLOYEE_REG, EMPLOYEE_UPDATE, EMPLOYEE_LISTING, EMPLOYEE_DETAILS, ASSET_LISTING, ASSET_DETAILS, ADD_ASSETS, ASSIGN_ASSETS,
-    REIMBURSEMENT_LISTING, REIMBURSEMENT_EMPLOYEE_LISTING, REIMBURSEMENT_BILL_LISTING,APPLY_REIMBURSEMENT,RESET_PASSWORD} from 'utils/constants';
+    REIMBURSEMENT_LISTING, REIMBURSEMENT_EMPLOYEE_LISTING, REIMBURSEMENT_BILL_LISTING,APPLY_REIMBURSEMENT,RESET_PASSWORD,FORGOT_PASSWORD,LOGIN} from 'utils/constants';
 const routes = [
     {
         name: LANDING,
@@ -19,6 +19,26 @@ const routes = [
         componentId: 'pages/resetPassword',
         title: 'reset password',
         className: 'reset-password-page',
+        exact: true,
+        nowrap: false
+    },
+    {
+        name: LOGIN,
+        path: PATH_PREFIX + LOGIN,
+        samplePath: PATH_PREFIX + LOGIN,
+        componentId: 'pages/login',
+        title: 'login',
+        className: 'login-page',
+        exact: true,
+        nowrap: false
+    },
+    {
+        name: FORGOT_PASSWORD,
+        path: PATH_PREFIX + FORGOT_PASSWORD,
+        samplePath: PATH_PREFIX + FORGOT_PASSWORD,
+        componentId: 'pages/forgotPassword',
+        title: 'forgot password',
+        className: 'forgot-password-page',
         exact: true,
         nowrap: false
     },

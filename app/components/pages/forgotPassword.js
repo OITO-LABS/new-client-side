@@ -78,7 +78,7 @@ export class ForgotPassword extends Component {
                         </span>
                                 <div className="row col-md-6 mx-auto input-fields">
 
-                                <div className="text-center forgot-credentials">
+                                <div className="text-center forgot-credentials forgot-password">
                                     <h3  className="txt1" >
                                         Please enter your registered Email address... We will send you a password reset link to that email address
                                     </h3>
