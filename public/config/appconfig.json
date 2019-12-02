@@ -3,6 +3,9 @@
   "apis": {
       "baseurl": "http://localhost:8080/",
       "portalSettings": "/data/portal-settings.json",
+
+      "reset": "api/login/reset",
+
       "getEmpDetails":"api/employee/:empId",    
       "updateEmployee":"api/employee/:empId",
       "getAsset":"api/asset/details/:assetId",
