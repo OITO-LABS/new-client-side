@@ -1,16 +1,27 @@
 import {
     PATH_PREFIX, LANDING, DASHBOARD, APP_INFO, EMPLOYEE_REG, EMPLOYEE_UPDATE, EMPLOYEE_LISTING, EMPLOYEE_DETAILS, ASSET_LISTING, ASSET_DETAILS, ADD_ASSETS, ASSIGN_ASSETS,
-    REIMBURSEMENT_LISTING, REIMBURSEMENT_EMPLOYEE_LISTING, REIMBURSEMENT_BILL_LISTING,APPLY_REIMBURSEMENT,RESET_PASSWORD,FORGOT_PASSWORD,LOGIN} from 'utils/constants';
+    REIMBURSEMENT_LISTING, REIMBURSEMENT_EMPLOYEE_LISTING, REIMBURSEMENT_BILL_LISTING,APPLY_REIMBURSEMENT,RESET_PASSWORD,FORGOT_PASSWORD,LOGIN,HOME} from 'utils/constants';
 const routes = [
     {
         name: LANDING,
         path: PATH_PREFIX,
         samplePath: PATH_PREFIX,
-        componentId: 'pages/home',
+        componentId: 'pages/login',
         title: 'Home',
+        className: 'login-page',
+        exact: true,
+        nowrap: false,
+        skipLogin:true
+    },
+    {
+        name: HOME,
+        path: PATH_PREFIX + HOME,
+        samplePath: PATH_PREFIX + HOME,
+        componentId: 'pages/home',
+        title: 'home',
         className: 'home-page',
         exact: true,
-        nowrap: false
+        nowrap: false,
     },
     {
         name: RESET_PASSWORD,
@@ -20,7 +31,8 @@ const routes = [
         title: 'reset password',
         className: 'reset-password-page',
         exact: true,
-        nowrap: false
+        nowrap: false,
+        skipLogin:true
     },
     {
         name: LOGIN,
@@ -30,7 +42,8 @@ const routes = [
         title: 'login',
         className: 'login-page',
         exact: true,
-        nowrap: false
+        nowrap: false,
+        skipLogin:true
     },
     {
         name: FORGOT_PASSWORD,
@@ -40,7 +53,8 @@ const routes = [
         title: 'forgot password',
         className: 'forgot-password-page',
         exact: true,
-        nowrap: false
+        nowrap: false,
+        skipLogin:true
     },
     {
         name: DASHBOARD,
@@ -92,7 +106,7 @@ const routes = [
         title: 'Employee Listing',
         className: 'employee-listing-page',
         exact: true,
-        nowrap: false
+        nowrap: false,
         // params:'',
     },
     {
