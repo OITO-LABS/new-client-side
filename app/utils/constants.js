@@ -44,7 +44,7 @@ export const APP_INFO = 'app-info';
 export const RESET_PASSWORD = 'reset-password';
 export const FORGOT_PASSWORD = 'forgot-password';
 export const LOGIN = 'login';
-export const DASHBOARD = 'dashboard';
+export const PROFILE = 'profile';
 
 export const EMPLOYEE_REG = 'employee-reg'
 export const EMPLOYEE_DETAILS ="employee-details";

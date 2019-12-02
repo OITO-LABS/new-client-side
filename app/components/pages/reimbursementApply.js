@@ -242,7 +242,7 @@ class ReimbursementApply extends Component {
                     onChange={this.handleInputChange}
                     options={this.getOptions()}
                     value={this.state.empNo}
-                    placeholder="Empoyee Number"
+                    placeholder="Employee Name"
                     validator={validation}
                   />
                 </div>
@@ -318,7 +318,7 @@ class ReimbursementApply extends Component {
                           nameAlias={"categoryName"}
                           onChange = {this.handleInputChange}
                           // onChange={() =>
-                          //     this.handleInputChange(event, detail)
+                          //     this.handleInputChange2(event, detail)
                           // }
                           options={[
                             { value: "Business Meals", label: "Business Meals" },

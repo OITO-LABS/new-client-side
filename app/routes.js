@@ -1,5 +1,5 @@
 import {
-    PATH_PREFIX, LANDING, DASHBOARD, APP_INFO, EMPLOYEE_REG, EMPLOYEE_UPDATE, EMPLOYEE_LISTING, EMPLOYEE_DETAILS, ASSET_LISTING, ASSET_DETAILS, ADD_ASSETS, ASSIGN_ASSETS,
+    PATH_PREFIX, LANDING, PROFILE, APP_INFO, EMPLOYEE_REG, EMPLOYEE_UPDATE, EMPLOYEE_LISTING, EMPLOYEE_DETAILS, ASSET_LISTING, ASSET_DETAILS, ADD_ASSETS, ASSIGN_ASSETS,
     REIMBURSEMENT_LISTING, REIMBURSEMENT_EMPLOYEE_LISTING, REIMBURSEMENT_BILL_LISTING,APPLY_REIMBURSEMENT,RESET_PASSWORD,FORGOT_PASSWORD,LOGIN} from 'utils/constants';
 const routes = [
     {
@@ -43,12 +43,12 @@ const routes = [
         nowrap: false
     },
     {
-        name: DASHBOARD,
-        path: PATH_PREFIX + DASHBOARD,
-        samplePath: PATH_PREFIX + DASHBOARD,
-        componentId: 'pages/dashboard',
-        title: 'Dashboard',
-        className: 'dashboard-page',
+        name: PROFILE,
+        path: PATH_PREFIX + PROFILE,
+        samplePath: PATH_PREFIX + PROFILE,
+        componentId: 'pages/profile',
+        title: 'PROFILE',
+        className: 'profile-page',
         exact: true,
         nowrap: false
     },

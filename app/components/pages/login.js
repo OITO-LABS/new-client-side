@@ -3,7 +3,7 @@ import "assets/sass/pages/_login.scss";
 import Logo from 'assets/images/logo.png';
 import FormField from "../common/formfield";
 import FormValidator from "../common/formvalidator";
-import { FORGOT_PASSWORD,GOTO_URL,FLIP_LOADER, DASHBOARD } from '../../utils/constants';
+import { FORGOT_PASSWORD,GOTO_URL,FLIP_LOADER, PROFILE } from '../../utils/constants';
 import dataService from "utils/dataservice";
 
 
