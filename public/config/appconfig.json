@@ -32,6 +32,8 @@
       "reimbursementApply":"api/reimbursement/apply",
       "reimbursementSearch":"api/reimbursement/search-emp-id",
       "reimbursementDateAndSearch":"api/reimbursement/search-emp-id-date",
+
+      "login":"api/login",
       "params": {
         "commonparams": "commonparams"
       }

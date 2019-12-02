@@ -80,7 +80,7 @@ export class ForgotPassword extends Component {
 
                                 <div className="text-center forgot-credentials forgot-password">
                                     <h3  className="txt1" >
-                                        Please enter your registered Email address... We will send you a password reset link to that email address
+                                        Please enter your registered Email address as username...
                                     </h3>
                                 </div>
 
@@ -113,8 +113,6 @@ export class ForgotPassword extends Component {
                                 </button>
                                     </div>
                                 </div>
-
-                            
 
                             </div>
                         </div>

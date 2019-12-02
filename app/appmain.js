@@ -21,7 +21,10 @@ import {
   GOTO_URL,
   LANDING,
   USER_TKEY,
-  PATH_PREFIX
+  PATH_PREFIX,
+  HOME,
+  EMPLOYEE_LISTING,
+  USER_SIGNIN,USER_SIGNOUT
 } from "utils/constants";
 import header from "components/layout/header";
 import Footer from "components/layout/footer";
@@ -39,34 +42,41 @@ import ForgotPassword from "components/pages/forgotPassword";
 
 initApp();
 
-const NoMatch = ({ location }) => (
+const NoMatchNonLogin = ({ location }) => (
   <Redirect to={resolveRouterPath(LANDING, { lang: app.selectedLocale })} />
+);
+const NoMatchLogin = ({ location }) => (
+  <Redirect to={resolveRouterPath(HOME, { lang: app.selectedLocale })} />
 );
 const Header = ComponentWrapper(header, { nowrap: true });
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { appinit: false };
+    this.state = { appinit: false,
+      login:false };
     this.loadPortalSettings();
     this.gotoUrl = this.gotoUrl.bind(this);
-    //this.userSignIn = this.userSignIn.bind(this);
+    this.userSignIn = this.userSignIn.bind(this);
     //this.userSignOut = this.userSignOut.bind(this);
     const ev = {};
     ev[GOTO_URL] = this.gotoUrl;
-    //ev[USER_SIGNIN] = this.userSignIn;
+    ev[USER_SIGNIN] = this.userSignIn;
     //ev[USER_SIGNOUT] = this.userSignOut;
     app.events.subscribe(ev);
   }
   userSignIn([userAuth, source]) {
     let d = new Date().getTime() - 100;
-    userAuth = { ...userAuth, ...(userAuth.customFields || {}) };
+    // userAuth = { ...userAuth, ...(userAuth.customFields || {}) };
     app.userAuth = userAuth;
-    app.userId = userAuth.userId;
-    this.setUserToken(userAuth, true);
+    app.empId = userAuth.empId;
+    // this.setUserToken(userAuth, true);
+    this.setState({
+      login:true
+    },()=>{app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });})
   }
   setUserToken(userAuth, loginUser) {
-    setToCache(USER_TKEY, BEARER_KEY + userAuth.accessToken);
+    //setToCache(USER_TKEY, BEARER_KEY + userAuth.accessToken);
     //removeFromCache(LOGIN_USER_DATA);
     //loginUser && setToCache(LOGIN_USER_DATA,LOGIN_USER_DATA);
   }
@@ -100,40 +110,65 @@ class Main extends React.Component {
     //console.log(process.env.TOKEN_CHECK+'-----Main mouted------');
     //this.loadPortalSettings();
     this.mouted = true;
-    
+    // this.setState({
+    //   login:true
+    // },()=>{app.events.trigger(GOTO_URL, { routerKey: HOME });})
+   
+    // app.filteredRoutes=filterRows();
+
   }
   componentDidUpdate() {
     //console.log('-----Main updated------');
   }
   render() {
     if (!this.state.appinit) return <Loader inline />;
+    console.log('-----'+this.state.login);
     return (
       <React.Fragment>
-      <Login/>
-      <ForgotPassword/>
-        <Loader />
-        {/* <Collapse/> */}
-        <Header pageQuery /> 
-        <div className="row content-height">
-          <div className="col-2"><Sidebar/></div>
-          <div className="col-10">
+        {this.state.login ?
+          <React.Fragment>
+            <Loader />
+            {/* <Collapse/> */}
+            <Header pageQuery />
+            <div className="row content-height">
+              <div className="col-2"><Sidebar /></div>
+              <div className="col-10">
+                <Router>
+                  <Switch>
+                    {app.routes.filter(route => !route.skipLogin).map(route => {
+                      let component = ComponentWrapper(
+                        loadableComp(route.componentId),
+                        route
+                      );
+                      return (
+                        <Route {...route} key={route.name} component={component} />
+                      );
+                    })}
+                    <Route component={NoMatchLogin} />
+                  </Switch>
+                </Router>
+              </div>
+            </div>
+            <Footer />
+          </React.Fragment>
+          :
+          <React.Fragment>
             <Router>
               <Switch>
-                {app.routes.map(route => {
-                  let component = ComponentWrapper(
-                    loadableComp(route.componentId),
-                    route
-                  );
-                  return (
-                    <Route {...route} key={route.name} component={component} />
-                  );
-                })}
-                <Route component={NoMatch} />
+                {app.routes.filter(route => route.skipLogin).map(route => {
+                    let component = ComponentWrapper(
+                      loadableComp(route.componentId),
+                      route
+                    );
+                    return (
+                      <Route {...route} key={route.name} component={component} />
+                    );
+                  })}
+                <Route component={NoMatchNonLogin} />
               </Switch>
             </Router>
-          </div>
-        </div>
-          <Footer />
+          </React.Fragment>
+        }
       </React.Fragment>
     );
   }

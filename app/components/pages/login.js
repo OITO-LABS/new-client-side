@@ -3,7 +3,7 @@ import "assets/sass/pages/_login.scss";
 import Logo from 'assets/images/logo.png';
 import FormField from "../common/formfield";
 import FormValidator from "../common/formvalidator";
-import { FORGOT_PASSWORD,GOTO_URL,FLIP_LOADER, PROFILE } from '../../utils/constants';
+import { FORGOT_PASSWORD,GOTO_URL,FLIP_LOADER, DASHBOARD ,USER_SIGNIN} from '../../utils/constants';
 import dataService from "utils/dataservice";
 
 
@@ -85,13 +85,14 @@ export class Login extends Component {
 
         if (validation.isValid) {
             let data={userName:this.state.username,password:this.state.password}
-            dataService.postRequest("login", data)
+            dataService.getRequest("login", data)
             .then(res => {
                 if(res.status == "success") {
-                    app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Password successfully reset"});
-                    setTimeout(()=>{
-                        app.events.trigger(GOTO_URL, { routerKey: HOME });
-                      },3000)
+                    app.userAuth==res;
+                    // app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCCESS,msg: "Login successfull"});
+                    // setTimeout(()=>{
+                        app.events.trigger(USER_SIGNIN,  res);
+                    //   },3000)
                 }
                 else {
                     app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});

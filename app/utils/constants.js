@@ -37,6 +37,9 @@ export const SUCCESS_DIALOG = 'successdialog:show';
 export const AFTER_LOAD = 'load:done';
 export const FLIP_LOADER = 'load:flip';
 export const PATH_CHANGED = 'path:changed';
+export const USER_SIGNIN = "login:signin";
+export const USER_SIGNOUT = "login:signout";
+
 
 //routes
 export const LANDING = 'landing';
@@ -44,6 +47,9 @@ export const APP_INFO = 'app-info';
 export const RESET_PASSWORD = 'reset-password';
 export const FORGOT_PASSWORD = 'forgot-password';
 export const LOGIN = 'login';
+// export const DASHBOARD = 'dashboard';
+export const HOME = 'home';
+
 export const PROFILE = 'profile';
 
 export const EMPLOYEE_REG = 'employee-reg'
