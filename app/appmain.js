@@ -100,6 +100,7 @@ class Main extends React.Component {
     //console.log(process.env.TOKEN_CHECK+'-----Main mouted------');
     //this.loadPortalSettings();
     this.mouted = true;
+    
   }
   componentDidUpdate() {
     //console.log('-----Main updated------');
@@ -108,7 +109,7 @@ class Main extends React.Component {
     if (!this.state.appinit) return <Loader inline />;
     return (
       <React.Fragment>
-      {/* <Login/> */}
+      <Login/>
       <ForgotPassword/>
         <Loader />
         {/* <Collapse/> */}

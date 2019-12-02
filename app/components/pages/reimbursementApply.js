@@ -318,7 +318,7 @@ class ReimbursementApply extends Component {
                           nameAlias={"categoryName"}
                           onChange = {this.handleInputChange}
                           // onChange={() =>
-                          //     this.handleInputChange2(event, detail)
+                          //     this.handleInputChange(event, detail)
                           // }
                           options={[
                             { value: "Business Meals", label: "Business Meals" },

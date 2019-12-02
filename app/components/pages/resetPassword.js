@@ -165,7 +165,7 @@ class ResetPassword extends Component {
                                             name="username"
                                             onChange={this.handleInputChange}
                                             value={this.state.username}
-                                            placeholder="Enter registered mail id"
+                                            placeholder="Registered Email"
                                             validator={validation}
                                         />
                                         <span className="focus-input100"></span>
