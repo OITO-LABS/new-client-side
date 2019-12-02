@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "assets/sass/pages/_login.scss";
 import Logo from 'assets/images/logo.png';
-import {FLIP_LOADER,RESET_PASSWORD}  from "utils/constants";
+import {FLIP_LOADER,LOGIN,GOTO_URL,SHOW_ALERT_MSG,ALERT_TYPE}  from "utils/constants";
 import FormValidator from '../common/formvalidator';
 import FormField from "../common/formfield";
 import dataService from "utils/dataservice";
@@ -31,16 +31,16 @@ class ResetPassword extends Component {
                 message: 'Invalid format'
             },
             {
-                field: 'newPassword',
-                aliasField:'newPassword',
+                field: 'password',
+                aliasField:'password',
                 method: 'isEmpty',
                 args:[{ignore_whitespace:true}],
                 validWhen: false,
                 message: 'Password is empty'
             },
             {
-                field: 'newPassword',
-                aliasField:'newPassword',
+                field: 'password',
+                aliasField:'password',
                 method: this.checkPswdRulesMatched,
                 validWhen: true,
                 message: 'Password must contain numbers,special characters,lowercase & uppercase alphabets'
@@ -57,7 +57,7 @@ class ResetPassword extends Component {
                 field: 'cpassword',
                 aliasField:'cpassword',
                 method: this.passwordMatch,   
-                args:['eq','newPassword'],
+                args:['eq','password'],
                 validWhen: true,
                 message: 'Password mismatch'
             }
@@ -90,7 +90,7 @@ class ResetPassword extends Component {
     }
 
     passwordMatch(value,args, state, validation,field) {
-        if(validation.cpassword !== validation.newPassword) {
+        if(validation.cpassword !== validation.password) {
             return false;
         }
         else {
@@ -102,14 +102,15 @@ class ResetPassword extends Component {
         const validation = this.validator.validate(this.state);
         this.setState({ validation });
         this.submitted = true;
+        let token = this.props.match.params;
 
         if (validation.isValid) {
-            dataService.postRequest("reset", { ...this.getStateData(this.state) })
+            dataService.postRequest("reset", { ...this.getStateData(this.state), token})
             .then(res => {
                 if(res.status == "success") {
                     app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Password successfully reset"});
                     setTimeout(()=>{
-                        app.events.trigger(GOTO_URL, { routerKey: RESET_PASSWORD });
+                        app.events.trigger(GOTO_URL, { routerKey: LOGIN });
                       },3000)
                 }
                 else {
@@ -123,7 +124,7 @@ class ResetPassword extends Component {
     getStateData(data) {
         return {
           username: data.username || "",
-          newPassword: data.newPassword || "",
+          password: data.password || "",
           cpassword: data.cpassword || "",
         }
     }
@@ -177,9 +178,9 @@ class ResetPassword extends Component {
                                         <FormField
                                             fieldClassName="input100"
                                             mandatory
-                                            name="newPassword"
+                                            name="password"
                                             onChange={this.handleInputChange}
-                                            value={this.state.newPassword}
+                                            value={this.state.password}
                                             placeholder="Password"
                                             type="password"
                                             validator={validation}

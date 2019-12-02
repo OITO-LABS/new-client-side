@@ -1,5 +1,5 @@
 import React from "react";
-import {DASHBOARD,EMPLOYEE_REG,EMPLOYEE_LISTING,GOTO_URL,ADD_ASSETS,ASSET_LISTING,APPLY_REIMBURSEMENT,REIMBURSEMENT_LISTING} from "utils/constants";
+import { PROFILE,EMPLOYEE_REG,EMPLOYEE_LISTING,GOTO_URL,ADD_ASSETS,ASSET_LISTING,APPLY_REIMBURSEMENT,REIMBURSEMENT_LISTING } from "utils/constants";
 import "assets/sass/pages/_employeeRegister.scss"
 
 class Sidebar extends React.Component {
@@ -7,7 +7,7 @@ class Sidebar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.dashboard = this.dashboard.bind(this);
+    this.profile = this.profile.bind(this);
     this.empReg = this.empReg.bind(this);
     this.empList = this.empList.bind(this);
     this.addAssets = this.addAssets.bind(this);
@@ -16,8 +16,8 @@ class Sidebar extends React.Component {
     // this.viewReimbursements = this.viewReimbursements.bind(this);
   }
   
-  dashboard() {
-    app.events.trigger(GOTO_URL, { routerKey: DASHBOARD });
+  profile() {
+    app.events.trigger(GOTO_URL, { routerKey: PROFILE });
   }
 
   empReg() {
@@ -56,11 +56,11 @@ class Sidebar extends React.Component {
               </div>
               {/* Menu  */}
               <ul className="list-unstyled components">
-                {/* Dashboard  */}
+                {/* Profile  */}
                 <li className="active">
-                  <a href="#" onClick={this.dashboard}>
+                  <a href="#" onClick={this.profile}>
                     <i className="fas fa-home"></i>
-                    Dashboard
+                    Profile
                   </a>
                 </li>
                 {/* Register Employee  */}

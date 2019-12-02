@@ -57,12 +57,12 @@ const routes = [
         skipLogin:true
     },
     {
-        name: DASHBOARD,
-        path: PATH_PREFIX + DASHBOARD,
-        samplePath: PATH_PREFIX + DASHBOARD,
-        componentId: 'pages/dashboard',
-        title: 'Dashboard',
-        className: 'dashboard-page',
+        name: PROFILE,
+        path: PATH_PREFIX + PROFILE,
+        samplePath: PATH_PREFIX + PROFILE,
+        componentId: 'pages/profile',
+        title: 'PROFILE',
+        className: 'profile-page',
         exact: true,
         nowrap: false
     },
