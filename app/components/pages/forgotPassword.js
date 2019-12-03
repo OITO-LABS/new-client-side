@@ -74,7 +74,7 @@ export class ForgotPassword extends Component {
                                 </div>
 
                                 <span className="login100-form-title ">
-                                    Forgot Password???
+                                    Forgot Password/Reset password
                         </span>
                                 <div className="row col-md-6 mx-auto input-fields">
 
