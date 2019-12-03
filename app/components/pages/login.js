@@ -85,9 +85,9 @@ export class Login extends Component {
 
         if (validation.isValid) {
             let data={username:this.state.username,password:this.state.password}
-            dataService.getRequest("login", data)
+            dataService.postRequest("login", data)
             .then(res => {
-                if(res.status == "success") {
+                if(res.response.status == "success") {
                         app.events.trigger(USER_SIGNIN,  res);
                 }
                 else {
