@@ -3,6 +3,10 @@ import "assets/sass/pages/_login.scss";
 import Logo from 'assets/images/logo.png';
 import FormField from "../common/formfield";
 import FormValidator from "../common/formvalidator";
+import {SHOW_ALERT_MSG, ALERT_TYPE,} from 'utils/constants';
+import dataService from "utils/dataservice";
+
+
 export class ForgotPassword extends Component {
     constructor(props) {
         super(props)
@@ -36,7 +40,6 @@ export class ForgotPassword extends Component {
     }
 
     handleInputChange(field) {
-        console.log(field);
         let name = field.target.name;
         let value = field.target.value;
         this.setState({
@@ -50,6 +53,19 @@ export class ForgotPassword extends Component {
         this.setState({ validation });
         this.submitted = true;
         // alert("onsubmit-clicked");
+
+        if (validation.isValid) {
+            dataService.postRequest("forgot", {to:this.state.username})
+            .then(res => {
+                if(res.status == "success") {
+                    app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCCESS,msg: "A password reset Link is sent to your registered Email"});
+                }
+                else {
+                    app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
+                }  
+            })
+            .catch(err => {console.log(err)});   
+        }
     }
 
     validEmailData(value, args, state, validation, field) {

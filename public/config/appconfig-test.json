@@ -34,8 +34,9 @@
       "reimbursementSearch":"api/reimbursement/search-emp-id",
       "reimbursementDateAndSearch":"api/reimbursement/search-emp-id-date",
 
-      "login":"data/login.json",
+      "login":"api/login",
       "logout":"api/logout",
+      "forgot":"api/login/send-mail",
       "params": {
         "commonparams": "commonparams"
       }

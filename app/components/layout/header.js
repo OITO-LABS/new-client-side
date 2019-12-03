@@ -3,7 +3,7 @@ import Logo from 'assets/images/logo.png';
 import {RESET_PASSWORD,GOTO_URL,USER_SIGNOUT,SHOW_ALERT_MSG, ALERT_TYPE} from "utils/constants";
 import AlertModal from "../common/alertmodal";
 import { confirm } from 'utils/common';
-import dataService from 'utils/dataservice';
+// import dataService from 'utils/dataservice';
 class Header extends React.Component {
   constructor(props) {
     super(props)
@@ -22,27 +22,29 @@ class Header extends React.Component {
     });
     if (isConfirmed) {
       // const deleteData = { empNo: data.empNo }
-      dataService.getRequest("employeeDelete", { empNo: data.empNo })
-        .then(res => {
-          if(res.status=="success"){
-            app.events.trigger(SHOW_ALERT_MSG, {
-              visible: true,
-              type: ALERT_TYPE.SUCESS,
-              msg: " Logout SUCCESS"
-            });
+                  app.events.trigger(USER_SIGNOUT,  {status:logout});
 
-            app.events.trigger(USER_SIGNOUT,  res);
-          }
-          else{
-            app.events.trigger(SHOW_ALERT_MSG, {
-              visible: true,
-              type: ALERT_TYPE.DANGER,
-              msg: ` Logout Failed  ${res.message}`
-            });
-          }
-        }).catch(res => {
-          console.log(res);
-        });
+    //   dataService.getRequest("employeeDelete", { empNo: data.empNo })
+    //     .then(res => {
+    //       if(res.status=="success"){
+    //         app.events.trigger(SHOW_ALERT_MSG, {
+    //           visible: true,
+    //           type: ALERT_TYPE.SUCESS,
+    //           msg: " Logout SUCCESS"
+    //         });
+
+    //         app.events.trigger(USER_SIGNOUT,  res);
+    //       }
+    //       else{
+    //         app.events.trigger(SHOW_ALERT_MSG, {
+    //           visible: true,
+    //           type: ALERT_TYPE.DANGER,
+    //           msg: ` Logout Failed  ${res.message}`
+    //         });
+    //       }
+    //     }).catch(res => {
+    //       console.log(res);
+    //     });
     }
 
   }
