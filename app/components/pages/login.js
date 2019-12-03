@@ -64,7 +64,7 @@ export class Login extends Component {
     }
 
     handleInputChange(field) {
-        console.log(field);
+        // console.log(field);
         let name = field.target.name;
         let value = field.target.value;
         this.setState({
@@ -84,18 +84,14 @@ export class Login extends Component {
         // alert("onsubmit-clicked");
 
         if (validation.isValid) {
-            let data={userName:this.state.username,password:this.state.password}
+            let data={username:this.state.username,password:this.state.password}
             dataService.getRequest("login", data)
             .then(res => {
                 if(res.status == "success") {
-                    app.userAuth==res;
-                    // app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCCESS,msg: "Login successfull"});
-                    // setTimeout(()=>{
                         app.events.trigger(USER_SIGNIN,  res);
-                    //   },3000)
                 }
                 else {
-                    app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
+                    app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: "username and password doesnot match"});
                 }  
             })
             .catch(err => {console.log(err)});   

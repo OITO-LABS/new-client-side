@@ -1,5 +1,5 @@
 import {
-    PATH_PREFIX, LANDING, DASHBOARD, APP_INFO, EMPLOYEE_REG, EMPLOYEE_UPDATE, EMPLOYEE_LISTING, EMPLOYEE_DETAILS, ASSET_LISTING, ASSET_DETAILS, ADD_ASSETS, ASSIGN_ASSETS,
+    PATH_PREFIX, LANDING, PROFILE, APP_INFO, EMPLOYEE_REG, EMPLOYEE_UPDATE, EMPLOYEE_LISTING, EMPLOYEE_DETAILS, ASSET_LISTING, ASSET_DETAILS, ADD_ASSETS, ASSIGN_ASSETS,
     REIMBURSEMENT_LISTING, REIMBURSEMENT_EMPLOYEE_LISTING, REIMBURSEMENT_BILL_LISTING,APPLY_REIMBURSEMENT,RESET_PASSWORD,FORGOT_PASSWORD,LOGIN,HOME} from 'utils/constants';
 const routes = [
     {
@@ -10,7 +10,7 @@ const routes = [
         title: 'Home',
         className: 'login-page',
         exact: true,
-        nowrap: false,
+        nowrap: true,
         skipLogin:true
     },
     {
@@ -31,7 +31,7 @@ const routes = [
         title: 'reset password',
         className: 'reset-password-page',
         exact: true,
-        nowrap: false,
+        nowrap: true,
         skipLogin:true
     },
     {
@@ -42,7 +42,7 @@ const routes = [
         title: 'login',
         className: 'login-page',
         exact: true,
-        nowrap: false,
+        nowrap: true,
         skipLogin:true
     },
     {
@@ -53,7 +53,7 @@ const routes = [
         title: 'forgot password',
         className: 'forgot-password-page',
         exact: true,
-        nowrap: false,
+        nowrap: true,
         skipLogin:true
     },
     {

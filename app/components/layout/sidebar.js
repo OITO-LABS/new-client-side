@@ -25,7 +25,7 @@ class Sidebar extends React.Component {
   }
 
   empList() {
-    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });
+      app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });
   }
 
   addAssets() {

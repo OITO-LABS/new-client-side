@@ -24,7 +24,7 @@ import {
   PATH_PREFIX,
   HOME,
   EMPLOYEE_LISTING,
-  USER_SIGNIN,USER_SIGNOUT
+  USER_SIGNIN, USER_SIGNOUT
 } from "utils/constants";
 import header from "components/layout/header";
 import Footer from "components/layout/footer";
@@ -53,27 +53,29 @@ const Header = ComponentWrapper(header, { nowrap: true });
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { appinit: false,
-      login:false };
+    this.state = {
+      appinit: false,
+      login: false
+    };
     this.loadPortalSettings();
     this.gotoUrl = this.gotoUrl.bind(this);
     this.userSignIn = this.userSignIn.bind(this);
-    //this.userSignOut = this.userSignOut.bind(this);
+    this.userSignOut = this.userSignOut.bind(this);
     const ev = {};
     ev[GOTO_URL] = this.gotoUrl;
     ev[USER_SIGNIN] = this.userSignIn;
-    //ev[USER_SIGNOUT] = this.userSignOut;
+    ev[USER_SIGNOUT] = this.userSignOut;
     app.events.subscribe(ev);
   }
   userSignIn([userAuth, source]) {
-    let d = new Date().getTime() - 100;
+    // let d = new Date().getTime() - 100;
     // userAuth = { ...userAuth, ...(userAuth.customFields || {}) };
     app.userAuth = userAuth;
-    app.empId = userAuth.empId;
+    app.empId = userAuth.employeeId;
     // this.setUserToken(userAuth, true);
     this.setState({
-      login:true
-    },()=>{app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_LISTING });})
+      login: true
+    }, () => { app.events.trigger(GOTO_URL, { routerKey: HOME }); })
   }
   setUserToken(userAuth, loginUser) {
     //setToCache(USER_TKEY, BEARER_KEY + userAuth.accessToken);
@@ -82,9 +84,13 @@ class Main extends React.Component {
   }
   userSignOut([type]) {
     app.userAuth = null;
-    removeFromCache(USER_TKEY);
-    app.userId = null;
-    app.isAdmin = false;
+    // removeFromCache(USER_TKEY);
+    app.empId = null;
+    // app.isAdmin = false;
+    this.setState({
+      login: false
+    }, () => { app.events.trigger(GOTO_URL, { routerKey: LANDING }); })
+
   }
   gotoUrl([urlInfo]) {
     let url = getRouterUrl(urlInfo);
@@ -113,7 +119,7 @@ class Main extends React.Component {
     // this.setState({
     //   login:true
     // },()=>{app.events.trigger(GOTO_URL, { routerKey: HOME });})
-   
+
     // app.filteredRoutes=filterRows();
 
   }
@@ -122,7 +128,7 @@ class Main extends React.Component {
   }
   render() {
     if (!this.state.appinit) return <Loader inline />;
-    console.log('-----'+this.state.login);
+    console.log('-----' + this.state.login);
     return (
       <React.Fragment>
         {this.state.login ?
@@ -156,14 +162,14 @@ class Main extends React.Component {
             <Router>
               <Switch>
                 {app.routes.filter(route => route.skipLogin).map(route => {
-                    let component = ComponentWrapper(
-                      loadableComp(route.componentId),
-                      route
-                    );
-                    return (
-                      <Route {...route} key={route.name} component={component} />
-                    );
-                  })}
+                  let component = ComponentWrapper(
+                    loadableComp(route.componentId),
+                    route
+                  );
+                  return (
+                    <Route {...route} key={route.name} component={component} />
+                  );
+                })}
                 <Route component={NoMatchNonLogin} />
               </Switch>
             </Router>
