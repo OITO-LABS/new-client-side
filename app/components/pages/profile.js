@@ -53,27 +53,32 @@ class Profile extends Component {
           {/* Heading */}
           <p className="greeting">YOUR PROFILE</p>
 
-          <div className="d-flex justify-content-around">
+        <div className="d-flex">
+          <div className="col-6">
             {empFields.map((field,index) => {
-              if (index % 2 === 0) {
+              if (index % 2 == 0) {
+                return(
                 <div className="input-wrapper" key={index}>
-                  <label className="txt-label text-uppercase readonly-label">{empFields.label}</label>
+                  <label className="txt-label text-uppercase readonly-label">{field.label}</label>
                   <input className="txt-input readonly-input" type="text" value={empData[field.key]} readonly/>
-                </div>
+                </div>  
+                )
               }
             })}
           </div>
 
-          <div className="d-flex justify-content-around">
+          <div className="col-6">
             {empFields.map((field,index) => {
-              if (index % 2 === 1) {
-                <div className="input-wrapper" key={index}>
-                  <label className="txt-label text-uppercase readonly-label">{empFields.label}</label>
+              if (index % 2 == 1) {
+                return(
+                  <div className="input-wrapper" key={index}>
+                  <label className="txt-label text-uppercase readonly-label">{field.label}</label>
                   <input className="txt-input readonly-input" type="text" value={empData[field.key]} readonly/>
                 </div>
-              }
+                )}
             })}
           </div>
+        </div>
         
         </div>
       </div>

@@ -29,6 +29,7 @@ import {
 import header from "components/layout/header";
 import Footer from "components/layout/footer";
 import Sidebar from "components/layout/sidebar";
+import SidebarEmp from "components/layout/sidebar_emp";
 import ComponentWrapper from "components/common/componentwrapper";
 import { initApp, initPortalSettings } from "./appinitializer";
 import dataService from "utils/dataservice";
@@ -137,7 +138,11 @@ class Main extends React.Component {
             {/* <Collapse/> */}
             <Header pageQuery />
             <div className="row content-height">
+            {app.userAuth.role == "admin" ? 
               <div className="col-2"><Sidebar /></div>
+              :
+              <div className="col-2"><SidebarEmp/></div>
+            }
               <div className="col-10">
                 <Router>
                   <Switch>
