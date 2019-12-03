@@ -98,11 +98,10 @@ class assetRegistration extends Component {
         .postRequest("assetregistered", { ...this.getStateData(this.state) })
         .then(res => {
           if (res.status == "success") {
-            app.events.trigger(SHOW_ALERT_MSG, {
-              visible: true,
-              type: ALERT_TYPE.SUCESS,
-              msg: "Successfully Submitted"
-            });
+            app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
+            setTimeout(()=>{
+              app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
+            },3000)
           } else {
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,
@@ -127,17 +126,12 @@ class assetRegistration extends Component {
         .putRequest("updateAsset",{ ...this.getStateData(this.state),assetId: this.props.match.params.assetId })
         .then(res => {
           if (res.status == "success") {
-            app.events.trigger(SHOW_ALERT_MSG, {
-              visible: true,
-              type: ALERT_TYPE.SUCESS,
-              msg: "Successfully Updated"
-            });
+            app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Updated"});
+            setTimeout(()=>{
+              app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
+            },3000)
           } else {
-            app.events.trigger(SHOW_ALERT_MSG, {
-              visible: true,
-              type: ALERT_TYPE.DANGER,
-              msg: "Updation Failed"
-            });
+            app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: "Updation Failed"});
           }
         })
         .catch(err => {
