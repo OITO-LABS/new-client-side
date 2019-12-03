@@ -13,7 +13,7 @@ class Header extends React.Component {
   }
   
   onChangePassword() {
-    app.events.trigger(USER_RESET,  {status:logout});
+    app.events.trigger(USER_RESET,  {status:"logout"});
     // app.events.trigger(GOTO_URL, { routerKey: RESET_PASSWORD });
   }
 

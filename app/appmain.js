@@ -24,7 +24,7 @@ import {
   PATH_PREFIX,
   HOME,
   EMPLOYEE_LISTING,
-  USER_SIGNIN, USER_SIGNOUT,USER_RESET
+  USER_SIGNIN, USER_SIGNOUT,USER_RESET,FORGOT_PASSWORD
 } from "utils/constants";
 import header from "components/layout/header";
 import Footer from "components/layout/footer";
@@ -56,7 +56,7 @@ class Main extends React.Component {
     super(props);
     this.state = {
       appinit: false,
-      login: false
+      login: true
     };
     this.loadPortalSettings();
     this.gotoUrl = this.gotoUrl.bind(this);
@@ -151,11 +151,11 @@ class Main extends React.Component {
             {/* <Collapse/> */}
             <Header pageQuery />
             <div className="row content-height">
-            {app.userAuth.role == "admin" ? 
+            {/* {app.userAuth.role == "admin" ? 
               <div className="col-2"><Sidebar /></div>
               :
               <div className="col-2"><SidebarEmp/></div>
-            }
+            } */}
               <div className="col-10">
                 <Router>
                   <Switch>
