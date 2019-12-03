@@ -51,7 +51,7 @@ class Sidebar extends React.Component {
             {/* Sidebar   */}
             <nav id="sidebar" className="sidebar-navwrapper">
               <div className="sidebar-header">
-                <h3 className="sidebar-txt">Welcome Admin!</h3>
+                <h3 className="sidebar-txt">Welcome</h3>
                 <strong>WA</strong>
               </div>
               {/* Menu  */}

@@ -39,6 +39,7 @@ export const FLIP_LOADER = 'load:flip';
 export const PATH_CHANGED = 'path:changed';
 export const USER_SIGNIN = "login:signin";
 export const USER_SIGNOUT = "login:signout";
+export const USER_RESET = "login:reset";
 
 
 //routes

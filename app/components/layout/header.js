@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from 'assets/images/logo.png';
-import {RESET_PASSWORD,GOTO_URL,USER_SIGNOUT,SHOW_ALERT_MSG, ALERT_TYPE} from "utils/constants";
+import {RESET_PASSWORD,GOTO_URL,USER_SIGNOUT,USER_RESET,SHOW_ALERT_MSG, ALERT_TYPE} from "utils/constants";
 import AlertModal from "../common/alertmodal";
 import { confirm } from 'utils/common';
 // import dataService from 'utils/dataservice';
@@ -8,13 +8,15 @@ class Header extends React.Component {
   constructor(props) {
     super(props)
   
-   this.onReset = this.onReset.bind(this);
-   this.onReset = this.onReset.bind(this);
+   this.onChangePassword = this.onChangePassword.bind(this);
+ 
   }
   
-  onReset() {
-    app.events.trigger(GOTO_URL, { routerKey: RESET_PASSWORD });
+  onChangePassword() {
+    app.events.trigger(USER_RESET,  {status:logout});
+    // app.events.trigger(GOTO_URL, { routerKey: RESET_PASSWORD });
   }
+
   async handleLogout(){
     let isConfirmed = false;
     isConfirmed = await confirm({
@@ -56,7 +58,7 @@ class Header extends React.Component {
           <div className="header">
             <img className="header-logo" src={Logo} />
             <div className="d-flex align-items-center pr-2">
-              <a className="pr-3 header-txt" onClick={this.onReset} href="#">
+              <a className="pr-3 header-txt" onClick={this.onChangePassword} href="#">
                 Change Password?
               </a>
               <a className="header-txt" href="#" onClick={this.handleLogout}>

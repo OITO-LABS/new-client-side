@@ -30,6 +30,7 @@ class Profile extends Component {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
     dataService.getRequest("getEmpDetails",{ empId:app.empId })  
       .then(res => {
+        app.userDetails=res;
         this.setState({
           data: res
         });

@@ -24,7 +24,7 @@ import {
   PATH_PREFIX,
   HOME,
   EMPLOYEE_LISTING,
-  USER_SIGNIN, USER_SIGNOUT
+  USER_SIGNIN, USER_SIGNOUT,USER_RESET
 } from "utils/constants";
 import header from "components/layout/header";
 import Footer from "components/layout/footer";
@@ -62,10 +62,12 @@ class Main extends React.Component {
     this.gotoUrl = this.gotoUrl.bind(this);
     this.userSignIn = this.userSignIn.bind(this);
     this.userSignOut = this.userSignOut.bind(this);
+    this.userReset = this.userReset.bind(this);
     const ev = {};
     ev[GOTO_URL] = this.gotoUrl;
     ev[USER_SIGNIN] = this.userSignIn;
     ev[USER_SIGNOUT] = this.userSignOut;
+    ev[USER_RESET] = this.userReset;
     app.events.subscribe(ev);
   }
   userSignIn([userAuth, source]) {
@@ -93,6 +95,17 @@ class Main extends React.Component {
     }, () => { app.events.trigger(GOTO_URL, { routerKey: LANDING }); })
 
   }
+
+  userReset([type]) {
+    app.userAuth = null;
+    // removeFromCache(USER_TKEY);
+    app.empId = null;
+    // app.isAdmin = false;
+    this.setState({
+      login: false
+    }, () => { app.events.trigger(GOTO_URL, { routerKey: FORGOT_PASSWORD }); })
+  }
+
   gotoUrl([urlInfo]) {
     let url = getRouterUrl(urlInfo);
     if (url) {

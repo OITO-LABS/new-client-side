@@ -26,7 +26,7 @@ class SidebarEmp extends React.Component {
   }
 
   reimbursement() {
-    app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_EMPLOYEE_LISTING, params: { empNo: app.empNo }  });
+    app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_EMPLOYEE_LISTING, params: { empId: app.userDetails.empNo }  });
   }
 
   render() {
