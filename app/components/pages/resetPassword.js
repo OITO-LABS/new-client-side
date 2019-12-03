@@ -102,10 +102,10 @@ class ResetPassword extends Component {
         const validation = this.validator.validate(this.state);
         this.setState({ validation });
         this.submitted = true;
-        let token = this.props.match.params;
+        let token = this.props.query.t;
 
         if (validation.isValid) {
-            dataService.postRequest("reset", { ...this.getStateData(this.state), token})
+            dataService.postRequest("reset", { ...this.getStateData(this.state), token:token})
             .then(res => {
                 if(res.status == "success") {
                     app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Password successfully reset"});
