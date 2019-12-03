@@ -14,7 +14,7 @@
 }
 
 .input-wrapper {
-  width: 25%;
+  width: 75%;
   margin-bottom: 2rem;
 }
 
@@ -23,11 +23,11 @@
 }
 
 .txt-input {
-  /* border: 1px solid #616263; */
   padding: 0.25rem 1rem;
   width: 100%;
   outline: none !important;
   display: flex;
+  // border: none !important;
 }
 
 /* .txt-input:hover {
