@@ -24,7 +24,7 @@ class Header extends React.Component {
     });
     if (isConfirmed) {
       // const deleteData = { empNo: data.empNo }
-                  app.events.trigger(USER_SIGNOUT,  {status:logout});
+                  app.events.trigger(USER_SIGNOUT,  {status:"logout"});
 
     //   dataService.getRequest("employeeDelete", { empNo: data.empNo })
     //     .then(res => {
