@@ -25,7 +25,8 @@
 		"updategetAsset":"/updategetAsset.json",
 		"getEmpDetails":"/getEmpDetails.json",
 		"reimbursementBill":"/reimbursementBill.json",
-		
+		"getReimCategory":"data/reimCategory.json",
+
 	    "params": {
 			"commonparams": "commonparams"
 	    }

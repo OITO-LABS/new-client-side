@@ -33,6 +33,7 @@
       "reimbursementApply":"api/reimbursement/apply",
       "reimbursementSearch":"api/reimbursement/search-emp-id",
       "reimbursementDateAndSearch":"api/reimbursement/search-emp-id-date",
+      "getReimCategory":"api/reimbursement/list-category",
 
       "login":"api/login",
       "logout":"api/logout",
