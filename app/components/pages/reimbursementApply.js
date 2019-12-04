@@ -62,23 +62,15 @@ class ReimbursementApply extends Component {
     
     ]);
     this.state = {
-      reimbursementDetails: [
-        {
-          index: 1,
-          billDate: "",
-          reimbursementDescription: "",
-          categoryName: "",
-          billNo: "",
-          cost: 0,
-          flag: false
-        }
-      ],
+      reimbursementDetails: [{index: 1,billDate: "",reimbursementDescription: "",categoryName: "",billNo: "",cost: 0,flag: false}],
       empNo: "",
-      empData: [],
+      // empData: [],
+      category: [],
       validation: this.validator.valid()
     };
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.getOptions = this.getOptions.bind(this);
+    // this.getOptions = this.getOptions.bind(this);
+    this.getCategoryOptions = this.getCategoryOptions.bind(this);
     this.fieldData = {};
     this.handleInputChange2 = this.handleInputChange2.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -89,21 +81,35 @@ class ReimbursementApply extends Component {
 
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
-    dataService
-      .getRequest("getEmpData")
-      .then(result => {
-        this.setState({
-          empData: result
-        });
+    dataService.getRequest("getReimCategory")
+    .then(res => {
+      this.setState({
+        category: res
       })
-      .catch(error => {
-        console.log(error);
-      });
+    })
+    .catch(err =>{
+      console.log(err);
+    })
+    // dataService.getRequest("getEmpData")
+    //   .then(result => {
+    //     this.setState({
+    //       empData: result
+    //     });
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
   }
 
-  getOptions() {
+  // getOptions() {
+  //   let optionData = [];
+  //   optionData = this.state.empData.map(item => ({value: item.empNo,label: item.firstName}));
+  //   return optionData;
+  // }
+
+  getCategoryOptions() {
     let optionData = [];
-    optionData = this.state.empData.map(item => ({value: item.empNo,label: item.firstName}));
+    optionData = this.state.category.map(item => ({value: item.categoryName, label: item.categoryName}))
     return optionData;
   }
 
@@ -160,14 +166,14 @@ class ReimbursementApply extends Component {
     const validation = this.validator.validate(this.state);
     this.setState({ validation });
     this.submitted = true;
-    var empNo = this.state.empNo;
+    // var empNo = this.state.empNo;
     var reimbursementDate = this.state.reimbursementDate;
     var totalCost = this.state.totalCost;
     var reimbursementDetails = this.state.reimbursementDetails;
 
     if (validation.isValid) {
       dataService
-        .postRequest("reimbursementApply", {empNo: empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementDetails: reimbursementDetails})
+        .postRequest("reimbursementApply", {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementDetails: reimbursementDetails})
         .then(res => {
           if (res.status == "success") {
             app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
@@ -229,7 +235,7 @@ class ReimbursementApply extends Component {
           <div className="container mt-3">
             <div className="row mt-5">
               <div className="d-flex mb-4 flex-row mx-auto">
-                <div className="mr-2">
+                {/* <div className="mr-2">
                   <FormField
                     type="select"
                     searchable
@@ -245,7 +251,7 @@ class ReimbursementApply extends Component {
                     placeholder="Employee Name"
                     validator={validation}
                   />
-                </div>
+                </div> */}
                 <div>
                   <FormField
                     label="Reimbursement Date"
@@ -308,38 +314,17 @@ class ReimbursementApply extends Component {
                           />
                         </td>
                         <td>
-                        <FormField
-                          type="select"
-                          searchable
-                          labelClassName="txt-label"
-                          fieldClassName="select-input"
-                          mandatory
-                          name="categoryName"
-                          nameAlias={"categoryName"}
-                          extraProps={detail}
-                          onChange = {this.handleInputChange2}
-                          options={[
-                            { value: "Business Meals", label: "Business Meals" },
-                            { value: "Legal Fees", label: "Legal Fees" },
-                            { value: "Dues ", label: "Dues" },
-                            { value: "Business Cards", label: "Business Cards" },
-                            { value: "License Fees", label: "License Fees" },
-                            { value: "Mileage", label: "Mileage" },
-                            { value: "Office Supplies", label: "Office Supplies" },
-                            { value: "Passport fee", label: "Passport fee" },
-                            { value: "Postage", label: "Postage" },
-                            { value: "Printer Cartridges", label: "Printer Cartridges" },
-                            { value: "Printer Paper", label: "Printer Paper" },
-                            { value: "Software", label: "Software" },
-                            { value: "Stationery", label: "Stationery" },
-                            { value: "Subscriptions", label: "Subscriptions" },
-                            { value: "Telephones", label: "Telephones" },
-                            { value: "Tools", label: "Tools" },
-                            { value: "Training Fees", label: "Training Fees" },
-                            { value: "Travel", label: "Travel" },
-                            { value: "Others", label: "Others" }
-    
-                          ]}
+                          <FormField
+                            type="select"
+                            searchable
+                            labelClassName="txt-label"
+                            fieldClassName="select-input"
+                            mandatory
+                            name="categoryName"
+                            nameAlias={"categoryName"}
+                            extraProps={detail}
+                            onChange = {this.handleInputChange2}
+                            options={this.getCategoryOptions()}
                             value={detail.categoryName}
                             placeholder="Category Name"
                             validator={validation}

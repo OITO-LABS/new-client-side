@@ -1,10 +1,15 @@
 {
-	"username":"arun@gmail.com",
-	"password":"",
-	"status":"success",
-	"loginTime":"2019/12/02",
-	"logoutTime":"",
-	"role":"admin",
-	"empId":92,
-	"token":"sszzxxvvyyTZwweFF"
+    "username": "veena12@gmail.com",
+    "password": "k+f3i1sCtAcMa127NvYzLw==",
+    "status": "Active",
+    "token": null,
+    "loginTime": "2019-12-03T06:39:17.947+0000",
+    "logoutTime": null,
+    "role": "admin",
+    "response": {
+        "status": "success",
+        "message": null,
+        "errorcode": null
+    },
+    "employeeId": 59
 }

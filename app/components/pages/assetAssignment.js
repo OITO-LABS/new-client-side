@@ -16,7 +16,6 @@ class AssetAssignment extends Component {
         args: [{ ignore_whitespace: true }],
         validWhen: false,
         message: 'Select employee number',
-        
       },
       {
         field: 'issueDate',
