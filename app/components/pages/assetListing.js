@@ -13,6 +13,8 @@ export class AssetListing extends Component {
 
     this.state = {
       activePage: 1,
+      sortOrder: "ascending",
+      sortKey: "",
       searchValue: "",
       recordsPerPage: 10,
       fields: [
@@ -72,6 +74,7 @@ export class AssetListing extends Component {
     this.handleDetails = this.handleDetails.bind(this);
     this.handleAssign = this.handleAssign.bind(this);
     this.handleUnAssign = this.handleUnAssign.bind(this);
+    this.handleSort = this.handleSort.bind(this);
   }
 
   componentDidMount() {
@@ -80,8 +83,10 @@ export class AssetListing extends Component {
   }
 
   gettingData() {
-    const data = { page: this.state.activePage - 1, searchkey: this.state.searchValue, limit: this.state.recordsPerPage }
+
     let urlKey = "";
+    const data = { page: this.state.activePage - 1, searchkey: this.state.searchValue, limit: this.state.recordsPerPage, sortorder: this.state.sortOrder, sortkey: this.state.sortKey }
+
     if (this.state.searchValue === "") {
       urlKey = "assetList";
     }
@@ -163,13 +168,29 @@ export class AssetListing extends Component {
   handleAssign(data) {
     console.log("assign");
     console.log(data);
-    app.events.trigger(GOTO_URL, { routerKey: ASSIGN_ASSETS, params: { assetId: data.assetId, status: data.status} });
+    app.events.trigger(GOTO_URL, { routerKey: ASSIGN_ASSETS, params: { assetId: data.assetId, status: data.status } });
   }
 
   handleUnAssign(data) {
     console.log("unAssign");
     console.log(data);
-    app.events.trigger(GOTO_URL, { routerKey: ASSIGN_ASSETS, params: { assetId: data.assetId, status: data.status} });
+    app.events.trigger(GOTO_URL, { routerKey: ASSIGN_ASSETS, params: { assetId: data.assetId, status: data.status } });
+  }
+  handleSort(fields) {
+    console.log(fields);
+    if (this.state.sortOrder === "ascending") {
+      this.setState({
+        sortOrder: "descending",
+        sortKey: fields.key
+      },()=>{this.gettingData();})
+    }
+
+    else {
+      this.setState({
+        sortOrder: "ascending",
+        sortKey: fields.key
+      },()=>{this.gettingData()})
+    }
   }
 
   render() {
@@ -190,7 +211,8 @@ export class AssetListing extends Component {
           deleteHandler={this.handleDelete}
           detailsHandler={this.handleDetails}
           assignHandler={this.handleAssign}
-          unAssignHandler={this.handleUnAssign} />
+          unAssignHandler={this.handleUnAssign}
+          sortHandler={this.handleSort} />
       </div>
     );
   }
