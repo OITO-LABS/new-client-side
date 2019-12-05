@@ -165,7 +165,7 @@ class ReimbursementApply extends Component {
 
     if (validation.isValid) {
       dataService
-        .postRequest("reimbursementApply", {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementDetails: reimbursementDetails})
+        .formDataRequest("reimbursementApply", {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementDetails: reimbursementDetails})
         .then(res => {
           if (res.status == "success") {
             app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
@@ -257,6 +257,18 @@ class ReimbursementApply extends Component {
                     placeholder="reimbursementDate"
                     validator={validation}
                   />
+                </div>
+                <div>
+                <FormField
+                  label="Upload Profile Pic"
+                  labelClassName="txt-label"
+                  fieldClassName="txt-input"
+                  type="file"
+                  onChange={this.handleInputChange}
+                  name="file"
+                  value={this.state.file}
+                  validator={validation} 
+                />
                 </div>
               </div>
             </div>

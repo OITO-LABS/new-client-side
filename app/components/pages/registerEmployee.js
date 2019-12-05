@@ -47,6 +47,13 @@ export class registerEmployee extends Component {
         message: 'Invalid format'
       },
       {
+        field: 'image', 
+        method: 'isEmpty', 
+        args:[{ignore_whitespace:true}],
+        validWhen: false, 
+        message: 'Profile image is empty'
+      },
+      {
         field: 'dob', 
         method: 'isEmpty', 
         args:[{ignore_whitespace:true}],
@@ -180,7 +187,7 @@ export class registerEmployee extends Component {
     this.submitted = true;
 
     if (validation.isValid) {
-      dataService.postRequest("registered", { ...this.getStateData(this.state) })
+      dataService.formDataRequest("registered", { ...this.getStateData(this.state) })
       .then(res => {
         if(res.status == "success") {
         app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
