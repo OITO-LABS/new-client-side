@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE,EMPLOYEE_DETAILS } from 'utils/constants';
+import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, EMPLOYEE_DETAILS } from 'utils/constants';
 import Heading from "../heading"
 import DetailsTable from "../detailsTable"
 import ListTable from "../listTable"
@@ -79,7 +79,7 @@ export class AssetDetails extends Component {
     this.handlePage = this.handlePage.bind(this);
     this.gettingHistory = this.gettingHistory.bind(this);
     this.gettingAsset = this.gettingAsset.bind(this);
-    this.handleDetails=this.handleDetails.bind(this);
+    this.handleDetails = this.handleDetails.bind(this);
   }
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
@@ -127,13 +127,17 @@ export class AssetDetails extends Component {
       <div >
         <Heading heading="ASSET DETAILS" />
         <DetailsTable data={this.state.assetData} fields={this.state.assetFields} />
-        <Heading heading="ASSET HISTORY " />
-        <ListTable
-          totalRecords={1}
-          fields={this.state.historyFields}
-          pageHandler={this.handlePage}
-          datas={this.state.historyDatas}
-          detailsHandler={this.handleDetails} />
+        {app.userAuth.role == "admin" ?
+          <React.Fragment>
+            <Heading heading="ASSET HISTORY " />
+            <ListTable
+              totalRecords={1}
+              fields={this.state.historyFields}
+              pageHandler={this.handlePage}
+              datas={this.state.historyDatas}
+              detailsHandler={this.handleDetails} />
+          </React.Fragment>
+          : ""}
       </div>
     );
   }

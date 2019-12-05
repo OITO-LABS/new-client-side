@@ -1,5 +1,5 @@
 import React from 'react';
-import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, EMPLOYEE_REG, EMPLOYEE_UPDATE,EMPLOYEE_DETAILS } from 'utils/constants';
+import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, EMPLOYEE_REG, EMPLOYEE_UPDATE, EMPLOYEE_DETAILS } from 'utils/constants';
 import SearchAndButtonBar from "../searchAndButtonBar";
 import FormMsg from 'components/common/formmessage';
 import ListTable from "../listTable";
@@ -46,15 +46,22 @@ class EmployeeListing extends React.Component {
   }
 
   gettingData() {
-    const data = { page: this.state.activePage - 1, searchkey: this.state.searchValue, limit: this.state.recordsPerPage, sortorder: this.state.sortOrder, sortkey: this.state.sortKey }
+    const data = {
+      page: this.state.activePage - 1,
+      searchkey: this.state.searchValue,
+      limit: this.state.recordsPerPage,
+      sortOrder: this.state.sortOrder,
+      sortKey: this.state.sortKey
+    }
     // dataService.getRequest("employeeUpdate", { empNo:'123',empId:123 })
-    let urlKey = "";
-    if (this.state.searchValue === "") {
-      urlKey = "employeeList";
-    }
-    else {
-      urlKey = "employeeSearch";
-    }
+    let urlKey = "employeeList";
+    // let urlKey = "";
+    // if (this.state.searchValue === "") {
+    //   urlKey = "employeeList";
+    // }
+    // else {
+    //   urlKey = "employeeSearch";
+    // }
     dataService.postRequest(urlKey, data)
       .then((jsonData) => {
         // jsonData is parsed json object received from url
@@ -84,7 +91,7 @@ class EmployeeListing extends React.Component {
 
   handleEdit(data) {
     // console.log(data);
-    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG,params:{empId:data.empId} });
+    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG, params: { empId: data.empId } });
   }
 
   async handleDelete(data) {
@@ -98,7 +105,7 @@ class EmployeeListing extends React.Component {
       // const deleteData = { empNo: data.empNo }
       dataService.putRequest("employeeDelete", { empNo: data.empNo })
         .then(res => {
-          if(res.status=="success"){
+          if (res.status == "success") {
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,
               type: ALERT_TYPE.SUCESS,
@@ -106,7 +113,7 @@ class EmployeeListing extends React.Component {
             });
             this.gettingData();
           }
-          else{
+          else {
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,
               type: ALERT_TYPE.DANGER,
@@ -136,14 +143,14 @@ class EmployeeListing extends React.Component {
       this.setState({
         sortOrder: "descending",
         sortKey: fields.key
-      },()=>{this.gettingData();})
+      }, () => { this.gettingData(); })
     }
 
     else {
       this.setState({
         sortOrder: "ascending",
         sortKey: fields.key
-      },()=>{this.gettingData()})
+      }, () => { this.gettingData() })
     }
   }
 
@@ -156,7 +163,7 @@ class EmployeeListing extends React.Component {
           handleRegister={this.handleRegister}
           searchHandler={this.handleSearch} />
 
-          <Heading heading="EMPLOYEES"/>
+        <Heading heading="EMPLOYEES" />
 
         <ListTable
           totalRecords={this.state.totalRecords}
@@ -166,7 +173,8 @@ class EmployeeListing extends React.Component {
           editHandler={this.handleEdit}
           deleteHandler={this.handleDelete}
           detailsHandler={this.handleDetails}
-          sortHandler={this.handleSort}  />
+          sortHandler={this.handleSort}
+          sortRequired={true} />
       </div>
     );
   }

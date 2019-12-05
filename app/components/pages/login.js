@@ -3,7 +3,7 @@ import "assets/sass/pages/_login.scss";
 import Logo from 'assets/images/logo.png';
 import FormField from "../common/formfield";
 import FormValidator from "../common/formvalidator";
-import { FORGOT_PASSWORD,GOTO_URL,FLIP_LOADER, DASHBOARD ,USER_SIGNIN} from '../../utils/constants';
+import { FORGOT_PASSWORD,GOTO_URL,FLIP_LOADER, DASHBOARD ,USER_SIGNIN,SHOW_ALERT_MSG, ALERT_TYPE,} from '../../utils/constants';
 import dataService from "utils/dataservice";
 
 
@@ -90,8 +90,9 @@ export class Login extends Component {
                 if(res.response.status == "success") {
                         app.events.trigger(USER_SIGNIN,  res);
                 }
-                else if(res.username==null) {
+                else if(res.response.status == "failed") {
                     app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: "username and password doesnot match"});
+                    
                 }  
             })
             .catch(err => {console.log(err)});   

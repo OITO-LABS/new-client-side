@@ -14,25 +14,13 @@ export class ReimbursementBillListing extends Component {
         { label: "si no", key: "index" },
         { label: "Bill no", key: "billNo" },
         { label: "bill date", key: "billDate" },
-        { label: "reimbursement description", key: "reimbursementDescription" },
+        { label: "description", key: "reimbursementDescription" },
         { label: "category name", key: "categoryName" },
         { label: "cost", key: "cost" },
+        { label: "action", key: "editDelete" },
+
       ],
       datas: [
-        // {
-        //   "billDate": "2019-11-11T18:30:00.000+0000",
-        //   "reimbursementDescription": "Travel Expense",
-        //   "categoryName": "Travel",
-        //   "billNo": 14351,
-        //   "cost": 16000
-        // },
-        // {
-        //   "billDate": "2019-11-12T18:30:00.000+0000",
-        //   "reimbursementDescription": "Food Expense",
-        //   "categoryName": "Food",
-        //   "billNo": 3042253,
-        //   "cost": 2000
-        // }
       ],
       subtotal: 0
     }

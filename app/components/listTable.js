@@ -19,13 +19,17 @@ class ListTable extends Component {
 
    renderTableHeader() {
       return this.props.fields.map((item, index) => {
-         if(index==0||item.key=="editDelete"||item.key=="status"){
+         if (this.props.sortRequired) {
+            if (index == 0 || item.key == "editDelete" || item.key == "status") {
+               return <th key={index}>{item.label.toUpperCase()}</th>
+            }
+            else {
+               return <th key={index}>{item.label.toUpperCase()}   <i class="fas fa-sort" onClick={() => { this.props.sortHandler(item) }}></i></th>
+            }
+         }
+         else {
             return <th key={index}>{item.label.toUpperCase()}</th>
          }
-         else{
-            return <th key={index}>{item.label.toUpperCase()}   <i class="fas fa-sort" onClick={()=>{this.props.sortHandler(item)}}></i></th>
-         }
-         
       })
    }
 
@@ -36,10 +40,10 @@ class ListTable extends Component {
          return (
             <tr key={index}>
                {fields.map((item, i) => {
-                  let activePage=this.state.activePage-1||0;
-                  let recordsPerPage=this.props.recordsPerPage;
-                  let newIndex=index+1 
-                  let indexValue=(activePage*recordsPerPage)+newIndex;
+                  let activePage = this.state.activePage - 1 || 0;
+                  let recordsPerPage = this.props.recordsPerPage;
+                  let newIndex = index + 1
+                  let indexValue = (activePage * recordsPerPage) + newIndex;
                   if (item.key == "index") {
                      return (
                         // <td key={i}>{index + 1}</td>
@@ -105,7 +109,7 @@ class ListTable extends Component {
                   {this.renderTableData()}
                </tbody>
             </table>
-            
+
             {this.props.datas && this.props.datas.length < 1 && <NoRecordsFound />}
 
             <Pagination totalItems={this.props.totalRecords || 1} onPageChange={this.onPageChange} />
@@ -123,10 +127,12 @@ ListTable.propTypes = {
    fields: PropTypes.array,
    pageHandler: PropTypes.func.isRequired,
    editHandler: PropTypes.func,
-   deleteHandler: PropTypes.func
+   deleteHandler: PropTypes.func,
+   sortRequired: PropTypes.bool
 };
 
 ListTable.defaultProps = {
    recordsPerPage: 10,
    activePage: 1,
+   sortRequired: false
 };
