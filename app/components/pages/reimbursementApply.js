@@ -58,6 +58,8 @@ class ReimbursementApply extends Component {
       reimbursementDetails: [{index: 1,billDate: "",reimbursementDescription: "",categoryName: "",billNo: "",cost: 0,flag: false}],
       // empData: [],
       category: [],
+      // imageAssets:{},
+      file:'',  
       validation: this.validator.valid()
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -69,6 +71,7 @@ class ReimbursementApply extends Component {
     this.subTotal = this.subTotal.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.imageSelected = this.imageSelected.bind(this);
   }
 
   componentDidMount() {
@@ -154,6 +157,25 @@ class ReimbursementApply extends Component {
     });
   }
 
+  imageSelected(event) {
+    // let reader = new FileReader();
+    let file = event.target.files[0];
+    this.setState({
+      file:file
+    })
+    // reader.onloadend = () =>{
+    //   this.setState({
+    //     file:file
+    //   })
+    // }
+    // reader.readAsDataURL(file);
+    // let file = event.target.files[0];
+    // let imgKey = event.target.attributes.name.value;
+    // let {imageAssets} = this.state;
+    // let ext = file.name.substring(file.name.lastIndexOf('.'))
+    // imageAssets[imgKey] = imageAssets[imgKey] || [];
+  }
+
   onSubmit() {
     const validation = this.validator.validate(this.state);
     this.setState({ validation });
@@ -162,10 +184,11 @@ class ReimbursementApply extends Component {
     var reimbursementDate = this.state.reimbursementDate;
     var totalCost = this.state.totalCost;
     var reimbursementDetails = this.state.reimbursementDetails;
+    let file = this.state.file;
 
     if (validation.isValid) {
       dataService
-        .formDataRequest("reimbursementApply", {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementDetails: reimbursementDetails})
+        .formDataRequest("reimbursementApply", {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementDetails: reimbursementDetails,file:file})
         .then(res => {
           if (res.status == "success") {
             app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
@@ -198,9 +221,6 @@ class ReimbursementApply extends Component {
     return this.fieldData[field] && !!this.fieldData[field][args.propName];
   }
 
-  handleInputChange1(row) {
-    console.log(row);
-  }
   handleDelete(row) {
     let filteredData = this.state.reimbursementDetails.filter(data => {
       return data.index != row.index;
@@ -264,10 +284,8 @@ class ReimbursementApply extends Component {
                   labelClassName="txt-label"
                   fieldClassName="txt-input"
                   type="file"
-                  onChange={this.handleInputChange}
+                  onChange={this.imageSelected} 
                   name="file"
-                  value={this.state.file}
-                  validator={validation} 
                 />
                 </div>
               </div>
