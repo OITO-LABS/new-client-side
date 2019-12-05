@@ -13,8 +13,8 @@ export class ReimbursementListing extends Component {
       activePage: 1,
       fromDate: "",
       toDate: "",
-      sortOrder: "ascending",
-      sortKey: "",
+      sortOrder: "descending",
+      sortKey: "reimbursementDate",
       recordsPerPage: 10,
       searchValue: "",
       fields: [
