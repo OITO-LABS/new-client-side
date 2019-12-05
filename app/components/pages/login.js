@@ -3,7 +3,7 @@ import "assets/sass/pages/_login.scss";
 import Logo from 'assets/images/logo.png';
 import FormField from "../common/formfield";
 import FormValidator from "../common/formvalidator";
-import { FORGOT_PASSWORD,GOTO_URL,FLIP_LOADER, DASHBOARD ,USER_SIGNIN,SHOW_ALERT_MSG, ALERT_TYPE,} from '../../utils/constants';
+import { FORGOT_PASSWORD, GOTO_URL, FLIP_LOADER, DASHBOARD, USER_SIGNIN, SHOW_ALERT_MSG, ALERT_TYPE, } from '../../utils/constants';
 import dataService from "utils/dataservice";
 
 
@@ -52,8 +52,8 @@ export class Login extends Component {
         ]);
 
         this.state = {
-            username:"",
-            password:""
+            username: "",
+            password: ""
 
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -84,24 +84,25 @@ export class Login extends Component {
         // alert("onsubmit-clicked");
 
         if (validation.isValid) {
-            let data={username:this.state.username,password:this.state.password}
+            let data = { username: this.state.username, password: this.state.password }
             dataService.postRequest("login", data)
-            .then(res => {
-                if(res.response.status == "success") {
-                        app.events.trigger(USER_SIGNIN,  res);
-                }
-                else if(res.response.status == "failed") {
-                    app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: "username and password doesnot match"});
-                    
-                }  
-            })
-            .catch(err => {console.log(err)});   
+                .then(res => {
+                    if (res.response.status == "success") {
+                        app.events.trigger(USER_SIGNIN, res);
+                    }
+                    else {
+                        app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: "username and password doesnot match" });
+                        // app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
+
+                    }
+                })
+                .catch(err => { console.log(err) });
         }
     }
-    
+
     handleForgotPassword() {
-        app.events.trigger(GOTO_URL, { routerKey: FORGOT_PASSWORD});
-   }
+        app.events.trigger(GOTO_URL, { routerKey: FORGOT_PASSWORD });
+    }
 
     validEmailData(value, args, state, validation, field) {
         const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
@@ -125,75 +126,76 @@ export class Login extends Component {
         // var assetId = this.props.match.params.assetId;
         return (
             <div className="container-fluid fluid">
-                    <div className="row">
-                        <div className="col-md-8 mx-auto form">
-                            <div className="col-md-12 mx-auto login-form text-center">
-                                <div className="login-form-avatar col-md-4 mx-auto">
-                                    <img src={Logo} alt="AVATAR" className="login-avatar" />
-                                </div>
-
-                                <span className="login100-form-title ">
-                                    Account Login
-                                </span>
-                                <div className="row col-md-6 mx-auto input-fields">
-                                    <div className="wrap-input100 validate-input" data-validate="Username is required">
-                                        {/* <input className="input100" type="text" name="username" placeholder="Username"/> */}
-                                        <FormField
-                                            // label="Asset Key"
-                                            // labelClassName="txt-label"
-                                            fieldClassName="input100"
-                                            mandatory
-                                            // disabled={assetId != "-1"}
-                                            name="username"
-                                            onChange={this.handleInputChange}
-                                            value={this.state.username}
-                                            placeholder="username"
-                                            validator={validation}
-                                        />
-                                        <span className="focus-input100"></span>
-                                        <span className="symbol-input100">
-                                            <i className="fa fa-user"></i>
-                                        </span>
-                                    </div>
-
-                                    <div className="wrap-input100 validate-input" data-validate="Password is required">
-                                        {/* <input className="input100" type="password" name="password" placeholder="Password" /> */}
-                                        <FormField
-                                            // label="Asset Key"
-                                            // labelClassName="txt-label"
-                                            fieldClassName="input100"
-                                            mandatory
-                                            // disabled={assetId != "-1"}
-                                            name="password"
-                                            onChange={this.handleInputChange}
-                                            value={this.state.password}
-                                            placeholder="password"
-                                            type="password"
-                                            validator={validation}
-                                        />
-                                        <span className="focus-input100"></span>
-                                        <span className="symbol-input100">
-                                            <i className="fa fa-lock"></i>
-                                        </span>
-                                    </div>
-
-                                    <div className="submit text-center mx-auto">
-                                        <button className="login100-form-btn" onClick={this.onSubmit}>
-                                            Login
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div className="text-center forgot-credentials">
-                                    <a href="#" className="txt1" onClick={this.handleForgotPassword}>
-                                        Forgot Password?
-                                    </a>
-                                </div>
-
+                <div className="row">
+                    <div className="col-md-8 mx-auto form">
+                        <div className="col-md-12 mx-auto login-form text-center">
+                            <div className="login-form-avatar col-md-4 mx-auto">
+                                <img src={Logo} alt="AVATAR" className="login-avatar" />
                             </div>
+
+                            <span className="login100-form-title ">
+                                Account Login
+                                </span>
+                            <div className="row col-md-6 mx-auto input-fields">
+                                <div className="wrap-input100 validate-input" data-validate="Username is required">
+                                    {/* <input className="input100" type="text" name="username" placeholder="Username"/> */}
+                                    <FormField
+                                        // label="Asset Key"
+                                        // labelClassName="txt-label"
+                                        fieldClassName="input100"
+                                        mandatory
+                                        // disabled={assetId != "-1"}
+                                        name="username"
+                                        onChange={this.handleInputChange}
+                                        value={this.state.username}
+                                        placeholder="username"
+                                        validator={validation}
+                                    />
+                                    <span className="focus-input100"></span>
+                                    <span className="symbol-input100">
+                                        <i className="fa fa-user"></i>
+                                    </span>
+                                </div>
+
+                                <div className="wrap-input100 validate-input" data-validate="Password is required">
+                                    {/* <input className="input100" type="password" name="password" placeholder="Password" /> */}
+                                    <span className="focus-input100"></span>
+                                    <span className="symbol-input100">
+                                        <i className="fa fa-lock"></i>
+                                    </span>
+                                    <FormField
+                                        // label="Asset Key"
+                                        // labelClassName="txt-label"
+                                        fieldClassName="input100"
+                                        mandatory
+                                        // disabled={assetId != "-1"}
+                                        name="password"
+                                        onChange={this.handleInputChange}
+                                        value={this.state.password}
+                                        placeholder="password"
+                                        type="password"
+                                        validator={validation}
+                                    />
+
+                                </div>
+
+                                <div className="submit text-center mx-auto">
+                                    <button className="login100-form-btn" onClick={this.onSubmit}>
+                                        Login
+                                        </button>
+                                </div>
+                            </div>
+
+                            <div className="text-center forgot-credentials">
+                                <a href="#" className="txt1" onClick={this.handleForgotPassword}>
+                                    Forgot Password?
+                                    </a>
+                            </div>
+
                         </div>
                     </div>
-               
+                </div>
+
             </div>
         );
     }

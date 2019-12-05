@@ -13,21 +13,6 @@ export class EmployeeDetails extends Component {
         super(props)
 
         this.state = {
-            // data:{
-            //     "empId": 2,
-            //     "firstName": "Shahana",
-            //     "lastName": "Shalikh",
-            //     "email": "sanashalikh@gmail.com",
-            //     "designation": "intern",
-            //     "dob": "1996-10-31T18:30:00.000+0000",
-            //     "contactNo": 91524354343,
-            //     "emergencyContactName": "ShalikhJaleel",
-            //     "emergencyContact": 9786423448,
-            //     "healthCardNo": "OITO101INT002",
-            //     "bloodGroup": "O+",
-            //     "status": "Y",
-            //     "empNo": "INT002"
-            // },
             employeeFields: [
                 { label: "First Name", key: "firstName" },
                 { label: "Last Name", key: "lastName" },
@@ -41,32 +26,6 @@ export class EmployeeDetails extends Component {
                 { label: "Blood Group ", key: "bloodGroup" },
                 { label: "Date Of Birth", key: "dob" },
             ],
-            // assets:[
-            //     {
-            //         "assetId": 1,
-            //         "assetKey": "RouterMS4Black",
-            //         "model": "Jio",
-            //         "macId": "BC8AE8432445F",
-            //         "simNo": "8086595711",
-            //         "msisdnNo": null,
-            //         "enableStatus": "Assigned",
-            //         "productCategory": "WiFi",
-            //         "empId": 1,
-            //         "id": null
-            //     },
-            //     {
-            //         "assetId": 3,
-            //         "assetKey": "DELL111",
-            //         "model": "Dell",
-            //         "macId": null,
-            //         "simNo": null,
-            //         "msisdnNo": null,
-            //         "enableStatus": "Assigned",
-            //         "productCategory": "Laptop",
-            //         "empId": 1,
-            //         "id": null
-            //     }
-            // ],
             assetFields: [
                 { label: "si no", key: "index" },
                 { label: "asset-key", key: "assetKey" },

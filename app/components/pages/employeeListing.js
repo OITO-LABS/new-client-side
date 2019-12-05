@@ -9,7 +9,6 @@ import dataService from 'utils/dataservice';
 import "assets/sass/pages/_listing.scss";
 import Heading from "../heading";
 
-// import { FLIP_LOADER,ALERT_TYPE,SHOW_ALERT_MSG,SHOW_ALERT } from 'utils/constants';
 
 class EmployeeListing extends React.Component {
   constructor(props) {
@@ -53,18 +52,16 @@ class EmployeeListing extends React.Component {
       sortOrder: this.state.sortOrder,
       sortKey: this.state.sortKey
     }
-    // dataService.getRequest("employeeUpdate", { empNo:'123',empId:123 })
-    let urlKey = "employeeList";
-    // let urlKey = "";
-    // if (this.state.searchValue === "") {
-    //   urlKey = "employeeList";
-    // }
-    // else {
-    //   urlKey = "employeeSearch";
-    // }
+    // let urlKey = "employeeList";
+    let urlKey = "";
+    if (this.state.searchValue === "") {
+      urlKey = "employeeList";
+    }
+    else {
+      urlKey = "employeeSearch";
+    }
     dataService.postRequest(urlKey, data)
       .then((jsonData) => {
-        // jsonData is parsed json object received from url
         console.log(jsonData)
         this.setState({
           totalRecords: jsonData.totalElements,
@@ -90,19 +87,16 @@ class EmployeeListing extends React.Component {
   }
 
   handleEdit(data) {
-    // console.log(data);
     app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG, params: { empId: data.empId } });
   }
 
   async handleDelete(data) {
-    // alert(data);
     console.log(data);
     let isConfirmed = false;
     isConfirmed = await confirm({
       msg: 'Are you sure you want to delete this record?',
     });
     if (isConfirmed) {
-      // const deleteData = { empNo: data.empNo }
       dataService.putRequest("employeeDelete", { empNo: data.empNo })
         .then(res => {
           if (res.status == "success") {
@@ -142,6 +136,7 @@ class EmployeeListing extends React.Component {
     if (this.state.sortOrder === "ascending") {
       this.setState({
         sortOrder: "descending",
+        activePage: 1,
         sortKey: fields.key
       }, () => { this.gettingData(); })
     }
@@ -149,6 +144,7 @@ class EmployeeListing extends React.Component {
     else {
       this.setState({
         sortOrder: "ascending",
+        activePage: 1,
         sortKey: fields.key
       }, () => { this.gettingData() })
     }

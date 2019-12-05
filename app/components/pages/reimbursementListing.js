@@ -124,6 +124,7 @@ export class ReimbursementListing extends Component {
     if (this.state.sortOrder === "ascending") {
       this.setState({
         sortOrder: "descending",
+        activePage: 1,
         sortKey: fields.key
       }, () => { this.gettingData(); })
     }
@@ -131,6 +132,7 @@ export class ReimbursementListing extends Component {
     else {
       this.setState({
         sortOrder: "ascending",
+        activePage: 1,
         sortKey: fields.key
       }, () => { this.gettingData() })
     }

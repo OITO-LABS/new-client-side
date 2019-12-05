@@ -14,7 +14,7 @@ export class AssetListing extends Component {
     this.state = {
       activePage: 1,
       sortOrder: "ascending",
-      sortKey: "",
+      sortKey: "assetId",
       searchValue: "",
       recordsPerPage: 10,
       fields: [
@@ -150,6 +150,7 @@ export class AssetListing extends Component {
     if (this.state.sortOrder === "ascending") {
       this.setState({
         sortOrder: "descending",
+        activePage: 1,
         sortKey: fields.key
       }, () => { this.gettingData(); })
     }
@@ -157,6 +158,7 @@ export class AssetListing extends Component {
     else {
       this.setState({
         sortOrder: "ascending",
+        activePage: 1,
         sortKey: fields.key
       }, () => { this.gettingData() })
     }
