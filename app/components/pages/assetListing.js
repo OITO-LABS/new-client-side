@@ -26,44 +26,7 @@ export class AssetListing extends Component {
         { label: "action", key: "editDelete" },
         { label: "assign/unassign", key: "status" }
       ],
-      // datas: [
-      //   {
-      //     "assetId": 10,
-      //     "assetKey": "MDM_001",
-      //     "status": "0",
-      //     "model": "D-Link",
-      //     "empId": 1,
-      //     "empNo": "INT001",
-      //     "assetCategoryName":"laptop"
-      //   },
-      //   {
-      //     "assetId": 9,
-      //     "assetKey": "ib1901",
-      //     "status": "1",
-      //     "model": "iBell",
-      //     "empId": 1,
-      //     "empNo": "INT001",
-      //     "assetCategoryName":"mouse"
-      //   },
-      //   {
-      //     "assetId": 8,
-      //     "assetKey": "ADO_D001",
-      //     "status": "1",
-      //     "model": "Dell",
-      //     "empId": 1,
-      //     "empNo": "INT001",
-      //     "assetCategoryName":"jio"
-      //   },
-      //   {
-      //     "assetId": 7,
-      //     "assetKey": "JioFi_246468E",
-      //     "status": "0",
-      //     "model": "Jio",
-      //     "empId": 1,
-      //     "empNo": "INT001",
-      //     "assetCategoryName":"monitor"
-      //   }
-      // ]
+
     }
     this.gettingData = this.gettingData.bind(this);
     this.handlePage = this.handlePage.bind(this);
@@ -85,7 +48,13 @@ export class AssetListing extends Component {
   gettingData() {
 
     let urlKey = "";
-    const data = { page: this.state.activePage - 1, searchkey: this.state.searchValue, limit: this.state.recordsPerPage, sortorder: this.state.sortOrder, sortkey: this.state.sortKey }
+    const data = {
+      page: this.state.activePage - 1,
+      searchkey: this.state.searchValue,
+      limit: this.state.recordsPerPage,
+      sortOrder: this.state.sortOrder,
+      sortKey: this.state.sortKey
+    }
 
     if (this.state.searchValue === "") {
       urlKey = "assetList";
@@ -182,14 +151,14 @@ export class AssetListing extends Component {
       this.setState({
         sortOrder: "descending",
         sortKey: fields.key
-      },()=>{this.gettingData();})
+      }, () => { this.gettingData(); })
     }
 
     else {
       this.setState({
         sortOrder: "ascending",
         sortKey: fields.key
-      },()=>{this.gettingData()})
+      }, () => { this.gettingData() })
     }
   }
 
@@ -212,7 +181,8 @@ export class AssetListing extends Component {
           detailsHandler={this.handleDetails}
           assignHandler={this.handleAssign}
           unAssignHandler={this.handleUnAssign}
-          sortHandler={this.handleSort} />
+          sortHandler={this.handleSort}
+          sortRequired={true} />
       </div>
     );
   }

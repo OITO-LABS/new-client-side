@@ -12,7 +12,7 @@ export class ReimbursementEmployeeListing extends Component {
       recordsPerPage: 10,
       fields: [
         { label: "si no", key: "index" },
-        { label: "Reimbursement Id", key: "reimbursementId" },
+        { label: "reimbursement Id", key: "reimbursementId" },
         { label: "date", key: "reimbursementDate" },
         { label: "Total cost", key: "totalCost" },
       ],

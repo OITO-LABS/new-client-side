@@ -13,46 +13,17 @@ export class ReimbursementListing extends Component {
       activePage: 1,
       fromDate: "",
       toDate: "",
+      sortOrder: "ascending",
+      sortKey: "",
       recordsPerPage: 10,
-      searchValue:"",
+      searchValue: "",
       fields: [
         { label: "sl no", key: "index" },
-        { label: "id", key: "empNo" },
+        { label: " employee id", key: "empNo" },
         { label: "date", key: "reimbursementDate" },
         { label: "Total cost", key: "totalCost" },
       ],
-      //   datas:[
-      //     {
-      //         "reimbursementId": 13,
-      //         "reimbursementDate": "2019-11-21",
-      //         "empNo": "EMP001",
-      //         "totalCost": 6000
-      //     },
-      //     {
-      //         "reimbursementId": 5,
-      //         "reimbursementDate": "2019-11-20",
-      //         "empNo": "EMP001",
-      //         "totalCost": 6000
-      //     },
-      //     {
-      //         "reimbursementId": 10,
-      //         "reimbursementDate": "2019-11-19",
-      //         "empNo": "EMP002",
-      //         "totalCost": 14000
-      //     },
-      //     {
-      //         "reimbursementId": 4,
-      //         "reimbursementDate": "2019-11-18",
-      //         "empNo": "EMP001",
-      //         "totalCost": 6000
-      //     },
-      //     {
-      //         "reimbursementId": 11,
-      //         "reimbursementDate": "2019-11-17",
-      //         "empNo": "EMP002",
-      //         "totalCost": 19000
-      //     }
-      // ]
+
 
     }
     this.handleDate = this.handleDate.bind(this);
@@ -62,6 +33,7 @@ export class ReimbursementListing extends Component {
     this.handleRegister = this.handleRegister.bind(this);
     this.fetchingData = this.fetchingData.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleSort = this.handleSort.bind(this);
 
   }
   componentDidMount() {
@@ -70,7 +42,15 @@ export class ReimbursementListing extends Component {
   }
 
   gettingData() {
-    const data = { page: this.state.activePage - 1, dateFrom: this.state.fromDate, dateTo: this.state.toDate, size: this.state.recordsPerPage, empNo:this.state.searchValue };
+    const data = {
+      page: this.state.activePage - 1,
+      dateFrom: this.state.fromDate,
+      dateTo: this.state.toDate,
+      size: this.state.recordsPerPage,
+      empNo: this.state.searchValue,
+      sortOrder: this.state.sortOrder,
+      sortKey: this.state.sortKey
+    };
     let urlKey = "";
     if ((this.state.fromDate == "" && this.state.toDate == "") && this.state.searchValue == "") {
       urlKey = "reimbursementList";
@@ -135,8 +115,25 @@ export class ReimbursementListing extends Component {
       activePage: 1,
       searchValue: value
     },
-       () => { this.gettingData() }
+      () => { this.gettingData() }
     )
+  }
+
+  handleSort(fields) {
+    console.log(fields);
+    if (this.state.sortOrder === "ascending") {
+      this.setState({
+        sortOrder: "descending",
+        sortKey: fields.key
+      }, () => { this.gettingData(); })
+    }
+
+    else {
+      this.setState({
+        sortOrder: "ascending",
+        sortKey: fields.key
+      }, () => { this.gettingData() })
+    }
   }
 
   render() {
@@ -149,7 +146,9 @@ export class ReimbursementListing extends Component {
           fields={this.state.fields}
           datas={this.state.datas}
           pageHandler={this.handlePage}
-          detailsHandler={this.handleDetails} />
+          detailsHandler={this.handleDetails}
+          sortHandler={this.handleSort}
+          sortRequired={true} />
       </div>
     );
   }
