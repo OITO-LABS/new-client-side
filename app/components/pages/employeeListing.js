@@ -18,6 +18,8 @@ class EmployeeListing extends React.Component {
     this.state = {
       activePage: 1,
       searchValue: "",
+      sortOrder: "ascending",
+      sortKey: "",
       recordsPerPage: 10,
       fields: [
         { label: "sl no", key: "index" },
@@ -35,6 +37,7 @@ class EmployeeListing extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
     this.handleDetails = this.handleDetails.bind(this);
+    this.handleSort = this.handleSort.bind(this);
   }
 
   componentDidMount() {
@@ -43,7 +46,7 @@ class EmployeeListing extends React.Component {
   }
 
   gettingData() {
-    const data = { page: this.state.activePage - 1, searchkey: this.state.searchValue, limit: this.state.recordsPerPage }
+    const data = { page: this.state.activePage - 1, searchkey: this.state.searchValue, limit: this.state.recordsPerPage, sortorder: this.state.sortOrder, sortkey: this.state.sortKey }
     // dataService.getRequest("employeeUpdate", { empNo:'123',empId:123 })
     let urlKey = "";
     if (this.state.searchValue === "") {
@@ -127,6 +130,23 @@ class EmployeeListing extends React.Component {
     app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_REG, params: { empId: -1 } });
   }
 
+  handleSort(fields) {
+    console.log(fields);
+    if (this.state.sortOrder === "ascending") {
+      this.setState({
+        sortOrder: "descending",
+        sortKey: fields.key
+      },()=>{this.gettingData();})
+    }
+
+    else {
+      this.setState({
+        sortOrder: "ascending",
+        sortKey: fields.key
+      },()=>{this.gettingData()})
+    }
+  }
+
   render() {
     return (
       <div>
@@ -145,7 +165,8 @@ class EmployeeListing extends React.Component {
           pageHandler={this.handlePage}
           editHandler={this.handleEdit}
           deleteHandler={this.handleDelete}
-          detailsHandler={this.handleDetails} />
+          detailsHandler={this.handleDetails}
+          sortHandler={this.handleSort}  />
       </div>
     );
   }

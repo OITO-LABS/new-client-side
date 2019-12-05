@@ -19,7 +19,13 @@ class ListTable extends Component {
 
    renderTableHeader() {
       return this.props.fields.map((item, index) => {
-         return <th key={index}>{item.label.toUpperCase()}</th>
+         if(index==0||item.key=="editDelete"||item.key=="status"){
+            return <th key={index}>{item.label.toUpperCase()}</th>
+         }
+         else{
+            return <th key={index}>{item.label.toUpperCase()}   <i class="fas fa-sort" onClick={()=>{this.props.sortHandler(item)}}></i></th>
+         }
+         
       })
    }
 
@@ -29,7 +35,6 @@ class ListTable extends Component {
       return data.map((data, index) => {
          return (
             <tr key={index}>
-
                {fields.map((item, i) => {
                   let activePage=this.state.activePage-1||0;
                   let recordsPerPage=this.props.recordsPerPage;

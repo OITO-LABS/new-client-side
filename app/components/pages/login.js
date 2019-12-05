@@ -90,7 +90,7 @@ export class Login extends Component {
                 if(res.response.status == "success") {
                         app.events.trigger(USER_SIGNIN,  res);
                 }
-                else {
+                else if(res.username==null) {
                     app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: "username and password doesnot match"});
                 }  
             })
@@ -185,7 +185,7 @@ export class Login extends Component {
 
                                 <div className="text-center forgot-credentials">
                                     <a href="#" className="txt1" onClick={this.handleForgotPassword}>
-                                        Forgot Username / Password?
+                                        Forgot Password?
                                     </a>
                                 </div>
 
