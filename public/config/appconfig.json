@@ -6,7 +6,7 @@
 
       "reset": "api/login/reset",
 
-      "getEmpDetails":"api/employee/:empId",    
+      "getEmpDetails":"api/employee/:empId",
       "updateEmployee":"api/employee/:empId",
       "getAsset":"api/asset/details/:assetId",
       "registered":"api/employee",

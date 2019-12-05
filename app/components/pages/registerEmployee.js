@@ -286,6 +286,17 @@ export class registerEmployee extends Component {
               placeholder="DOB"
               validator={validation} 
             />
+             <FormField
+              label="Upload Profile Pic"
+              labelClassName="txt-label"
+              fieldClassName="txt-input"
+              type="file"
+              mandatory
+              onChange={this.handleInputChange}
+              name="image"
+              value={this.state.image}
+              validator={validation} 
+            />
           </div>
 
           {/* Input details second block  */}

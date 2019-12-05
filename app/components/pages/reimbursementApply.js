@@ -11,13 +11,6 @@ class ReimbursementApply extends Component {
     this.validateFieldData = this.validateFieldData.bind(this);
     this.validator = new FormValidator([
       {
-        field: "empNo",
-        method: "isEmpty",
-        args: [{ ignore_whitespace: true }],
-        validWhen: false,
-        message: "Select employee name"
-      },
-      {
         field: "reimbursementDate",
         method: "isEmpty",
         args: [{ ignore_whitespace: true }],
@@ -63,7 +56,6 @@ class ReimbursementApply extends Component {
     ]);
     this.state = {
       reimbursementDetails: [{index: 1,billDate: "",reimbursementDescription: "",categoryName: "",billNo: "",cost: 0,flag: false}],
-      empNo: "",
       // empData: [],
       category: [],
       validation: this.validator.valid()
