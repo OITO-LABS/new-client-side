@@ -112,7 +112,7 @@ class ListTable extends Component {
 
             {this.props.datas && this.props.datas.length < 1 && <NoRecordsFound />}
 
-            <Pagination totalItems={this.props.totalRecords || 1} onPageChange={this.onPageChange} />
+            <Pagination totalItems={this.props.totalRecords || 1} onPageChange={this.onPageChange} activePage={this.props.activePage}/>
          </div>
       );
    }

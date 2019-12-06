@@ -169,6 +169,7 @@ class EmployeeListing extends React.Component {
           editHandler={this.handleEdit}
           deleteHandler={this.handleDelete}
           detailsHandler={this.handleDetails}
+          activePage={this.state.activePage}
           sortHandler={this.handleSort}
           sortRequired={true} />
       </div>

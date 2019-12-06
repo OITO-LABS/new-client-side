@@ -183,6 +183,7 @@ export class AssetListing extends Component {
           detailsHandler={this.handleDetails}
           assignHandler={this.handleAssign}
           unAssignHandler={this.handleUnAssign}
+          activePage={this.state.activePage}
           sortHandler={this.handleSort}
           sortRequired={true} />
       </div>

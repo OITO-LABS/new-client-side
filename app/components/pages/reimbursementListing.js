@@ -149,6 +149,7 @@ export class ReimbursementListing extends Component {
           datas={this.state.datas}
           pageHandler={this.handlePage}
           detailsHandler={this.handleDetails}
+          activePage={this.state.activePage}
           sortHandler={this.handleSort}
           sortRequired={true} />
       </div>

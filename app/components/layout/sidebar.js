@@ -71,6 +71,7 @@ class Sidebar extends React.Component {
                 <li>
                   <a href="#" onClick={this.empReg}  className="dropdown-toggle">
                     <i className="fas fa-cog"></i>
+                    {/* <i class="far fa-registered"></i> */}
                     Register
                   </a>
                 </li>
