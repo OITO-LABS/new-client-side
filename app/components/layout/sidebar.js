@@ -1,5 +1,5 @@
 import React from "react";
-import { PROFILE,EMPLOYEE_REG,EMPLOYEE_LISTING,GOTO_URL,ADD_ASSETS,ASSET_LISTING,APPLY_REIMBURSEMENT,REIMBURSEMENT_LISTING } from "utils/constants";
+import { PROFILE,EMPLOYEE_REG,EMPLOYEE_LISTING,GOTO_URL,ADD_ASSETS,ASSET_LISTING,APPLY_REIMBURSEMENT,REIMBURSEMENT_LISTING,INACTIVE_ASSET_LISTING } from "utils/constants";
 import "assets/sass/pages/_employeeRegister.scss"
 
 class Sidebar extends React.Component {
@@ -14,6 +14,7 @@ class Sidebar extends React.Component {
     this.viewAssets = this.viewAssets.bind(this);
     this.applyReimbursement = this.applyReimbursement.bind(this);
     // this.viewReimbursements = this.viewReimbursements.bind(this);
+    this.viewInactiveAssets=this.viewInactiveAssets.bind(this);
   }
   
   profile() {
@@ -42,6 +43,9 @@ class Sidebar extends React.Component {
 
   viewReimbursements() {
     app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_LISTING });
+  }
+  viewInactiveAssets(){
+    app.events.trigger(GOTO_URL, { routerKey: INACTIVE_ASSET_LISTING });
   }
 
   render() {
@@ -88,7 +92,14 @@ class Sidebar extends React.Component {
                 <li>
                   <a href="#" onClick={this.viewAssets}>
                     <i className="fab fa-accusoft"></i>
-                    Assets 
+                   Active Assets 
+                  </a>
+                </li>
+                {/* View inactive Assets  */}
+                <li>
+                  <a href="#" onClick={this.viewInactiveAssets}>
+                  <i class="fas fa-wrench"></i>
+                   Inactive Assets 
                   </a>
                 </li>
                  {/* Apply Reimbursement */}
