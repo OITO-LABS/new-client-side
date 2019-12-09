@@ -81,7 +81,14 @@ class ListTable extends Component {
                               <button onClick={() => this.props.assignHandler(data)} className="btn btn-success">Assign</button>
                            </td>
                         )
+                     } else if (data[item.key] == "disabled") {
+                        return (
+                           <td key={i}>
+                              <button onClick={() => this.props.activateHandler(data)} className="btn btn-success">Activate</button>
+                           </td>
+                        )
                      }
+
                   }
                })}
             </tr>

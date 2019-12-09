@@ -22,9 +22,9 @@ export class InactiveAssetListing extends Component {
         { label: "Key", key: "assetKey" },
         { label: "category", key: "productCategoryName" },
         { label: "model", key: "model" },
-        { label: "owner id", key: "empNo" },
+        // { label: "owner id", key: "empNo" },
         { label: "action", key: "editDelete" },
-        { label: "assign/unassign", key: "status" }
+        { label: "Activate", key: "status" }
       ],
 
     }
@@ -183,6 +183,7 @@ export class InactiveAssetListing extends Component {
           detailsHandler={this.handleDetails}
           assignHandler={this.handleAssign}
           unAssignHandler={this.handleUnAssign}
+          activePage={this.state.activePage}
           sortHandler={this.handleSort}
           sortRequired={true} />
       </div>
