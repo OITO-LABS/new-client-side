@@ -22,7 +22,7 @@ const defaultFormDataOpt = {
   ...defaultPostOpt,
   bodyType:FORM_DATA,
   headers: {
-    "Content-Type": ""
+    "Content-Type": "multipart/form-data; charset=utf-8"
   }
 }
 
@@ -112,7 +112,7 @@ class DataService {
         let paramsToBody = bodyOpt.method == METHOD_POST || bodyOpt.method == METHOD_PUT || !!bodyOpt.paramsToBody;
         let url = resolveApiUrl(urlkey,params,!paramsToBody,excludeParams);
         if(bodyOpt.bodyType == FORM_DATA){
-          delete bodyOpt.headers['Content-Type'];
+          // delete bodyOpt.headers['Content-Type'];
           let formData = new FormData();
           Object.keys(params).forEach(k=>{
             formData.append(k,params[k]);
