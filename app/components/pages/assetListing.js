@@ -53,7 +53,8 @@ export class AssetListing extends Component {
       searchkey: this.state.searchValue,
       limit: this.state.recordsPerPage,
       sortOrder: this.state.sortOrder,
-      sortKey: this.state.sortKey
+      sortKey: this.state.sortKey,
+      status:"active"
     }
 
     if (this.state.searchValue === "") {
@@ -172,7 +173,7 @@ export class AssetListing extends Component {
           button2name="export"
           handleRegister={this.handleRegister}
           searchHandler={this.handleSearch} />
-        <Heading heading="ASSETS" />
+        <Heading heading="ACTIVE ASSETS" />
         <ListTable
           totalRecords={this.state.totalRecords}
           fields={this.state.fields}

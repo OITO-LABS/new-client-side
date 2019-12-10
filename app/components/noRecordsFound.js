@@ -12,7 +12,7 @@ export class NoRecordsFound extends Component {
 
     render() {
         return (
-            <div  class=" no-records">
+            <div  className=" no-records">
                 <h1 className="text-center">No Records Found</h1>
             </div>
         );

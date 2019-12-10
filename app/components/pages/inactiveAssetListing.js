@@ -38,6 +38,7 @@ export class InactiveAssetListing extends Component {
     this.handleAssign = this.handleAssign.bind(this);
     this.handleUnAssign = this.handleUnAssign.bind(this);
     this.handleSort = this.handleSort.bind(this);
+    this.handleActivate = this.handleActivate.bind(this);
   }
 
   componentDidMount() {
@@ -53,7 +54,8 @@ export class InactiveAssetListing extends Component {
       searchkey: this.state.searchValue,
       limit: this.state.recordsPerPage,
       sortOrder: this.state.sortOrder,
-      sortKey: this.state.sortKey
+      sortKey: this.state.sortKey,
+      status: "inActive"
     }
 
     if (this.state.searchValue === "") {
@@ -164,6 +166,11 @@ export class InactiveAssetListing extends Component {
     }
   }
 
+
+  handleActivate(data) {
+    alert(data);
+  }
+
   render() {
     return (
       <div>
@@ -185,7 +192,8 @@ export class InactiveAssetListing extends Component {
           unAssignHandler={this.handleUnAssign}
           activePage={this.state.activePage}
           sortHandler={this.handleSort}
-          sortRequired={true} />
+          sortRequired={true}
+          activateHandler={this.handleActivate} />
       </div>
     );
   }

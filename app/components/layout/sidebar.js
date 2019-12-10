@@ -71,7 +71,7 @@ class Sidebar extends React.Component {
                 <li>
                   <a href="#" onClick={this.empReg}  className="dropdown-toggle">
                     <i className="fas fa-cog"></i>
-                    {/* <i class="far fa-registered"></i> */}
+                    {/* <i className="far fa-registered"></i> */}
                     Register
                   </a>
                 </li>
@@ -99,7 +99,7 @@ class Sidebar extends React.Component {
                 {/* View inactive Assets  */}
                 <li>
                   <a href="#" onClick={this.viewInactiveAssets}>
-                  <i class="fas fa-wrench"></i>
+                  <i className="fas fa-wrench"></i>
                    Inactive Assets 
                   </a>
                 </li>

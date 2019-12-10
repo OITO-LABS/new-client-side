@@ -24,7 +24,7 @@ class ListTable extends Component {
                return <th key={index}>{item.label.toUpperCase()}</th>
             }
             else {
-               return <th key={index}>{item.label.toUpperCase()}   <i class="fas fa-sort" onClick={() => { this.props.sortHandler(item) }}></i></th>
+               return <th key={index}>{item.label.toUpperCase()}   <i className="fas fa-sort" onClick={() => { this.props.sortHandler(item) }}></i></th>
             }
          }
          else {
@@ -50,7 +50,7 @@ class ListTable extends Component {
                         <td key={i}>{indexValue}</td>
                      )
                   }
-                  else if (item.key !== "editDelete" && item.key !== "status") {
+                  else if (item.key !== "editDelete" && item.key !== "status" && item.key !== "approvel") {
                      if (i == 1) {
                         return (
                            <td key={i} onClick={() => { this.props.detailsHandler(data) }}><a href="#">{data[item.key]}</a></td>
@@ -60,6 +60,7 @@ class ListTable extends Component {
                         <td key={i}>{data[item.key]}</td>
                      )
                   }
+
                   else if (item.key == "editDelete") {
                      return (
                         <td key={i}>
@@ -68,6 +69,8 @@ class ListTable extends Component {
                         </td>
                      )
                   }
+
+
                   else if (item.key == "status") {
                      if (data[item.key] == "Assigned") {
                         return (
@@ -88,7 +91,28 @@ class ListTable extends Component {
                            </td>
                         )
                      }
+                  }
 
+                  else if (item.key == "approvel") {
+                     if (data[item.key] == "approved") {
+                        return (
+                           <td key={i}>
+                              <button className="btn btn-success">Approved</button>
+                           </td>
+                        )
+                     } else if (data[item.key] == "rejected") {
+                        return (
+                           <td key={i}>
+                              <button className="btn btn-danger">Rejected</button>
+                           </td>
+                        )
+                     } else if (data[item.key] == "pending") {
+                        return (
+                           <td key={i}>
+                              <button className="btn btn-warning">Pending</button>
+                           </td>
+                        )
+                     }
                   }
                })}
             </tr>
@@ -119,7 +143,7 @@ class ListTable extends Component {
 
             {this.props.datas && this.props.datas.length < 1 && <NoRecordsFound />}
 
-            <Pagination totalItems={this.props.totalRecords || 1} onPageChange={this.onPageChange} activePage={this.props.activePage}/>
+            <Pagination totalItems={this.props.totalRecords || 1} onPageChange={this.onPageChange} activePage={this.props.activePage} />
          </div>
       );
    }
