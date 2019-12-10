@@ -1,6 +1,6 @@
 import {
     PATH_PREFIX, LANDING, PROFILE, APP_INFO, EMPLOYEE_REG, EMPLOYEE_UPDATE, EMPLOYEE_LISTING, EMPLOYEE_DETAILS, ASSET_LISTING, ASSET_DETAILS, ADD_ASSETS, ASSIGN_ASSETS,
-    REIMBURSEMENT_LISTING, REIMBURSEMENT_EMPLOYEE_LISTING, REIMBURSEMENT_BILL_LISTING,APPLY_REIMBURSEMENT,RESET_PASSWORD,FORGOT_PASSWORD,LOGIN,HOME,INACTIVE_ASSET_LISTING} from 'utils/constants';
+    REIMBURSEMENT_LISTING, REIMBURSEMENT_EMPLOYEE_LISTING, REIMBURSEMENT_BILL_LISTING,APPLY_REIMBURSEMENT,RESET_PASSWORD,FORGOT_PASSWORD,LOGIN,HOME,INACTIVE_ASSET_LISTING,ASSET_DELETION} from 'utils/constants';
 const routes = [
     {
         name: LANDING,
@@ -156,6 +156,16 @@ const routes = [
         componentId: 'pages/assetAssignment',
         title: 'asset assignment',
         className: 'asset-assign-page',
+        exact: true,
+        nowrap: false
+    },
+    {
+        name: ASSET_DELETION,
+        path: PATH_PREFIX +':assetId/' + ASSET_DELETION,
+        samplePath: PATH_PREFIX + ASSET_DELETION,
+        componentId: 'pages/assetDeletion',
+        title: 'asset deletion',
+        className: 'asset-deletion-page',
         exact: true,
         nowrap: false
     },

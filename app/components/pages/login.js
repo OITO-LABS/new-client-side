@@ -89,6 +89,8 @@ export class Login extends Component {
                 .then(res => {
                     if (res.response.status == "success") {
                         app.events.trigger(USER_SIGNIN, res);
+                        // app.events.trigger(USER_SIGNIN, {key:"value"});
+
                     }
                     else {
                         app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: "username and password doesnot match" });

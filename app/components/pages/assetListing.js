@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, ASSET_DETAILS, ADD_ASSETS, ASSIGN_ASSETS } from 'utils/constants';
+import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, ASSET_DETAILS, ADD_ASSETS, ASSIGN_ASSETS,ASSET_DELETION } from 'utils/constants';
 import dataService from 'utils/dataservice';
 import SearchAndButtonBar from "../searchAndButtonBar";
 import ListTable from "../listTable";
@@ -54,7 +54,7 @@ export class AssetListing extends Component {
       limit: this.state.recordsPerPage,
       sortOrder: this.state.sortOrder,
       sortKey: this.state.sortKey,
-      status:"active"
+      enableStatus:"Active"
     }
 
     if (this.state.searchValue === "") {
@@ -94,35 +94,38 @@ export class AssetListing extends Component {
     app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS, params: { assetId: data.assetId } });
   }
 
-  async handleDelete(data) {
+   handleDelete(data) {
     console.log(data);
-    let isConfirmed = false;
-    isConfirmed = await confirm({
-      msg: 'Are you sure you want to delete this record?',
-    });
-    if (isConfirmed) {
-      dataService.deleteRequest("assetDelete", { assetId: data.assetId })
-        .then(res => {
-          if (res.status == "deleted successfully") {
-            app.events.trigger(SHOW_ALERT_MSG, {
-              visible: true,
-              type: ALERT_TYPE.SUCESS,
-              msg: "Successfully Deleted"
-            });
-            this.gettingData();
-          }
-          else {
-            app.events.trigger(SHOW_ALERT_MSG, {
-              visible: true,
-              type: ALERT_TYPE.DANGER,
-              msg: `Deletion Failed  ${res.message}`
-            });
-            this.gettingData();
-          }
-        }).catch(res => {
-          console.log(res);
-        });
-    }
+
+    app.events.trigger(GOTO_URL, { routerKey: ASSET_DELETION, params: { assetId: data.assetId } });
+
+    // let isConfirmed = false;
+    // isConfirmed = await confirm({
+    //   msg: 'Are you sure you want to delete this record?',
+    // });
+    // if (isConfirmed) {
+    //   dataService.deleteRequest("assetDelete", { assetId: data.assetId })
+    //     .then(res => {
+    //       if (res.status == "deleted successfully") {
+    //         app.events.trigger(SHOW_ALERT_MSG, {
+    //           visible: true,
+    //           type: ALERT_TYPE.SUCESS,
+    //           msg: "Successfully Deleted"
+    //         });
+    //         this.gettingData();
+    //       }
+    //       else {
+    //         app.events.trigger(SHOW_ALERT_MSG, {
+    //           visible: true,
+    //           type: ALERT_TYPE.DANGER,
+    //           msg: `Deletion Failed  ${res.message}`
+    //         });
+    //         this.gettingData();
+    //       }
+    //     }).catch(res => {
+    //       console.log(res);
+    //     });
+    // }
   }
 
   handleDetails(data) {

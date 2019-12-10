@@ -50,7 +50,7 @@ class ListTable extends Component {
                         <td key={i}>{indexValue}</td>
                      )
                   }
-                  else if (item.key !== "editDelete" && item.key !== "status" && item.key !== "approvel") {
+                  else if (item.key !== "editDelete" && item.key !== "status" && item.key !== "approvel" && item.key !== "approvel") {
                      if (i == 1) {
                         return (
                            <td key={i} onClick={() => { this.props.detailsHandler(data) }}><a href="#">{data[item.key]}</a></td>
@@ -70,6 +70,14 @@ class ListTable extends Component {
                      )
                   }
 
+                  else if (item.key == "delete") {
+                     return (
+                        <td key={i}>
+                           <button onClick={() => { this.props.deleteHandler(data) }} className="btn btn-danger action"><i className="fas fa-trash"></i></button>
+                        </td>
+                     )
+                  }
+
 
                   else if (item.key == "status") {
                      if (data[item.key] == "Assigned") {
@@ -84,10 +92,16 @@ class ListTable extends Component {
                               <button onClick={() => this.props.assignHandler(data)} className="btn btn-success">Assign</button>
                            </td>
                         )
-                     } else if (data[item.key] == "disabled") {
+                     } else if (data[item.key] == "Inactive") {
                         return (
                            <td key={i}>
                               <button onClick={() => this.props.activateHandler(data)} className="btn btn-success">Activate</button>
+                           </td>
+                        )
+                     }else if (data[item.key] == "Disabled") {
+                        return (
+                           <td key={i}>
+                              <button  className="btn btn-disabled" >Disabled</button>
                            </td>
                         )
                      }

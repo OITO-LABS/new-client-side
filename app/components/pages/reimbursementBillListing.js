@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { FLIP_LOADER, GOTO_URL, REIMBURSEMENT_BILL_LISTING } from 'utils/constants';
+import { FLIP_LOADER, GOTO_URL, REIMBURSEMENT_BILL_LISTING, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE } from 'utils/constants';
 import dataService from 'utils/dataservice';
 import ListTable from "../listTable";
 import "assets/sass/pages/_listing.scss";
 import FormField from "../common/formfield";
+import { confirm } from 'utils/common';
+
 
 export class ReimbursementBillListing extends Component {
   constructor(props) {
@@ -17,7 +19,7 @@ export class ReimbursementBillListing extends Component {
         { label: "description", key: "reimbursementDescription" },
         { label: "category name", key: "categoryName" },
         { label: "cost", key: "cost" },
-        { label: "action", key: "editDelete" },
+        { label: "action", key: "delete" },
 
       ],
       datas: [
@@ -26,6 +28,7 @@ export class ReimbursementBillListing extends Component {
     }
     this.pageHandler = this.pageHandler.bind(this);
     this.gettingBill = this.gettingBill.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
 
   }
   componentDidMount() {
@@ -51,6 +54,37 @@ export class ReimbursementBillListing extends Component {
       .catch(error => {
         console.log(error);
       });
+  }
+
+  async handleDelete(data) {
+    console.log(data);
+    let isConfirmed = false;
+    isConfirmed = await confirm({
+      msg: 'Are you sure you want to delete this record?',
+    });
+    if (isConfirmed) {
+      dataService.putRequest("urlKey", { empNo: data.empNo })
+        .then(res => {
+          if (res.status == "success") {
+            app.events.trigger(SHOW_ALERT_MSG, {
+              visible: true,
+              type: ALERT_TYPE.SUCESS,
+              msg: "Successfully Deleted"
+            });
+            this.gettingBill();
+          }
+          else {
+            app.events.trigger(SHOW_ALERT_MSG, {
+              visible: true,
+              type: ALERT_TYPE.DANGER,
+              msg: ` Deletion Failed  ${res.message}`
+            });
+            this.gettingBill();
+          }
+        }).catch(res => {
+          console.log(res);
+        });
+    }
   }
 
 
@@ -105,7 +139,7 @@ export class ReimbursementBillListing extends Component {
           fields={this.state.fields}
           datas={this.state.datas}
           pageHandler={this.handlePage}
-        />
+          deleteHandler={this.handleDelete} />
 
         <div className="row total-cost">
           <div className="col-8"></div>
@@ -122,6 +156,12 @@ export class ReimbursementBillListing extends Component {
         </div>
         <div className="d-flex flex-row-reverse">
           <button className="ml-auto btn btn-success" onClick={() => window.print()}>PRINT</button>
+        </div>
+        <div class="btn-wrapper">
+          <div class="btn-wrapper">
+            <button type="button" class="btn btn-primary">Edit</button>
+            <button type="button" class="btn btn-success">send for approvel</button>
+          </div>
         </div>
       </div>
     );
