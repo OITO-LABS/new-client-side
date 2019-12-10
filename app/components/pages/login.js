@@ -92,7 +92,6 @@ export class Login extends Component {
                     }
                     else {
                         app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: "username and password doesnot match" });
-                        // app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
 
                     }
                 })

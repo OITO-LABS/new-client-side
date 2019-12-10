@@ -81,7 +81,14 @@ class ListTable extends Component {
                               <button onClick={() => this.props.assignHandler(data)} className="btn btn-success">Assign</button>
                            </td>
                         )
+                     } else if (data[item.key] == "disabled") {
+                        return (
+                           <td key={i}>
+                              <button onClick={() => this.props.activateHandler(data)} className="btn btn-success">Activate</button>
+                           </td>
+                        )
                      }
+
                   }
                })}
             </tr>
@@ -112,7 +119,7 @@ class ListTable extends Component {
 
             {this.props.datas && this.props.datas.length < 1 && <NoRecordsFound />}
 
-            <Pagination totalItems={this.props.totalRecords || 1} onPageChange={this.onPageChange} />
+            <Pagination totalItems={this.props.totalRecords || 1} onPageChange={this.onPageChange} activePage={this.props.activePage}/>
          </div>
       );
    }

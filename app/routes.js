@@ -1,6 +1,6 @@
 import {
     PATH_PREFIX, LANDING, PROFILE, APP_INFO, EMPLOYEE_REG, EMPLOYEE_UPDATE, EMPLOYEE_LISTING, EMPLOYEE_DETAILS, ASSET_LISTING, ASSET_DETAILS, ADD_ASSETS, ASSIGN_ASSETS,
-    REIMBURSEMENT_LISTING, REIMBURSEMENT_EMPLOYEE_LISTING, REIMBURSEMENT_BILL_LISTING,APPLY_REIMBURSEMENT,RESET_PASSWORD,FORGOT_PASSWORD,LOGIN,HOME} from 'utils/constants';
+    REIMBURSEMENT_LISTING, REIMBURSEMENT_EMPLOYEE_LISTING, REIMBURSEMENT_BILL_LISTING,APPLY_REIMBURSEMENT,RESET_PASSWORD,FORGOT_PASSWORD,LOGIN,HOME,INACTIVE_ASSET_LISTING} from 'utils/constants';
 const routes = [
     {
         name: LANDING,
@@ -87,16 +87,16 @@ const routes = [
         exact: true,
         nowrap: false
     },
-    // {
-    //     name:EMPLOYEE_UPDATE,
-    //     path:PATH_PREFIX+EMPLOYEE_UPDATE,
-    //     samplePath:PATH_PREFIX+EMPLOYEE_UPDATE,
-    //     componentId:'pages/updateEmployee',
-    //     title:'update employee',
-    //     className:'update-employee-page',
-    //     exact:true,
-    //     nowrap:false
-    // },
+    {
+        name:INACTIVE_ASSET_LISTING,
+        path:PATH_PREFIX+INACTIVE_ASSET_LISTING,
+        samplePath:PATH_PREFIX+INACTIVE_ASSET_LISTING,
+        componentId:'pages/inactiveAssetListing',
+        title:'inactive asset listing',
+        className:'inactive-asset-listing-page',
+        exact:true,
+        nowrap:false
+    },
     
     {
         name: EMPLOYEE_LISTING,

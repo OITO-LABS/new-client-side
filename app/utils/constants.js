@@ -60,7 +60,8 @@ export const EMPLOYEE_LISTING = "employee-listing";
 export const ADD_ASSETS = 'add-assets'
 export const ASSET_DETAILS ="asset-details";
 export const ASSET_LISTING = "asset-listing";
-export const ASSIGN_ASSETS = 'assign-assets'
+export const ASSIGN_ASSETS = 'assign-assets';
+export const INACTIVE_ASSET_LISTING='inactive-asset-listing';
 
 export const REIMBURSEMENT_LISTING ="reimbursement-listing";
 export const REIMBURSEMENT_EMPLOYEE_LISTING = "reimbursement-employee-listing";

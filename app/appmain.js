@@ -24,7 +24,7 @@ import {
   PATH_PREFIX,
   HOME,
   EMPLOYEE_LISTING,
-  USER_SIGNIN, USER_SIGNOUT,USER_RESET,FORGOT_PASSWORD
+  USER_SIGNIN, USER_SIGNOUT, USER_RESET, FORGOT_PASSWORD
 } from "utils/constants";
 import header from "components/layout/header";
 import Footer from "components/layout/footer";
@@ -76,9 +76,17 @@ class Main extends React.Component {
     app.userAuth = userAuth;
     app.empId = userAuth.employeeId;
     // this.setUserToken(userAuth, true);
+
+    // let cookies=  getCookie('JSESSIONID');
+    // console.log("-------------cookies get from serverside")
+    // console.log(cookies);
+
+    // if(cookies==""){
     this.setState({
       login: true
     }, () => { app.events.trigger(GOTO_URL, { routerKey: HOME }); })
+    // }
+
   }
   setUserToken(userAuth, loginUser) {
     //setToCache(USER_TKEY, BEARER_KEY + userAuth.accessToken);
@@ -151,11 +159,11 @@ class Main extends React.Component {
             {/* <Collapse/> */}
             <Header pageQuery />
             <div className="row content-height">
-             {app.userAuth.role == "admin" ?
-              <div className="col-2"><Sidebar /></div>
-              :
-               <div className="col-2"><SidebarEmp/></div> 
-            } 
+              {app.userAuth.role == "admin" ?
+                <div className="col-2"><Sidebar /></div>
+                :
+                <div className="col-2"><SidebarEmp /></div>
+              }
               <div className="col-10">
                 <Router>
                   <Switch>
