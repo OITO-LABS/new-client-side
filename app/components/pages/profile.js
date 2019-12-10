@@ -61,7 +61,7 @@ class Profile extends Component {
                 return(
                 <div className="input-wrapper" key={index}>
                   <label className="txt-label text-uppercase readonly-label">{field.label}</label>
-                  <input className="txt-input readonly-input" type="text" value={empData[field.key]} readonly/>
+                  <input className="txt-input" type="text" value={empData[field.key]}/>
                 </div>  
                 )
               }
@@ -74,7 +74,7 @@ class Profile extends Component {
                 return(
                   <div className="input-wrapper" key={index}>
                   <label className="txt-label text-uppercase readonly-label">{field.label}</label>
-                  <input className="txt-input readonly-input" type="text" value={empData[field.key]} readonly/>
+                  <input className="txt-input" type="text" value={empData[field.key]}/>
                 </div>
                 )}
             })}
