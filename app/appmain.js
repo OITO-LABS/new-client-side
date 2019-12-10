@@ -73,12 +73,13 @@ class Main extends React.Component {
   userSignIn([userAuth, source]) {
     // let d = new Date().getTime() - 100;
     // userAuth = { ...userAuth, ...(userAuth.customFields || {}) };
-    app.userAuth.role="admin"
 
 
-    
-    // app.userAuth = userAuth;
-    // app.empId = userAuth.employeeId;
+    // app.userAuth.role="admin"
+
+
+    app.userAuth = userAuth;
+    app.empId = userAuth.employeeId;
 
 
 

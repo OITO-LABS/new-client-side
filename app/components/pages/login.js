@@ -85,19 +85,19 @@ export class Login extends Component {
 
         if (validation.isValid) {
             let data = { username: this.state.username, password: this.state.password }
-            // dataService.postRequest("login", data)
-                // .then(res => {
-                    // if (res.response.status == "success") {
-                        // app.events.trigger(USER_SIGNIN, res);
-                        app.events.trigger(USER_SIGNIN, {key:"value"});
+            dataService.postRequest("login", data)
+                .then(res => {
+                    if (res.response.status == "success") {
+                        app.events.trigger(USER_SIGNIN, res);
+                        // app.events.trigger(USER_SIGNIN, {key:"value"});
 
-                    // }
-                    // else {
-                        // app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: "username and password doesnot match" });
+                    }
+                    else {
+                        app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: "username and password doesnot match" });
 
-                    // }
-                // })
-                // .catch(err => { console.log(err) });
+                    }
+                })
+                .catch(err => { console.log(err) });
         }
     }
 
