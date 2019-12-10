@@ -174,13 +174,12 @@ class ReimbursementApply extends Component {
     fileReader.onload = ()=>{
       let {imageAssets} = this.state;
       imageAssets[imgKey] = imageAssets[imgKey] || [];
-      imageAssets[imgKey].push({ src: fileReader.result, file });
+      imageAssets[imgKey].push({ file });
       let img = new Image();
       img.src = fileReader.result;
       console.log('Image Assets',imageAssets);
     }
     fileReader.readAsDataURL(file);
-    
   }
 
   onSubmit() {
@@ -191,11 +190,18 @@ class ReimbursementApply extends Component {
     var reimbursementDate = this.state.reimbursementDate;
     var totalCost = this.state.totalCost;
     var reimbursementDetails = this.state.reimbursementDetails;
-    let imageAssets = this.state.imageAssets;
+    let {imageAssets} = this.state;
+    let data = {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementDetails: reimbursementDetails};
+    Object.keys(imageAssets).forEach(imgkey=>{
+        let itemIndex = -1;
+        imageAssets[imgkey].forEach((uimg,index)=>{
+            uimg.file && (data[imgkey+'['+(++itemIndex)+']'] = uimg.file);
+        });                
+    });
 
     if (validation.isValid) {
       dataService
-        .formDataRequest("reimbursementApply", {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementDetails: reimbursementDetails,imageData:imageAssets})
+        .formDataRequest("reimbursementApply", data)
         .then(res => {
           if (res.status == "success") {
             app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
@@ -292,7 +298,8 @@ class ReimbursementApply extends Component {
                   fieldClassName="txt-input"
                   type="file"
                   onChange={this.imageSelected} 
-                  name="file"
+                  name="imageData"
+                  value={this.state.imageAssets.file}            
                 />
                 </div>
               </div>
