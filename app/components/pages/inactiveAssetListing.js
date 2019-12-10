@@ -23,7 +23,7 @@ export class InactiveAssetListing extends Component {
         { label: "category", key: "productCategoryName" },
         { label: "model", key: "model" },
         // { label: "owner id", key: "empNo" },
-        { label: "action", key: "editDelete" },
+        // { label: "action", key: "editDelete" },
         { label: "Activate", key: "status" }
       ],
 
@@ -31,12 +31,8 @@ export class InactiveAssetListing extends Component {
     this.gettingData = this.gettingData.bind(this);
     this.handlePage = this.handlePage.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
     this.handleDetails = this.handleDetails.bind(this);
-    this.handleAssign = this.handleAssign.bind(this);
-    this.handleUnAssign = this.handleUnAssign.bind(this);
     this.handleSort = this.handleSort.bind(this);
     this.handleActivate = this.handleActivate.bind(this);
   }
@@ -55,7 +51,7 @@ export class InactiveAssetListing extends Component {
       limit: this.state.recordsPerPage,
       sortOrder: this.state.sortOrder,
       sortKey: this.state.sortKey,
-      status: "inActive"
+      enableStatus: "Inactive"
     }
 
     if (this.state.searchValue === "") {
@@ -90,41 +86,8 @@ export class InactiveAssetListing extends Component {
     }, () => { this.gettingData() })
   }
 
-  handleEdit(data) {
-    // console.log(data);
-    app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS, params: { assetId: data.assetId } });
-  }
+ 
 
-  async handleDelete(data) {
-    console.log(data);
-    let isConfirmed = false;
-    isConfirmed = await confirm({
-      msg: 'Are you sure you want to delete this record?',
-    });
-    if (isConfirmed) {
-      dataService.deleteRequest("assetDelete", { assetId: data.assetId })
-        .then(res => {
-          if (res.status == "deleted successfully") {
-            app.events.trigger(SHOW_ALERT_MSG, {
-              visible: true,
-              type: ALERT_TYPE.SUCESS,
-              msg: "Successfully Deleted"
-            });
-            this.gettingData();
-          }
-          else {
-            app.events.trigger(SHOW_ALERT_MSG, {
-              visible: true,
-              type: ALERT_TYPE.DANGER,
-              msg: `Deletion Failed  ${res.message}`
-            });
-            this.gettingData();
-          }
-        }).catch(res => {
-          console.log(res);
-        });
-    }
-  }
 
   handleDetails(data) {
     console.log("details");
@@ -136,17 +99,7 @@ export class InactiveAssetListing extends Component {
     app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS, params: { assetId: -1 } });
   }
 
-  handleAssign(data) {
-    console.log("assign");
-    console.log(data);
-    app.events.trigger(GOTO_URL, { routerKey: ASSIGN_ASSETS, params: { assetId: data.assetId, status: data.status } });
-  }
-
-  handleUnAssign(data) {
-    console.log("unAssign");
-    console.log(data);
-    app.events.trigger(GOTO_URL, { routerKey: ASSIGN_ASSETS, params: { assetId: data.assetId, status: data.status } });
-  }
+  
   handleSort(fields) {
     console.log(fields);
     if (this.state.sortOrder === "ascending") {
@@ -185,11 +138,7 @@ export class InactiveAssetListing extends Component {
           fields={this.state.fields}
           datas={this.state.datas}
           pageHandler={this.handlePage}
-          editHandler={this.handleEdit}
-          deleteHandler={this.handleDelete}
           detailsHandler={this.handleDetails}
-          assignHandler={this.handleAssign}
-          unAssignHandler={this.handleUnAssign}
           activePage={this.state.activePage}
           sortHandler={this.handleSort}
           sortRequired={true}
