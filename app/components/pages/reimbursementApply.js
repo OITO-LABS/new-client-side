@@ -163,17 +163,6 @@ class ReimbursementApply extends Component {
     this.setState({
       file:file
     })
-    // reader.onloadend = () =>{
-    //   this.setState({
-    //     file:file
-    //   })
-    // }
-    // reader.readAsDataURL(file);
-    // let file = event.target.files[0];
-    // let imgKey = event.target.attributes.name.value;
-    // let {imageAssets} = this.state;
-    // let ext = file.name.substring(file.name.lastIndexOf('.'))
-    // imageAssets[imgKey] = imageAssets[imgKey] || [];
   }
 
   onSubmit() {
@@ -188,7 +177,7 @@ class ReimbursementApply extends Component {
 
     if (validation.isValid) {
       dataService
-        .formDataRequest("reimbursementApply", {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementDetails: reimbursementDetails,file:file})
+        .formDataRequest("reimbursementApply", {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementDetails: reimbursementDetails, file:file})
         .then(res => {
           if (res.status == "success") {
             app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
@@ -280,7 +269,7 @@ class ReimbursementApply extends Component {
                 </div>
                 <div>
                 <FormField
-                  label="Upload Profile Pic"
+                  label="Upload File"
                   labelClassName="txt-label"
                   fieldClassName="txt-input"
                   type="file"
