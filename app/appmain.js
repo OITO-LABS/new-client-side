@@ -77,7 +77,6 @@ class Main extends React.Component {
 
     // app.userAuth.role="admin"
 
-
     app.userAuth = userAuth;
     app.empId = userAuth.employeeId;
 
