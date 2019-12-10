@@ -58,8 +58,8 @@ class ReimbursementApply extends Component {
       reimbursementDetails: [{index: 1,billDate: "",reimbursementDescription: "",categoryName: "",billNo: "",cost: 0,flag: false}],
       // empData: [],
       category: [],
-      // imageAssets:{},
-      file:'',  
+      imageAssets:{},
+      // file:'',  
       validation: this.validator.valid()
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -160,9 +160,27 @@ class ReimbursementApply extends Component {
   imageSelected(event) {
     // let reader = new FileReader();
     let file = event.target.files[0];
-    this.setState({
-      file:file
-    })
+    let imgKey = event.target.attributes.name.value;
+    let {imageAssets} = this.state;
+    imageAssets[imgKey] = imageAssets[imgKey] || [];
+    // this.setState({
+    //   file:file
+    // });
+    this.readAsDataURL(file,imgKey);
+  }
+
+  readAsDataURL(file,imgKey) {
+    let fileReader = new FileReader();
+    fileReader.onload = ()=>{
+      let {imageAssets} = this.state;
+      imageAssets[imgKey] = imageAssets[imgKey] || [];
+      imageAssets[imgKey].push({ src: fileReader.result, file });
+      let img = new Image();
+      img.src = fileReader.result;
+      console.log('Image Assets',imageAssets);
+    }
+    fileReader.readAsDataURL(file);
+    
   }
 
   onSubmit() {
@@ -173,11 +191,11 @@ class ReimbursementApply extends Component {
     var reimbursementDate = this.state.reimbursementDate;
     var totalCost = this.state.totalCost;
     var reimbursementDetails = this.state.reimbursementDetails;
-    let file = this.state.file;
+    let imageAssets = this.state.imageAssets;
 
     if (validation.isValid) {
       dataService
-        .formDataRequest("reimbursementApply", {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementDetails: reimbursementDetails, file:file})
+        .formDataRequest("reimbursementApply", {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementDetails: reimbursementDetails,imageData:imageAssets})
         .then(res => {
           if (res.status == "success") {
             app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
