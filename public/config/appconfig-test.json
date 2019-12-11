@@ -19,6 +19,8 @@
       "assetSearch":"api/asset/assetDetails",
       "assetDelete":"api/asset/:assetId",
       "assetHistory":"api/asset/:assetId",
+      "assetActivate":"api/asset/activate/:assetId",
+
 
       "assetregistered":"api/asset",
       "updategetAsset":"api/asset/getforupdate/details/:assetId",
