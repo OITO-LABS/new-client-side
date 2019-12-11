@@ -189,9 +189,10 @@ class ReimbursementApply extends Component {
     // var empNo = this.state.empNo;
     var reimbursementDate = this.state.reimbursementDate;
     var totalCost = this.state.totalCost;
-    var reimbursementDetails = this.state.reimbursementDetails;
+    
+    var reimbursementBills = JSON.stringify(this.state.reimbursementDetails);
     let {imageAssets} = this.state;
-    let data = {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementDetails: reimbursementDetails};
+    let data = {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementBills: reimbursementBills};
     Object.keys(imageAssets).forEach(imgkey=>{
         let itemIndex = -1;
         imageAssets[imgkey].forEach((uimg,index)=>{
