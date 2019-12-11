@@ -14,7 +14,7 @@ import {
   getUpdatedPageUrl,
   getRouterUrl
 } from "utils/common";
-import { getCookie } from "utils/cookie";
+import { getCookie, setCookie } from "utils/cookie";
 import { setToCache, getFromCache, removeFromCache } from "utils/querystring";
 import {
   BEARER_KEY,
@@ -79,15 +79,11 @@ class Main extends React.Component {
 
     app.userAuth = userAuth;
     app.empId = userAuth.employeeId;
-
-
-
+    setCookie("empId", app.empId);
+    let cookies = getCookie('empId');
+    console.log("-------------employeeId get from serverside");
+    console.log(cookies);
     // this.setUserToken(userAuth, true);
-
-    // let cookies=  getCookie('JSESSIONID');
-    // console.log("-------------cookies get from serverside")
-    // console.log(cookies);
-
     // if(cookies==""){
     this.setState({
       login: true
@@ -95,6 +91,11 @@ class Main extends React.Component {
     // }
 
   }
+
+  refreshPage(){
+
+  }
+
   setUserToken(userAuth, loginUser) {
     //setToCache(USER_TKEY, BEARER_KEY + userAuth.accessToken);
     //removeFromCache(LOGIN_USER_DATA);
