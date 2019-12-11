@@ -128,8 +128,7 @@ class Main extends React.Component {
     }
   }
   loadPortalSettings(userToken) {
-    dataService
-      .getRequest("portalSettings", {})
+    dataService.getRequest("portalSettings", {})
       .then(res => {
         initPortalSettings(res);
         this.setState({ appinit: true });

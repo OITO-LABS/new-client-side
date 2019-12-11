@@ -127,7 +127,7 @@ export class InactiveAssetListing extends Component {
 
 
   handleActivate(data) {
-    dataService.postRequest("assetActivate", { assetId: data.assetId })
+    dataService.putRequest("assetActivate", { assetId: data.assetId })
       .then(res => {
         if (res.status == "success") {
           app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.SUCCESS, msg: "Asset Deletion Successfull" });
