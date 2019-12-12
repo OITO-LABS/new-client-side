@@ -40,6 +40,7 @@
       "login":"api/login",
       "logout":"api/logout",
       "forgot":"api/login/send-mail",
+      "refreshPage":"api/login/activesession",
       "params": {
         "commonparams": "commonparams"
       }

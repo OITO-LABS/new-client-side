@@ -88,15 +88,17 @@ export class Login extends Component {
             dataService.formDataRequest("login", data)
                 .then(res => {
                     console.log(res);
-                    if (res.employeeId != "") {
+                    if(res.status=="failed"  ) {
+                        console.log("---------failed------");
+                        app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: "username and password doesnot match" });
+                    }
+                    else if(res.employeeId != "") {
+                        console.log("---------success---------");
                         app.events.trigger(USER_SIGNIN, res);
                         // app.events.trigger(USER_SIGNIN, {key:"value"});
 
                     }
-                    else {
-                        app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: "username and password doesnot match" });
-
-                    }
+                   
                 })
                 .catch(err => { console.log(err) });
         }

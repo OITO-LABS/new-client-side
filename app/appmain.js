@@ -14,7 +14,7 @@ import {
   getUpdatedPageUrl,
   getRouterUrl
 } from "utils/common";
-import { getCookie, setCookie } from "utils/cookie";
+import { getCookie, setCookie, removeCookie } from "utils/cookie";
 import { setToCache, getFromCache, removeFromCache } from "utils/querystring";
 import {
   BEARER_KEY,
@@ -74,25 +74,44 @@ class Main extends React.Component {
     // let d = new Date().getTime() - 100;
     // userAuth = { ...userAuth, ...(userAuth.customFields || {}) };
 
-
-    // app.userAuth.role="admin"
-
     app.userAuth = userAuth;
     app.empId = userAuth.employeeId;
     setCookie("empId", app.empId);
+    setCookie("role", userAuth.role);
+    
     let cookies = getCookie('empId');
     console.log("-------------employeeId get from serverside");
     console.log(cookies);
+    this.refreshPage();
     // this.setUserToken(userAuth, true);
     // if(cookies==""){
-    this.setState({
-      login: true
-    }, () => { app.events.trigger(GOTO_URL, { routerKey: HOME }); })
+    // this.setState({
+    //   login: true
+    // }, () => { app.events.trigger(GOTO_URL, { routerKey: HOME }); })
     // }
 
   }
 
-  refreshPage(){
+  refreshPage() {
+    let cookies = getCookie('empId');
+    var role=getCookie('role');
+    if (cookies != "") {
+      dataService.getRequest("refreshPage", {})
+        .then(res => {
+          app.userDetails = res;
+          this.setState({
+            login: true
+          }, () => { app.events.trigger(GOTO_URL, { routerKey: HOME }); })
+        })
+        .catch(err => {
+          console.log(err)
+        });
+    }
+    else (
+      this.setState({
+        login: false
+      }, () => { app.events.trigger(GOTO_URL, { routerKey: LANDING }); })
+    )
 
   }
 
@@ -105,10 +124,14 @@ class Main extends React.Component {
     app.userAuth = null;
     // removeFromCache(USER_TKEY);
     app.empId = null;
+    app.userDetails = null;
+    removeCookie("empId");
+    removeCookie("role");
+    this.refreshPage();
     // app.isAdmin = false;
-    this.setState({
-      login: false
-    }, () => { app.events.trigger(GOTO_URL, { routerKey: LANDING }); })
+    // this.setState({
+    //   login: false
+    // }, () => { app.events.trigger(GOTO_URL, { routerKey: LANDING }); })
 
   }
 
@@ -137,6 +160,7 @@ class Main extends React.Component {
       .catch(err => {
         //this.handleError(err);
       });
+    this.refreshPage();
     //comment below code when uncomment above code
     //initPortalSettings({});
     //this.setState({appinit:true});
@@ -166,7 +190,7 @@ class Main extends React.Component {
             {/* <Collapse/> */}
             <Header pageQuery />
             <div className="row content-height">
-              {app.userAuth.role == "admin" ?
+              {getCookie("role") == "admin" ?
                 <div className="col-2"><Sidebar /></div>
                 :
                 <div className="col-2"><SidebarEmp /></div>

@@ -134,12 +134,13 @@ export class ReimbursementBillListing extends Component {
             </div>
           </div>
         </div>
-
-        <ListTable
-          fields={this.state.fields}
-          datas={this.state.datas}
-          pageHandler={this.handlePage}
-          deleteHandler={this.handleDelete} />
+        {app.userAuth.role == "admin" ?
+          <ListTable
+            fields={this.state.fields}
+            datas={this.state.datas}
+            pageHandler={this.handlePage}
+            deleteHandler={this.handleDelete} />
+          : ""}
 
         <div className="row total-cost">
           <div className="col-8"></div>
@@ -157,12 +158,12 @@ export class ReimbursementBillListing extends Component {
         <div className="d-flex flex-row-reverse">
           <button className="ml-auto btn btn-success" onClick={() => window.print()}>PRINT</button>
         </div>
-        <div class="btn-wrapper">
+        {/* <div class="btn-wrapper">
           <div class="btn-wrapper">
             <button type="button" class="btn btn-primary">Edit</button>
             <button type="button" class="btn btn-success">send for approvel</button>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }
