@@ -108,7 +108,7 @@ class ResetPassword extends Component {
             dataService.postRequest("reset", { ...this.getStateData(this.state), token:token})
             .then(res => {
                 if(res.status == "success") {
-                    app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Password successfully reset"});
+                    app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCCESS,msg: "Password successfully reset"});
                     setTimeout(()=>{
                         app.events.trigger(GOTO_URL, { routerKey: LOGIN });
                       },3000)

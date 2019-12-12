@@ -73,16 +73,15 @@ class Main extends React.Component {
   userSignIn([userAuth, source]) {
     // let d = new Date().getTime() - 100;
     // userAuth = { ...userAuth, ...(userAuth.customFields || {}) };
-
     app.userAuth = userAuth;
     app.empId = userAuth.employeeId;
     setCookie("empId", app.empId);
     setCookie("role", userAuth.role);
-    
+  
     let cookies = getCookie('empId');
     console.log("-------------employeeId get from serverside");
     console.log(cookies);
-    this.refreshPage();
+    this.refreshPage(true);
     // this.setUserToken(userAuth, true);
     // if(cookies==""){
     // this.setState({
@@ -92,17 +91,18 @@ class Main extends React.Component {
 
   }
 
-  refreshPage() {
-    let cookies = getCookie('empId');
+  refreshPage(redirection) {
+    let empId = getCookie('empId');
     var role=getCookie('role');
-    if (cookies != "") {
+    if (empId != "") {
       dataService.getRequest("refreshPage", {})
         .then(res => {
           app.userDetails = res;
           app.empId=res.empId;
           this.setState({
-            login: true
-          }, () => { app.events.trigger(GOTO_URL, { routerKey: HOME }); })
+            login: true,
+            appinit:true
+          }, () => { redirection && app.events.trigger(GOTO_URL, { routerKey: HOME }); })
         })
         .catch(err => {
           console.log(err)
@@ -153,15 +153,17 @@ class Main extends React.Component {
     }
   }
   loadPortalSettings(userToken) {
+    let empId = getCookie('empId');
     dataService.getRequest("portalSettings", {})
       .then(res => {
         initPortalSettings(res);
-        this.setState({ appinit: true });
+        empId && this.refreshPage();
+        !empId && this.setState({ appinit: true });
       })
       .catch(err => {
         //this.handleError(err);
       });
-    this.refreshPage();
+    
     //comment below code when uncomment above code
     //initPortalSettings({});
     //this.setState({appinit:true});

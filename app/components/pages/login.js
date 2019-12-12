@@ -3,7 +3,7 @@ import "assets/sass/pages/_login.scss";
 import Logo from 'assets/images/logo.png';
 import FormField from "../common/formfield";
 import FormValidator from "../common/formvalidator";
-import { FORGOT_PASSWORD, GOTO_URL, FLIP_LOADER, DASHBOARD, USER_SIGNIN, SHOW_ALERT_MSG, ALERT_TYPE, } from '../../utils/constants';
+import { FORGOT_PASSWORD, GOTO_URL, FLIP_LOADER, DASHBOARD, USER_SIGNIN,  SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE, } from '../../utils/constants';
 import dataService from "utils/dataservice";
 
 
@@ -90,7 +90,11 @@ export class Login extends Component {
                     console.log(res);
                     if(res.status=="failed"  ) {
                         console.log("---------failed------");
-                        app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: "username and password doesnot match" });
+                        app.events.trigger(SHOW_ALERT_MSG, {
+                            visible: true,
+                            type: ALERT_TYPE.DANGER,
+                            msg: "Username and password does not match"
+                          });
                     }
                     else if(res.employeeId != "") {
                         console.log("---------success---------");

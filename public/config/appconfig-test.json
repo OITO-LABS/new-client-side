@@ -38,7 +38,7 @@
       "getReimCategory":"api/reimbursement/list-category",
 
       "login":"api/login",
-      "logout":"api/logout",
+      "logout":"api/login/logout",
       "forgot":"api/login/send-mail",
       "refreshPage":"api/login/activesession",
       "params": {
