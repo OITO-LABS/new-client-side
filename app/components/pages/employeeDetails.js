@@ -47,7 +47,7 @@ export class EmployeeDetails extends Component {
         dataService.getRequest("getEmpDetails", { empId: this.props.match.params.empId })
             .then(res => {
                 this.setState({
-                    data: res
+                    data: res.employeeDetails
                 });
             })
             .catch(error => {
