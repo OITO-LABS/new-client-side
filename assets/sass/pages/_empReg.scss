@@ -50,6 +50,14 @@
   padding: 0.5rem 2.5rem;
 }
 
+.save-btn {
+  background-color: #f37940;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0.5rem 2.5rem;
+}
+
 .cancel-btn {
   background-color: #b4323e;
   color: #fff;
@@ -70,5 +78,12 @@
   transform: translateY(-3px);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
   background-color: #28a745;
+  color: #000;
+}
+
+.save-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  background-color: #e96427;
   color: #000;
 }

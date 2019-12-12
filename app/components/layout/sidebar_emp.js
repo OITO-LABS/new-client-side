@@ -1,16 +1,32 @@
 import React from "react";
 import { PROFILE,GOTO_URL,APPLY_REIMBURSEMENT,EMPLOYEE_DETAILS,REIMBURSEMENT_EMPLOYEE_LISTING } from "utils/constants";
-import "assets/sass/pages/_employeeRegister.scss"
+import "assets/sass/pages/_employeeRegister.scss";
+import dataService from "utils/dataservice";
 
 class SidebarEmp extends React.Component {
 
   constructor(props) {
     super(props);
 
+    this.state={
+      results:''
+    }
     this.profile = this.profile.bind(this);
     this.assets = this.assets.bind(this);
     this.applyReimbursement = this.applyReimbursement.bind(this);
     this.reimbursement = this.reimbursement.bind(this);
+  }
+
+  componentDidMount() {
+    dataService.getRequest("getEmpDetails", { empId: app.empId })
+    .then(result => {
+      this.setState({
+        results:result.employeeDetails
+      })
+    })
+    .catch(error => {
+      console.error(error);
+    });
   }
   
   profile() {
@@ -30,13 +46,14 @@ class SidebarEmp extends React.Component {
   }
 
   render() {
+    let data = this.state.results;
     return (
       <React.Fragment>
         <sidebar>
             {/* Sidebar   */}
             <nav id="sidebar" className="sidebar-navwrapper">
               <div className="sidebar-header">
-                <h3 className="sidebar-txt">Welcome Admin!</h3>
+                <h3 className="sidebar-txt">Welcome {data.firstName}</h3>
                 <strong>WA</strong>
               </div>
               {/* Menu  */}

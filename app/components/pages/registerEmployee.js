@@ -47,13 +47,6 @@ export class registerEmployee extends Component {
         message: 'Invalid format'
       },
       {
-        field: 'image', 
-        method: 'isEmpty', 
-        args:[{ignore_whitespace:true}],
-        validWhen: false, 
-        message: 'Profile image is empty'
-      },
-      {
         field: 'dob', 
         method: 'isEmpty', 
         args:[{ignore_whitespace:true}],
@@ -110,6 +103,13 @@ export class registerEmployee extends Component {
         message: 'Employee number is empty'
       },
       {
+        field: 'joiningDate', 
+        method: 'isEmpty', 
+        args:[{ignore_whitespace:true}],
+        validWhen: false, 
+        message: 'Joining Date is empty'
+      },
+      {
         field: 'bloodGroup', 
         method: 'isEmpty', 
         args:[{ignore_whitespace:true}],
@@ -121,6 +121,8 @@ export class registerEmployee extends Component {
     this.state = {
       ...this.getStateData(this.props),
       validation: this.validator.valid(),
+      image:null
+      // imageAssets:[],
       // bloodgroups:[]
     };
     
@@ -128,6 +130,7 @@ export class registerEmployee extends Component {
     this.submit = this.submit.bind(this);
     this.update = this.update.bind(this);
     this.cancel = this.cancel.bind(this);
+    this.imageSelected = this.imageSelected.bind(this);
     this.fieldData = {};
   }
 
@@ -138,7 +141,7 @@ export class registerEmployee extends Component {
      dataService.getRequest("getEmpDetails", { empId: this.props.match.params.empId })
       .then(result => {
         this.setState({
-          ...this.getStateData(result),
+          ...this.getStateData(result.employeeDetails),
         });
       })
       .catch(error => {
@@ -159,6 +162,7 @@ export class registerEmployee extends Component {
       emergencyContact: empdata.emergencyContact || "",
       healthCardNo: empdata.healthCardNo || "",
       empNo: empdata.empNo || "",
+      joiningDate: empdata.joiningDate || "",
       bloodGroup: empdata.bloodGroup || ""
     };
   }
@@ -181,11 +185,26 @@ export class registerEmployee extends Component {
     });
   }
 
+  imageSelected(event) {
+    let file = event.target.files[0];
+    this.readAsDataURL(file);
+  }
+
+  readAsDataURL(file) {
+    let fileReader = new FileReader();
+    fileReader.onload = ()=>{
+      this.setState({
+        image:file
+      })
+    }
+    fileReader.readAsDataURL(file);
+  }
+
   submit() {
     const validation = this.validator.validate(this.state);
     this.setState({ validation });
     this.submitted = true;
-
+    
     if (validation.isValid) {
       dataService.formDataRequest("registered", { ...this.getStateData(this.state) })
       .then(res => {
@@ -231,6 +250,7 @@ export class registerEmployee extends Component {
   render() {
     let validation = this.submitted ?this.validator.validate(this.state) : this.state.validation;
     var empId = this.props.match.params.empId;
+    var imageDetails = this.state.image || '';
     return (
       <div className="form-wrapper">
         {empId == -1 ? <Heading heading="REGISTER EMPLOYEE" />: <Heading heading="UPDATE EMPLOYEE" />}
@@ -288,20 +308,32 @@ export class registerEmployee extends Component {
               mandatory
               onChange={this.handleInputChange}
               name="dob"
-              type= {empId == -1 ?"date" :''}
+              type= "date" 
               value={this.state.dob}
               placeholder="DOB"
               validator={validation} 
             />
-             <FormField
+            {empId == -1 ? 
+            <FormField
               label="Upload Profile Pic"
               labelClassName="txt-label"
               fieldClassName="txt-input"
               type="file"
+              onChange={this.imageSelected}
+              name="imageData"
+            />
+            : ""
+            }
+            <FormField
+              label="Joining Date"
+              labelClassName="txt-label"
+              fieldClassName="txt-input"
               mandatory
               onChange={this.handleInputChange}
-              name="image"
-              value={this.state.image}
+              name="joiningDate"
+              type= "date"
+              value={this.state.joiningDate}
+              placeholder="Joining Date"
               validator={validation} 
             />
           </div>
