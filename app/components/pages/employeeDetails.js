@@ -8,6 +8,7 @@ import "assets/sass/pages/_details.scss";
 import "assets/sass/pages/_listing.scss";
 
 
+
 export class EmployeeDetails extends Component {
     constructor(props) {
         super(props)
@@ -44,6 +45,7 @@ export class EmployeeDetails extends Component {
     }
 
     gettingEmployee() {
+        
         dataService.getRequest("getEmpDetails", { empId: this.props.match.params.empId })
             .then(res => {
                 this.setState({
