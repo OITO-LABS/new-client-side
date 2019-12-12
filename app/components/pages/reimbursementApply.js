@@ -55,11 +55,9 @@ class ReimbursementApply extends Component {
     
     ]);
     this.state = {
-      reimbursementDetails: [{index: 1,billDate: "",reimbursementDescription: "",categoryName: "",billNo: "",cost: 0,flag: false}],
-      // empData: [],
+      reimbursementDetails: [{index: 1,billDate: "",reimbursementDescription: "",categoryName: "",billNo: "",cost: 0}],
       category: [],
       imageAssets:{},
-      // file:'',  
       validation: this.validator.valid()
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -68,6 +66,7 @@ class ReimbursementApply extends Component {
     this.fieldData = {};
     this.handleInputChange2 = this.handleInputChange2.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onSave = this.onSave.bind(this);
     this.subTotal = this.subTotal.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -129,7 +128,7 @@ class ReimbursementApply extends Component {
 
   handleAdd() {
     let add = [...this.state.reimbursementDetails];
-    add.push({ index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0, flag: false });
+    add.push({ index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0});
     this.setState({
       reimbursementDetails: add
     });
@@ -189,10 +188,10 @@ class ReimbursementApply extends Component {
     // var empNo = this.state.empNo;
     var reimbursementDate = this.state.reimbursementDate;
     var totalCost = this.state.totalCost;
-    
+    let onbtnClick = "submit"
     var reimbursementBills = JSON.stringify(this.state.reimbursementDetails);
     let {imageAssets} = this.state;
-    let data = {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementBills: reimbursementBills};
+    let data = {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementBills: reimbursementBills,onbtnClick:onbtnClick};
     Object.keys(imageAssets).forEach(imgkey=>{
         let itemIndex = -1;
         imageAssets[imgkey].forEach((uimg,index)=>{
@@ -206,6 +205,44 @@ class ReimbursementApply extends Component {
         .then(res => {
           if (res.status == "success") {
             app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
+            setTimeout(()=>{
+              app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_LISTING });
+            },3000)
+          } else {
+            app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }
+
+  onSave() {
+    const validation = this.validator.validate(this.state);
+    this.setState({ validation });
+    this.submitted = true;
+    // var empNo = this.state.empNo;
+    var reimbursementDate = this.state.reimbursementDate;
+    var totalCost = this.state.totalCost;
+    let onbtnClick = "save";
+    
+    var reimbursementBills = JSON.stringify(this.state.reimbursementDetails);
+    let {imageAssets} = this.state;
+    let data = {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementBills: reimbursementBills,onbtnClick:onbtnClick};
+    Object.keys(imageAssets).forEach(imgkey=>{
+        let itemIndex = -1;
+        imageAssets[imgkey].forEach((uimg,index)=>{
+            uimg.file && (data[imgkey+'['+(++itemIndex)+']'] = uimg.file);
+        });                
+    });
+
+    if (validation.isValid) {
+      dataService
+        .formDataRequest("reimbursementApply", data)
+        .then(res => {
+          if (res.status == "success") {
+            app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Saved"});
             setTimeout(()=>{
               app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_LISTING });
             },3000)
@@ -278,19 +315,19 @@ class ReimbursementApply extends Component {
                     validator={validation}
                   />
                 </div> */}
-                <div>
-                  <FormField
-                    label="Reimbursement Date"
-                    labelClassName="txt-label"
-                    fieldClassName="txt-input"
-                    mandatory
-                    onChange={this.handleInputChange}
-                    name="reimbursementDate"
-                    type="date"
-                    value={this.state.reimbursementDate}
-                    placeholder="reimbursementDate"
-                    validator={validation}
-                  />
+                <div className="pr-5">
+                <FormField
+                  label="Reimbursement Date"
+                  labelClassName="txt-label"
+                  fieldClassName="txt-input"
+                  mandatory
+                  onChange={this.handleInputChange}
+                  name="reimbursementDate"
+                  type="date"
+                  value={this.state.reimbursementDate}
+                  placeholder="reimbursementDate"
+                  validator={validation}
+                />
                 </div>
                 <div>
                 <FormField
@@ -300,9 +337,10 @@ class ReimbursementApply extends Component {
                   type="file"
                   onChange={this.imageSelected} 
                   name="imageData"
-                  value={this.state.imageAssets.file}            
+                  value={this.state.imageAssets.file}        
                 />
                 </div>
+               
               </div>
             </div>
 
@@ -436,11 +474,15 @@ class ReimbursementApply extends Component {
                 </tbody>
               </table>
 
-              <div className="mx-auto">
-                <button className="submit-btn" onClick={this.onSubmit}>
+              <div className="btn-wrapper mx-auto"> 
+                <button className="btn save-btn" onClick={this.onSave}>
+                  Save
+                </button>
+                <button className="btn submit-btn ml-5" onClick={this.onSubmit}>
                   Submit
                 </button>
               </div>
+
             </div>
           </div>
         </div>
