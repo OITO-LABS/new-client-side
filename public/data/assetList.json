@@ -1,57 +1,48 @@
 {
     "resultSet": [
         {
-            "assetId": 5,
-            "assetKey": "JioFi_2415671E",
-            "productCategoryName": "WiFi",
-            "status": "Unassigned",
-            "model": "Jio",
-            "empId": null,
-            "empNo": null
-        },
-        {
-            "assetId": 4,
-            "assetKey": "JioFi_2455671E",
-            "productCategoryName": "WiFi",
-            "status": "Unassigned",
-            "model": "Jio",
-            "empId": null,
-            "empNo": null
-        },
-        {
-            "assetId": 3,
-            "assetKey": "JioFi_245567EE",
-            "productCategoryName": "WiFi",
-            "status": "Unassigned",
+            "assetId": 12,
+            "assetKey": "Jio11",
+            "productCategoryName": "Wifi",
+            "status": "Inactive",
             "model": "Jio",
             "empId": null,
             "empNo": null
         },
         {
             "assetId": 1,
-            "assetKey": "DL100M1",
-            "productCategoryName": "Modem",
-            "status": "Assigned",
-            "model": "D-Link",
-            "empId": 2,
-            "empNo": "INT005"
+            "assetKey": "Key11",
+            "productCategoryName": "Keyboard",
+            "status": "Disabled",
+            "model": "Acer",
+            "empId": 1,
+            "empNo": "INT001"
+        },
+        {
+            "assetId": 13,
+            "assetKey": "Key222",
+            "productCategoryName": "Keyboard",
+            "status": "Disabled",
+            "model": "Dell",
+            "empId": 21,
+            "empNo": "INT011"
         }
     ],
     "pageable": {
         "sort": {
-            "sorted": false,
-            "unsorted": true,
-            "empty": true
+            "sorted": true,
+            "unsorted": false,
+            "empty": false
         },
         "offset": 0,
-        "pageSize": 4,
+        "pageSize": 10,
         "pageNumber": 0,
-        "unpaged": false,
-        "paged": true
+        "paged": true,
+        "unpaged": false
     },
     "number": 0,
-    "numberOfElements": 4,
-    "size": 4,
-    "totalElements": 6,
-    "totalPages": 2
+    "numberOfElements": 3,
+    "size": 10,
+    "totalElements": 3,
+    "totalPages": 1
 }

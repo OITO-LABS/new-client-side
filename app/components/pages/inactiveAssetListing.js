@@ -69,7 +69,7 @@ export class InactiveAssetListing extends Component {
         })
       })
       .catch((error) => {
-        console.error(error)
+        console.log(error)
       })
   }
 
@@ -86,7 +86,7 @@ export class InactiveAssetListing extends Component {
     }, () => { this.gettingData() })
   }
 
- 
+
 
 
   handleDetails(data) {
@@ -99,18 +99,24 @@ export class InactiveAssetListing extends Component {
     app.events.trigger(GOTO_URL, { routerKey: ADD_ASSETS, params: { assetId: -1 } });
   }
 
-  
+
   handleSort(fields) {
     console.log(fields);
-    if (this.state.sortOrder === "ascending") {
+    if (this.state.sortOrder === "") {
+      this.setState({
+        sortOrder: "ascending",
+        activePage: 1,
+        sortKey: fields.key
+      }, () => { this.gettingData(); })
+    }
+    else if (this.state.sortOrder === "ascending") {
       this.setState({
         sortOrder: "descending",
         activePage: 1,
         sortKey: fields.key
       }, () => { this.gettingData(); })
     }
-
-    else {
+    else if (this.state.sortOrder === "descending") {
       this.setState({
         sortOrder: "ascending",
         activePage: 1,
@@ -121,7 +127,20 @@ export class InactiveAssetListing extends Component {
 
 
   handleActivate(data) {
-    alert(data);
+    dataService.putRequest("assetActivate", { assetId: data.assetId })
+      .then(res => {
+        if (res.status == "success") {
+          app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.SUCCESS, msg: "Asset Deletion Successfull" });
+          this.gettingData();
+        }
+        else {
+          app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: `${res.message}` });
+        }
+      })
+      .catch(err => {
+        app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: "Failed To Unassign" });
+      });
+
   }
 
   render() {

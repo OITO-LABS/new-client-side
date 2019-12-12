@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {FLIP_LOADER,GOTO_URL,SHOW_ALERT,SHOW_ALERT_MSG,ALERT_TYPE} from "utils/constants";
+import { FLIP_LOADER, GOTO_URL, SHOW_ALERT, SHOW_ALERT_MSG, ALERT_TYPE } from "utils/constants";
 import FormField from "../common/formfield";
 import FormValidator from "../common/formvalidator";
 import dataService from "utils/dataservice";
@@ -52,7 +52,7 @@ class ReimbursementApply extends Component {
         validWhen: false,
         message: "Cost is empty"
       },
-    
+
     ]);
     this.state = {
       reimbursementDetails: [{index: 1,billDate: "",reimbursementDescription: "",categoryName: "",billNo: "",cost: 0}],
@@ -76,14 +76,14 @@ class ReimbursementApply extends Component {
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
     dataService.getRequest("getReimCategory")
-    .then(res => {
-      this.setState({
-        category: res
+      .then(res => {
+        this.setState({
+          category: res
+        })
       })
-    })
-    .catch(err =>{
-      console.log(err);
-    })
+      .catch(err => {
+        console.log(err);
+      })
     // dataService.getRequest("getEmpData")
     //   .then(result => {
     //     this.setState({
@@ -103,7 +103,7 @@ class ReimbursementApply extends Component {
 
   getCategoryOptions() {
     let optionData = [];
-    optionData = this.state.category.map(item => ({value: item.categoryName, label: item.categoryName}))
+    optionData = this.state.category.map(item => ({ value: item.categoryName, label: item.categoryName }))
     return optionData;
   }
 
@@ -134,7 +134,7 @@ class ReimbursementApply extends Component {
     });
   }
 
-  handleInputChange(event, fieldData={}) {
+  handleInputChange(event, fieldData = {}) {
     let field = fieldData.field || event.target.name;
     let value = fieldData.value || event.target.value || "";
     this.fieldData[field] = fieldData;
@@ -147,7 +147,7 @@ class ReimbursementApply extends Component {
   subTotal() {
     let total = 0;
     this.state.reimbursementDetails.forEach(row => {
-      if(row.cost!=""){
+      if (row.cost != "") {
         total = total + parseInt(row.cost);
       }
     });
@@ -160,23 +160,23 @@ class ReimbursementApply extends Component {
     // let reader = new FileReader();
     let file = event.target.files[0];
     let imgKey = event.target.attributes.name.value;
-    let {imageAssets} = this.state;
+    let { imageAssets } = this.state;
     imageAssets[imgKey] = imageAssets[imgKey] || [];
     // this.setState({
     //   file:file
     // });
-    this.readAsDataURL(file,imgKey);
+    this.readAsDataURL(file, imgKey);
   }
 
-  readAsDataURL(file,imgKey) {
+  readAsDataURL(file, imgKey) {
     let fileReader = new FileReader();
-    fileReader.onload = ()=>{
-      let {imageAssets} = this.state;
+    fileReader.onload = () => {
+      let { imageAssets } = this.state;
       imageAssets[imgKey] = imageAssets[imgKey] || [];
       imageAssets[imgKey].push({ file });
       let img = new Image();
       img.src = fileReader.result;
-      console.log('Image Assets',imageAssets);
+      console.log('Image Assets', imageAssets);
     }
     fileReader.readAsDataURL(file);
   }
@@ -204,12 +204,12 @@ class ReimbursementApply extends Component {
         .formDataRequest("reimbursementApply", data)
         .then(res => {
           if (res.status == "success") {
-            app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Submitted"});
-            setTimeout(()=>{
+            app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.SUCESS, msg: "Successfully Submitted" });
+            setTimeout(() => {
               app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_LISTING });
-            },3000)
+            }, 3000)
           } else {
-            app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
+            app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: `${res.message}` });
           }
         })
         .catch(err => {
@@ -356,7 +356,7 @@ class ReimbursementApply extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.reimbursementDetails.map((detail, index ) => {
+                  {this.state.reimbursementDetails.map((detail, index) => {
                     return (
                       <tr key={index}>
                         <td>
@@ -398,7 +398,7 @@ class ReimbursementApply extends Component {
                             name="categoryName"
                             nameAlias={"categoryName"}
                             extraProps={detail}
-                            onChange = {this.handleInputChange2}
+                            onChange={this.handleInputChange2}
                             options={this.getCategoryOptions()}
                             value={detail.categoryName}
                             placeholder="Category Name"

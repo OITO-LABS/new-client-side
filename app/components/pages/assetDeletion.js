@@ -39,7 +39,7 @@ class AssetDeletion extends Component {
 
     componentDidMount() {
         app.events.trigger(FLIP_LOADER, { status: false, reset: true });
-        
+
     }
 
     getStateData(assetdata) {
@@ -60,13 +60,15 @@ class AssetDeletion extends Component {
         this.submitted = true;
 
         var updatedDate = this.state.updatedDate;
-        var enableStatus= this.state.enableStatus;
+        var enableStatus = this.state.enableStatus;
+        var assetId = this.props.match.params.assetId;
 
         if (validation.isValid) {
-            dataService.deleteRequest("assetDelete", { enableStatus: enableStatus, updatedDate: updatedDate, assetId: this.props.assetId })
+            dataService.putRequest("assetDelete", { enableStatus: enableStatus, updatedDate: updatedDate, assetId: assetId })
                 .then(res => {
+                    console.log(res);
                     if (res.status == "success") {
-                        app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.SUCCESS, msg: "Successfully Assigned" });
+                        app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.SUCCESS, msg: "Successfully Deleted" });
                         setTimeout(() => {
                             app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
                         }, 3000)
