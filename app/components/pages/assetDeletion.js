@@ -71,7 +71,7 @@ class AssetDeletion extends Component {
                         app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.SUCCESS, msg: "Successfully Deleted" });
                         setTimeout(() => {
                             app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
-                        }, 3000)
+                            }, 3000)
                     }
                     else {
                         app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: `${res.message}` });
