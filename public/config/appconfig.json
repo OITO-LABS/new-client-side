@@ -16,7 +16,7 @@
       "assetsOfEmployee":"api/employee/asset/:empId",
       "assetList":"api/asset/getAll",
       "assetSearch":"api/asset/assetDetails",
-      "assetDelete":"api/asset/:assetId",
+      "assetDelete":"api/asset/delete/:assetId",
       "assetHistory":"api/asset/:assetId",
       "assetActivate":"api/asset/activate/:assetId",
 

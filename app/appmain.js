@@ -99,6 +99,7 @@ class Main extends React.Component {
       dataService.getRequest("refreshPage", {})
         .then(res => {
           app.userDetails = res;
+          app.empId=res.empId;
           this.setState({
             login: true
           }, () => { app.events.trigger(GOTO_URL, { routerKey: HOME }); })

@@ -6,6 +6,8 @@ import ListTable from "../listTable"
 import dataService from 'utils/dataservice';
 import "assets/sass/pages/_listing.scss";
 import "assets/sass/pages/_details.scss";
+import { getCookie, setCookie, removeCookie } from "utils/cookie";
+
 
 
 
@@ -127,7 +129,7 @@ export class AssetDetails extends Component {
       <div >
         <Heading heading="ASSET DETAILS" />
         <DetailsTable data={this.state.assetData} fields={this.state.assetFields} />
-        {app.userAuth.role == "admin" ?
+        {getCookie("role") == "admin" ?
           <React.Fragment>
             <Heading heading="ASSET HISTORY " />
             <ListTable

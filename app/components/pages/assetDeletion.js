@@ -64,7 +64,7 @@ class AssetDeletion extends Component {
         var assetId = this.props.match.params.assetId;
 
         if (validation.isValid) {
-            dataService.deleteRequest("assetDelete", { enableStatus: enableStatus, updatedDate: updatedDate, assetId: assetId })
+            dataService.putRequest("assetDelete", { enableStatus: enableStatus, updatedDate: updatedDate, assetId: assetId })
                 .then(res => {
                     console.log(res);
                     if (res.status == "success") {

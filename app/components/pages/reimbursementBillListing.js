@@ -5,6 +5,8 @@ import ListTable from "../listTable";
 import "assets/sass/pages/_listing.scss";
 import FormField from "../common/formfield";
 import { confirm } from 'utils/common';
+import { getCookie, setCookie, removeCookie } from "utils/cookie";
+
 
 
 export class ReimbursementBillListing extends Component {
@@ -134,7 +136,7 @@ export class ReimbursementBillListing extends Component {
             </div>
           </div>
         </div>
-        {app.userAuth.role == "admin" ?
+        {getCookie("role") == "admin" ?
           <ListTable
             fields={this.state.fields}
             datas={this.state.datas}
