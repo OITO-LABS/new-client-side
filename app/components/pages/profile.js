@@ -5,6 +5,8 @@ import "assets/sass/pages/_employeeRegister.scss";
 import FormField from "../common/formfield";
 import FormValidator from '../common/formvalidator';
 import dataService from 'utils/dataservice';
+import { getCookie, setCookie, removeCookie } from "utils/cookie";
+
 
 class Profile extends Component {
 
@@ -140,7 +142,7 @@ class Profile extends Component {
 
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
-     dataService.getRequest("getEmpDetails", { empId: app.empId })
+     dataService.getRequest("getEmpDetails", { empId: getCookie("empId") })
       .then(result => {
         app.userDetails=result.employeeDetails;
         this.setState({
@@ -261,7 +263,7 @@ class Profile extends Component {
                 labelClassName="txt-label"
                 fieldClassName="txt-input"
                 mandatory
-                disabled={app.userAuth.role !='admin'}
+                disabled={getCookie("role") !='admin'}
                 onChange={this.handleInputChange}
                 name="email"
                 value={this.state.email}
@@ -272,7 +274,7 @@ class Profile extends Component {
                 label="Designation"
                 labelClassName="txt-label"
                 fieldClassName="txt-input"
-                disabled={app.userAuth.role !='admin'}
+                disabled={getCookie("role") !='admin'}
                 mandatory
                 onChange={this.handleInputChange}
                 name="designation"
@@ -351,7 +353,7 @@ class Profile extends Component {
                 labelClassName="txt-label"
                 fieldClassName="txt-input"
                 mandatory
-                disabled={app.userAuth.role !='admin'}
+                disabled={getCookie("role") !='admin'}
                 onChange={this.handleInputChange}
                 name="healthCardNo"
                 value={this.state.healthCardNo}
@@ -398,7 +400,7 @@ class Profile extends Component {
                 labelClassName="txt-label"
                 fieldClassName="txt-input"
                 mandatory
-                disabled={app.userAuth.role !='admin'}
+                disabled={getCookie("role") !='admin'}
                 onChange={this.handleInputChange}
                 name="joiningDate"
                 type= "date"
