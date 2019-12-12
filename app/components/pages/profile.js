@@ -144,7 +144,7 @@ class Profile extends Component {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
      dataService.getRequest("getEmpDetails", { empId: getCookie("empId") })
       .then(result => {
-        app.userDetails=result.employeeDetails;
+        // app.userDetails=result.employeeDetails;
         this.setState({
           ...this.getStateData(result.employeeDetails,result.imagePath),
           resultData:result

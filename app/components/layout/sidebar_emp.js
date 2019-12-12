@@ -2,39 +2,26 @@ import React from "react";
 import { PROFILE,GOTO_URL,APPLY_REIMBURSEMENT,EMPLOYEE_DETAILS,REIMBURSEMENT_EMPLOYEE_LISTING } from "utils/constants";
 import "assets/sass/pages/_employeeRegister.scss";
 import dataService from "utils/dataservice";
+import { getCookie, setCookie, removeCookie } from "utils/cookie";
+
 
 class SidebarEmp extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.state={
-      results:''
-    }
     this.profile = this.profile.bind(this);
     this.assets = this.assets.bind(this);
     this.applyReimbursement = this.applyReimbursement.bind(this);
     this.reimbursement = this.reimbursement.bind(this);
   }
 
-  componentDidMount() {
-    dataService.getRequest("getEmpDetails", { empId: app.empId })
-    .then(result => {
-      this.setState({
-        results:result.employeeDetails
-      })
-    })
-    .catch(error => {
-      console.error(error);
-    });
-  }
-  
   profile() {
     app.events.trigger(GOTO_URL, { routerKey: PROFILE });
   }
 
   assets() {
-    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_DETAILS, params: { empId: app.empId } });
+    app.events.trigger(GOTO_URL, { routerKey: EMPLOYEE_DETAILS, params: { empId: getCookie("empId") } });
   }
 
   applyReimbursement() {
@@ -42,18 +29,17 @@ class SidebarEmp extends React.Component {
   }
 
   reimbursement() {
-    app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_EMPLOYEE_LISTING, params: { empNo: app.userDetails.empNo }  });
+    app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_EMPLOYEE_LISTING, params: { empNo: app.userDetails.employeeDetails.empNo }  });
   }
 
   render() {
-    let data = this.state.results;
     return (
       <React.Fragment>
         <sidebar>
             {/* Sidebar   */}
             <nav id="sidebar" className="sidebar-navwrapper">
               <div className="sidebar-header">
-                <h3 className="sidebar-txt">Welcome {data.firstName}</h3>
+                <h3 className="sidebar-txt">Welcome {app.userDetails.employeeDetails.firstName}</h3>
                 <strong>WA</strong>
               </div>
               {/* Menu  */}
