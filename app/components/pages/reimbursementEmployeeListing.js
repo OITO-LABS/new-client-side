@@ -15,7 +15,7 @@ export class ReimbursementEmployeeListing extends Component {
         { label: "reimbursement Id", key: "reimbursementId" },
         { label: "date", key: "reimbursementDate" },
         { label: "Total cost", key: "totalCost" },
-        { label: "status", key: "totalCost" },
+        { label: "status", key: "" },
       ],
       // datas: [
       //   {
