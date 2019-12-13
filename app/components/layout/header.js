@@ -17,10 +17,11 @@ class Header extends React.Component {
       msg: 'Do you want to change password?'
     });
     if (isConfirm) {
-      dataService.postRequest("forgot", { to: app.userAuth.username })
+      dataService.postRequest("forgot", { to: app.userDetails.employeeDetails.emai })
         .then(res => {
           if (res.status == 'success') {
-            app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.SUCESS, msg: "Check your email to reset password!" });
+            app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.SUCCESS, msg: "Check your email to reset password!" });
+          
           }
           else {
             app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: `${res.message}` });
