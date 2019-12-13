@@ -58,7 +58,7 @@ class ReimbursementApply extends Component {
       reimbursementDetails: [{index: 1,billDate: "",reimbursementDescription: "",categoryName: "",billNo: "",cost: 0}],
       category: [],
       imageAssets:{},
-      validation: this.validator.valid()
+      validation: this.validator.valid(),
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     // this.getOptions = this.getOptions.bind(this);
@@ -292,6 +292,7 @@ class ReimbursementApply extends Component {
     let validation = this.submitted
       ? this.validator.validate(this.state)
       : this.state.validation;
+    
     return (
       <React.Fragment>
         <div className="container-fluid">
@@ -340,7 +341,12 @@ class ReimbursementApply extends Component {
                   value={this.state.imageAssets.file}        
                 />
                 </div>
-               
+                {/* <div>
+                  {this.state.file.map((fileData) => {
+                    return fileData.name
+                  })}
+                </div> */}
+
               </div>
             </div>
 
