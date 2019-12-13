@@ -66,7 +66,7 @@ export class ForgotPassword extends Component {
                         // app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.SUCCESS, msg: "A password reset Link is sent to your registered Email" });
                     }
                     else {
-                        alert("status failed is getting");
+                        alert("status failed is getting from server");
                         app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: `${res.message}` });
                     }
                 })

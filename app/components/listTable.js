@@ -98,19 +98,26 @@ class ListTable extends Component {
                               <button onClick={() => this.props.activateHandler(data)} className="btn btn-success">Activate</button>
                            </td>
                         )
-                     }else if (data[item.key] == "Disabled") {
+                     } else if (data[item.key] == "Disabled") {
                         return (
                            <td key={i}>
-                              <button  className="btn btn-disabled" >Disabled</button>
+                              <button className="btn btn-disabled" >Disabled</button>
                            </td>
                         )
-                     }else if (data[item.key] == "Active") {
+                     } else if (data[item.key] == "Active") {
                         return (
                            <td key={i}>
-                              <button  className="btn btn-success " ><i className="fas fa-check"></i></button>
+                              <button className="btn btn-success " ><i className="fas fa-check"></i></button>
+                           </td>
+                        )
+                     }else if (data[item.key] == "Terminated") {
+                        return (
+                           <td key={i}>
+                              <button className="btn btn-danger " ><i class="far fa-times"></i></button>
                            </td>
                         )
                      }
+
                   }
 
                   else if (item.key == "approvel") {
