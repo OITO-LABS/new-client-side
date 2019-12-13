@@ -26,7 +26,8 @@ class EmployeeListing extends React.Component {
         { label: "NAME", key: "firstName" },
         { label: "email", key: "email" },
         { label: "contact no", key: "contactNo" },
-        { label: "action", key: "editDelete" }
+        { label: "action", key: "editDelete" },
+        { label: "status", key: "status" }
       ]
     }
     this.gettingData = this.gettingData.bind(this);
@@ -111,7 +112,7 @@ class EmployeeListing extends React.Component {
             app.events.trigger(SHOW_ALERT_MSG, {
               visible: true,
               type: ALERT_TYPE.DANGER,
-              msg: ` Deletion Failed  ${res.message}`
+              msg: ` Deletion Failed !!!  ${res.message}`
             });
             this.gettingData();
           }

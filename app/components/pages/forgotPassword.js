@@ -3,7 +3,7 @@ import "assets/sass/pages/_login.scss";
 import Logo from 'assets/images/logo.png';
 import FormField from "../common/formfield";
 import FormValidator from "../common/formvalidator";
-import {SHOW_ALERT_MSG, ALERT_TYPE,} from 'utils/constants';
+import { SHOW_ALERT_MSG, ALERT_TYPE, } from 'utils/constants';
 import dataService from "utils/dataservice";
 
 
@@ -28,6 +28,7 @@ export class ForgotPassword extends Component {
             },
         ]);
         this.state = {
+            passwordResetLinkSent:false
 
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -55,16 +56,21 @@ export class ForgotPassword extends Component {
         // alert("onsubmit-clicked");
 
         if (validation.isValid) {
-            dataService.postRequest("forgot", {to:this.state.username})
-            .then(res => {
-                if(res.status == "success") {
-                    app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCCESS,msg: "A password reset Link is sent to your registered Email"});
-                }
-                else {
-                    app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
-                }  
-            })
-            .catch(err => {console.log(err)});   
+            dataService.postRequest("forgot", { to: this.state.username })
+                .then(res => {
+                    console.log(res);
+                    if (res.status == "success") {
+                        this.setState({
+                            passwordResetLinkSent:true
+                        })
+                        // app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.SUCCESS, msg: "A password reset Link is sent to your registered Email" });
+                    }
+                    else {
+                        alert("status failed is getting");
+                        app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: `${res.message}` });
+                    }
+                })
+                .catch(err => { console.log(err) });
         }
     }
 
@@ -91,14 +97,14 @@ export class ForgotPassword extends Component {
 
                                 <span className="login100-form-title ">
                                     Forgot Password/Reset password
-                        </span>
+                                </span>
+                                {!this.state.passwordResetLinkSent?
                                 <div className="row col-md-6 mx-auto input-fields">
-
-                                <div className="text-center forgot-credentials forgot-password">
-                                    <h3  className="txt1" >
-                                        Please enter your registered Email address as username...
-                                    </h3>
-                                </div>
+                                    <div className="text-center forgot-credentials forgot-password">
+                                        <h3 className="txt1" >
+                                            Please enter your registered Email address as username...
+                                        </h3>
+                                    </div>
 
 
                                     <div className="wrap-input100 validate-input" data-validate="Username is required">
@@ -120,15 +126,20 @@ export class ForgotPassword extends Component {
                                             <i className="fa fa-user"></i>
                                         </span>
                                     </div>
-
-                                   
-
                                     <div className="submit text-center mx-auto">
                                         <button className="login100-form-btn" onClick={this.onSubmit}>
                                             Submit
                                 </button>
                                     </div>
                                 </div>
+                                :
+                                <div className="row col-md-6 mx-auto input-fields">
+                                    <div className="text-center forgot-credentials forgot-password">
+                                        <h3 className="txt1" >
+                                            A password Reset link is sent to your registered email id.. please check your registered email id
+                                        </h3>
+                                    </div>
+                                </div>}
 
                             </div>
                         </div>

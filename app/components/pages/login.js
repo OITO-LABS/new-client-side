@@ -9,6 +9,7 @@ import dataService from "utils/dataservice";
 
 
 
+
 export class Login extends Component {
     constructor(props) {
         super(props)
@@ -134,6 +135,7 @@ export class Login extends Component {
         // var assetId = this.props.match.params.assetId;
         return (
             <div className="container-fluid fluid">
+                
                 <div className="row">
                     <div className="col-md-8 mx-auto form">
                         <div className="col-md-12 mx-auto login-form text-center">

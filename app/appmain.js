@@ -38,6 +38,7 @@ import "assets/sass/home.scss";
 // import NoRecordsFound from "../app/components/noRecordsFound";
 import Login from "components/pages/login";
 import ForgotPassword from "components/pages/forgotPassword";
+import AlertModal from "./components/common/alertmodal";
 
 
 
@@ -129,9 +130,9 @@ class Main extends React.Component {
     removeCookie("role");
     // removeFromCache(USER_TKEY);
     // app.isAdmin = false;
-    // this.setState({
-    //   login: false
-    // }, () => { app.events.trigger(GOTO_URL, { routerKey: LANDING }); })
+    this.setState({
+      login: false
+    }, () => { app.events.trigger(GOTO_URL, { routerKey: LANDING }); })
 
   }
 
@@ -140,9 +141,12 @@ class Main extends React.Component {
     // removeFromCache(USER_TKEY);
     app.userAuth = null;
     app.empId = null;
+    app.userAuth=null;
+    removeCookie("empId");
+    removeCookie("role");
     this.setState({
       login: false
-    }, () => { app.events.trigger(GOTO_URL, { routerKey: FORGOT_PASSWORD }); })
+    }, () => { app.events.trigger(GOTO_URL, { routerKey: LANDING }); })
   }
 
   gotoUrl([urlInfo]) {
@@ -186,6 +190,7 @@ class Main extends React.Component {
     console.log('-----' + this.state.login);
     return (
       <React.Fragment>
+        <AlertModal/>
         {this.state.login ?
           <React.Fragment>
             <Loader />
