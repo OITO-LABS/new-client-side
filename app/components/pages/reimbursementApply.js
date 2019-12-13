@@ -59,6 +59,7 @@ class ReimbursementApply extends Component {
       category: [],
       imageAssets:{},
       validation: this.validator.valid(),
+      array1:[]
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     // this.getOptions = this.getOptions.bind(this);
@@ -71,6 +72,7 @@ class ReimbursementApply extends Component {
     this.handleAdd = this.handleAdd.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.imageSelected = this.imageSelected.bind(this);
+    this.imageGet=this.imageGet.bind(this);
   }
 
   componentDidMount() {
@@ -166,6 +168,7 @@ class ReimbursementApply extends Component {
     //   file:file
     // });
     this.readAsDataURL(file, imgKey);
+    this.imageGet();
   }
 
   readAsDataURL(file, imgKey) {
@@ -179,6 +182,7 @@ class ReimbursementApply extends Component {
       console.log('Image Assets', imageAssets);
     }
     fileReader.readAsDataURL(file);
+    
   }
 
   onSubmit() {
@@ -191,7 +195,7 @@ class ReimbursementApply extends Component {
     let onbtnClick = "submit"
     var reimbursementBills = JSON.stringify(this.state.reimbursementDetails);
     let {imageAssets} = this.state;
-    let data = {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementBills: reimbursementBills,onbtnClick:onbtnClick};
+    let data = {empNo: app.userDetails.employeeDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementBills: reimbursementBills,onbtnClick:onbtnClick};
     Object.keys(imageAssets).forEach(imgkey=>{
         let itemIndex = -1;
         imageAssets[imgkey].forEach((uimg,index)=>{
@@ -229,7 +233,7 @@ class ReimbursementApply extends Component {
     
     var reimbursementBills = JSON.stringify(this.state.reimbursementDetails);
     let {imageAssets} = this.state;
-    let data = {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementBills: reimbursementBills,onbtnClick:onbtnClick};
+    let data = {empNo: app.userDetails.employeeDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementBills: reimbursementBills,onbtnClick:onbtnClick};
     Object.keys(imageAssets).forEach(imgkey=>{
         let itemIndex = -1;
         imageAssets[imgkey].forEach((uimg,index)=>{
@@ -288,6 +292,16 @@ class ReimbursementApply extends Component {
     }
   }
 
+  imageGet() {
+    let array=[]
+    this.state.imageAssets.imageData && this.state.imageAssets.imageData.map((file)=>{
+      array.push(file.file.name);
+      this.setState({
+        array1: array
+      })
+    }) 
+  }
+
   render() {
     let validation = this.submitted
       ? this.validator.validate(this.state)
@@ -340,13 +354,9 @@ class ReimbursementApply extends Component {
                   name="imageData"
                   value={this.state.imageAssets.file}        
                 />
+                  {this.state.array1}
                 </div>
-                {/* <div>
-                  {this.state.imageAssets.map((fileData) => {
-                    return fileData.name
-                  })}
-                </div> */}
-
+                
               </div>
             </div>
 
@@ -485,7 +495,7 @@ class ReimbursementApply extends Component {
                   Save
                 </button>
                 <button className="btn submit-btn ml-5" onClick={this.onSubmit}>
-                  Submit
+                  Send For Approval
                 </button>
               </div>
 
