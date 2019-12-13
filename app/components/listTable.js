@@ -104,6 +104,12 @@ class ListTable extends Component {
                               <button  className="btn btn-disabled" >Disabled</button>
                            </td>
                         )
+                     }else if (data[item.key] == "Active") {
+                        return (
+                           <td key={i}>
+                              <button  className="btn btn-success " ><i className="fas fa-check"></i></button>
+                           </td>
+                        )
                      }
                   }
 
