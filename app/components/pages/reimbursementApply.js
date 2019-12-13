@@ -191,7 +191,7 @@ class ReimbursementApply extends Component {
     let onbtnClick = "submit"
     var reimbursementBills = JSON.stringify(this.state.reimbursementDetails);
     let {imageAssets} = this.state;
-    let data = {empNo: app.userDetails.employeeDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementBills: reimbursementBills,onbtnClick:onbtnClick};
+    let data = {empNo: app.userDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementBills: reimbursementBills,onbtnClick:onbtnClick};
     Object.keys(imageAssets).forEach(imgkey=>{
         let itemIndex = -1;
         imageAssets[imgkey].forEach((uimg,index)=>{
@@ -342,7 +342,7 @@ class ReimbursementApply extends Component {
                 />
                 </div>
                 {/* <div>
-                  {this.state.file.map((fileData) => {
+                  {this.state.imageAssets.map((fileData) => {
                     return fileData.name
                   })}
                 </div> */}
