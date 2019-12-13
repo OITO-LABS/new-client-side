@@ -12,13 +12,16 @@ class AlertMessage extends React.Component {
     evt[SHOW_ALERT_MSG] = this.setAlertMessage;
     evt[PATH_CHANGED] = this.closeAlert;
     evt[CLOSE_ALERT] = this.closeAlert;
-    app.events.subscribe(evt, this,-1);
+    this.subId = app.events.subscribe(evt, this,-1);
     this.style = {position:'fixed',bottom:0,zIndex:1051};
     this.state = {style:this.style, visible: false, type: ALERT_TYPE.SUCCESS, msg: '' };
     this.timer = null;
     this.delay = 10000;
     this.floatingTime = 100;
     this.floatingTimer = null;
+  }  
+  componentWillUnmount(){
+    app.events.unsubscribe(this.subId);
   }
   setAlertMessage([data]) {
     if(data.showAfter){

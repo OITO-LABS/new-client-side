@@ -123,12 +123,11 @@ class Main extends React.Component {
   }
   userSignOut([type]) {
     app.userAuth = null;
-    // removeFromCache(USER_TKEY);
     app.empId = null;
     app.userDetails = null;
     removeCookie("empId");
     removeCookie("role");
-    this.refreshPage();
+    // removeFromCache(USER_TKEY);
     // app.isAdmin = false;
     // this.setState({
     //   login: false
@@ -137,10 +136,10 @@ class Main extends React.Component {
   }
 
   userReset([type]) {
-    app.userAuth = null;
-    // removeFromCache(USER_TKEY);
-    app.empId = null;
     // app.isAdmin = false;
+    // removeFromCache(USER_TKEY);
+    app.userAuth = null;
+    app.empId = null;
     this.setState({
       login: false
     }, () => { app.events.trigger(GOTO_URL, { routerKey: FORGOT_PASSWORD }); })

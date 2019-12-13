@@ -36,7 +36,10 @@ class AlertModal extends React.Component {
         this.cancel = this.cancel.bind(this);
         let evt = {};
         evt[SHOW_ALERT] = this.showDialog;
-        app.events.subscribe(evt, this,-1);
+        this.subId = app.events.subscribe(evt, this,-1);
+    }
+    componentWillUnmount(){
+        app.events.unsubscribe(this.subId);
     }
     showDialog([data]){
         this.callBack = data.callBack || null;
