@@ -324,6 +324,7 @@ export class registerEmployee extends Component {
             />
             : ""
             }
+            <div className="p-2">{imageDetails.name}</div>
             <FormField
               label="Joining Date"
               labelClassName="txt-label"
