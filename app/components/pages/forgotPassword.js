@@ -57,6 +57,7 @@ export class ForgotPassword extends Component {
         if (validation.isValid) {
             dataService.postRequest("forgot", {to:this.state.username})
             .then(res => {
+                console.log(res);
                 if(res.status == "success") {
                     app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCCESS,msg: "A password reset Link is sent to your registered Email"});
                 }
