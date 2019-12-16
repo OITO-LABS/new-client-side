@@ -21,8 +21,7 @@ export class ReimbursementBillListing extends Component {
         { label: "description", key: "reimbursementDescription" },
         { label: "category name", key: "categoryName" },
         { label: "cost", key: "cost" },
-        { label: "action", key: "delete" },
-
+        { label: "action", key: "billStatus" },
       ],
       datas: [
       ],

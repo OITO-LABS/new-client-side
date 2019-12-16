@@ -216,11 +216,11 @@ class ResetPassword extends Component {
                                     </div>
                                 </div>
 
-                                <div className="text-center forgot-credentials">
+                                {/* <div className="text-center forgot-credentials">
                                     <a href="#" className="txt1" onClick={this.handleForgotPassword}>
                                         Forgot Username / Password?
                                 </a>
-                                </div>
+                                </div> */}
 
                             </div>
                         </div>
