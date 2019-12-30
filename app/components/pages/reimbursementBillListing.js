@@ -21,7 +21,8 @@ export class ReimbursementBillListing extends Component {
         { label: "description", key: "reimbursementDescription" },
         { label: "category name", key: "categoryName" },
         { label: "cost", key: "cost" },
-        { label: "action", key: "billStatus" },
+        { label: "status", key: "billStatus" },
+        { label: "action", key: "action" },
       ],
       datas: [
       ],
@@ -42,7 +43,8 @@ export class ReimbursementBillListing extends Component {
   }
 
   gettingBill() {
-    dataService.getRequest("reimbursementBill", { reimbursementId: this.props.match.params.reimbursementId })
+    let role = getCookie('role');
+    dataService.getRequest("reimbursementBill", { reimbursementId: this.props.match.params.reimbursementId, role:role })
       .then(res => {
         this.setState({
           datas: res.billDetails,

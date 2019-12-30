@@ -56,7 +56,7 @@ export class ForgotPassword extends Component {
         // alert("onsubmit-clicked");
 
         if (validation.isValid) {
-            dataService.postRequest("forgot", { to: this.state.username })
+            dataService.formDataRequest("forgot", { to: this.state.username })
                 .then(res => {
                     console.log(res);
                     if (res.status == "success") {

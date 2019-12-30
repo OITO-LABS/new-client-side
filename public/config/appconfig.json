@@ -30,14 +30,16 @@
       "reimbursementDate":"api/reimbursement/reimbursement-date",
       "reimbursementEmployee":"api/reimbursement/emp-id/",
       "reimbursementBill":"api/reimbursement/emp-id/:reimbursementId",
+      "getreimbursementBill":"api/reimbursement/admin/:reimbursementId",
       "reimbursementApply":"api/reimbursement/apply",
       "reimbursementSearch":"api/reimbursement/search-emp-id",
       "reimbursementDateAndSearch":"api/reimbursement/search-emp-id-date",
       "getReimCategory":"api/reimbursement/list-category",
+      "reimbursementUpdate":"api/reimbursement/update-bill",
 
       "login":"api/login",
       "logout":"api/login/logout",
-      "forgot":"api/login/send-mail",
+      "forgot":"api/login/forgot/send-mail",
       "refreshPage":"api/login/activesession",
       "params": {
         "commonparams": "commonparams"

@@ -10,13 +10,13 @@ class ReimbursementApply extends Component {
     super(props);
     this.validateFieldData = this.validateFieldData.bind(this);
     this.validator = new FormValidator([
-      {
-        field: "reimbursementDate",
-        method: "isEmpty",
-        args: [{ ignore_whitespace: true }],
-        validWhen: false,
-        message: "Reimbursement date is empty"
-      },
+      // {
+      //   field: "reimbursementDate",
+      //   method: "isEmpty",
+      //   args: [{ ignore_whitespace: true }],
+      //   validWhen: false,
+      //   message: "Reimbursement date is empty"
+      // },
       {
         field: "billDate",
         method: "isEmpty",
@@ -55,11 +55,11 @@ class ReimbursementApply extends Component {
 
     ]);
     this.state = {
-      reimbursementDetails: [{index: 1,billDate: "",reimbursementDescription: "",categoryName: "",billNo: "",cost: 0}],
+      reimbursementDetails: [{ index: 1, billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0 }],
       category: [],
-      imageAssets:{},
+      imageAssets: {},
       validation: this.validator.valid(),
-      array1:[]
+      array1: []
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     // this.getOptions = this.getOptions.bind(this);
@@ -68,11 +68,13 @@ class ReimbursementApply extends Component {
     this.handleInputChange2 = this.handleInputChange2.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onSave = this.onSave.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
     this.subTotal = this.subTotal.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.imageSelected = this.imageSelected.bind(this);
-    this.imageGet=this.imageGet.bind(this);
+    this.imageGet = this.imageGet.bind(this);
+    this.gettingBill = this.gettingBill.bind(this);
   }
 
   componentDidMount() {
@@ -86,15 +88,39 @@ class ReimbursementApply extends Component {
       .catch(err => {
         console.log(err);
       })
-    // dataService.getRequest("getEmpData")
-    //   .then(result => {
-    //     this.setState({
-    //       empData: result
-    //     });
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
+
+    this.gettingBill();
+  }
+
+  gettingBill() {
+    dataService.getRequest("getreimbursementBill", { reimbursementId: this.props.match.params.reimbursementId })
+      .then(res => {
+        let newBill = res.billDetails.map(item => {
+          return (
+            {
+              trackId: item.trackId,
+              reimbursementTrack: item.reimbursementTrack,
+              index: Math.random(),
+              billDate:item.billDate,
+              reimbursementDescription: item.reimbursementDescription,
+              categoryName: item.categoryName,
+              billNo: item.billNo,
+              cost: item.cost
+            }
+          )
+        })
+        this.setState({
+          totalCost: res.totalCost,
+          // ...this.getStateData(res.billDetails),
+          reimbursementDetails:newBill
+          // reimbursementDetails: res.billDetails,
+          // reimbursementDetails: [{billDate: res.billDetails.billDate,reimbursementDescription: res.billDetails.reimbursementDescription,categoryName: res.billDetails.categoryName,billNo: res.billDetails.billNo,cost: res.billDetails.cost}],
+
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   // getOptions() {
@@ -130,7 +156,7 @@ class ReimbursementApply extends Component {
 
   handleAdd() {
     let add = [...this.state.reimbursementDetails];
-    add.push({ index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0});
+    add.push({ index: Math.random(), billDate: "", reimbursementDescription: "", categoryName: "", billNo: "", cost: 0 });
     this.setState({
       reimbursementDetails: add
     });
@@ -182,7 +208,7 @@ class ReimbursementApply extends Component {
       console.log('Image Assets', imageAssets);
     }
     fileReader.readAsDataURL(file);
-    
+
   }
 
   onSubmit() {
@@ -194,13 +220,13 @@ class ReimbursementApply extends Component {
     var totalCost = this.state.totalCost;
     let onbtnClick = "submit"
     var reimbursementBills = JSON.stringify(this.state.reimbursementDetails);
-    let {imageAssets} = this.state;
-    let data = {empNo: app.userDetails.employeeDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementBills: reimbursementBills,onbtnClick:onbtnClick};
-    Object.keys(imageAssets).forEach(imgkey=>{
-        let itemIndex = -1;
-        imageAssets[imgkey].forEach((uimg,index)=>{
-            uimg.file && (data[imgkey+'['+(++itemIndex)+']'] = uimg.file);
-        });                
+    let { imageAssets } = this.state;
+    let data = { empNo: app.userDetails.employeeDetails.empNo, reimbursementDate: reimbursementDate, totalCost: totalCost, reimbursementBills: reimbursementBills, onbtnClick: onbtnClick };
+    Object.keys(imageAssets).forEach(imgkey => {
+      let itemIndex = -1;
+      imageAssets[imgkey].forEach((uimg, index) => {
+        uimg.file && (data[imgkey + '[' + (++itemIndex) + ']'] = uimg.file);
+      });
     });
 
     if (validation.isValid) {
@@ -230,15 +256,15 @@ class ReimbursementApply extends Component {
     var reimbursementDate = this.state.reimbursementDate;
     var totalCost = this.state.totalCost;
     let onbtnClick = "save";
-    
+
     var reimbursementBills = JSON.stringify(this.state.reimbursementDetails);
-    let {imageAssets} = this.state;
-    let data = {empNo: app.userDetails.employeeDetails.empNo,reimbursementDate: reimbursementDate,totalCost: totalCost,reimbursementBills: reimbursementBills,onbtnClick:onbtnClick};
-    Object.keys(imageAssets).forEach(imgkey=>{
-        let itemIndex = -1;
-        imageAssets[imgkey].forEach((uimg,index)=>{
-            uimg.file && (data[imgkey+'['+(++itemIndex)+']'] = uimg.file);
-        });                
+    let { imageAssets } = this.state;
+    let data = { empNo: app.userDetails.employeeDetails.empNo, reimbursementDate: reimbursementDate, totalCost: totalCost, reimbursementBills: reimbursementBills, onbtnClick: onbtnClick };
+    Object.keys(imageAssets).forEach(imgkey => {
+      let itemIndex = -1;
+      imageAssets[imgkey].forEach((uimg, index) => {
+        uimg.file && (data[imgkey + '[' + (++itemIndex) + ']'] = uimg.file);
+      });
     });
 
     if (validation.isValid) {
@@ -246,12 +272,12 @@ class ReimbursementApply extends Component {
         .formDataRequest("reimbursementApply", data)
         .then(res => {
           if (res.status == "success") {
-            app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Saved"});
-            setTimeout(()=>{
+            app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.SUCESS, msg: "Successfully Saved" });
+            setTimeout(() => {
               app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_LISTING });
-            },3000)
+            }, 3000)
           } else {
-            app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message}`});
+            app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: `${res.message}` });
           }
         })
         .catch(err => {
@@ -260,15 +286,47 @@ class ReimbursementApply extends Component {
     }
   }
 
+  onUpdate() {
+    const validation = this.validator.validate(this.state);
+    this.setState({ validation });
+    this.submitted = true;
+    var totalCost = this.state.totalCost;
+    let onbtnClick = "save";
+    let reimbursementId = this.props.match.params.reimbursementId;
+
+    var reimbursementBills = JSON.stringify(this.state.reimbursementDetails);
+    let { imageAssets } = this.state;
+    let data = { empNo: app.userDetails.employeeDetails.empNo, totalCost: totalCost, reimbursementBills: reimbursementBills, onbtnClick: onbtnClick, reimbursementId: reimbursementId };
+    Object.keys(imageAssets).forEach(imgkey => {
+      let itemIndex = -1;
+      imageAssets[imgkey].forEach((uimg, index) => {
+        uimg.file && (data[imgkey + '[' + (++itemIndex) + ']'] = uimg.file);
+      });
+    });
+
+    if (validation.isValid) {
+      dataService
+        .formDataRequest("reimbursementUpdate", data)
+        .then(res => {
+          if (res.status == "success") {
+            app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.SUCESS, msg: "Successfully Saved" });
+            setTimeout(() => {
+              app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_LISTING });
+            }, 3000)
+          } else {
+            app.events.trigger(SHOW_ALERT_MSG, { visible: true, type: ALERT_TYPE.DANGER, msg: `${res.message}` });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }
+
+
   getStateData(reimburseData) {
     return {
-      billDate: reimburseData.billDate || "",
-      // totalCost: reimburseData.totalCost || "",
-      billDate: reimburseData.billDate || "",
-      reimbursementDescription: reimburseData.reimbursementDescription || "",
-      categoryName: reimburseData.categoryName || "",
-      billNo: reimburseData.billNo || "",
-      cost: reimburseData.cost || ""
+      reimbursementDetails: reimburseData || '',
     };
   }
 
@@ -293,20 +351,20 @@ class ReimbursementApply extends Component {
   }
 
   imageGet() {
-    let array=[]
-    this.state.imageAssets.imageData && this.state.imageAssets.imageData.map((file)=>{
+    let array = []
+    this.state.imageAssets.imageData && this.state.imageAssets.imageData.map((file) => {
       array.push(file.file.name);
       this.setState({
         array1: array
       })
-    }) 
+    })
   }
 
   render() {
     let validation = this.submitted
       ? this.validator.validate(this.state)
       : this.state.validation;
-    
+
     return (
       <React.Fragment>
         <div className="container-fluid">
@@ -330,33 +388,37 @@ class ReimbursementApply extends Component {
                     validator={validation}
                   />
                 </div> */}
-                <div className="pr-5">
-                <FormField
-                  label="Reimbursement Date"
-                  labelClassName="txt-label"
-                  fieldClassName="txt-input"
-                  mandatory
-                  onChange={this.handleInputChange}
-                  name="reimbursementDate"
-                  type="date"
-                  value={this.state.reimbursementDate}
-                  placeholder="reimbursementDate"
-                  validator={validation}
-                />
-                </div>
+                {this.props.match.params.reimbursementId != -1 ?
+                  ''
+                  :
+                  <div className="pr-5">
+                    <FormField
+                      label="Reimbursement Date"
+                      labelClassName="txt-label"
+                      fieldClassName="txt-input"
+                      mandatory
+                      onChange={this.handleInputChange}
+                      name="reimbursementDate"
+                      type="date"
+                      value={this.state.reimbursementDate}
+                      placeholder="reimbursementDate"
+                    // validator={validation}
+                    />
+                  </div>
+                }
                 <div>
-                <FormField
-                  label="Upload File"
-                  labelClassName="txt-label"
-                  fieldClassName="txt-input"
-                  type="file"
-                  onChange={this.imageSelected} 
-                  name="imageData"
-                  value={this.state.imageAssets.file}        
-                />
+                  <FormField
+                    label="Upload File"
+                    labelClassName="txt-label"
+                    fieldClassName="txt-input"
+                    type="file"
+                    onChange={this.imageSelected}
+                    name="imageData"
+                    value={this.state.imageAssets.file}
+                  />
                   {this.state.array1}
                 </div>
-                
+
               </div>
             </div>
 
@@ -490,10 +552,16 @@ class ReimbursementApply extends Component {
                 </tbody>
               </table>
 
-              <div className="btn-wrapper mx-auto"> 
-                <button className="btn save-btn" onClick={this.onSave}>
-                  Save
-                </button>
+              <div className="btn-wrapper mx-auto">
+                {this.props.match.params.reimbursementId == -1 ?
+                  <button className="btn save-btn" onClick={this.onSave}>
+                    Save
+                  </button>
+                  :
+                  <button className="btn save-btn" onClick={this.onUpdate}>
+                    Update
+                  </button>
+                }
                 <button className="btn submit-btn ml-5" onClick={this.onSubmit}>
                   Send For Approval
                 </button>

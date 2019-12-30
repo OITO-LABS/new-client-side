@@ -50,7 +50,7 @@ class ListTable extends Component {
                         <td key={i}>{indexValue}</td>
                      )
                   }
-                  else if (item.key !== "editDelete" && item.key !== "status" && item.key !== "approvel" && item.key !== "approvel") {
+                  else if (item.key !== "editDelete" && item.key !== "status" && item.key !== "delete" && item.key !== "reimbursementStatus" && item.key !== "billStatus" && item.key !== "action") {
                      if (i == 1) {
                         return (
                            <td key={i} onClick={() => { this.props.detailsHandler(data) }}><a href="#">{data[item.key]}</a></td>
@@ -78,6 +78,14 @@ class ListTable extends Component {
                      )
                   }
 
+                  else if(item.key == "action") {
+                     return(
+                        <td key={i}>
+                           <button onClick={() =>{this.props.approveHandler(data)}} className="btn btn-success action"><i class="fas fa-check"></i></button>
+                           <button onClick={() =>{this.props.approveHandler(data)}} className="btn btn-danger action"><i class="fas fa-times"></i></button>
+                        </td>
+                     )
+                  }
 
                   else if (item.key == "status") {
                      if (data[item.key] == "Assigned") {
@@ -113,14 +121,14 @@ class ListTable extends Component {
                      }else if (data[item.key] == "Terminated") {
                         return (
                            <td key={i}>
-                              <button className="btn btn-danger " ><i class="far fa-times"></i></button>
+                              <button className="btn btn-danger " ><i class="fas fa-times"></i></button>
                            </td>
                         )
                      }
 
                   }
 
-                  else if (item.key == "approvel") {
+                  else if (item.key == "reimbursementStatus") {
                      if (data[item.key] == "approved") {
                         return (
                            <td key={i}>
@@ -133,14 +141,58 @@ class ListTable extends Component {
                               <button className="btn btn-danger">Rejected</button>
                            </td>
                         )
-                     } else if (data[item.key] == "pending") {
+                     } else if (data[item.key] == "Pending") {
+                        return (
+                           <td key={i}>
+                              <button onClick={()=>{this.props.verifyHandler(data)}} className="btn btn-warning">Verify</button>
+                           </td>
+                        )
+                     }else if (data[item.key] == "Save") {
+                        return (
+                           <td key={i}>
+                              <button className="btn btn-primary">saved</button>
+                           </td>
+                        )
+                     }else if (data[item.key] == "Verified") {
+                        return (
+                           <td key={i}>
+                              <button className="btn btn-success"><i className="fas fa-check"></i></button>
+                           </td>
+                        )
+                     }
+
+                  }
+
+                  else if (item.key == "billStatus") {
+                     if (data[item.key] == "Approved") {
+                        return (
+                           <td key={i}>
+                              <button className="btn btn-success">Approved</button>
+                           </td>
+                        )
+                     } else if (data[item.key] == "rejected") {
+                        return (
+                           <td key={i}>
+                              <button className="btn btn-danger">Rejected</button>
+                           </td>
+                        )
+                     } else if (data[item.key] == "Pending") {
                         return (
                            <td key={i}>
                               <button className="btn btn-warning">Pending</button>
                            </td>
                         )
+                     }else if (data[item.key] == "Save") {
+                        return (
+                           <td key={i}>
+                              <button className="btn btn-primary">saved</button>
+                           </td>
+                        )
                      }
+
                   }
+
+
                })}
             </tr>
          )

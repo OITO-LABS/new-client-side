@@ -13,7 +13,7 @@ class Sidebar extends React.Component {
     this.empList = this.empList.bind(this);
     this.addAssets = this.addAssets.bind(this);
     this.viewAssets = this.viewAssets.bind(this);
-    this.applyReimbursement = this.applyReimbursement.bind(this);
+    // this.applyReimbursement = this.applyReimbursement.bind(this);
     // this.viewReimbursements = this.viewReimbursements.bind(this);
     this.viewInactiveAssets=this.viewInactiveAssets.bind(this);
   }
@@ -38,9 +38,9 @@ class Sidebar extends React.Component {
     app.events.trigger(GOTO_URL, { routerKey: ASSET_LISTING });
   }
 
-  applyReimbursement() {
-    app.events.trigger(GOTO_URL, { routerKey: APPLY_REIMBURSEMENT });
-  }
+  // applyReimbursement() {
+  //   app.events.trigger(GOTO_URL, { routerKey: APPLY_REIMBURSEMENT, params: { reimbursementId: -1} });
+  // }
 
   viewReimbursements() {
     app.events.trigger(GOTO_URL, { routerKey: REIMBURSEMENT_LISTING });
@@ -105,12 +105,12 @@ class Sidebar extends React.Component {
                   </a>
                 </li>
                  {/* Apply Reimbursement */}
-                 <li>
+                 {/* <li>
                   <a href="#" onClick={this.applyReimbursement}>
                     <i className="fas fa-money-bill"></i>
                     Apply Reimbursement 
                   </a>
-                </li>
+                </li> */}
                 {/* Reimbursement */}
                 <li>
                   <a href="#" onClick={this.viewReimbursements}>

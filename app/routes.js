@@ -201,7 +201,7 @@ const routes = [
     },
     {
         name: APPLY_REIMBURSEMENT,
-        path: PATH_PREFIX + APPLY_REIMBURSEMENT,
+        path: PATH_PREFIX + ':reimbursementId/' + APPLY_REIMBURSEMENT,
         samplePath: PATH_PREFIX + APPLY_REIMBURSEMENT,
         componentId: 'pages/reimbursementApply',
         title: 'apply reimbursement',
