@@ -99,9 +99,19 @@ export class ReimbursementEmployeeListing extends Component {
   }
 
   handleVerify(data) {
-    alert("verfy button clicked");
-    this.gettingData();
-
+    let urlKey = "reimbursementVerify";
+    dataService.postRequest(urlKey,{reimbursementId:data.reimbursementId})
+      .then(res => {
+        if(res.status == 'success') {
+          app.events.trigger(SHOW_ALERT_MSG, { visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Verified"});
+        }
+        else {
+          app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `Verification ${res.message} !!!`});
+        }
+      })
+      .catch(err => {
+        app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: "Failed To Verify"});
+      })
   }
 
   render() {

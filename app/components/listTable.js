@@ -82,7 +82,7 @@ class ListTable extends Component {
                      return(
                         <td key={i}>
                            <button onClick={() =>{this.props.approveHandler(data)}} className="btn btn-success action"><i class="fas fa-check"></i></button>
-                           <button onClick={() =>{this.props.approveHandler(data)}} className="btn btn-danger action"><i class="fas fa-times"></i></button>
+                           <button onClick={() =>{this.props.disapproveHandler(data)}} className="btn btn-danger action"><i class="fas fa-times"></i></button>
                         </td>
                      )
                   }

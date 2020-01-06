@@ -31,8 +31,10 @@ export class ReimbursementBillListing extends Component {
     this.pageHandler = this.pageHandler.bind(this);
     this.gettingBill = this.gettingBill.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-
+    this.handleApprove = this.handleApprove.bind(this);
+    this.handleDisapprove = this.handleDisapprove.bind(this);
   }
+
   componentDidMount() {
     app.events.trigger(FLIP_LOADER, { status: false, reset: true });
     this.gettingBill();
@@ -90,7 +92,41 @@ export class ReimbursementBillListing extends Component {
     }
   }
 
+  handleApprove(data) {
+    console.log('Approve data',data);
+    let urlKey = "reimbursementBillAction";
+    let action = 0;
+    dataService.postRequest(urlKey,{billId:data.trackId,reimbursementId:data.reimbursementTrack, action:action})
+      .then(res => {
+        if(res.status == 'success') {
+          app.events.trigger(SHOW_ALERT_MSG, { visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Accepted"});
+        }
+        else {
+          app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message} !!!`});
+        }
+      })
+      .catch(err => {
+        app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: "Failed To Accept/Reject"});
+      })
+  }
 
+  handleDisapprove(data) {
+    console.log('Disapprove data',data);
+    let urlKey = "reimbursementBillAction";
+    let action = 1;
+    dataService.postRequest(urlKey,{billId:data.trackId,reimbursementId:data.reimbursementTrack, action:action})
+      .then(res => {
+        if(res.status == 'success') {
+          app.events.trigger(SHOW_ALERT_MSG, { visible: true,type: ALERT_TYPE.SUCESS,msg: "Successfully Rejected"});
+        }
+        else {
+          app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: `${res.message} !!!`});
+        }
+      })
+      .catch(err => {
+        app.events.trigger(SHOW_ALERT_MSG, {visible: true,type: ALERT_TYPE.DANGER,msg: "Failed To Accept/Reject"});
+      })
+  }
 
   render() {
     return (
@@ -142,7 +178,10 @@ export class ReimbursementBillListing extends Component {
             fields={this.state.fields}
             datas={this.state.datas}
             pageHandler={this.handlePage}
-            deleteHandler={this.handleDelete} />
+            deleteHandler={this.handleDelete} 
+            approveHandler={this.handleApprove}  
+            disapproveHandler={this.handleDisapprove}
+            />
           : ""}
 
         <div className="row total-cost">
