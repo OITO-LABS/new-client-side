@@ -27,7 +27,7 @@ class ListTable extends Component {
                return <th key={index}>{item.label.toUpperCase()}   <i className="fas fa-sort" onClick={() => { this.props.sortHandler(item) }}></i></th>
             }
          }
-         else {
+         else { 
             return <th key={index}>{item.label.toUpperCase()}</th>
          }
       })

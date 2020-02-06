@@ -112,8 +112,8 @@ class ReimbursementApply extends Component {
         this.setState({
           totalCost: res.totalCost,
           // ...this.getStateData(res.billDetails),
-          reimbursementDetails:newBill
-          // reimbursementDetails: res.billDetails,
+          reimbursementDetails:newBill,
+          reimbursementDate: res.reimbursementDate,
           // reimbursementDetails: [{billDate: res.billDetails.billDate,reimbursementDescription: res.billDetails.reimbursementDescription,categoryName: res.billDetails.categoryName,billNo: res.billDetails.billNo,cost: res.billDetails.cost}],
 
         });
