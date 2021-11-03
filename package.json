@@ -47,6 +47,6 @@
     "react-router-dom": "^5.1.2",
     "reactstrap": "^8.1.1",
     "reactstrap-confirm": "^1.0.4",
-    "validator": "^12.0.0"
+    "validator": "^13.7.0"
   }
 }
